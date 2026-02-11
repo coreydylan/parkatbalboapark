@@ -55,6 +55,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  summary:
+                    type: string
+                    description: Natural language summary of the best option
                   recommendations:
                     type: array
                     items:
@@ -63,37 +66,55 @@ paths:
                         lot_name:
                           type: string
                           description: Display name of the parking lot
-                        cost_display:
+                        cost:
                           type: string
                           description: "Formatted cost (e.g. 'FREE', '$5', '$16')"
                         is_free:
                           type: boolean
-                        walking_time_display:
-                          type: string
-                          description: "Walking time to destination (e.g. '7 min walk')"
-                        has_tram:
-                          type: boolean
-                          description: Whether a free tram stop is at this lot
-                        tram_time_display:
+                        walking_time:
                           type: string
                           nullable: true
-                          description: "Tram ride time (e.g. '5 min by tram')"
+                          description: "Walking time to destination (e.g. '7 min walk')"
+                        walking_distance:
+                          type: string
+                          nullable: true
+                          description: "Walking distance to destination (e.g. '0.3 mi')"
+                        tram_available:
+                          type: boolean
+                          description: Whether a free tram stop is at this lot
+                        tram_time:
+                          type: string
+                          nullable: true
+                          description: "Tram ride time (e.g. '5 min')"
                         tips:
                           type: array
                           items:
                             type: string
                           description: Contextual tips for this lot
-                  summary:
-                    type: string
-                    description: Natural language summary of the best option
-                  enforcement_status:
-                    type: string
-                    description: "Current enforcement info (e.g. 'Parking is enforced today 8am-6pm' or 'Parking is FREE today (holiday)')"
-                  tips:
-                    type: array
-                    items:
-                      type: string
-                    description: General tips about parking at Balboa Park
+                        score:
+                          type: number
+                          description: Ranking score (higher is better)
+                        lat:
+                          type: number
+                          description: Latitude of the parking lot
+                        lng:
+                          type: number
+                          description: Longitude of the parking lot
+                  query:
+                    type: object
+                    description: Echo of the query parameters used
+                    properties:
+                      user_type:
+                        type: string
+                      has_pass:
+                        type: boolean
+                      destination:
+                        type: string
+                        nullable: true
+                      visit_hours:
+                        type: number
+                      query_time:
+                        type: string
   /api/chatgpt/destinations:
     get:
       operationId: getDestinations
@@ -161,6 +182,8 @@ paths:
                       properties:
                         name:
                           type: string
+                        slug:
+                          type: string
                         tier:
                           type: integer
                         capacity:
@@ -172,6 +195,10 @@ paths:
                           type: boolean
                         has_ada_spaces:
                           type: boolean
+                        notes:
+                          type: string
+                          nullable: true
+                          description: Additional notes about the lot
                         pricing:
                           type: object
                           properties:

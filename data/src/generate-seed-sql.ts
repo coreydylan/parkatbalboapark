@@ -168,8 +168,8 @@ function main() {
     const lat = geoLot?.geocoded?.lat ?? lot.lat;
     const lng = geoLot?.geocoded?.lng ?? lot.lng;
 
-    lines.push(`INSERT INTO parking_lots (slug, name, display_name, address, location, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)`);
-    lines.push(`VALUES ('${esc(lot.slug)}', '${esc(lot.name)}', '${esc(lot.displayName)}', '${esc(lot.address)}', ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326), ${lot.capacity}, ${sqlBool(lot.hasEvCharging)}, ${sqlBool(lot.hasAdaSpaces)}, ${sqlBool(lot.hasTramStop)}, '${esc(lot.notes)}')`);
+    lines.push(`INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)`);
+    lines.push(`VALUES ('${esc(lot.slug)}', '${esc(lot.name)}', '${esc(lot.displayName)}', '${esc(lot.address)}', ${lat}, ${lng}, ${lot.capacity}, ${sqlBool(lot.hasEvCharging)}, ${sqlBool(lot.hasAdaSpaces)}, ${sqlBool(lot.hasTramStop)}, '${esc(lot.notes)}')`);
     lines.push(`ON CONFLICT (slug) DO NOTHING;`);
     lines.push("");
   }
@@ -179,24 +179,10 @@ function main() {
   lines.push("-- =============================================================");
   for (const lot of lots) {
     for (const th of lot.tierHistory) {
-      lines.push(`INSERT INTO lot_tier_assignments (lot_slug, tier, effective_date, end_date)`);
-      lines.push(`VALUES ('${esc(lot.slug)}', ${th.tier}, '${th.effectiveDate}', ${sqlNull(th.endDate)})`);
-      lines.push(`ON CONFLICT (lot_slug, effective_date) DO NOTHING;`);
+      lines.push(`INSERT INTO lot_tier_assignments (lot_id, tier, effective_date, end_date)`);
+      lines.push(`VALUES ((SELECT id FROM parking_lots WHERE slug = '${esc(lot.slug)}'), ${th.tier}, '${th.effectiveDate}', ${sqlNull(th.endDate)})`);
+      lines.push(`ON CONFLICT (lot_id, effective_date) DO NOTHING;`);
       lines.push("");
-    }
-  }
-
-  // --- Lot Special Rules ---
-  lines.push("-- Lot Special Rules");
-  lines.push("-- =============================================================");
-  for (const lot of lots) {
-    if (lot.specialRules) {
-      for (const rule of lot.specialRules) {
-        lines.push(`INSERT INTO lot_special_rules (lot_slug, description, free_minutes, effective_date, end_date)`);
-        lines.push(`VALUES ('${esc(lot.slug)}', '${esc(rule.description)}', ${rule.freeMinutes}, '${rule.effectiveDate}', ${sqlNull(rule.endDate)})`);
-        lines.push(`ON CONFLICT DO NOTHING;`);
-        lines.push("");
-      }
     }
   }
 
@@ -208,8 +194,8 @@ function main() {
     const lat = geoDest?.geocoded?.lat ?? dest.lat;
     const lng = geoDest?.geocoded?.lng ?? dest.lng;
 
-    lines.push(`INSERT INTO destinations (slug, name, display_name, area, type, address, location, website_url)`);
-    lines.push(`VALUES ('${esc(dest.slug)}', '${esc(dest.name)}', '${esc(dest.displayName)}', '${esc(dest.area)}', '${esc(dest.type)}', '${esc(dest.address)}', ST_SetSRID(ST_MakePoint(${lng}, ${lat}), 4326), '${esc(dest.websiteUrl)}')`);
+    lines.push(`INSERT INTO destinations (slug, name, display_name, area, type, address, lat, lng, website_url)`);
+    lines.push(`VALUES ('${esc(dest.slug)}', '${esc(dest.name)}', '${esc(dest.displayName)}', '${esc(dest.area)}', '${esc(dest.type)}', '${esc(dest.address)}', ${lat}, ${lng}, '${esc(dest.websiteUrl)}')`);
     lines.push(`ON CONFLICT (slug) DO NOTHING;`);
     lines.push("");
   }
@@ -243,12 +229,23 @@ function main() {
     lines.push("");
   }
 
+  // --- Enforcement Periods ---
+  lines.push("-- Enforcement Periods");
+  lines.push("-- =============================================================");
+  lines.push(`INSERT INTO enforcement_periods (start_time, end_time, days_of_week, effective_date, end_date)`);
+  lines.push(`VALUES ('08:00', '18:00', ARRAY[0,1,2,3,4,5,6], '2026-01-05', NULL)`);
+  lines.push(`ON CONFLICT DO NOTHING;`);
+  lines.push("");
+
   // --- Tram Stops ---
   lines.push("-- Tram Stops");
   lines.push("-- =============================================================");
   for (const stop of tramData.stops) {
-    lines.push(`INSERT INTO tram_stops (name, lot_slug, location, stop_order)`);
-    lines.push(`VALUES ('${esc(stop.name)}', ${sqlNull(stop.lotSlug)}, ST_SetSRID(ST_MakePoint(${stop.lng}, ${stop.lat}), 4326), ${stop.stopOrder})`);
+    const lotIdExpr = stop.lotSlug
+      ? `(SELECT id FROM parking_lots WHERE slug = '${esc(stop.lotSlug)}')`
+      : "NULL";
+    lines.push(`INSERT INTO tram_stops (name, lot_id, lat, lng, stop_order)`);
+    lines.push(`VALUES ('${esc(stop.name)}', ${lotIdExpr}, ${stop.lat}, ${stop.lng}, ${stop.stopOrder})`);
     lines.push(`ON CONFLICT DO NOTHING;`);
     lines.push("");
   }
@@ -256,8 +253,8 @@ function main() {
   // --- Tram Schedule ---
   lines.push("-- Tram Schedule");
   lines.push("-- =============================================================");
-  lines.push(`INSERT INTO tram_schedule (start_time, end_time, frequency_minutes, days_of_week, effective_date, end_date, notes)`);
-  lines.push(`VALUES ('${tramData.schedule.startTime}', '${tramData.schedule.endTime}', ${tramData.schedule.frequencyMinutes}, ARRAY[${tramData.schedule.daysOfWeek.join(",")}], '${tramData.schedule.effectiveDate}', ${sqlNull(tramData.schedule.endDate)}, '${esc(tramData.notes)}')`);
+  lines.push(`INSERT INTO tram_schedule (start_time, end_time, frequency_minutes, days_of_week, effective_date, end_date)`);
+  lines.push(`VALUES ('${tramData.schedule.startTime}', '${tramData.schedule.endTime}', ${tramData.schedule.frequencyMinutes}, ARRAY[${tramData.schedule.daysOfWeek.join(",")}], '${tramData.schedule.effectiveDate}', ${sqlNull(tramData.schedule.endDate)})`);
   lines.push(`ON CONFLICT DO NOTHING;`);
   lines.push("");
 
@@ -266,9 +263,9 @@ function main() {
   lines.push("-- =============================================================");
   for (const pm of paymentMethods) {
     for (const method of pm.methods) {
-      lines.push(`INSERT INTO lot_payment_methods (lot_slug, method)`);
-      lines.push(`VALUES ('${esc(pm.lotSlug)}', '${esc(method)}')`);
-      lines.push(`ON CONFLICT DO NOTHING;`);
+      lines.push(`INSERT INTO payment_methods (lot_id, method)`);
+      lines.push(`VALUES ((SELECT id FROM parking_lots WHERE slug = '${esc(pm.lotSlug)}'), '${esc(method)}')`);
+      lines.push(`ON CONFLICT (lot_id, method) DO NOTHING;`);
       lines.push("");
     }
   }
@@ -278,9 +275,9 @@ function main() {
     lines.push("-- Lot-Destination Walking Distances");
     lines.push("-- =============================================================");
     for (const d of distances) {
-      lines.push(`INSERT INTO lot_destination_distances (lot_slug, destination_slug, walking_distance_meters, walking_time_seconds)`);
-      lines.push(`VALUES ('${esc(d.lotSlug)}', '${esc(d.destinationSlug)}', ${d.walkingDistanceMeters}, ${d.walkingTimeSeconds})`);
-      lines.push(`ON CONFLICT (lot_slug, destination_slug) DO UPDATE SET walking_distance_meters = EXCLUDED.walking_distance_meters, walking_time_seconds = EXCLUDED.walking_time_seconds;`);
+      lines.push(`INSERT INTO lot_destination_distances (lot_id, destination_id, walking_distance_meters, walking_time_seconds)`);
+      lines.push(`VALUES ((SELECT id FROM parking_lots WHERE slug = '${esc(d.lotSlug)}'), (SELECT id FROM destinations WHERE slug = '${esc(d.destinationSlug)}'), ${d.walkingDistanceMeters}, ${d.walkingTimeSeconds})`);
+      lines.push(`ON CONFLICT (lot_id, destination_id) DO UPDATE SET walking_distance_meters = EXCLUDED.walking_distance_meters, walking_time_seconds = EXCLUDED.walking_time_seconds;`);
       lines.push("");
     }
   }

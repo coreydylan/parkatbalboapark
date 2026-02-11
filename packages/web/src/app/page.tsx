@@ -1,6 +1,7 @@
 import { ParkMap } from '@/components/map/ParkMap'
 import { Sidebar } from '@/components/sidebar/Sidebar'
 import { Header } from '@/components/Header'
+import { OnboardingGate } from '@/components/onboarding/OnboardingGate'
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <Sidebar />
         <ParkMap />
       </div>
+      <OnboardingGate />
     </main>
   )
 }

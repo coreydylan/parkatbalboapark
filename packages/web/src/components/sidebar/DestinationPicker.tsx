@@ -2,16 +2,55 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { useAppStore } from '@/store/app-store'
+import type { Waypoint } from '@/store/app-store'
 import { SearchInput } from '@/components/ui/SearchInput'
 import { useDebounce } from '@/lib/hooks'
 import { getAreaLabel, getTypeIcon } from '@/lib/utils'
-import type { Destination, DestinationArea } from '@parkatbalboa/shared'
+import type { Destination, DestinationArea, DestinationType } from '@parkatbalboa/shared'
+
+function mapCategoryToType(category: string): DestinationType {
+  const map: Record<string, DestinationType> = {
+    museum: 'museum',
+    arts_culture: 'landmark',
+    garden: 'garden',
+    garden_nature: 'garden',
+    theatre: 'theater',
+    theater_performance: 'theater',
+    dining: 'dining',
+    cafe: 'dining',
+    restaurant: 'dining',
+    recreation: 'recreation',
+    sports: 'recreation',
+    playground: 'recreation',
+    zoo: 'zoo',
+    zoo_animals: 'zoo',
+  }
+  return map[category] ?? 'other'
+}
+
+function waypointToDestination(wp: Waypoint): Destination {
+  return {
+    id: wp.id,
+    slug: wp.id.replace('/', '-'),
+    name: wp.name,
+    displayName: wp.name,
+    area: 'central_mesa' as DestinationArea,
+    type: mapCategoryToType(wp.category),
+    address: null,
+    lat: wp.lat,
+    lng: wp.lng,
+    websiteUrl: null,
+    createdAt: '',
+  }
+}
 
 export function DestinationPicker() {
   const destinations = useAppStore((s) => s.destinations)
+  const waypoints = useAppStore((s) => s.waypoints)
   const selectedDestination = useAppStore((s) => s.selectedDestination)
   const setDestination = useAppStore((s) => s.setDestination)
   const fetchDestinations = useAppStore((s) => s.fetchDestinations)
+  const fetchWaypoints = useAppStore((s) => s.fetchWaypoints)
 
   const [search, setSearch] = useState('')
   const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +58,8 @@ export function DestinationPicker() {
 
   useEffect(() => {
     fetchDestinations()
-  }, [fetchDestinations])
+    fetchWaypoints()
+  }, [fetchDestinations, fetchWaypoints])
 
   const grouped = useMemo(() => {
     const filtered = destinations.filter((d) =>
@@ -46,8 +86,33 @@ export function DestinationPicker() {
     ) as [DestinationArea, Destination[]][]
   }, [destinations, debouncedSearch])
 
+  const filteredWaypoints = useMemo(() => {
+    if (!debouncedSearch) return []
+
+    const q = debouncedSearch.toLowerCase()
+
+    // Get IDs of curated destinations to exclude duplicates
+    const curatedNames = new Set(
+      destinations.map((d) => d.name.toLowerCase())
+    )
+
+    return waypoints
+      .filter(
+        (w) =>
+          w.name.toLowerCase().includes(q) &&
+          !curatedNames.has(w.name.toLowerCase())
+      )
+      .slice(0, 20)
+  }, [waypoints, destinations, debouncedSearch])
+
   function handleSelect(dest: Destination) {
     setDestination(dest)
+    setIsOpen(false)
+    setSearch('')
+  }
+
+  function handleSelectWaypoint(wp: Waypoint) {
+    setDestination(waypointToDestination(wp))
     setIsOpen(false)
     setSearch('')
   }
@@ -56,6 +121,8 @@ export function DestinationPicker() {
     setDestination(null)
     setSearch('')
   }
+
+  const hasResults = grouped.length > 0 || filteredWaypoints.length > 0
 
   return (
     <div className="relative">
@@ -103,30 +170,59 @@ export function DestinationPicker() {
 
           {isOpen && (
             <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-stone-200 rounded-lg shadow-lg max-h-64 overflow-y-auto z-30">
-              {grouped.length === 0 ? (
+              {!hasResults ? (
                 <div className="p-3 text-sm text-stone-400 text-center">
                   No destinations found
                 </div>
               ) : (
-                grouped.map(([area, dests]) => (
-                  <div key={area}>
-                    <div className="px-3 py-1.5 text-xs font-semibold text-stone-400 uppercase tracking-wide bg-stone-50 sticky top-0">
-                      {getAreaLabel(area)}
+                <>
+                  {grouped.map(([area, dests]) => (
+                    <div key={area}>
+                      <div className="px-3 py-1.5 text-xs font-semibold text-stone-400 uppercase tracking-wide bg-stone-50 sticky top-0">
+                        {getAreaLabel(area)}
+                      </div>
+                      {dests.map((d) => (
+                        <button
+                          key={d.id}
+                          onClick={() => handleSelect(d)}
+                          className="w-full text-left px-3 py-2 flex items-center gap-2 hover:bg-stone-50 transition-colors"
+                        >
+                          <span className="text-base">{getTypeIcon(d.type)}</span>
+                          <span className="text-sm text-stone-700">
+                            {d.displayName}
+                          </span>
+                        </button>
+                      ))}
                     </div>
-                    {dests.map((d) => (
-                      <button
-                        key={d.id}
-                        onClick={() => handleSelect(d)}
-                        className="w-full text-left px-3 py-2 flex items-center gap-2 hover:bg-stone-50 transition-colors"
-                      >
-                        <span className="text-base">{getTypeIcon(d.type)}</span>
-                        <span className="text-sm text-stone-700">
-                          {d.displayName}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                ))
+                  ))}
+
+                  {filteredWaypoints.length > 0 && (
+                    <div>
+                      <div className="px-3 py-1.5 text-xs font-semibold text-stone-400 uppercase tracking-wide bg-stone-50 sticky top-0">
+                        Other Places
+                      </div>
+                      {filteredWaypoints.map((wp) => (
+                        <button
+                          key={wp.id}
+                          onClick={() => handleSelectWaypoint(wp)}
+                          className="w-full text-left px-3 py-2 flex items-center gap-2 hover:bg-stone-50 transition-colors"
+                        >
+                          <span className="text-base">
+                            {getTypeIcon(mapCategoryToType(wp.category))}
+                          </span>
+                          <span className="text-sm text-stone-700">
+                            {wp.name}
+                          </span>
+                          {wp.onOfficialMap && (
+                            <span className="ml-auto text-[10px] font-medium text-park-green bg-park-green/10 px-1.5 py-0.5 rounded">
+                              On Map
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}

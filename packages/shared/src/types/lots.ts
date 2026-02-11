@@ -14,6 +14,12 @@ export interface ParkingLot {
   hasAdaSpaces: boolean;
   hasTramStop: boolean;
   notes: string | null;
+  specialRules?: {
+    description: string;
+    freeMinutes: number;
+    effectiveDate: string;
+    endDate: string | null;
+  }[];
   createdAt: string;
 }
 

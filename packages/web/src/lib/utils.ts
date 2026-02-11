@@ -1,30 +1,13 @@
 import type { DestinationArea, DestinationType } from '@parkatbalboa/shared'
 
-/**
- * Format cost in cents to a display string.
- */
-export function formatCost(cents: number): string {
-  if (cents <= 0) return 'FREE'
-  const dollars = cents / 100
-  if (cents % 100 === 0) return `$${dollars}`
-  return `$${dollars.toFixed(2)}`
-}
+export { formatCost, formatWalkTime } from '@parkatbalboa/shared'
 
 /**
- * Format walking time in seconds to a human-readable string.
- */
-export function formatWalkTime(seconds: number): string {
-  const minutes = Math.round(seconds / 60)
-  if (minutes <= 0) return '1 min walk'
-  return `${minutes} min walk`
-}
-
-/**
- * Format distance in meters to miles.
+ * Format distance in meters to feet or miles.
  */
 export function formatDistance(meters: number): string {
   const miles = meters / 1609.344
-  if (miles < 0.1) return `${Math.round(meters)} ft`
+  if (miles < 0.1) return `${Math.round(meters * 3.28084)} ft`
   return `${miles.toFixed(1)} mi`
 }
 

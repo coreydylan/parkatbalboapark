@@ -2,6 +2,7 @@
 
 import { UserTypeSelector } from './UserTypeSelector'
 import { DestinationPicker } from './DestinationPicker'
+import { VisitDurationPicker } from './VisitDurationPicker'
 import { RecommendationList } from './RecommendationList'
 import { TramInfo } from './TramInfo'
 import { MobileBottomSheet } from './MobileBottomSheet'
@@ -14,6 +15,7 @@ export function Sidebar() {
     <div className="flex flex-col gap-4 p-4">
       <UserTypeSelector />
       <DestinationPicker />
+      <VisitDurationPicker />
       <RecommendationList />
       <TramInfo />
     </div>

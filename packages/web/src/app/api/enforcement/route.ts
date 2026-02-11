@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
 
+function getPacificDate(): Date {
+  return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }))
+}
+
 export async function GET() {
   try {
     const supabase = getSupabase()
-    const now = new Date()
+    const now = getPacificDate()
     const dayOfWeek = now.getDay()
     const currentMinutes = now.getHours() * 60 + now.getMinutes()
-    const todayStr = now.toISOString().split('T')[0]!
+    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
 
     // Check enforcement periods
     const { data: periods } = await supabase
@@ -33,8 +37,6 @@ export async function GET() {
           endTime = ep.end_time
           break
         }
-        startTime = ep.start_time
-        endTime = ep.end_time
       }
     }
 

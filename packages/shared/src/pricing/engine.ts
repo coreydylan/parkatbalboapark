@@ -10,6 +10,8 @@ export interface PricingData {
   enforcementPeriods: EnforcementPeriod[];
   holidays: Holiday[];
   distances: LotDestinationDistance[] | null;
+  destinationId: string | null;
+  tramScheduleFrequencyMinutes: number | null;
 }
 
 export interface CostResult {
@@ -148,7 +150,8 @@ export function computeLotCost(
   hasPass: boolean,
   visitHours: number,
   rules: PricingRule[],
-  enforced: boolean
+  enforced: boolean,
+  queryDate: Date
 ): CostResult {
   const tips: string[] = [];
 
@@ -170,31 +173,33 @@ export function computeLotCost(
     return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
   }
 
-  // ADA is always free
-  if (userType === 'ada') {
-    tips.push('ADA placard holders park free');
-    return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
-  }
-
   // Staff and volunteers park free in tier 0, 2, 3
   if ((userType === 'staff' || userType === 'volunteer') && tier !== 1) {
     tips.push('Staff and volunteers park free in Free, Standard, and Economy lots');
     return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
   }
 
-  // Lower Inspiration Point: first 3 hours free for everyone
-  if (lot.slug === 'inspiration-point-lower' && visitHours <= 3) {
-    tips.push('First 3 hours free at this lot');
-    return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
+  // Check lot-specific special rules (e.g. first N hours free)
+  if (lot.specialRules) {
+    const dateStr = queryDate.toISOString().split('T')[0]!;
+    const applicableRule = lot.specialRules.find(
+      (sr) =>
+        sr.freeMinutes > 0 &&
+        sr.effectiveDate <= dateStr &&
+        (sr.endDate === null || sr.endDate >= dateStr)
+    );
+    if (applicableRule && visitHours <= applicableRule.freeMinutes / 60) {
+      tips.push(applicableRule.description);
+      return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
+    }
   }
 
   // Look up the pricing rule
-  const now = new Date();
-  const rule = findPricingRule(tier, userType, rules, now);
+  const rule = findPricingRule(tier, userType, rules, queryDate);
 
   if (!rule) {
     // Fallback: try nonresident rate if no specific rate found
-    const fallbackRule = findPricingRule(tier, 'nonresident', rules, now);
+    const fallbackRule = findPricingRule(tier, 'nonresident', rules, queryDate);
     if (!fallbackRule) {
       tips.push('Pricing information unavailable');
       return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
@@ -317,7 +322,8 @@ export function computeRecommendations(
       request.hasPass,
       request.visitHours,
       data.pricingRules,
-      enforced
+      enforced,
+      queryTime
     );
 
     // Find walking distance to requested destination
@@ -326,7 +332,13 @@ export function computeRecommendations(
     let walkingTimeDisplay: string | null = null;
 
     if (data.distances && request.destinationSlug) {
-      const distance = data.distances.find((d) => d.lotId === lot.id);
+      // Filter by both lotId and destinationId to get the correct distance
+      // when distances for multiple destinations are present
+      const distance = data.distances.find(
+        (d) =>
+          d.lotId === lot.id &&
+          (data.destinationId === null || d.destinationId === data.destinationId)
+      );
       if (distance) {
         walkingDistanceMeters = distance.walkingDistanceMeters;
         walkingTimeSeconds = distance.walkingTimeSeconds;
@@ -334,9 +346,14 @@ export function computeRecommendations(
       }
     }
 
-    // Tram info
+    // Tram info: compute estimated wait as (frequency / 2) + 5 min ride,
+    // falling back to 5 min default when schedule data is unavailable
     const hasTram = lot.hasTramStop;
-    const tramTimeMinutes = hasTram ? 5 : null;
+    const tramTimeMinutes = hasTram
+      ? data.tramScheduleFrequencyMinutes !== null
+        ? Math.round(data.tramScheduleFrequencyMinutes / 2) + 5
+        : 5 // default when tram schedule data is unavailable
+      : null;
 
     // Add contextual tips
     if (lot.hasEvCharging) {

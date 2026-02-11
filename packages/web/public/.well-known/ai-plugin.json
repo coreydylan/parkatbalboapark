@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Park at Balboa Park",
+  "name_for_model": "park_at_balboa_park",
+  "description_for_human": "Find the best parking at Balboa Park, San Diego. Get personalized recommendations based on where you're going, when, and whether you're a resident.",
+  "description_for_model": "Helps users find the best parking at Balboa Park in San Diego. Provides personalized parking lot recommendations based on visitor type (resident, nonresident, staff, volunteer, ADA), destination, and visit time. Considers enforcement hours (8am-6pm), holidays (parking is free), pricing tiers, walking distances, and free tram availability. San Diego residents get free or reduced parking in many lots. ADA parking is free everywhere.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://parkatbalboapark.com/api/chatgpt/openapi.yaml"
+  },
+  "logo_url": "https://parkatbalboapark.com/icon.png",
+  "contact_email": "hello@parkatbalboapark.com",
+  "legal_info_url": "https://parkatbalboapark.com/terms"
+}

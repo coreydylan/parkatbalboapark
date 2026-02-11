@@ -1,8 +1,29 @@
 'use client'
 
+import { useMemo } from 'react'
 import { useAppStore } from '@/store/app-store'
 import { Badge } from '@/components/ui/Badge'
-import type { ParkingRecommendation } from '@parkatbalboa/shared'
+import { TIER_NAMES } from '@parkatbalboa/shared'
+import type { ParkingRecommendation, LotTier } from '@parkatbalboa/shared'
+
+const TIER_STYLE: Record<LotTier, { bg: string; text: string }> = {
+  0: { bg: 'bg-green-100', text: 'text-green-700' },
+  1: { bg: 'bg-red-100', text: 'text-red-700' },
+  2: { bg: 'bg-amber-100', text: 'text-amber-700' },
+  3: { bg: 'bg-blue-100', text: 'text-blue-700' },
+}
+
+function deriveFreeReason(tips: string[]): string | null {
+  for (const tip of tips) {
+    const lower = tip.toLowerCase()
+    if (lower.includes('resident')) return 'Free — resident parking'
+    if (lower.includes('enforce') || lower.includes('hours'))
+      return 'Free — outside enforcement hours'
+    if (lower.includes('free lot')) return 'Free — no-cost lot'
+    if (lower.includes('pass')) return 'Free — valid pass'
+  }
+  return 'Free parking'
+}
 
 interface RecommendationCardProps {
   recommendation: ParkingRecommendation
@@ -18,10 +39,11 @@ export function RecommendationCard({
   const selectLot = useAppStore((s) => s.selectLot)
 
   const isSelected = selectedLot?.slug === rec.lotSlug
+  const lot = useMemo(() => lots.find((l) => l.slug === rec.lotSlug), [lots, rec.lotSlug])
+  const tierStyle = TIER_STYLE[rec.tier]
 
   function handleClick() {
-    const lot = lots.find((l) => l.slug === rec.lotSlug) ?? null
-    selectLot(isSelected ? null : lot)
+    selectLot(isSelected ? null : lot ?? null)
   }
 
   return (
@@ -46,9 +68,18 @@ export function RecommendationCard({
           <h4 className="font-semibold text-stone-800 text-sm">
             {rec.lotDisplayName}
           </h4>
+          <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${tierStyle.bg} ${tierStyle.text}`}>
+            {TIER_NAMES[rec.tier]}
+          </span>
         </div>
         <Badge cost={rec.costCents} label={rec.costDisplay} />
       </div>
+
+      {rec.isFree && (
+        <p className="text-xs text-green-600 mb-1.5">
+          {deriveFreeReason(rec.tips)}
+        </p>
+      )}
 
       <div className="flex items-center gap-3 text-xs text-stone-500 mb-2">
         {rec.walkingTimeDisplay && (
@@ -92,6 +123,24 @@ export function RecommendationCard({
               <line x1="4" y1="10" x2="20" y2="10" />
             </svg>
             Tram available
+          </span>
+        )}
+
+        {lot?.hasAdaSpaces && (
+          <span className="flex items-center gap-1 text-blue-600" title="ADA accessible spaces">
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm-1 8h2l1 5h3l1 2h-5l-.5-2H8.5a4.5 4.5 0 1 1 0-9h1v2h-1a2.5 2.5 0 1 0 0 5h2.5L11 10Z" />
+            </svg>
+            ADA
+          </span>
+        )}
+
+        {lot?.hasEvCharging && (
+          <span className="flex items-center gap-1 text-emerald-600" title="EV charging available">
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+            EV
           </span>
         )}
       </div>

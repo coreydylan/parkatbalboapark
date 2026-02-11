@@ -101,7 +101,26 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const recs: ParkingRecommendation[] = data ?? []
+    // Transform snake_case RPC results to camelCase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const recs: ParkingRecommendation[] = (data ?? []).map((row: any) => ({
+      lotSlug: row.lot_slug,
+      lotName: row.lot_name,
+      lotDisplayName: row.lot_display_name,
+      lat: row.lat,
+      lng: row.lng,
+      tier: row.tier,
+      costCents: row.cost_cents,
+      costDisplay: row.cost_display,
+      isFree: row.is_free,
+      walkingDistanceMeters: row.walking_distance_meters,
+      walkingTimeSeconds: row.walking_time_seconds,
+      walkingTimeDisplay: row.walking_time_display,
+      hasTram: row.has_tram,
+      tramTimeMinutes: row.tram_time_minutes,
+      score: row.score,
+      tips: row.tips ?? [],
+    }))
     const formatted = recs.map(formatRecommendationForChatGPT)
     const summary = generateSummary(recs, userType, destinationSlug)
 
