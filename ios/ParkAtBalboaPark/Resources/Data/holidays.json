@@ -1,0 +1,11 @@
+[
+  { "name": "New Year's Day", "date": "2026-01-01", "isRecurring": true },
+  { "name": "Presidents' Day", "date": "2026-02-16", "isRecurring": false },
+  { "name": "Memorial Day", "date": "2026-05-25", "isRecurring": false },
+  { "name": "Independence Day", "date": "2026-07-04", "isRecurring": true },
+  { "name": "Labor Day", "date": "2026-09-07", "isRecurring": false },
+  { "name": "Veterans Day", "date": "2026-11-11", "isRecurring": true },
+  { "name": "Thanksgiving", "date": "2026-11-26", "isRecurring": false },
+  { "name": "Christmas Eve", "date": "2026-12-24", "isRecurring": true },
+  { "name": "Christmas Day", "date": "2026-12-25", "isRecurring": true }
+]

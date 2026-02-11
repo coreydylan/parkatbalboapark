@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		019A7FC416D40BB9625ECB28 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2145A346A018AB09AC5F08 /* APIClient.swift */; };
+		090A978110E82F8C81F43BE2 /* CostBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9C97747641D9CEE466FDA /* CostBadge.swift */; };
+		0E2C9D79DF73B8FF988B0D08 /* tram-data.json in Resources */ = {isa = PBXBuildFile; fileRef = C1998D483B26AA76C39C6BB7 /* tram-data.json */; };
+		15502C62E9051A195078F90C /* EnforcementPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED59FF0DA2A270CFF3DABED /* EnforcementPeriod.swift */; };
+		191665741A530E8700BE8534 /* RecommendationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB293C0023BC73F1B4C178D /* RecommendationCard.swift */; };
+		19B1C8C01096059C6BF23703 /* BottomPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F399CE2F380F79443469B26 /* BottomPanel.swift */; };
+		2C6D8353BFCDA76D8B4C218E /* ParkAtBalboaParkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8931641195E83D30D461ACF /* ParkAtBalboaParkApp.swift */; };
+		3DD05C1A9F4851E3E8189CE0 /* BundledDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B356F87872115D1E8191D4 /* BundledDataService.swift */; };
+		4E7A8C05E8E32831B7147E2A /* LotMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B614276D322F64DEC3CEE80 /* LotMarkerView.swift */; };
+		5320D815714286AB2E4F2520 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1102EA2CC4ACBD5B290260B7 /* ProfileView.swift */; };
+		55F41EB0DAB6667AF6284B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6B192C755D9D1E996ECF36C /* Assets.xcassets */; };
+		6239C0362BBCB1ADF817E89D /* ParkingRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC1991F1C49CC6E75A63DC /* ParkingRecommendation.swift */; };
+		6C03D8A2B663AC21E82F8033 /* PricingRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF70F8239AC2B6FEE1CDEA1 /* PricingRule.swift */; };
+		6DD97295CB764F14D86B325E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5D015E7D6EC0A07A64553E /* LocationService.swift */; };
+		72CE035E8612BE51CF5545B9 /* LotTierAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3C7E0303446D115BF1662C /* LotTierAssignment.swift */; };
+		73D6EAAAA7B8DE628A99F408 /* RecommendationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A118AF29B6DF9D0FD71D14 /* RecommendationSheet.swift */; };
+		7833F886A146EBA0461FBCFC /* ParkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88BC611170FFFE9194EE31 /* ParkMapView.swift */; };
+		79833B7163401A0ACAB782B2 /* holidays.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F9737FE2F121D40330DAF0F /* holidays.json */; };
+		7A188275D54B6256FD8C93DC /* ParkingLot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409D8D496778DBB4F219895 /* ParkingLot.swift */; };
+		8376D13CB5245CADA7F7D277 /* RecommendationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C7CF1FCD043EDF0B43E832 /* RecommendationResponse.swift */; };
+		95FF8AC7421E9B2524E14781 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751EB29E2CB0B3BBFA797351 /* AppState.swift */; };
+		97518973CA3770AE729EFFC6 /* pricing-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = D7840B75A2ADEA6886FC2776 /* pricing-rules.json */; };
+		9C7370601057B1E889D78883 /* destinations.json in Resources */ = {isa = PBXBuildFile; fileRef = DE51FAF51BA55C1AF60A7779 /* destinations.json */; };
+		A84867E940A48BA8AFAA03C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA507DF04E465ACA4DF2C4A /* ContentView.swift */; };
+		C1ACA83645C48AE32474B134 /* Holiday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C692849C0F932544EC436BB /* Holiday.swift */; };
+		C3EAFDE5E33D1A6E8DBEC68F /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28B4D696F5AF4D38EA46619 /* Destination.swift */; };
+		C6BC3231DB8B9138CDB9D979 /* lots.json in Resources */ = {isa = PBXBuildFile; fileRef = A75D9DA72D6E97758723FF37 /* lots.json */; };
+		CCB67078E148DCBD124CE6EA /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81CBB9005F10E2D703710F /* InfoView.swift */; };
+		CECA2C4DF0087B9EFCFDE3FE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99524B9A4285D570C555B1 /* OnboardingView.swift */; };
+		D4333BE3E2888F090DA992C3 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D784B07A3C299FF51CC08 /* Waypoint.swift */; };
+		DBC49F045972B84F34A1EBA2 /* PanelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EE5D7016A83C6CFE19000C /* PanelContentView.swift */; };
+		DCB73A0E76D2423B99914A2E /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4F77F0D5D42C787A0332E /* UserType.swift */; };
+		DCBB99CF4C20FFCC9251313F /* DestinationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE5600A8FBF74746A4231F /* DestinationSearchView.swift */; };
+		DD39BAA326282053A25A36DD /* VisitDurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375FD8919307C0532C73CBA5 /* VisitDurationPicker.swift */; };
+		E11221574E7FF1EF413A369C /* Tram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDC4B74BE8CF42783D160F /* Tram.swift */; };
+		E279F3B60C61E00AF9409D93 /* MapFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FEAFBC46871DCE6E9FED33 /* MapFilterBar.swift */; };
+		EED6E28CC62DBB1EAEEDBBA5 /* EnforcementStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40736356271781626E15EDD1 /* EnforcementStatus.swift */; };
+		EF910EA1D77E704C8EAA74A6 /* PricingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50457AB5F132C52402B1796 /* PricingEngine.swift */; };
+		F59BD351A2B8F99BD8D2437B /* LotTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B95DAE17DCB05F78423463 /* LotTier.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01B356F87872115D1E8191D4 /* BundledDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledDataService.swift; sourceTree = "<group>"; };
+		0F88BC611170FFFE9194EE31 /* ParkMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkMapView.swift; sourceTree = "<group>"; };
+		1102EA2CC4ACBD5B290260B7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		2B614276D322F64DEC3CEE80 /* LotMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotMarkerView.swift; sourceTree = "<group>"; };
+		2FC9C97747641D9CEE466FDA /* CostBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostBadge.swift; sourceTree = "<group>"; };
+		375FD8919307C0532C73CBA5 /* VisitDurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitDurationPicker.swift; sourceTree = "<group>"; };
+		3C81CBB9005F10E2D703710F /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		3F399CE2F380F79443469B26 /* BottomPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPanel.swift; sourceTree = "<group>"; };
+		40736356271781626E15EDD1 /* EnforcementStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnforcementStatus.swift; sourceTree = "<group>"; };
+		40FEAFBC46871DCE6E9FED33 /* MapFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterBar.swift; sourceTree = "<group>"; };
+		4E5D015E7D6EC0A07A64553E /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		54EC1991F1C49CC6E75A63DC /* ParkingRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRecommendation.swift; sourceTree = "<group>"; };
+		5E2145A346A018AB09AC5F08 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		6CEDC4B74BE8CF42783D160F /* Tram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tram.swift; sourceTree = "<group>"; };
+		6DA507DF04E465ACA4DF2C4A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		751EB29E2CB0B3BBFA797351 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		8F9737FE2F121D40330DAF0F /* holidays.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = holidays.json; sourceTree = "<group>"; };
+		9C692849C0F932544EC436BB /* Holiday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Holiday.swift; sourceTree = "<group>"; };
+		A3F4F77F0D5D42C787A0332E /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		A6EE5D7016A83C6CFE19000C /* PanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentView.swift; sourceTree = "<group>"; };
+		A75D9DA72D6E97758723FF37 /* lots.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lots.json; sourceTree = "<group>"; };
+		B50457AB5F132C52402B1796 /* PricingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingEngine.swift; sourceTree = "<group>"; };
+		BAF70F8239AC2B6FEE1CDEA1 /* PricingRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingRule.swift; sourceTree = "<group>"; };
+		BEB293C0023BC73F1B4C178D /* RecommendationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCard.swift; sourceTree = "<group>"; };
+		BED59FF0DA2A270CFF3DABED /* EnforcementPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnforcementPeriod.swift; sourceTree = "<group>"; };
+		C1998D483B26AA76C39C6BB7 /* tram-data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "tram-data.json"; sourceTree = "<group>"; };
+		C65C652C14DE3B4A8AB79D2D /* ParkAtBalboaPark.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ParkAtBalboaPark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9A118AF29B6DF9D0FD71D14 /* RecommendationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationSheet.swift; sourceTree = "<group>"; };
+		D28B4D696F5AF4D38EA46619 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		D2B95DAE17DCB05F78423463 /* LotTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotTier.swift; sourceTree = "<group>"; };
+		D409D8D496778DBB4F219895 /* ParkingLot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLot.swift; sourceTree = "<group>"; };
+		D7840B75A2ADEA6886FC2776 /* pricing-rules.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pricing-rules.json"; sourceTree = "<group>"; };
+		D8931641195E83D30D461ACF /* ParkAtBalboaParkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkAtBalboaParkApp.swift; sourceTree = "<group>"; };
+		DE51FAF51BA55C1AF60A7779 /* destinations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = destinations.json; sourceTree = "<group>"; };
+		E6B192C755D9D1E996ECF36C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC3C7E0303446D115BF1662C /* LotTierAssignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotTierAssignment.swift; sourceTree = "<group>"; };
+		F2AE5600A8FBF74746A4231F /* DestinationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchView.swift; sourceTree = "<group>"; };
+		F48D784B07A3C299FF51CC08 /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
+		F7C7CF1FCD043EDF0B43E832 /* RecommendationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationResponse.swift; sourceTree = "<group>"; };
+		FA99524B9A4285D570C555B1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		06DCF98753155E104E0FF546 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C65C652C14DE3B4A8AB79D2D /* ParkAtBalboaPark.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07D7B483850E74BA0DD1B26C /* Panel */ = {
+			isa = PBXGroup;
+			children = (
+				A6EE5D7016A83C6CFE19000C /* PanelContentView.swift */,
+			);
+			path = Panel;
+			sourceTree = "<group>";
+		};
+		1BAAEA5A43F33D7620FBF5B7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D28B4D696F5AF4D38EA46619 /* Destination.swift */,
+				BED59FF0DA2A270CFF3DABED /* EnforcementPeriod.swift */,
+				40736356271781626E15EDD1 /* EnforcementStatus.swift */,
+				9C692849C0F932544EC436BB /* Holiday.swift */,
+				D2B95DAE17DCB05F78423463 /* LotTier.swift */,
+				EC3C7E0303446D115BF1662C /* LotTierAssignment.swift */,
+				D409D8D496778DBB4F219895 /* ParkingLot.swift */,
+				54EC1991F1C49CC6E75A63DC /* ParkingRecommendation.swift */,
+				BAF70F8239AC2B6FEE1CDEA1 /* PricingRule.swift */,
+				F7C7CF1FCD043EDF0B43E832 /* RecommendationResponse.swift */,
+				6CEDC4B74BE8CF42783D160F /* Tram.swift */,
+				A3F4F77F0D5D42C787A0332E /* UserType.swift */,
+				F48D784B07A3C299FF51CC08 /* Waypoint.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1F46B8F0E5262895B572B4E1 = {
+			isa = PBXGroup;
+			children = (
+				8EA5B58B948982239E314D96 /* ParkAtBalboaPark */,
+				06DCF98753155E104E0FF546 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2C05B3FB42450E2CC2315530 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1102EA2CC4ACBD5B290260B7 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		2D48FEEA38B9C4BB03FAA874 /* Pricing */ = {
+			isa = PBXGroup;
+			children = (
+				B50457AB5F132C52402B1796 /* PricingEngine.swift */,
+			);
+			path = Pricing;
+			sourceTree = "<group>";
+		};
+		5561F3DA6E88AADB5BF9A662 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				751EB29E2CB0B3BBFA797351 /* AppState.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		610A7B14C5701117E0BF5E94 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B49DBE2C3A8DBCFCBCEE440E /* Components */,
+				C82466D08E912E913CC3B786 /* Info */,
+				B21EDEB061EBE6F1EE4C1474 /* Map */,
+				B689A743D811A28FEA99AE0C /* Onboarding */,
+				07D7B483850E74BA0DD1B26C /* Panel */,
+				2C05B3FB42450E2CC2315530 /* Profile */,
+				F3897D289503AB7FFF4F5A04 /* Recommendations */,
+				DDCC5BF5F297AC44D9985A74 /* Search */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		65682AD744BC485AD377A69F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6DA507DF04E465ACA4DF2C4A /* ContentView.swift */,
+				D8931641195E83D30D461ACF /* ParkAtBalboaParkApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		85E477172A7715C4F3E8B023 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DE51FAF51BA55C1AF60A7779 /* destinations.json */,
+				8F9737FE2F121D40330DAF0F /* holidays.json */,
+				A75D9DA72D6E97758723FF37 /* lots.json */,
+				D7840B75A2ADEA6886FC2776 /* pricing-rules.json */,
+				C1998D483B26AA76C39C6BB7 /* tram-data.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8EA5B58B948982239E314D96 /* ParkAtBalboaPark */ = {
+			isa = PBXGroup;
+			children = (
+				65682AD744BC485AD377A69F /* App */,
+				1BAAEA5A43F33D7620FBF5B7 /* Models */,
+				2D48FEEA38B9C4BB03FAA874 /* Pricing */,
+				99C2A35A5596553B934A9445 /* Resources */,
+				B8C4831B731F6861CF5937F6 /* Services */,
+				5561F3DA6E88AADB5BF9A662 /* Store */,
+				610A7B14C5701117E0BF5E94 /* Views */,
+			);
+			path = ParkAtBalboaPark;
+			sourceTree = "<group>";
+		};
+		99C2A35A5596553B934A9445 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E6B192C755D9D1E996ECF36C /* Assets.xcassets */,
+				85E477172A7715C4F3E8B023 /* Data */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B21EDEB061EBE6F1EE4C1474 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2B614276D322F64DEC3CEE80 /* LotMarkerView.swift */,
+				40FEAFBC46871DCE6E9FED33 /* MapFilterBar.swift */,
+				0F88BC611170FFFE9194EE31 /* ParkMapView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		B49DBE2C3A8DBCFCBCEE440E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3F399CE2F380F79443469B26 /* BottomPanel.swift */,
+				2FC9C97747641D9CEE466FDA /* CostBadge.swift */,
+				375FD8919307C0532C73CBA5 /* VisitDurationPicker.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B689A743D811A28FEA99AE0C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				FA99524B9A4285D570C555B1 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		B8C4831B731F6861CF5937F6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5E2145A346A018AB09AC5F08 /* APIClient.swift */,
+				01B356F87872115D1E8191D4 /* BundledDataService.swift */,
+				4E5D015E7D6EC0A07A64553E /* LocationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C82466D08E912E913CC3B786 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				3C81CBB9005F10E2D703710F /* InfoView.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		DDCC5BF5F297AC44D9985A74 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F2AE5600A8FBF74746A4231F /* DestinationSearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		F3897D289503AB7FFF4F5A04 /* Recommendations */ = {
+			isa = PBXGroup;
+			children = (
+				BEB293C0023BC73F1B4C178D /* RecommendationCard.swift */,
+				C9A118AF29B6DF9D0FD71D14 /* RecommendationSheet.swift */,
+			);
+			path = Recommendations;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		41A7D08AE3EC57E8418BF4A8 /* ParkAtBalboaPark */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9F4A53871817C3CA080C098 /* Build configuration list for PBXNativeTarget "ParkAtBalboaPark" */;
+			buildPhases = (
+				EAD421A15AE995AEF8A4F218 /* Sources */,
+				43A52BF0AB56DB8F7AB04D1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ParkAtBalboaPark;
+			packageProductDependencies = (
+			);
+			productName = ParkAtBalboaPark;
+			productReference = C65C652C14DE3B4A8AB79D2D /* ParkAtBalboaPark.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		47DC7A7441F1E762CAB65496 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2600;
+			};
+			buildConfigurationList = 8010072E28504B7A0EB15912 /* Build configuration list for PBXProject "ParkAtBalboaPark" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 1F46B8F0E5262895B572B4E1;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				41A7D08AE3EC57E8418BF4A8 /* ParkAtBalboaPark */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43A52BF0AB56DB8F7AB04D1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55F41EB0DAB6667AF6284B11 /* Assets.xcassets in Resources */,
+				9C7370601057B1E889D78883 /* destinations.json in Resources */,
+				79833B7163401A0ACAB782B2 /* holidays.json in Resources */,
+				C6BC3231DB8B9138CDB9D979 /* lots.json in Resources */,
+				97518973CA3770AE729EFFC6 /* pricing-rules.json in Resources */,
+				0E2C9D79DF73B8FF988B0D08 /* tram-data.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EAD421A15AE995AEF8A4F218 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				019A7FC416D40BB9625ECB28 /* APIClient.swift in Sources */,
+				95FF8AC7421E9B2524E14781 /* AppState.swift in Sources */,
+				19B1C8C01096059C6BF23703 /* BottomPanel.swift in Sources */,
+				3DD05C1A9F4851E3E8189CE0 /* BundledDataService.swift in Sources */,
+				A84867E940A48BA8AFAA03C8 /* ContentView.swift in Sources */,
+				090A978110E82F8C81F43BE2 /* CostBadge.swift in Sources */,
+				C3EAFDE5E33D1A6E8DBEC68F /* Destination.swift in Sources */,
+				DCBB99CF4C20FFCC9251313F /* DestinationSearchView.swift in Sources */,
+				15502C62E9051A195078F90C /* EnforcementPeriod.swift in Sources */,
+				EED6E28CC62DBB1EAEEDBBA5 /* EnforcementStatus.swift in Sources */,
+				C1ACA83645C48AE32474B134 /* Holiday.swift in Sources */,
+				CCB67078E148DCBD124CE6EA /* InfoView.swift in Sources */,
+				6DD97295CB764F14D86B325E /* LocationService.swift in Sources */,
+				4E7A8C05E8E32831B7147E2A /* LotMarkerView.swift in Sources */,
+				F59BD351A2B8F99BD8D2437B /* LotTier.swift in Sources */,
+				72CE035E8612BE51CF5545B9 /* LotTierAssignment.swift in Sources */,
+				E279F3B60C61E00AF9409D93 /* MapFilterBar.swift in Sources */,
+				CECA2C4DF0087B9EFCFDE3FE /* OnboardingView.swift in Sources */,
+				DBC49F045972B84F34A1EBA2 /* PanelContentView.swift in Sources */,
+				2C6D8353BFCDA76D8B4C218E /* ParkAtBalboaParkApp.swift in Sources */,
+				7833F886A146EBA0461FBCFC /* ParkMapView.swift in Sources */,
+				7A188275D54B6256FD8C93DC /* ParkingLot.swift in Sources */,
+				6239C0362BBCB1ADF817E89D /* ParkingRecommendation.swift in Sources */,
+				EF910EA1D77E704C8EAA74A6 /* PricingEngine.swift in Sources */,
+				6C03D8A2B663AC21E82F8033 /* PricingRule.swift in Sources */,
+				5320D815714286AB2E4F2520 /* ProfileView.swift in Sources */,
+				191665741A530E8700BE8534 /* RecommendationCard.swift in Sources */,
+				8376D13CB5245CADA7F7D277 /* RecommendationResponse.swift in Sources */,
+				73D6EAAAA7B8DE628A99F408 /* RecommendationSheet.swift in Sources */,
+				E11221574E7FF1EF413A369C /* Tram.swift in Sources */,
+				DCB73A0E76D2423B99914A2E /* UserType.swift in Sources */,
+				DD39BAA326282053A25A36DD /* VisitDurationPicker.swift in Sources */,
+				D4333BE3E2888F090DA992C3 /* Waypoint.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		36A695F29F01169959695DB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Park at Balboa Park";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We use your location to find parking lots near you and calculate walking distances.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		72C9DC0D8D0EF65924A4010E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.parkatbalboapark.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C41DA3B105193E74EE849DC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Park at Balboa Park";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We use your location to find parking lots near you and calculate walking distances.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		DA5AC83B0BBAA8C7EAE275C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.parkatbalboapark.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8010072E28504B7A0EB15912 /* Build configuration list for PBXProject "ParkAtBalboaPark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36A695F29F01169959695DB7 /* Debug */,
+				C41DA3B105193E74EE849DC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9F4A53871817C3CA080C098 /* Build configuration list for PBXNativeTarget "ParkAtBalboaPark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72C9DC0D8D0EF65924A4010E /* Debug */,
+				DA5AC83B0BBAA8C7EAE275C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 47DC7A7441F1E762CAB65496 /* Project object */;
+}

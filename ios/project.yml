@@ -1,0 +1,35 @@
+name: ParkAtBalboaPark
+options:
+  bundleIdPrefix: com.parkatbalboapark
+  deploymentTarget:
+    iOS: "26.0"
+  xcodeVersion: "26"
+  defaultConfig: Release
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    GENERATE_INFOPLIST_FILE: true
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: 1
+    INFOPLIST_KEY_CFBundleDisplayName: "Park at Balboa Park"
+    INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "We use your location to find parking lots near you and calculate walking distances."
+    INFOPLIST_KEY_UILaunchScreen_Generation: true
+    INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
+
+targets:
+  ParkAtBalboaPark:
+    type: application
+    platform: iOS
+    sources:
+      - path: ParkAtBalboaPark
+        excludes:
+          - "**/*.xcodeproj"
+          - "**/*.xcworkspace"
+    resources:
+      - path: ParkAtBalboaPark/Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.parkatbalboapark.app
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
