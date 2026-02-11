@@ -233,12 +233,10 @@ DECLARE
   v_max_cost       integer;
   v_max_walk       integer;
 BEGIN
-  -- Extract date/time components
   v_query_date := (p_query_time AT TIME ZONE 'America/Los_Angeles')::date;
   v_query_time_of_day := (p_query_time AT TIME ZONE 'America/Los_Angeles')::time;
   v_day_of_week := EXTRACT(DOW FROM p_query_time AT TIME ZONE 'America/Los_Angeles')::integer;
 
-  -- Check if today is a holiday
   SELECT EXISTS (
     SELECT 1 FROM holidays h
     WHERE h.date = v_query_date
@@ -246,7 +244,6 @@ BEGIN
                            AND EXTRACT(DAY FROM h.date) = EXTRACT(DAY FROM v_query_date))
   ) INTO v_is_holiday;
 
-  -- Check if enforcement is active
   IF NOT v_is_holiday THEN
     SELECT EXISTS (
       SELECT 1 FROM enforcement_periods ep
@@ -256,53 +253,114 @@ BEGIN
     ) INTO v_enforced;
   END IF;
 
-  -- Build results into a temp table for scoring
-  CREATE TEMP TABLE _recommendations ON COMMIT DROP AS
+  -- Get max values for normalization
   SELECT
-    pl.slug                           AS lot_slug,
-    pl.name                           AS lot_name,
-    pl.display_name                   AS lot_display_name,
-    pl.lat                            AS lat,
-    pl.lng                            AS lng,
-    COALESCE(lta.tier, 0::smallint)   AS tier,
-    pl.has_tram_stop                  AS has_tram,
-    pl.has_ev_charging                AS has_ev_charging,
-    pl.has_ada_spaces                 AS has_ada_spaces,
-    ldd.walking_distance_meters       AS walking_distance_meters,
-    ldd.walking_time_seconds          AS walking_time_seconds,
-    -- Cost calculation
+    GREATEST(MAX(sub.c), 1),
+    GREATEST(MAX(sub.w), 1)
+  INTO v_max_cost, v_max_walk
+  FROM (
+    SELECT
+      CASE
+        WHEN NOT v_enforced OR p_has_pass THEN 0
+        WHEN p_user_type = 'ada' THEN 0
+        WHEN COALESCE(lta.tier, 0) = 0 THEN 0
+        WHEN pl.slug = 'inspiration-point-lower' AND p_visit_hours <= 3 THEN 0
+        WHEN p_user_type IN ('staff','volunteer') AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        WHEN p_user_type = 'resident' AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        ELSE COALESCE(
+          (SELECT LEAST(pr.rate_cents * CEIL(p_visit_hours)::integer, COALESCE(pr.max_daily_cents, pr.rate_cents * CEIL(p_visit_hours)::integer))
+           FROM pricing_rules pr
+           WHERE pr.tier = COALESCE(lta.tier, 0) AND pr.user_type = p_user_type AND pr.duration_type = 'hourly'
+             AND v_query_date BETWEEN pr.effective_date AND COALESCE(pr.end_date, '9999-12-31'::date)
+           ORDER BY pr.effective_date DESC LIMIT 1), 0)
+      END AS c,
+      ldd.walking_distance_meters AS w
+    FROM parking_lots pl
+    LEFT JOIN lot_tier_assignments lta ON lta.lot_id = pl.id
+      AND v_query_date BETWEEN lta.effective_date AND COALESCE(lta.end_date, '9999-12-31'::date)
+    LEFT JOIN lot_destination_distances ldd ON ldd.lot_id = pl.id
+      AND p_destination_slug IS NOT NULL
+      AND ldd.destination_id = (SELECT d.id FROM destinations d WHERE d.slug = p_destination_slug LIMIT 1)
+  ) sub;
+
+  RETURN QUERY
+  SELECT
+    pl.slug,
+    pl.name,
+    pl.display_name,
+    pl.lat,
+    pl.lng,
+    COALESCE(lta.tier, 0::smallint),
+    -- cost_cents
     CASE
-      -- Not enforced or user has a pass: free everywhere
       WHEN NOT v_enforced OR p_has_pass THEN 0
-      -- ADA: always free
       WHEN p_user_type = 'ada' THEN 0
-      -- Tier 0: always free for everyone
       WHEN COALESCE(lta.tier, 0) = 0 THEN 0
-      -- Lower Inspiration Point: first 3 hours free for everyone
       WHEN pl.slug = 'inspiration-point-lower' AND p_visit_hours <= 3 THEN 0
-      -- Staff/volunteer: free in tier 0, 2, 3; normal pricing in tier 1
       WHEN p_user_type IN ('staff','volunteer') AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
-      -- Resident: free in tier 2, 3
       WHEN p_user_type = 'resident' AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
-      -- Otherwise: look up pricing
       ELSE COALESCE(
-        (
-          SELECT LEAST(
-            pr.rate_cents * CEIL(p_visit_hours)::integer,
-            COALESCE(pr.max_daily_cents, pr.rate_cents * CEIL(p_visit_hours)::integer)
-          )
-          FROM pricing_rules pr
-          WHERE pr.tier = COALESCE(lta.tier, 0)
-            AND pr.user_type = p_user_type
-            AND pr.duration_type = 'hourly'
-            AND v_query_date BETWEEN pr.effective_date AND COALESCE(pr.end_date, '9999-12-31'::date)
-          ORDER BY pr.effective_date DESC
-          LIMIT 1
-        ),
-        0
-      )
-    END AS cost_cents,
-    -- Tram time estimate (based on frequency / 2 as average wait + ~5 min ride)
+        (SELECT LEAST(pr.rate_cents * CEIL(p_visit_hours)::integer, COALESCE(pr.max_daily_cents, pr.rate_cents * CEIL(p_visit_hours)::integer))
+         FROM pricing_rules pr
+         WHERE pr.tier = COALESCE(lta.tier, 0) AND pr.user_type = p_user_type AND pr.duration_type = 'hourly'
+           AND v_query_date BETWEEN pr.effective_date AND COALESCE(pr.end_date, '9999-12-31'::date)
+         ORDER BY pr.effective_date DESC LIMIT 1), 0)
+    END,
+    -- cost_display
+    CASE
+      WHEN (CASE
+        WHEN NOT v_enforced OR p_has_pass THEN 0
+        WHEN p_user_type = 'ada' THEN 0
+        WHEN COALESCE(lta.tier, 0) = 0 THEN 0
+        WHEN pl.slug = 'inspiration-point-lower' AND p_visit_hours <= 3 THEN 0
+        WHEN p_user_type IN ('staff','volunteer') AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        WHEN p_user_type = 'resident' AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        ELSE COALESCE(
+          (SELECT LEAST(pr.rate_cents * CEIL(p_visit_hours)::integer, COALESCE(pr.max_daily_cents, pr.rate_cents * CEIL(p_visit_hours)::integer))
+           FROM pricing_rules pr
+           WHERE pr.tier = COALESCE(lta.tier, 0) AND pr.user_type = p_user_type AND pr.duration_type = 'hourly'
+             AND v_query_date BETWEEN pr.effective_date AND COALESCE(pr.end_date, '9999-12-31'::date)
+           ORDER BY pr.effective_date DESC LIMIT 1), 0)
+      END) = 0 THEN 'FREE'
+      ELSE '$' || ((CASE
+        WHEN NOT v_enforced OR p_has_pass THEN 0
+        WHEN p_user_type = 'ada' THEN 0
+        WHEN COALESCE(lta.tier, 0) = 0 THEN 0
+        WHEN pl.slug = 'inspiration-point-lower' AND p_visit_hours <= 3 THEN 0
+        WHEN p_user_type IN ('staff','volunteer') AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        WHEN p_user_type = 'resident' AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        ELSE COALESCE(
+          (SELECT LEAST(pr.rate_cents * CEIL(p_visit_hours)::integer, COALESCE(pr.max_daily_cents, pr.rate_cents * CEIL(p_visit_hours)::integer))
+           FROM pricing_rules pr
+           WHERE pr.tier = COALESCE(lta.tier, 0) AND pr.user_type = p_user_type AND pr.duration_type = 'hourly'
+             AND v_query_date BETWEEN pr.effective_date AND COALESCE(pr.end_date, '9999-12-31'::date)
+           ORDER BY pr.effective_date DESC LIMIT 1), 0)
+      END) / 100.0)::numeric(10,2)::text
+    END,
+    -- is_free
+    (CASE
+      WHEN NOT v_enforced OR p_has_pass THEN 0
+      WHEN p_user_type = 'ada' THEN 0
+      WHEN COALESCE(lta.tier, 0) = 0 THEN 0
+      WHEN pl.slug = 'inspiration-point-lower' AND p_visit_hours <= 3 THEN 0
+      WHEN p_user_type IN ('staff','volunteer') AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+      WHEN p_user_type = 'resident' AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+      ELSE COALESCE(
+        (SELECT LEAST(pr.rate_cents * CEIL(p_visit_hours)::integer, COALESCE(pr.max_daily_cents, pr.rate_cents * CEIL(p_visit_hours)::integer))
+         FROM pricing_rules pr
+         WHERE pr.tier = COALESCE(lta.tier, 0) AND pr.user_type = p_user_type AND pr.duration_type = 'hourly'
+           AND v_query_date BETWEEN pr.effective_date AND COALESCE(pr.end_date, '9999-12-31'::date)
+         ORDER BY pr.effective_date DESC LIMIT 1), 0)
+    END) = 0,
+    ldd.walking_distance_meters,
+    ldd.walking_time_seconds,
+    -- walking_time_display
+    CASE
+      WHEN ldd.walking_time_seconds IS NULL THEN NULL
+      ELSE CEIL(ldd.walking_time_seconds / 60.0)::integer::text || ' min walk'
+    END,
+    pl.has_tram_stop,
+    -- tram_time_minutes
     CASE
       WHEN pl.has_tram_stop THEN (
         SELECT (ts.frequency_minutes / 2) + 5
@@ -310,79 +368,49 @@ BEGIN
         WHERE v_query_date BETWEEN ts.effective_date AND COALESCE(ts.end_date, '9999-12-31'::date)
           AND v_query_time_of_day BETWEEN ts.start_time AND ts.end_time
           AND v_day_of_week = ANY(ts.days_of_week)
-        ORDER BY ts.effective_date DESC
-        LIMIT 1
-      )
+        ORDER BY ts.effective_date DESC LIMIT 1)
       ELSE NULL
-    END AS tram_time_minutes
-  FROM parking_lots pl
-  LEFT JOIN lot_tier_assignments lta
-    ON lta.lot_id = pl.id
-   AND v_query_date BETWEEN lta.effective_date AND COALESCE(lta.end_date, '9999-12-31'::date)
-  LEFT JOIN lot_destination_distances ldd
-    ON ldd.lot_id = pl.id
-   AND p_destination_slug IS NOT NULL
-   AND ldd.destination_id = (
-     SELECT d.id FROM destinations d WHERE d.slug = p_destination_slug LIMIT 1
-   );
-
-  -- Get max values for normalization
-  SELECT GREATEST(MAX(r.cost_cents), 1), GREATEST(MAX(r.walking_distance_meters), 1)
-    INTO v_max_cost, v_max_walk
-    FROM _recommendations r;
-
-  -- Return scored results
-  RETURN QUERY
-  SELECT
-    r.lot_slug,
-    r.lot_name,
-    r.lot_display_name,
-    r.lat,
-    r.lng,
-    r.tier,
-    r.cost_cents,
-    -- cost_display
-    CASE
-      WHEN r.cost_cents = 0 THEN 'FREE'
-      ELSE '$' || (r.cost_cents / 100.0)::numeric(10,2)::text
-    END AS cost_display,
-    -- is_free
-    (r.cost_cents = 0) AS is_free,
-    r.walking_distance_meters,
-    r.walking_time_seconds,
-    -- walking_time_display
-    CASE
-      WHEN r.walking_time_seconds IS NULL THEN NULL
-      ELSE CEIL(r.walking_time_seconds / 60.0)::integer::text || ' min walk'
-    END AS walking_time_display,
-    r.has_tram,
-    r.tram_time_minutes,
-    -- Score: cost 0.40, walk 0.35, tram 0.10, tier 0.10, ada 0.05
+    END,
+    -- score
     ROUND(
-      0.40 * (1.0 - (r.cost_cents::numeric / v_max_cost))
-      + 0.35 * (1.0 - COALESCE(r.walking_distance_meters::numeric / v_max_walk, 0.5))
-      + 0.10 * CASE WHEN r.has_tram THEN 1 ELSE 0 END
-      + 0.10 * (1.0 - r.tier::numeric / 3.0)
-      + 0.05 * CASE WHEN r.has_ada_spaces THEN 1 ELSE 0 END
-    , 4) AS score,
-    -- Tips
+      0.40 * (1.0 - (CASE
+        WHEN NOT v_enforced OR p_has_pass THEN 0
+        WHEN p_user_type = 'ada' THEN 0
+        WHEN COALESCE(lta.tier, 0) = 0 THEN 0
+        WHEN pl.slug = 'inspiration-point-lower' AND p_visit_hours <= 3 THEN 0
+        WHEN p_user_type IN ('staff','volunteer') AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        WHEN p_user_type = 'resident' AND COALESCE(lta.tier, 0) IN (2, 3) THEN 0
+        ELSE COALESCE(
+          (SELECT LEAST(pr.rate_cents * CEIL(p_visit_hours)::integer, COALESCE(pr.max_daily_cents, pr.rate_cents * CEIL(p_visit_hours)::integer))
+           FROM pricing_rules pr
+           WHERE pr.tier = COALESCE(lta.tier, 0) AND pr.user_type = p_user_type AND pr.duration_type = 'hourly'
+             AND v_query_date BETWEEN pr.effective_date AND COALESCE(pr.end_date, '9999-12-31'::date)
+           ORDER BY pr.effective_date DESC LIMIT 1), 0)
+      END)::numeric / v_max_cost)
+      + 0.35 * (1.0 - COALESCE(ldd.walking_distance_meters::numeric / v_max_walk, 0.5))
+      + 0.10 * CASE WHEN pl.has_tram_stop THEN 1 ELSE 0 END
+      + 0.10 * (1.0 - COALESCE(lta.tier, 0)::numeric / 3.0)
+      + 0.05 * CASE WHEN pl.has_ada_spaces THEN 1 ELSE 0 END
+    , 4),
+    -- tips
     ARRAY_REMOVE(ARRAY[
-      CASE WHEN r.lot_slug = 'inspiration-point-lower' AND v_enforced AND p_visit_hours <= 3
-           THEN 'First 3 hours free' END,
-      CASE WHEN NOT v_enforced
-           THEN 'Free parking (outside enforcement hours)' END,
-      CASE WHEN v_is_holiday
-           THEN 'Free parking (holiday)' END,
-      CASE WHEN p_has_pass AND v_enforced
-           THEN 'Free with parking pass' END,
-      CASE WHEN r.has_tram AND r.tram_time_minutes IS NOT NULL
-           THEN 'Tram available to destination' END,
-      CASE WHEN r.has_ev_charging
-           THEN 'EV charging available' END,
-      CASE WHEN r.tier = 0
-           THEN 'Always free lot' END
-    ], NULL) AS tips
-  FROM _recommendations r
+      CASE WHEN pl.slug = 'inspiration-point-lower' AND v_enforced AND p_visit_hours <= 3 THEN 'First 3 hours free' END,
+      CASE WHEN NOT v_enforced THEN 'Free parking (outside enforcement hours)' END,
+      CASE WHEN v_is_holiday THEN 'Free parking (holiday)' END,
+      CASE WHEN p_has_pass AND v_enforced THEN 'Free with parking pass' END,
+      CASE WHEN pl.has_tram_stop AND (SELECT (ts2.frequency_minutes / 2) + 5 FROM tram_schedule ts2
+        WHERE v_query_date BETWEEN ts2.effective_date AND COALESCE(ts2.end_date, '9999-12-31'::date)
+          AND v_query_time_of_day BETWEEN ts2.start_time AND ts2.end_time
+          AND v_day_of_week = ANY(ts2.days_of_week) LIMIT 1) IS NOT NULL THEN 'Tram available to destination' END,
+      CASE WHEN pl.has_ev_charging THEN 'EV charging available' END,
+      CASE WHEN COALESCE(lta.tier, 0) = 0 THEN 'Always free lot' END
+    ], NULL)
+  FROM parking_lots pl
+  LEFT JOIN lot_tier_assignments lta ON lta.lot_id = pl.id
+    AND v_query_date BETWEEN lta.effective_date AND COALESCE(lta.end_date, '9999-12-31'::date)
+  LEFT JOIN lot_destination_distances ldd ON ldd.lot_id = pl.id
+    AND p_destination_slug IS NOT NULL
+    AND ldd.destination_id = (SELECT d.id FROM destinations d WHERE d.slug = p_destination_slug LIMIT 1)
   ORDER BY score DESC;
 END;
 $$;
