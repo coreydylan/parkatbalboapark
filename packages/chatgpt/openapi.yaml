@@ -1,0 +1,224 @@
+openapi: 3.1.0
+info:
+  title: Park at Balboa Park API
+  description: Find the best parking at Balboa Park, San Diego. Provides personalized parking recommendations based on who you are, where you're going, and when.
+  version: 1.0.0
+servers:
+  - url: https://parkatbalboapark.com
+    description: Production
+paths:
+  /api/chatgpt/recommend:
+    get:
+      operationId: getRecommendation
+      summary: Get personalized parking recommendations
+      description: Returns ranked parking lot recommendations based on user type, destination, and visit time. Considers enforcement hours, holidays, pricing tiers, walking distances, and tram availability.
+      parameters:
+        - name: user_type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [resident, nonresident, staff, volunteer, ada]
+          description: "Type of visitor: 'resident' for San Diego residents, 'nonresident' for visitors, 'staff' for park staff, 'volunteer' for park volunteers, 'ada' for visitors with disabilities"
+        - name: has_pass
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+          description: Whether the visitor has a pre-purchased parking pass
+        - name: destination
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Slug of the destination they're visiting (e.g. 'san-diego-zoo', 'fleet-science-center'). Use /api/chatgpt/destinations to find valid slugs.
+        - name: time
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: "When they plan to arrive (ISO 8601). Defaults to now. Used to check enforcement hours and holiday status."
+        - name: visit_hours
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 2
+          description: Expected duration of visit in hours
+      responses:
+        '200':
+          description: Parking recommendations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        lot_name:
+                          type: string
+                          description: Display name of the parking lot
+                        cost_display:
+                          type: string
+                          description: "Formatted cost (e.g. 'FREE', '$5', '$16')"
+                        is_free:
+                          type: boolean
+                        walking_time_display:
+                          type: string
+                          description: "Walking time to destination (e.g. '7 min walk')"
+                        has_tram:
+                          type: boolean
+                          description: Whether a free tram stop is at this lot
+                        tram_time_display:
+                          type: string
+                          nullable: true
+                          description: "Tram ride time (e.g. '5 min by tram')"
+                        tips:
+                          type: array
+                          items:
+                            type: string
+                          description: Contextual tips for this lot
+                  summary:
+                    type: string
+                    description: Natural language summary of the best option
+                  enforcement_status:
+                    type: string
+                    description: "Current enforcement info (e.g. 'Parking is enforced today 8am-6pm' or 'Parking is FREE today (holiday)')"
+                  tips:
+                    type: array
+                    items:
+                      type: string
+                    description: General tips about parking at Balboa Park
+  /api/chatgpt/destinations:
+    get:
+      operationId: getDestinations
+      summary: List all Balboa Park destinations
+      description: Returns all destinations (museums, gardens, theaters, etc.) with their slugs, areas, and types. Use the slug when calling the recommend endpoint.
+      parameters:
+        - name: area
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [central_mesa, palisades, east_mesa, florida_canyon, morley_field, pan_american]
+          description: Filter by park area
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [museum, garden, theater, landmark, recreation, dining, zoo, other]
+          description: Filter by destination type
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search destinations by name
+      responses:
+        '200':
+          description: List of destinations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  destinations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        slug:
+                          type: string
+                        name:
+                          type: string
+                        area:
+                          type: string
+                        type:
+                          type: string
+  /api/chatgpt/lots:
+    get:
+      operationId: getLots
+      summary: List all parking lots with current pricing
+      description: Returns all parking lots with their current tier, pricing for each user type, and amenities.
+      responses:
+        '200':
+          description: List of parking lots
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lots:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        tier:
+                          type: integer
+                        capacity:
+                          type: integer
+                          nullable: true
+                        has_tram_stop:
+                          type: boolean
+                        has_ev_charging:
+                          type: boolean
+                        has_ada_spaces:
+                          type: boolean
+                        pricing:
+                          type: object
+                          properties:
+                            resident:
+                              type: string
+                            nonresident:
+                              type: string
+                            staff:
+                              type: string
+                            ada:
+                              type: string
+                        payment_methods:
+                          type: array
+                          items:
+                            type: string
+  /api/chatgpt/enforcement:
+    get:
+      operationId: getEnforcement
+      summary: Get current enforcement status
+      description: Returns whether parking enforcement is currently active, enforcement hours, and upcoming holidays when parking is free.
+      responses:
+        '200':
+          description: Enforcement status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  active:
+                    type: boolean
+                    description: Whether enforcement is currently active
+                  hours:
+                    type: string
+                    description: "Enforcement hours (e.g. '8:00 AM - 6:00 PM')"
+                  is_holiday:
+                    type: boolean
+                  holiday_name:
+                    type: string
+                    nullable: true
+                  next_free_day:
+                    type: object
+                    nullable: true
+                    properties:
+                      name:
+                        type: string
+                      date:
+                        type: string
+                  message:
+                    type: string
+                    description: Human-readable enforcement status message

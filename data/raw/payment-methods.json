@@ -1,0 +1,15 @@
+[
+  { "lotSlug": "inspiration-point-upper", "methods": ["parkmobile", "credit_card"] },
+  { "lotSlug": "inspiration-point-lower", "methods": ["parkmobile", "credit_card"] },
+  { "lotSlug": "alcazar-parking-structure", "methods": ["parkmobile", "credit_card", "apple_pay", "google_pay"] },
+  { "lotSlug": "organ-pavilion", "methods": ["parkmobile", "credit_card"] },
+  { "lotSlug": "pan-american-plaza", "methods": ["parkmobile", "credit_card"] },
+  { "lotSlug": "federal-building", "methods": ["parkmobile"] },
+  { "lotSlug": "morley-field", "methods": ["parkmobile"] },
+  { "lotSlug": "gold-gulch", "methods": ["parkmobile"] },
+  { "lotSlug": "centro-cultural", "methods": ["parkmobile"] },
+  { "lotSlug": "presidents-way", "methods": ["parkmobile"] },
+  { "lotSlug": "war-memorial", "methods": ["parkmobile"] },
+  { "lotSlug": "balboa-park-activity-center", "methods": ["parkmobile"] },
+  { "lotSlug": "municipal-gym", "methods": ["parkmobile"] }
+]

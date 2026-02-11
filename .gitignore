@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+.next/
+.turbo/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Supabase
+.supabase/
+
+# iOS
+ios/build/
+ios/DerivedData/
+ios/*.xcuserdata
+ios/**/*.xcuserdata
+
+# Generated data (re-generate from raw)
+data/generated/
+
+# Vercel
+.vercel/
+
+# Build info
+*.tsbuildinfo
+
+# Temp
+tmp/
+
+# Debug
+npm-debug.log*
+pnpm-debug.log*

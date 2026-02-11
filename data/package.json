@@ -1,0 +1,17 @@
+{
+  "name": "@parkatbalboa/data",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "geocode:lots": "tsx src/geocode-lots.ts",
+    "geocode:destinations": "tsx src/geocode-destinations.ts",
+    "compute:distances": "tsx src/compute-distances.ts",
+    "generate:seed": "tsx src/generate-seed-sql.ts",
+    "pipeline": "pnpm geocode:lots && pnpm geocode:destinations && pnpm compute:distances && pnpm generate:seed"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "tsx": "^4.0.0",
+    "dotenv": "^16.4.0"
+  }
+}

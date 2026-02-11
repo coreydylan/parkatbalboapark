@@ -1,0 +1,7060 @@
+[
+  {
+    "id": 2351681417,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7383,
+    "lng": -117.145485,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water",
+      "description": "balboa park dog park",
+      "source": "wetap.org",
+      "wetap:photo": "http://mdcwetap.atwebpages.com/jpg.php?i=H2Otracker1346007774302.jpg",
+      "wetap:status": "working"
+    }
+  },
+  {
+    "id": 2968882715,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.728155,
+    "lng": -117.1478471,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 2968882716,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7287758,
+    "lng": -117.1475792,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 2968882717,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7308073,
+    "lng": -117.1500704,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 2968883608,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7298079,
+    "lng": -117.1511864,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water",
+      "check_date": "2025-09-21",
+      "fountain": "bubbler"
+    }
+  },
+  {
+    "id": 2969275911,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.732404,
+    "lng": -117.151788,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 3451442073,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7360451,
+    "lng": -117.1512483,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 3844507148,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7345042,
+    "lng": -117.1520859,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water",
+      "layer": "1"
+    }
+  },
+  {
+    "id": 5633352302,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7369491,
+    "lng": -117.1521941,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water",
+      "description": "bottle filling station"
+    }
+  },
+  {
+    "id": 5831138128,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7309739,
+    "lng": -117.149982,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 5831142685,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7295991,
+    "lng": -117.1510046,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 6538230112,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7353054,
+    "lng": -117.1514015,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 6717698712,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7311854,
+    "lng": -117.1456637,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 8405349183,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7361025,
+    "lng": -117.139179,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 9488397029,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7382203,
+    "lng": -117.1394567,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 9921606040,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7313101,
+    "lng": -117.1499563,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 10197421910,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.739633,
+    "lng": -117.1361948,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 11048588823,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7292862,
+    "lng": -117.1492462,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "drinking_water"
+    }
+  },
+  {
+    "id": 12047835548,
+    "osmType": "node",
+    "name": "Plaza de Panama Fountain",
+    "category": "amenity_drinking_water",
+    "lat": 32.7314511,
+    "lng": -117.1504414,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "amenity": "fountain",
+      "drinking_water": "no",
+      "fountain": "decorative",
+      "name": "Plaza de Panama Fountain"
+    }
+  },
+  {
+    "id": 5935739153,
+    "osmType": "node",
+    "name": "Blink",
+    "category": "amenity_ev_charging",
+    "lat": 32.7304239,
+    "lng": -117.147346,
+    "onOfficialMap": true,
+    "mapGridRef": "5E",
+    "tags": {
+      "amenity": "charging_station",
+      "brand": "Blink",
+      "brand:wikidata": "Q62065645",
+      "capacity": "3",
+      "name": "Blink",
+      "operator": "Blink",
+      "operator:wikidata": "Q62065645"
+    }
+  },
+  {
+    "id": 936855344,
+    "osmType": "way",
+    "name": "Saint Francis Chapel",
+    "category": "amenity_other",
+    "lat": 32.7310776,
+    "lng": -117.1526041,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "amenity": "place_of_worship",
+      "building": "yes",
+      "name": "Saint Francis Chapel",
+      "religion": "none"
+    }
+  },
+  {
+    "id": 358846100,
+    "osmType": "node",
+    "name": "San Diego Art Institute",
+    "category": "amenity_other",
+    "lat": 32.7311587,
+    "lng": -117.1511572,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "amenity": "arts_centre",
+      "ele": "82",
+      "gnis:feature_id": "1870101",
+      "name": "San Diego Art Institute",
+      "wikidata": "Q7413594",
+      "wikipedia": "en:San Diego Art Institute"
+    }
+  },
+  {
+    "id": 10016876666,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7369079,
+    "lng": -117.1474279,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "access": "yes",
+      "amenity": "parking",
+      "covered": "no",
+      "fee": "no",
+      "parking": "surface",
+      "surface": "asphalt"
+    }
+  },
+  {
+    "id": 936855851,
+    "osmType": "way",
+    "name": "San Diego Zoo Employee Parking",
+    "category": "amenity_parking",
+    "lat": 32.7328681,
+    "lng": -117.1509679,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "access": "private",
+      "amenity": "parking",
+      "building": "parking",
+      "name": "San Diego Zoo Employee Parking",
+      "parking": "multi-storey"
+    }
+  },
+  {
+    "id": 1619736368,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7331476,
+    "lng": -117.1483452,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 1619736401,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.733877,
+    "lng": -117.1488925,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 1619736690,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7358112,
+    "lng": -117.1522123,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "access": "customers",
+      "amenity": "toilets",
+      "female": "yes",
+      "male": "yes",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 1919407851,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7274995,
+    "lng": -117.1488708,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 1919411178,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7289828,
+    "lng": -117.1476676,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 2656954570,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7355673,
+    "lng": -117.149577,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "access": "customers",
+      "amenity": "toilets",
+      "changing_table": "yes",
+      "changing_table:count": "2",
+      "changing_table:location": "male_toilet;female_toilet",
+      "female": "yes",
+      "male": "yes",
+      "nursing_room": "no",
+      "unisex": "no",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 2969275916,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7311873,
+    "lng": -117.1497763,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets",
+      "changing_table": "room",
+      "fee": "no",
+      "level": "0"
+    }
+  },
+  {
+    "id": 3844510371,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7345842,
+    "lng": -117.1520259,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets",
+      "layer": "1"
+    }
+  },
+  {
+    "id": 4234189352,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7337034,
+    "lng": -117.1478341,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "access": "yes",
+      "amenity": "toilets",
+      "check_date": "2024-08-02"
+    }
+  },
+  {
+    "id": 4234268789,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.728528,
+    "lng": -117.1476057,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 4234323529,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7279948,
+    "lng": -117.1484263,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 5633154597,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7371651,
+    "lng": -117.1497382,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "access": "customers",
+      "amenity": "toilets",
+      "changing_table": "yes",
+      "changing_table:location": "unisex_toilet;male_toilet;female_toilet",
+      "fee": "no",
+      "female": "yes",
+      "male": "yes",
+      "toilets:disposal": "flush",
+      "unisex": "yes"
+    }
+  },
+  {
+    "id": 8217972482,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.730738,
+    "lng": -117.1521813,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 10239033244,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7293468,
+    "lng": -117.1491489,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets"
+    }
+  },
+  {
+    "id": 11046852285,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_restroom",
+    "lat": 32.7290941,
+    "lng": -117.1497067,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "amenity": "toilets",
+      "changing_table": "no",
+      "check_date": "2023-07-13",
+      "toilets:disposal": "flush"
+    }
+  },
+  {
+    "id": 529832141,
+    "osmType": "way",
+    "name": "Arctic Trader",
+    "category": "attraction",
+    "lat": 32.7342163,
+    "lng": -117.1548724,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "commercial",
+      "layer": "1",
+      "name": "Arctic Trader"
+    }
+  },
+  {
+    "id": 79135710,
+    "osmType": "way",
+    "name": "Balboa Park Carousel",
+    "category": "attraction",
+    "lat": 32.7345799,
+    "lng": -117.1466628,
+    "onOfficialMap": true,
+    "mapGridRef": "4E",
+    "tags": {
+      "attraction": "carousel",
+      "building": "yes",
+      "name": "Balboa Park Carousel",
+      "opening_hours": "Su-Sa 11:00-17:30",
+      "operator": "Friends of Balboa Park",
+      "tourism": "attraction",
+      "website": "http://www.balboaparkcarousel.org/"
+    }
+  },
+  {
+    "id": 132580113,
+    "osmType": "way",
+    "name": "Balboa Park Club",
+    "category": "attraction",
+    "lat": 32.7290113,
+    "lng": -117.153627,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "addr:state": "CA",
+      "amenity": "community_centre",
+      "building": "yes",
+      "ele": "75",
+      "gnis:feature_id": "1870070",
+      "name": "Balboa Park Club",
+      "source": "USGS Geonames",
+      "wikidata": "Q115159604"
+    }
+  },
+  {
+    "id": 148910128,
+    "osmType": "way",
+    "name": "Balboa Park Miniature Railroad Station",
+    "category": "attraction",
+    "lat": 32.7347394,
+    "lng": -117.1481239,
+    "onOfficialMap": true,
+    "mapGridRef": "4E",
+    "tags": {
+      "building": "yes",
+      "name": "Balboa Park Miniature Railroad Station",
+      "railway": "station",
+      "tourism": "attraction",
+      "train": "yes"
+    }
+  },
+  {
+    "id": 1463000386,
+    "osmType": "node",
+    "name": "Balboa Park Visitors Center",
+    "category": "attraction",
+    "lat": 32.7312375,
+    "lng": -117.1498822,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "information": "office",
+      "name": "Balboa Park Visitors Center",
+      "shop": "gift",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 253239000,
+    "osmType": "way",
+    "name": "Bus Tour Loading",
+    "category": "attraction",
+    "lat": 32.735843,
+    "lng": -117.1498331,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Bus Tour Loading"
+    }
+  },
+  {
+    "id": 666404430,
+    "osmType": "way",
+    "name": "Bus Tour Unloading",
+    "category": "attraction",
+    "lat": 32.7364634,
+    "lng": -117.1494282,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "bus_station",
+      "building": "yes",
+      "bus": "yes",
+      "name": "Bus Tour Unloading",
+      "public_transport": "station",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 28824904,
+    "osmType": "way",
+    "name": "Casa de Balboa Building",
+    "category": "attraction",
+    "lat": 32.7310428,
+    "lng": -117.1485942,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "building": "yes",
+      "layer": "1",
+      "name": "Casa de Balboa Building",
+      "wikidata": "Q28035410",
+      "wikipedia": "en:Casa de Balboa"
+    }
+  },
+  {
+    "id": 830502600,
+    "osmType": "way",
+    "name": "Covered outdoor activity area for WorldBeat Cultural Center",
+    "category": "attraction",
+    "lat": 32.7270526,
+    "lng": -117.1497971,
+    "onOfficialMap": true,
+    "mapGridRef": "7D",
+    "tags": {
+      "building": "roof",
+      "layer": "1",
+      "name": "Covered outdoor activity area for WorldBeat Cultural Center"
+    }
+  },
+  {
+    "id": 31239882,
+    "osmType": "way",
+    "name": "Developed Regional Parks Administration Building",
+    "category": "attraction",
+    "lat": 32.7250913,
+    "lng": -117.1480424,
+    "onOfficialMap": true,
+    "mapGridRef": "7E",
+    "tags": {
+      "building": "yes",
+      "layer": "-1",
+      "name": "Developed Regional Parks Administration Building"
+    }
+  },
+  {
+    "id": 253227662,
+    "osmType": "way",
+    "name": "Elephant Care Center",
+    "category": "attraction",
+    "lat": 32.7374164,
+    "lng": -117.1533059,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Elephant Care Center",
+      "ref": "33"
+    }
+  },
+  {
+    "id": 590839089,
+    "osmType": "way",
+    "name": "Elevator Tower",
+    "category": "attraction",
+    "lat": 32.7352002,
+    "lng": -117.151941,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "layer": "-1",
+      "name": "Elevator Tower",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 31240099,
+    "osmType": "way",
+    "name": "Gill Administration Building",
+    "category": "attraction",
+    "lat": 32.7316828,
+    "lng": -117.1528419,
+    "onOfficialMap": true,
+    "mapGridRef": "7E",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1350",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "building": "office",
+      "name": "Gill Administration Building",
+      "old_name": "Balboa Park Administration Building"
+    }
+  },
+  {
+    "id": 529837561,
+    "osmType": "way",
+    "name": "Gorilla Building",
+    "category": "attraction",
+    "lat": 32.7347585,
+    "lng": -117.1512138,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "commercial",
+      "name": "Gorilla Building"
+    }
+  },
+  {
+    "id": 31240063,
+    "osmType": "way",
+    "name": "House of Charm",
+    "category": "attraction",
+    "lat": 32.7311012,
+    "lng": -117.1510923,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "building": "yes",
+      "name": "House of Charm",
+      "name:en": "House of Charm",
+      "wikidata": "Q5914806",
+      "wikipedia": "en:House of Charm"
+    }
+  },
+  {
+    "id": 1076746489,
+    "osmType": "way",
+    "name": "Ituri Forest Outpost",
+    "category": "attraction",
+    "lat": 32.7338812,
+    "lng": -117.1527356,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Ituri Forest Outpost",
+      "shop": "gift"
+    }
+  },
+  {
+    "id": 529837551,
+    "osmType": "way",
+    "name": "Koala Center",
+    "category": "attraction",
+    "lat": 32.7376364,
+    "lng": -117.1500422,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "commercial",
+      "name": "Koala Center"
+    }
+  },
+  {
+    "id": 2707959679,
+    "osmType": "node",
+    "name": "Moreton Bay Fig Tree",
+    "category": "attraction",
+    "lat": 32.7327201,
+    "lng": -117.147489,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "circumference": "12.3",
+      "denotation": "landmark",
+      "height": "24",
+      "leaf_cycle": "evergreen",
+      "leaf_type": "broadleaved",
+      "name": "Moreton Bay Fig Tree",
+      "natural": "tree",
+      "species": "Ficus macrophylla",
+      "species:wikidata": "Q1439079",
+      "species:wikipedia": "en:Ficus macrophylla",
+      "start_date": "1914",
+      "tourism": "attraction",
+      "wikidata": "Q27728107",
+      "wikipedia": "en:Moreton Bay Fig Tree (Balboa Park)"
+    }
+  },
+  {
+    "id": 529837548,
+    "osmType": "way",
+    "name": "Mountain Lions",
+    "category": "attraction",
+    "lat": 32.7353416,
+    "lng": -117.153704,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Mountain Lions"
+    }
+  },
+  {
+    "id": 28824925,
+    "osmType": "way",
+    "name": "Municipal Gymnasium",
+    "category": "attraction",
+    "lat": 32.7269013,
+    "lng": -117.1530402,
+    "onOfficialMap": true,
+    "mapGridRef": "7C",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2111",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Pan American Plaza",
+      "building": "yes",
+      "leisure": "fitness_centre",
+      "name": "Municipal Gymnasium",
+      "phone": "+1-619-525-8262",
+      "website": "https://www.sandiego.gov/park-and-recreation/centers/recctr/munigym",
+      "wikidata": "Q27728071",
+      "wikipedia": "en:Municipal Gymnasium"
+    }
+  },
+  {
+    "id": 381213766,
+    "osmType": "way",
+    "name": "Otto Center",
+    "category": "attraction",
+    "lat": 32.7337448,
+    "lng": -117.1483049,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Otto Center",
+      "source": "USGS Geonames"
+    }
+  },
+  {
+    "id": 381213769,
+    "osmType": "way",
+    "name": "Panda Shop",
+    "category": "attraction",
+    "lat": 32.7355724,
+    "lng": -117.1519781,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Panda Shop",
+      "shop": "gift",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 1468124327,
+    "osmType": "way",
+    "name": "Photographic Arts Building",
+    "category": "attraction",
+    "lat": 32.7333521,
+    "lng": -117.1470324,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "amenity": "community_centre",
+      "building": "yes",
+      "club": "photography",
+      "community_centre": "club_home",
+      "name": "Photographic Arts Building",
+      "website": "https://balboapark.org/attractions-experiences/photographic-arts-building/"
+    }
+  },
+  {
+    "id": 529837559,
+    "osmType": "way",
+    "name": "Rondavel",
+    "category": "attraction",
+    "lat": 32.7357558,
+    "lng": -117.1493193,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "commercial",
+      "name": "Rondavel"
+    }
+  },
+  {
+    "id": 79293454,
+    "osmType": "way",
+    "name": "San Diego Zoo Main Entrance",
+    "category": "attraction",
+    "lat": 32.7351315,
+    "lng": -117.1492947,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housename": "San Diego Zoo Main Entrance",
+      "addr:housenumber": "2920",
+      "addr:postcode": "92101",
+      "addr:street": "Zoo Drive",
+      "building": "yes",
+      "name": "San Diego Zoo Main Entrance"
+    }
+  },
+  {
+    "id": 529837560,
+    "osmType": "way",
+    "name": "San Diego Zoo Retail Office",
+    "category": "attraction",
+    "lat": 32.7378296,
+    "lng": -117.1490716,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "commercial",
+      "name": "San Diego Zoo Retail Office"
+    }
+  },
+  {
+    "id": 529837558,
+    "osmType": "way",
+    "name": "Sydney Gift Shop",
+    "category": "attraction",
+    "lat": 32.7376998,
+    "lng": -117.1493324,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "commercial",
+      "name": "Sydney Gift Shop",
+      "shop": "gift"
+    }
+  },
+  {
+    "id": 1242126655,
+    "osmType": "way",
+    "name": "The Louis",
+    "category": "attraction",
+    "lat": 32.7445133,
+    "lng": -117.1479614,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "3652",
+      "addr:state": "CA",
+      "addr:street": "Park Boulevard",
+      "building": "apartments",
+      "building:levels": "2",
+      "name": "The Louis"
+    }
+  },
+  {
+    "id": 529832147,
+    "osmType": "way",
+    "name": "Tusker's Trunk",
+    "category": "attraction",
+    "lat": 32.7383793,
+    "lng": -117.1520523,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "commercial",
+      "description": "Gift Shop\n",
+      "name": "Tusker's Trunk"
+    }
+  },
+  {
+    "id": 132580123,
+    "osmType": "way",
+    "name": "United Nations Building",
+    "category": "attraction",
+    "lat": 32.7293924,
+    "lng": -117.1517223,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "addr:state": "CA",
+      "building": "yes",
+      "ele": "75",
+      "gnis:feature_id": "1869980",
+      "name": "United Nations Building",
+      "source": "USGS Geonames"
+    }
+  },
+  {
+    "id": 132580117,
+    "osmType": "way",
+    "name": "Veterans War Memorial",
+    "category": "attraction",
+    "lat": 32.7387845,
+    "lng": -117.1480326,
+    "onOfficialMap": true,
+    "mapGridRef": "6D",
+    "tags": {
+      "building": "yes",
+      "name": "Veterans War Memorial",
+      "source": "Bing"
+    }
+  },
+  {
+    "id": 6610777569,
+    "osmType": "node",
+    "name": "Viewing Deck",
+    "category": "attraction",
+    "lat": 32.7306666,
+    "lng": -117.1500911,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "description": "View over the Japanese Friendship Garden",
+      "direction": "SE",
+      "name": "Viewing Deck",
+      "tourism": "viewpoint"
+    }
+  },
+  {
+    "id": 529832140,
+    "osmType": "way",
+    "name": "Arctic Snacks",
+    "category": "cafe",
+    "lat": 32.7351126,
+    "lng": -117.1541225,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cafe",
+      "building": "yes",
+      "cuisine": "snack",
+      "name": "Arctic Snacks"
+    }
+  },
+  {
+    "id": 529837562,
+    "osmType": "way",
+    "name": "Canteen",
+    "category": "cafe",
+    "lat": 32.7346726,
+    "lng": -117.151876,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cafe",
+      "building": "yes",
+      "cuisine": "snack",
+      "name": "Canteen"
+    }
+  },
+  {
+    "id": 9906818445,
+    "osmType": "node",
+    "name": "Craft Café at Mingei",
+    "category": "cafe",
+    "lat": 32.7312413,
+    "lng": -117.1508764,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1439",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "amenity": "cafe",
+      "check_date:opening_hours": "2024-09-07",
+      "name": "Craft Café at Mingei",
+      "opening_hours": "Mo-Su 08:30-17:00",
+      "website": "https://www.mingei.org/visit/craft-café"
+    }
+  },
+  {
+    "id": 12619422918,
+    "osmType": "node",
+    "name": "Craveology",
+    "category": "cafe",
+    "lat": 32.7310498,
+    "lng": -117.1468319,
+    "onOfficialMap": true,
+    "mapGridRef": "5E",
+    "tags": {
+      "amenity": "ice_cream",
+      "name": "Craveology"
+    }
+  },
+  {
+    "id": 1468124325,
+    "osmType": "way",
+    "name": "Daniel's Coffee",
+    "category": "cafe",
+    "lat": 32.7338971,
+    "lng": -117.1476888,
+    "onOfficialMap": true,
+    "mapGridRef": "4E",
+    "tags": {
+      "amenity": "cafe",
+      "building": "yes",
+      "indoor_seating": "no",
+      "name": "Daniel's Coffee",
+      "opening_hours": "Mo-Fr 11:00-16:00",
+      "outdoor_seating": "yes",
+      "shop": "kiosk"
+    }
+  },
+  {
+    "id": 9910690225,
+    "osmType": "node",
+    "name": "Front Street Sweet Shack",
+    "category": "cafe",
+    "lat": 32.734366,
+    "lng": -117.1491862,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "fast_food",
+      "name": "Front Street Sweet Shack"
+    }
+  },
+  {
+    "id": 529837563,
+    "osmType": "way",
+    "name": "Ituri Hut",
+    "category": "cafe",
+    "lat": 32.7339994,
+    "lng": -117.1526355,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cafe",
+      "building": "yes",
+      "name": "Ituri Hut"
+    }
+  },
+  {
+    "id": 5676557122,
+    "osmType": "node",
+    "name": "Prado Perk",
+    "category": "cafe",
+    "lat": 32.7310691,
+    "lng": -117.1499716,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "amenity": "cafe",
+      "name": "Prado Perk"
+    }
+  },
+  {
+    "id": 253240166,
+    "osmType": "way",
+    "name": "Safari Kitchen",
+    "category": "cafe",
+    "lat": 32.7347183,
+    "lng": -117.1497954,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cafe",
+      "building": "retail",
+      "name": "Safari Kitchen"
+    }
+  },
+  {
+    "id": 46838250,
+    "osmType": "way",
+    "name": "Tea Pavilion",
+    "category": "cafe",
+    "lat": 32.7301083,
+    "lng": -117.1499784,
+    "onOfficialMap": true,
+    "mapGridRef": "6D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2215",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Pan American Road East",
+      "amenity": "cafe",
+      "building": "yes",
+      "cuisine": "japanese",
+      "internet_access": "wlan",
+      "name": "Tea Pavilion",
+      "smoking": "no"
+    }
+  },
+  {
+    "id": 6582434331,
+    "osmType": "node",
+    "name": "The Bridge Snacks and Refreshments",
+    "category": "cafe",
+    "lat": 32.735653,
+    "lng": -117.1529041,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "fast_food",
+      "indoor_seating": "no",
+      "name": "The Bridge Snacks and Refreshments",
+      "outdoor_seating": "yes"
+    }
+  },
+  {
+    "id": 13376986759,
+    "osmType": "node",
+    "name": "The Craft Taco at The Nat",
+    "category": "cafe",
+    "lat": 32.7320782,
+    "lng": -117.1472979,
+    "onOfficialMap": true,
+    "mapGridRef": "5E",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1788",
+      "addr:postcode": "92101-1624",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "amenity": "fast_food",
+      "check_date": "2025-12-15",
+      "contact:email": "info@thecrafttaco.com",
+      "contact:instagram": "https://www.instagram.com/thecrafttaco",
+      "cuisine": "tacos",
+      "currency:XBT": "yes",
+      "name": "The Craft Taco at The Nat",
+      "opening_hours": "Mo-Su 10:00-16:30",
+      "payment:lightning": "yes",
+      "payment:lightning:operator": "square",
+      "payment:lightning_contactless": "no",
+      "payment:onchain": "no",
+      "phone": "+1-619-255-0184",
+      "website": "https://www.thecrafttaconat.com/"
+    }
+  },
+  {
+    "id": 700926037,
+    "osmType": "way",
+    "name": "The Pagoda",
+    "category": "cafe",
+    "lat": 32.7350017,
+    "lng": -117.1521467,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "fast_food",
+      "building": "yes",
+      "name": "The Pagoda"
+    }
+  },
+  {
+    "id": 381213765,
+    "osmType": "way",
+    "name": "Treetops Cafe",
+    "category": "cafe",
+    "lat": 32.7347198,
+    "lng": -117.1520213,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cafe",
+      "building": "yes",
+      "layer": "1",
+      "name": "Treetops Cafe"
+    }
+  },
+  {
+    "id": 529832143,
+    "osmType": "way",
+    "name": "Tundra Treats",
+    "category": "cafe",
+    "lat": 32.7345211,
+    "lng": -117.1549042,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cafe",
+      "building": "yes",
+      "cuisine": "snack",
+      "name": "Tundra Treats"
+    }
+  },
+  {
+    "id": 1430103454,
+    "osmType": "way",
+    "name": "Zoo Brew",
+    "category": "cafe",
+    "lat": 32.735192,
+    "lng": -117.1509118,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cafe",
+      "building": "yes",
+      "cuisine": "coffe_shop",
+      "drink:beer": "yes",
+      "drink:coffee": "yes",
+      "name": "Zoo Brew",
+      "outdoor_seating": "yes",
+      "website": "https://zoo.sandiegozoo.org/dining",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 11048583179,
+    "osmType": "node",
+    "name": "Azalea Garden",
+    "category": "garden",
+    "lat": 32.7301498,
+    "lng": -117.1495087,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "garden:style": "japanese",
+      "leisure": "garden",
+      "name": "Azalea Garden"
+    }
+  },
+  {
+    "id": 11048431821,
+    "osmType": "node",
+    "name": "Bonsai Exhibit",
+    "category": "garden",
+    "lat": 32.7290244,
+    "lng": -117.1497022,
+    "onOfficialMap": true,
+    "mapGridRef": "6D",
+    "tags": {
+      "garden:style": "japanese",
+      "leisure": "garden",
+      "name": "Bonsai Exhibit",
+      "operator": "Japanese Friendship Garden"
+    }
+  },
+  {
+    "id": 25775425,
+    "osmType": "way",
+    "name": "Botanical Building",
+    "category": "garden",
+    "lat": 32.7325219,
+    "lng": -117.1492324,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "building": "greenhouse",
+      "building:material": "wood",
+      "fee": "no",
+      "leisure": "garden",
+      "name": "Botanical Building",
+      "name:en": "Botanical Building",
+      "website": "https://www.balboapark.org/gardens/botanical-building",
+      "wikidata": "Q27704699",
+      "wikipedia": "en:Botanical Building"
+    }
+  },
+  {
+    "id": 1458212914,
+    "osmType": "node",
+    "name": "Desert Garden",
+    "category": "garden",
+    "lat": 32.7321051,
+    "lng": -117.145646,
+    "onOfficialMap": true,
+    "mapGridRef": "5I",
+    "tags": {
+      "fee": "no",
+      "garden:type": "botanical",
+      "leisure": "garden",
+      "name": "Desert Garden",
+      "source": "Bing"
+    }
+  },
+  {
+    "id": 10684041397,
+    "osmType": "node",
+    "name": "House of Chamorros (Guam)",
+    "category": "international_house",
+    "lat": 32.7286556,
+    "lng": -117.153037,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Chamorros (Guam)",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486244,
+    "osmType": "way",
+    "name": "House of China",
+    "category": "international_house",
+    "lat": 32.7291519,
+    "lng": -117.1524468,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "addr:state": "CA",
+      "building": "house",
+      "ele": "76",
+      "gnis:feature_id": "1869949",
+      "name": "House of China",
+      "source": "USGS Geonames",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 9538810733,
+    "osmType": "node",
+    "name": "House of Colombia",
+    "category": "international_house",
+    "lat": 32.7288294,
+    "lng": -117.1522209,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Colombia",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486240,
+    "osmType": "way",
+    "name": "House of Czechia and Slovakia",
+    "category": "international_house",
+    "lat": 32.7290576,
+    "lng": -117.1521721,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Czechia and Slovakia",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486246,
+    "osmType": "way",
+    "name": "House of Denmark",
+    "category": "international_house",
+    "lat": 32.7290655,
+    "lng": -117.1526808,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Denmark",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486241,
+    "osmType": "way",
+    "name": "House of England",
+    "category": "international_house",
+    "lat": 32.7289552,
+    "lng": -117.1522415,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of England",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486250,
+    "osmType": "way",
+    "name": "House of Finland",
+    "category": "international_house",
+    "lat": 32.7286848,
+    "lng": -117.1525266,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Finland",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684064305,
+    "osmType": "node",
+    "name": "House of France",
+    "category": "international_house",
+    "lat": 32.7288794,
+    "lng": -117.1522097,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of France",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486251,
+    "osmType": "way",
+    "name": "House of Germany",
+    "category": "international_house",
+    "lat": 32.7287152,
+    "lng": -117.1524275,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Germany",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486238,
+    "osmType": "way",
+    "name": "House of Hungary",
+    "category": "international_house",
+    "lat": 32.7288993,
+    "lng": -117.1519374,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Hungary",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684041395,
+    "osmType": "node",
+    "name": "House of India",
+    "category": "international_house",
+    "lat": 32.7287658,
+    "lng": -117.1530715,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of India",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486236,
+    "osmType": "way",
+    "name": "House of Iran",
+    "category": "international_house",
+    "lat": 32.7292151,
+    "lng": -117.1515706,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Iran",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486249,
+    "osmType": "way",
+    "name": "House of Ireland",
+    "category": "international_house",
+    "lat": 32.7287204,
+    "lng": -117.152625,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Ireland",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486255,
+    "osmType": "way",
+    "name": "House of Israel",
+    "category": "international_house",
+    "lat": 32.7287662,
+    "lng": -117.152302,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Israel",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 13465428554,
+    "osmType": "node",
+    "name": "House of Italy",
+    "category": "international_house",
+    "lat": 32.7294524,
+    "lng": -117.1516978,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Italy",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684041394,
+    "osmType": "node",
+    "name": "House of Korea",
+    "category": "international_house",
+    "lat": 32.7288112,
+    "lng": -117.1530149,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Korea",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684041386,
+    "osmType": "node",
+    "name": "House of Mexico",
+    "category": "international_house",
+    "lat": 32.7294252,
+    "lng": -117.1514452,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Mexico",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486245,
+    "osmType": "way",
+    "name": "House of Norway",
+    "category": "international_house",
+    "lat": 32.729123,
+    "lng": -117.1525571,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Norway",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684041398,
+    "osmType": "node",
+    "name": "House of Palestine",
+    "category": "international_house",
+    "lat": 32.7286608,
+    "lng": -117.1529246,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Palestine",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684041385,
+    "osmType": "node",
+    "name": "House of Panama",
+    "category": "international_house",
+    "lat": 32.7294416,
+    "lng": -117.151524,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Panama",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684041396,
+    "osmType": "node",
+    "name": "House of Peru",
+    "category": "international_house",
+    "lat": 32.7286906,
+    "lng": -117.153083,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Peru",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486248,
+    "osmType": "way",
+    "name": "House of Poland",
+    "category": "international_house",
+    "lat": 32.7287836,
+    "lng": -117.1527124,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Poland",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1444057670,
+    "osmType": "way",
+    "name": "House of Puerto Rico",
+    "category": "international_house",
+    "lat": 32.7291154,
+    "lng": -117.1517185,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Puerto Rico",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486243,
+    "osmType": "way",
+    "name": "House of Scotland",
+    "category": "international_house",
+    "lat": 32.7291895,
+    "lng": -117.1523439,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Scotland",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486239,
+    "osmType": "way",
+    "name": "House of Spain",
+    "category": "international_house",
+    "lat": 32.7289449,
+    "lng": -117.1517416,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Spain",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486247,
+    "osmType": "way",
+    "name": "House of Sweden",
+    "category": "international_house",
+    "lat": 32.7290382,
+    "lng": -117.1527997,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Sweden",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1086870358,
+    "osmType": "way",
+    "name": "House of the Philippines",
+    "category": "international_house",
+    "lat": 32.7292777,
+    "lng": -117.1514551,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of the Philippines",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486254,
+    "osmType": "way",
+    "name": "House of the United States of America",
+    "category": "international_house",
+    "lat": 32.7288132,
+    "lng": -117.1528316,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of the United States of America",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 10684041399,
+    "osmType": "node",
+    "name": "House of Turkey",
+    "category": "international_house",
+    "lat": 32.7287271,
+    "lng": -117.1528583,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "name": "House of Turkey",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 1035486253,
+    "osmType": "way",
+    "name": "House of Ukraine",
+    "category": "international_house",
+    "lat": 32.7289171,
+    "lng": -117.1528969,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "building": "house",
+      "name": "House of Ukraine",
+      "tourism": "attraction"
+    }
+  },
+  {
+    "id": 31240096,
+    "osmType": "way",
+    "name": "California Building",
+    "category": "museum",
+    "lat": 32.7317562,
+    "lng": -117.1523721,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "building": "museum",
+      "name": "California Building",
+      "name:en": "California Building"
+    }
+  },
+  {
+    "id": 60194854,
+    "osmType": "way",
+    "name": "Centro Cultural de la Raza",
+    "category": "museum",
+    "lat": 32.727723,
+    "lng": -117.148656,
+    "onOfficialMap": true,
+    "mapGridRef": "6D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2004",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Park Boulevard",
+      "building": "yes",
+      "ele": "78",
+      "gnis:feature_id": "1869888",
+      "museum": "cultural",
+      "name": "Centro Cultural de la Raza",
+      "phone": "+1-619-559-6389",
+      "source": "USGS Geonames",
+      "tourism": "museum",
+      "website": "https://centrodelaraza.com",
+      "wikidata": "Q5062815",
+      "wikipedia": "en:Centro Cultural de la Raza"
+    }
+  },
+  {
+    "id": 28824920,
+    "osmType": "way",
+    "name": "Comic-Con Museum",
+    "category": "museum",
+    "lat": 32.727276,
+    "lng": -117.1524062,
+    "onOfficialMap": true,
+    "mapGridRef": "7C",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2131",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Pan American Plaza",
+      "air_conditioning": "yes",
+      "building": "yes",
+      "fee": "yes",
+      "name": "Comic-Con Museum",
+      "opening_hours:covid19": "closed",
+      "tourism": "museum",
+      "website": "https://www.balboapark.org/museums/comic-con-museum",
+      "wikidata": "Q65665941",
+      "wikipedia": "en:Comic-Con Museum"
+    }
+  },
+  {
+    "id": 1713143030,
+    "osmType": "node",
+    "name": "Mingei International Museum",
+    "category": "museum",
+    "lat": 32.7310117,
+    "lng": -117.1510312,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1439",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "fee": "no",
+      "museum": "art",
+      "name": "Mingei International Museum",
+      "opening_hours": "Tu-Th, Sa-Su 10:00-17:00; Fr 10:00-20:00",
+      "phone": "+1-619-239-0003",
+      "tourism": "museum",
+      "website": "https://www.mingei.org/",
+      "wikidata": "Q6864705",
+      "wikipedia": "en:Mingei International Museum"
+    }
+  },
+  {
+    "id": 1458213374,
+    "osmType": "node",
+    "name": "Museum of Photographic Arts",
+    "category": "museum",
+    "lat": 32.7311633,
+    "lng": -117.1488901,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1649",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "email": "info@mopa.org",
+      "name": "Museum of Photographic Arts",
+      "opening_hours": "Fr-Su 11:00-16:00",
+      "phone": "+1-619-238-7559",
+      "short_name": "MOPA",
+      "tourism": "museum",
+      "website": "https://mopa.org/",
+      "wikidata": "Q9046984",
+      "wikipedia": "en:Museum of Photographic Arts"
+    }
+  },
+  {
+    "id": 28824905,
+    "osmType": "way",
+    "name": "Reuben H. Fleet Science Center",
+    "category": "museum",
+    "lat": 32.7308234,
+    "lng": -117.1470715,
+    "onOfficialMap": true,
+    "mapGridRef": "5E",
+    "tags": {
+      "alt_name": "The Fleet",
+      "building": "yes",
+      "fee": "yes",
+      "name": "Reuben H. Fleet Science Center",
+      "note": "Floorplan: http://www.rhfleet.org/visit/groups-private-events",
+      "tourism": "museum",
+      "website": "https://www.rhfleet.org/",
+      "wikidata": "Q3428321",
+      "wikipedia": "en:Fleet Science Center"
+    }
+  },
+  {
+    "id": 60194724,
+    "osmType": "way",
+    "name": "San Diego Automotive Museum",
+    "category": "museum",
+    "lat": 32.7274854,
+    "lng": -117.1539073,
+    "onOfficialMap": true,
+    "mapGridRef": "7C",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2080",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Pan American Plaza",
+      "building": "yes",
+      "ele": "72",
+      "fee": "yes",
+      "gnis:feature_id": "2084630",
+      "museum": "automotive",
+      "name": "San Diego Automotive Museum",
+      "source": "USGS Geonames",
+      "tourism": "museum",
+      "website": "https://www.sdautomuseum.org/",
+      "wikidata": "Q7413596",
+      "wikipedia": "en:San Diego Automotive Museum"
+    }
+  },
+  {
+    "id": 6579135920,
+    "osmType": "node",
+    "name": "San Diego History Center",
+    "category": "museum",
+    "lat": 32.7311591,
+    "lng": -117.148272,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "addr:housenumber": "1649",
+      "addr:street": "El Prado",
+      "addr:unit": "3",
+      "name": "San Diego History Center",
+      "name:en": "San Diego History Center",
+      "opening_hours": "Mo-Su 10:00-17:00",
+      "tourism": "museum",
+      "website": "https://sandiegohistory.org",
+      "wheelchair": "yes",
+      "wikidata": "Q27704794",
+      "wikipedia": "en:San Diego History Center"
+    }
+  },
+  {
+    "id": 265210993,
+    "osmType": "way",
+    "name": "San Diego Mineral & Gem Society",
+    "category": "museum",
+    "lat": 32.7340452,
+    "lng": -117.1477733,
+    "onOfficialMap": true,
+    "mapGridRef": "4E",
+    "tags": {
+      "building": "commercial",
+      "check_date": "2024-08-02",
+      "fee": "no",
+      "name": "San Diego Mineral & Gem Society",
+      "tourism": "museum",
+      "website": "https://sdmg.org/"
+    }
+  },
+  {
+    "id": 1458212924,
+    "osmType": "node",
+    "name": "San Diego Model Railroad Museum",
+    "category": "museum",
+    "lat": 32.7311558,
+    "lng": -117.1487415,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1649",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "level": "-1",
+      "name": "San Diego Model Railroad Museum",
+      "opening_hours": "Tu-Fr 11:00-16:00; Sa-Su 11:00-17:00",
+      "phone": "+1-619-696-0199",
+      "tourism": "museum",
+      "website": "https://www.sdmrm.org/",
+      "wikidata": "Q7413693",
+      "wikipedia": "en:San Diego Model Railroad Museum"
+    }
+  },
+  {
+    "id": 368174501,
+    "osmType": "node",
+    "name": "San Diego Museum of Art",
+    "category": "museum",
+    "lat": 32.7321695,
+    "lng": -117.1504503,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1450",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "ele": "82",
+      "gnis:feature_id": "1869917",
+      "museum": "art",
+      "name": "San Diego Museum of Art",
+      "opening_hours": "Mo-Tu, Th-Sa 10:00-17:00; Su 12:00-17:00",
+      "phone": "+1-619-232-7931",
+      "source": "USGS Geonames",
+      "tourism": "museum",
+      "website": "https://www.sdmart.org/",
+      "wikidata": "Q1368166",
+      "wikipedia": "en:San Diego Museum of Art"
+    }
+  },
+  {
+    "id": 79288741,
+    "osmType": "way",
+    "name": "San Diego Natural History Museum",
+    "category": "museum",
+    "lat": 32.7320549,
+    "lng": -117.1473636,
+    "onOfficialMap": true,
+    "mapGridRef": "5E",
+    "tags": {
+      "addr:state": "CA",
+      "building": "yes",
+      "changing_table": "yes",
+      "changing_table:location": "male_toilet;female_toilet",
+      "ele": "89",
+      "gnis:feature_id": "1869905",
+      "museum": "nature",
+      "name": "San Diego Natural History Museum",
+      "opening_hours": "Mo-Su 09:00-17:00; May 30-Aug 30 Th-Fr 09:00-22:00",
+      "source": "USGS Geonames",
+      "toilets": "yes",
+      "toilets:access": "customers",
+      "tourism": "museum",
+      "website": "https://www.sdnhm.org",
+      "wheelchair": "yes",
+      "wikidata": "Q4891895",
+      "wikipedia": "en:San Diego Natural History Museum"
+    }
+  },
+  {
+    "id": 31240330,
+    "osmType": "way",
+    "name": "Timken Museum of Art",
+    "category": "museum",
+    "lat": 32.7318452,
+    "lng": -117.1496304,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1500",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "El Prado",
+      "building": "yes",
+      "fee": "no",
+      "height": "10.5",
+      "height:source": "estimated",
+      "museum": "art",
+      "name": "Timken Museum of Art",
+      "opening_hours": "We-Su 10:00-17:00",
+      "phone": "+1-619-239-5548",
+      "tourism": "museum",
+      "website": "https://www.timkenmuseum.org/",
+      "wheelchair": "yes",
+      "wikidata": "Q585462",
+      "wikipedia": "en:Timken Museum of Art"
+    }
+  },
+  {
+    "id": 1346369199,
+    "osmType": "node",
+    "name": "Veteran's Museum and Memorial Center",
+    "category": "museum",
+    "lat": 32.7257982,
+    "lng": -117.1487934,
+    "onOfficialMap": true,
+    "mapGridRef": "7D",
+    "tags": {
+      "name": "Veteran's Museum and Memorial Center",
+      "tourism": "museum",
+      "website": "https://veteranmuseum.net/",
+      "wikidata": "Q7923661",
+      "wikipedia": "en:Veterans Museum and Memorial Center"
+    }
+  },
+  {
+    "id": 60194728,
+    "osmType": "way",
+    "name": "WorldBeat Cultural Center",
+    "category": "museum",
+    "lat": 32.7272089,
+    "lng": -117.1495749,
+    "onOfficialMap": true,
+    "mapGridRef": "7D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2100",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Park Boulevard",
+      "building": "yes",
+      "museum": "cultural",
+      "name": "WorldBeat Cultural Center",
+      "phone": "+1 619-230-1190",
+      "tourism": "museum",
+      "website": "https://www.worldbeatcenter.org"
+    }
+  },
+  {
+    "id": 925950663,
+    "osmType": "node",
+    "name": null,
+    "category": "playground",
+    "lat": 32.7390047,
+    "lng": -117.1514882,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "leisure": "playground"
+    }
+  },
+  {
+    "id": 925950678,
+    "osmType": "node",
+    "name": null,
+    "category": "playground",
+    "lat": 32.7387452,
+    "lng": -117.1518133,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "leisure": "playground"
+    }
+  },
+  {
+    "id": 925950685,
+    "osmType": "node",
+    "name": null,
+    "category": "playground",
+    "lat": 32.7335131,
+    "lng": -117.1488828,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "leisure": "playground"
+    }
+  },
+  {
+    "id": 11784585914,
+    "osmType": "node",
+    "name": null,
+    "category": "playground",
+    "lat": 32.7333813,
+    "lng": -117.1482389,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "leisure": "playground"
+    }
+  },
+  {
+    "id": 11784586051,
+    "osmType": "node",
+    "name": null,
+    "category": "playground",
+    "lat": 32.7336569,
+    "lng": -117.1486923,
+    "onOfficialMap": true,
+    "mapGridRef": "various",
+    "tags": {
+      "leisure": "playground"
+    }
+  },
+  {
+    "id": 2504421568,
+    "osmType": "node",
+    "name": "Bird Park Swingset",
+    "category": "playground",
+    "lat": 32.7392512,
+    "lng": -117.1338444,
+    "onOfficialMap": true,
+    "mapGridRef": "2I",
+    "tags": {
+      "access": "yes",
+      "leisure": "playground",
+      "name": "Bird Park Swingset"
+    }
+  },
+  {
+    "id": 358845923,
+    "osmType": "node",
+    "name": "Morley Field Sports Complex",
+    "category": "recreation",
+    "lat": 32.7387233,
+    "lng": -117.138237,
+    "onOfficialMap": true,
+    "mapGridRef": "2G-3H",
+    "tags": {
+      "ele": "86",
+      "gnis:feature_id": "1869903",
+      "leisure": "park",
+      "name": "Morley Field Sports Complex",
+      "wikidata": "Q49528388",
+      "wikipedia": "en:Morley Field Sports Complex"
+    }
+  },
+  {
+    "id": 381213770,
+    "osmType": "way",
+    "name": "Albert's Restaurant",
+    "category": "restaurant",
+    "lat": 32.7345547,
+    "lng": -117.1520774,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "restaurant",
+      "building": "yes",
+      "layer": "1",
+      "name": "Albert's Restaurant"
+    }
+  },
+  {
+    "id": 253236432,
+    "osmType": "way",
+    "name": "Hua Mei Cafe",
+    "category": "restaurant",
+    "lat": 32.73583,
+    "lng": -117.1520118,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "restaurant",
+      "building": "yes",
+      "cuisine": "asian;burger",
+      "name": "Hua Mei Cafe",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 8680715942,
+    "osmType": "node",
+    "name": "Lady Carolyn’s Pub",
+    "category": "restaurant",
+    "lat": 32.7322285,
+    "lng": -117.1519038,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "amenity": "restaurant",
+      "name": "Lady Carolyn’s Pub"
+    }
+  },
+  {
+    "id": 6313229039,
+    "osmType": "node",
+    "name": "Panama 66",
+    "category": "restaurant",
+    "lat": 32.7317599,
+    "lng": -117.1510339,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "amenity": "restaurant",
+      "name": "Panama 66"
+    }
+  },
+  {
+    "id": 7012818185,
+    "osmType": "node",
+    "name": "Prado",
+    "category": "restaurant",
+    "lat": 32.7313477,
+    "lng": -117.1489718,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "addr:housenumber": "1549",
+      "addr:street": "El Prado",
+      "amenity": "restaurant",
+      "name": "Prado"
+    }
+  },
+  {
+    "id": 529832146,
+    "osmType": "way",
+    "name": "Sabertooth Mexican Grill",
+    "category": "restaurant",
+    "lat": 32.7381046,
+    "lng": -117.1520441,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "restaurant",
+      "building": "yes",
+      "cuisine": "mexican",
+      "name": "Sabertooth Mexican Grill",
+      "ref": "34"
+    }
+  },
+  {
+    "id": 253238999,
+    "osmType": "way",
+    "name": "Sydney's",
+    "category": "restaurant",
+    "lat": 32.7373778,
+    "lng": -117.1497141,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "restaurant",
+      "building": "yes",
+      "name": "Sydney's"
+    }
+  },
+  {
+    "id": 1463000245,
+    "osmType": "node",
+    "name": "The Prado",
+    "category": "restaurant",
+    "lat": 32.7309651,
+    "lng": -117.1496819,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "amenity": "restaurant",
+      "name": "The Prado"
+    }
+  },
+  {
+    "id": 964383232,
+    "osmType": "node",
+    "name": "Tobeys 19th Hole Cafe",
+    "category": "restaurant",
+    "lat": 32.7249312,
+    "lng": -117.1376307,
+    "onOfficialMap": true,
+    "mapGridRef": "8G",
+    "tags": {
+      "addr:housenumber": "2600",
+      "addr:street": "Golf Course Drive",
+      "amenity": "restaurant",
+      "cuisine": "american",
+      "indoor_seating": "yes",
+      "internet_access": "wlan",
+      "internet_access:fee": "yes",
+      "name": "Tobeys 19th Hole Cafe",
+      "outdoor_seating": "yes",
+      "phone": "+1 619-234-5821"
+    }
+  },
+  {
+    "id": 31239818,
+    "osmType": "way",
+    "name": "Balboa Park Activity Center",
+    "category": "sports",
+    "lat": 32.7266804,
+    "lng": -117.1477054,
+    "onOfficialMap": true,
+    "mapGridRef": "7E",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2145",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Park Boulevard",
+      "building": "yes",
+      "leisure": "sports_centre",
+      "name": "Balboa Park Activity Center",
+      "operator": "City of San Diego",
+      "operator:type": "public"
+    }
+  },
+  {
+    "id": 529832144,
+    "osmType": "way",
+    "name": "4D Theater",
+    "category": "theatre",
+    "lat": 32.7351629,
+    "lng": -117.1537231,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cinema",
+      "building": "commercial",
+      "cinema:3D": "yes",
+      "description": "This is a movie theater that plays movies in \"4D\".",
+      "name": "4D Theater"
+    }
+  },
+  {
+    "id": 31240301,
+    "osmType": "way",
+    "name": "Casa del Prado Theatre",
+    "category": "theatre",
+    "lat": 32.7324932,
+    "lng": -117.1483884,
+    "onOfficialMap": true,
+    "mapGridRef": "5D",
+    "tags": {
+      "amenity": "theatre",
+      "building": "yes",
+      "name": "Casa del Prado Theatre"
+    }
+  },
+  {
+    "id": 51538418,
+    "osmType": "way",
+    "name": "Conrad Prebys Theatre Center",
+    "category": "theatre",
+    "lat": 32.7322485,
+    "lng": -117.1522144,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1363",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Old Globe Way",
+      "amenity": "arts_centre",
+      "building": "yes",
+      "name": "Conrad Prebys Theatre Center",
+      "old_name": "Simon Edison Centre for the Performing Arts",
+      "website": "https://www.theoldglobe.org"
+    }
+  },
+  {
+    "id": 418408261,
+    "osmType": "way",
+    "name": "Inamori Pavilion",
+    "category": "theatre",
+    "lat": 32.729639,
+    "lng": -117.1490338,
+    "onOfficialMap": true,
+    "mapGridRef": "6D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "2220",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Paseo De Oro",
+      "building": "yes",
+      "building:levels": "1",
+      "layer": "2",
+      "name": "Inamori Pavilion"
+    }
+  },
+  {
+    "id": 666803042,
+    "osmType": "way",
+    "name": "Kid's Theater",
+    "category": "theatre",
+    "lat": 32.738127,
+    "lng": -117.1527981,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "amenity": "cinema",
+      "building": "yes",
+      "layer": "-1",
+      "name": "Kid's Theater"
+    }
+  },
+  {
+    "id": 51538419,
+    "osmType": "way",
+    "name": "Lowell Davies Festival Theatre",
+    "category": "theatre",
+    "lat": 32.7322559,
+    "lng": -117.1515138,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "addr:state": "CA",
+      "alt_name": "Lowell Davies Theater",
+      "amenity": "theatre",
+      "building": "yes",
+      "capacity": "620",
+      "ele": "80",
+      "gnis:feature_id": "1870086",
+      "name": "Lowell Davies Festival Theatre",
+      "source": "USGS Geonames"
+    }
+  },
+  {
+    "id": 132580118,
+    "osmType": "way",
+    "name": "Marie Hitchcock Puppet Theater and Recital Hall",
+    "category": "theatre",
+    "lat": 32.7282673,
+    "lng": -117.1536008,
+    "onOfficialMap": true,
+    "mapGridRef": "6C",
+    "tags": {
+      "addr:state": "CA",
+      "amenity": "theatre",
+      "building": "yes",
+      "ele": "73",
+      "gnis:feature_id": "1870081",
+      "name": "Marie Hitchcock Puppet Theater and Recital Hall",
+      "source": "USGS Geonames",
+      "wikidata": "Q115160955"
+    }
+  },
+  {
+    "id": 8680715940,
+    "osmType": "node",
+    "name": "Old Globe Theater",
+    "category": "theatre",
+    "lat": 32.7322645,
+    "lng": -117.1522704,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "amenity": "theatre",
+      "capacity": "580",
+      "ele": "83",
+      "gnis:feature_id": "2084629;1869909",
+      "name": "Old Globe Theater",
+      "note": "Duplicate GNIS records were not resolved before the Feature Class was archived",
+      "website": "https://www.theoldglobe.org/",
+      "wikidata": "Q7084094",
+      "wikipedia": "en:Old Globe Theatre"
+    }
+  },
+  {
+    "id": 368171664,
+    "osmType": "node",
+    "name": "Reuben H. Fleet Space Theater",
+    "category": "theatre",
+    "lat": 32.7309728,
+    "lng": -117.147406,
+    "onOfficialMap": true,
+    "mapGridRef": "5E",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1875",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "el prado",
+      "amenity": "theatre",
+      "ele": "87",
+      "gnis:feature_id": "1869894",
+      "name": "Reuben H. Fleet Space Theater",
+      "opening_hours": "09:00-18:00",
+      "source": "USGS Geonames"
+    }
+  },
+  {
+    "id": 8680715941,
+    "osmType": "node",
+    "name": "Sheryl and Harvey White Theatre",
+    "category": "theatre",
+    "lat": 32.7324059,
+    "lng": -117.1520248,
+    "onOfficialMap": true,
+    "mapGridRef": "5C",
+    "tags": {
+      "amenity": "theatre",
+      "capacity": "250",
+      "name": "Sheryl and Harvey White Theatre"
+    }
+  },
+  {
+    "id": 31240523,
+    "osmType": "way",
+    "name": "Spreckels Organ Pavillion",
+    "category": "theatre",
+    "lat": 32.7294805,
+    "lng": -117.1504218,
+    "onOfficialMap": true,
+    "mapGridRef": "6D",
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:postcode": "92101",
+      "addr:state": "CA",
+      "addr:street": "Pan American Road East",
+      "amenity": "theatre",
+      "building": "yes",
+      "ele": "81",
+      "gnis:feature_id": "1870106",
+      "name": "Spreckels Organ Pavillion",
+      "name:en": "Spreckels Organ Pavillion",
+      "source": "USGS Geonames",
+      "wikidata": "Q7580302",
+      "wikipedia": "en:Spreckels Organ Pavilion"
+    }
+  },
+  {
+    "id": 79141696,
+    "osmType": "way",
+    "name": "Arctic Aviary",
+    "category": "zoo",
+    "lat": 32.7346746,
+    "lng": -117.1549616,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "animal": "birds",
+      "attraction": "animal",
+      "building": "yes",
+      "name": "Arctic Aviary",
+      "zoo": "aviary"
+    }
+  },
+  {
+    "id": 46838264,
+    "osmType": "way",
+    "name": "Exhibit Hall",
+    "category": "zoo",
+    "lat": 32.7297318,
+    "lng": -117.1496472,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Exhibit Hall"
+    }
+  },
+  {
+    "id": 46838265,
+    "osmType": "way",
+    "name": "Exhibit Hall",
+    "category": "zoo",
+    "lat": 32.7291371,
+    "lng": -117.149765,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Exhibit Hall"
+    }
+  },
+  {
+    "id": 79135698,
+    "osmType": "way",
+    "name": "Owens Aviary",
+    "category": "zoo",
+    "lat": 32.7354747,
+    "lng": -117.151173,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "attraction": "animal",
+      "building": "yes",
+      "name": "Owens Aviary",
+      "wheelchair": "yes",
+      "zoo": "aviary"
+    }
+  },
+  {
+    "id": 1430020594,
+    "osmType": "way",
+    "name": "Parker Aviary",
+    "category": "zoo",
+    "lat": 32.7351362,
+    "lng": -117.1511079,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "animal": "bird",
+      "attraction": "animal",
+      "building": "yes",
+      "indoor": "yes",
+      "layer": "1",
+      "name": "Parker Aviary",
+      "operator": "San Diego Zoo",
+      "wheelchair": "yes",
+      "zoo": "aviary"
+    }
+  },
+  {
+    "id": 253227284,
+    "osmType": "way",
+    "name": "Polar Bear Exhibit",
+    "category": "zoo",
+    "lat": 32.734527,
+    "lng": -117.1546077,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Polar Bear Exhibit"
+    }
+  },
+  {
+    "id": 31557171,
+    "osmType": "way",
+    "name": "Reptile House",
+    "category": "zoo",
+    "lat": 32.7342031,
+    "lng": -117.1495955,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Reptile House",
+      "start_date": "1936"
+    }
+  },
+  {
+    "id": 201066688,
+    "osmType": "way",
+    "name": "Scripps Aviary",
+    "category": "zoo",
+    "lat": 32.7343792,
+    "lng": -117.1510095,
+    "onOfficialMap": true,
+    "mapGridRef": "3D",
+    "tags": {
+      "building": "yes",
+      "name": "Scripps Aviary"
+    }
+  },
+  {
+    "id": 347332744,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7312604,
+    "lng": -117.1517672,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 347332797,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7312635,
+    "lng": -117.1514638,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 4188372867,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7303126,
+    "lng": -117.1497131,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 5121523890,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.725699,
+    "lng": -117.1502953,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "mapillary": "oxketL3Yc2XXjVT_ewKWNw",
+      "material": "stone",
+      "seats": "3"
+    }
+  },
+  {
+    "id": 5121523891,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7254033,
+    "lng": -117.1507861,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "mapillary": "oxketL3Yc2XXjVT_ewKWNw",
+      "material": "stone",
+      "seats": "3"
+    }
+  },
+  {
+    "id": 5633157115,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7372451,
+    "lng": -117.1498851,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "description": "pavillion for eating"
+    }
+  },
+  {
+    "id": 5633281622,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7384617,
+    "lng": -117.1504348,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "description": "Roger S Benson, in memory of"
+    }
+  },
+  {
+    "id": 6538230108,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7353478,
+    "lng": -117.151287,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "metal",
+      "seats": "3"
+    }
+  },
+  {
+    "id": 6538230110,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7353078,
+    "lng": -117.1512893,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "metal",
+      "seats": "3"
+    }
+  },
+  {
+    "id": 6554078017,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7322562,
+    "lng": -117.1496584,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078018,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.731737,
+    "lng": -117.1499972,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078019,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.731737,
+    "lng": -117.1499558,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078020,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7320344,
+    "lng": -117.1499808,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078021,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7319656,
+    "lng": -117.1499752,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078026,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7322089,
+    "lng": -117.1497519,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078027,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7319248,
+    "lng": -117.1493532,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078035,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7322473,
+    "lng": -117.1497503,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078036,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7317363,
+    "lng": -117.1500229,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078040,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7317408,
+    "lng": -117.1499277,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078042,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7317857,
+    "lng": -117.1493547,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078043,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7321797,
+    "lng": -117.1496572,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078044,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7320278,
+    "lng": -117.1493566,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078045,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.731971,
+    "lng": -117.1493553,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078046,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7319665,
+    "lng": -117.1499323,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078049,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7320674,
+    "lng": -117.1493572,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6554078050,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7317432,
+    "lng": -117.1493546,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6575587626,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7341011,
+    "lng": -117.1518108,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "metal"
+    }
+  },
+  {
+    "id": 6575587633,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7341678,
+    "lng": -117.151734,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "metal"
+    }
+  },
+  {
+    "id": 6579475141,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7311106,
+    "lng": -117.1505131,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 6579475148,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7311288,
+    "lng": -117.1504269,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 6579475174,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7311054,
+    "lng": -117.1503491,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 6582760537,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7308112,
+    "lng": -117.1460218,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 6582792722,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7307951,
+    "lng": -117.1457604,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 6582792860,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.730932,
+    "lng": -117.1458655,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 6584679970,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.731075,
+    "lng": -117.1513214,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 6610814591,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7308959,
+    "lng": -117.1499321,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 6610814595,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7308502,
+    "lng": -117.1498751,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 6611063003,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7310015,
+    "lng": -117.1504133,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 6611063004,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7310013,
+    "lng": -117.1504642,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 6678112254,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.731717,
+    "lng": -117.1470462,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 6678112255,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7316527,
+    "lng": -117.1470438,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 6678112256,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7317502,
+    "lng": -117.1470479,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 6678112257,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7317625,
+    "lng": -117.1467311,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no"
+    }
+  },
+  {
+    "id": 6717698707,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7313359,
+    "lng": -117.1456814,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6717698708,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.731359,
+    "lng": -117.1456949,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 6717698711,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7309321,
+    "lng": -117.1459268,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 7152451845,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7280683,
+    "lng": -117.1518332,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 9786851646,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7387123,
+    "lng": -117.1388271,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10284842590,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7364717,
+    "lng": -117.1533968,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10284889314,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7391345,
+    "lng": -117.1497768,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453211,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7311206,
+    "lng": -117.1517969,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453212,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7311177,
+    "lng": -117.1517409,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453213,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7310705,
+    "lng": -117.1517409,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453214,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7310705,
+    "lng": -117.1517952,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453215,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7310774,
+    "lng": -117.151491,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453216,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7311167,
+    "lng": -117.1514899,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453217,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7311167,
+    "lng": -117.1514385,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681453218,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7310739,
+    "lng": -117.1514373,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 10681459932,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7310823,
+    "lng": -117.1513508,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench"
+    }
+  },
+  {
+    "id": 11046852286,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7290843,
+    "lng": -117.1496683,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 11046852287,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7292744,
+    "lng": -117.1497167,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 11046852288,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7293462,
+    "lng": -117.1495889,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 11046852290,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7301044,
+    "lng": -117.1497979,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 11046852291,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7304665,
+    "lng": -117.14937,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 11046852292,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7304736,
+    "lng": -117.1494107,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 11046852293,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7306608,
+    "lng": -117.149355,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 11046852294,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7306551,
+    "lng": -117.1493205,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "material": "wood"
+    }
+  },
+  {
+    "id": 12047719441,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7319374,
+    "lng": -117.1515023,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12047719442,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7317282,
+    "lng": -117.1516846,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12047719443,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7316917,
+    "lng": -117.15152,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12047719444,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7316925,
+    "lng": -117.1515014,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12047719445,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7316776,
+    "lng": -117.1513404,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12047719446,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7316746,
+    "lng": -117.1513201,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12047719447,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7318801,
+    "lng": -117.1513271,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12047719448,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7318622,
+    "lng": -117.1513271,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 12771319633,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.733589,
+    "lng": -117.1568531,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 12771319634,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.733406,
+    "lng": -117.1568012,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 13375356885,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.7307868,
+    "lng": -117.1460594,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "armrest": "yes",
+      "backrest": "yes"
+    }
+  },
+  {
+    "id": 13375356887,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.730688,
+    "lng": -117.1459239,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "material": "concrete"
+    }
+  },
+  {
+    "id": 13394212807,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bench",
+    "lat": 32.732492,
+    "lng": -117.1503658,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "armrest": "yes",
+      "backrest": "yes",
+      "direction": "160",
+      "material": "wood",
+      "seats": "4"
+    }
+  },
+  {
+    "id": 1919425641,
+    "osmType": "node",
+    "name": "Rose Bench",
+    "category": "amenity_bench",
+    "lat": 32.7312272,
+    "lng": -117.146616,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bench",
+      "backrest": "no",
+      "name": "Rose Bench"
+    }
+  },
+  {
+    "id": 4234192966,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bicycle",
+    "lat": 32.7328863,
+    "lng": -117.148119,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_rental"
+    }
+  },
+  {
+    "id": 6222281135,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_bicycle",
+    "lat": 32.7352679,
+    "lng": -117.1481558,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_rental"
+    }
+  },
+  {
+    "id": 6579472541,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7310997,
+    "lng": -117.151464,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 6579472544,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7310967,
+    "lng": -117.1517701,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 9958565394,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7300312,
+    "lng": -117.1504296,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 12048716468,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7307083,
+    "lng": -117.1496743,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 12050016992,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7243342,
+    "lng": -117.1477184,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain",
+      "drinking_water": "no"
+    }
+  },
+  {
+    "id": 12050016993,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7250933,
+    "lng": -117.1477299,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain",
+      "drinking_water": "no"
+    }
+  },
+  {
+    "id": 12050016994,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7258677,
+    "lng": -117.1477393,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain",
+      "drinking_water": "no"
+    }
+  },
+  {
+    "id": 12050132920,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7322224,
+    "lng": -117.1487612,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 12050132921,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7322164,
+    "lng": -117.1497021,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 12089599058,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7339821,
+    "lng": -117.1479163,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 12998150379,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.7325223,
+    "lng": -117.1495155,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 12998150380,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_drinking_water",
+    "lat": 32.732519,
+    "lng": -117.148947,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "fountain"
+    }
+  },
+  {
+    "id": 316543226,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.744279,
+    "lng": -117.14738,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "post_box",
+      "drive_through": "no",
+      "opening_hours": "24/7",
+      "source": "Yahoo",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 413318841,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7422143,
+    "lng": -117.143644,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "post_box"
+    }
+  },
+  {
+    "id": 413318843,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7434111,
+    "lng": -117.1476205,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "post_box"
+    }
+  },
+  {
+    "id": 925950667,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7357345,
+    "lng": -117.151952,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "atm",
+      "operator": "RBS"
+    }
+  },
+  {
+    "id": 2425949784,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7421948,
+    "lng": -117.147578,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "vending_machine",
+      "operator": "U-T San Diego",
+      "source": "survey",
+      "vending": "newspapers"
+    }
+  },
+  {
+    "id": 2657026383,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7261437,
+    "lng": -117.1438461,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "parking_entrance"
+    }
+  },
+  {
+    "id": 3844510375,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7345369,
+    "lng": -117.1521099,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "atm",
+      "layer": "1"
+    }
+  },
+  {
+    "id": 6554078025,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.731713,
+    "lng": -117.150052,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "atm",
+      "brand": "Pacific Processing",
+      "cash_in": "no",
+      "check_date": "2024-09-07",
+      "description": "Balboa Park map",
+      "information": "map",
+      "map_size": "site",
+      "map_type": "street",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 6554078039,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7316508,
+    "lng": -117.150126,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "vending_machine",
+      "operator": "San Diego City Beat",
+      "vending": "newspapers"
+    }
+  },
+  {
+    "id": 6579492931,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7313803,
+    "lng": -117.1477331,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "atm",
+      "check_date": "2023-10-23",
+      "description": "Balboa Park map",
+      "information": "map",
+      "map_size": "site",
+      "map_type": "street",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 6595126195,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7287505,
+    "lng": -117.1472709,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_disposal"
+    }
+  },
+  {
+    "id": 11256107746,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7305513,
+    "lng": -117.1467859,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "post_box",
+      "operator": "USPS"
+    }
+  },
+  {
+    "id": 12046811430,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.725381,
+    "lng": -117.1491941,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "atm"
+    }
+  },
+  {
+    "id": 12463869805,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_other",
+    "lat": 32.7355985,
+    "lng": -117.1520749,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "atm",
+      "brand": "Cal Coast Credit Union"
+    }
+  },
+  {
+    "id": 11968143142,
+    "osmType": "node",
+    "name": "Donald and Darlene Shiley Stage",
+    "category": "amenity_other",
+    "lat": 32.7323138,
+    "lng": -117.1523293,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "stage",
+      "name": "Donald and Darlene Shiley Stage"
+    }
+  },
+  {
+    "id": 7899986469,
+    "osmType": "node",
+    "name": "Little Free Library",
+    "category": "amenity_other",
+    "lat": 32.7373974,
+    "lng": -117.132455,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "public_bookcase",
+      "brand": "Little Free Library",
+      "brand:wikidata": "Q6650101",
+      "name": "Little Free Library"
+    }
+  },
+  {
+    "id": 8185771100,
+    "osmType": "node",
+    "name": "Little Free Library",
+    "category": "amenity_other",
+    "lat": 32.7415522,
+    "lng": -117.1358234,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "public_bookcase",
+      "brand": "Little Free Library",
+      "brand:wikidata": "Q6650101",
+      "name": "Little Free Library"
+    }
+  },
+  {
+    "id": 8185771101,
+    "osmType": "node",
+    "name": "Little Free Library",
+    "category": "amenity_other",
+    "lat": 32.7426451,
+    "lng": -117.137424,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "public_bookcase",
+      "brand": "Little Free Library",
+      "brand:wikidata": "Q6650101",
+      "name": "Little Free Library"
+    }
+  },
+  {
+    "id": 1222344622,
+    "osmType": "way",
+    "name": "Saint Spyridon Greek Orthodox Church",
+    "category": "amenity_other",
+    "lat": 32.7445331,
+    "lng": -117.1471329,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:country": "US",
+      "addr:housenumber": "3655",
+      "addr:postcode": "92103",
+      "addr:state": "CA",
+      "addr:street": "Park Boulevard",
+      "amenity": "place_of_worship",
+      "building": "church",
+      "denomination": "greek_orthodox",
+      "name": "Saint Spyridon Greek Orthodox Church",
+      "phone": "+1-619-297-4165",
+      "religion": "christian",
+      "source": "SanGIS Addresses Public Domain (http://www.sangis.org/)",
+      "website": "https://www.stspyridon.org/"
+    }
+  },
+  {
+    "id": 358860810,
+    "osmType": "node",
+    "name": "United States Naval Hospital Post Office",
+    "category": "amenity_other",
+    "lat": 32.7240997,
+    "lng": -117.1451322,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "post_office",
+      "ele": "60",
+      "gnis:feature_id": "2457164",
+      "name": "United States Naval Hospital Post Office"
+    }
+  },
+  {
+    "id": 358846072,
+    "osmType": "node",
+    "name": "Vedanta Society of Southern California",
+    "category": "amenity_other",
+    "lat": 32.7414396,
+    "lng": -117.150866,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "addr:city": "San Diego",
+      "addr:housenumber": "1440",
+      "addr:postcode": "92103",
+      "addr:street": "Upas Street",
+      "amenity": "place_of_worship",
+      "ele": "90",
+      "email": "sandiego@vedanta.org",
+      "gnis:feature_id": "1870062",
+      "name": "Vedanta Society of Southern California",
+      "phone": "+1-619-291-9377",
+      "religion": "hindu",
+      "website": "https://sandiegovedanta.org/"
+    }
+  },
+  {
+    "id": 1458213373,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7376196,
+    "lng": -117.1381037,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking"
+    }
+  },
+  {
+    "id": 7152034008,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.730297,
+    "lng": -117.1501207,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "access": "yes",
+      "amenity": "bicycle_parking",
+      "bicycle_parking": "stands",
+      "capacity": "5",
+      "covered": "no",
+      "fee": "no"
+    }
+  },
+  {
+    "id": 7152451839,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7315462,
+    "lng": -117.1507193,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking"
+    }
+  },
+  {
+    "id": 8349785397,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.72689,
+    "lng": -117.1450142,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking"
+    }
+  },
+  {
+    "id": 8826119371,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7316984,
+    "lng": -117.1473041,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking",
+      "bicycle_parking": "stands",
+      "capacity": "5",
+      "covered": "no"
+    }
+  },
+  {
+    "id": 8826119372,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7322477,
+    "lng": -117.149087,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking",
+      "bicycle_parking": "stands",
+      "capacity": "4",
+      "covered": "no"
+    }
+  },
+  {
+    "id": 8826119373,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7322504,
+    "lng": -117.1493744,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking",
+      "bicycle_parking": "stands",
+      "capacity": "4",
+      "covered": "no"
+    }
+  },
+  {
+    "id": 8826119374,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.73134,
+    "lng": -117.1508649,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking",
+      "bicycle_parking": "stands",
+      "capacity": "8",
+      "covered": "no"
+    }
+  },
+  {
+    "id": 8826119375,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7313727,
+    "lng": -117.1507239,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking",
+      "bicycle_parking": "stands",
+      "capacity": "8",
+      "covered": "no"
+    }
+  },
+  {
+    "id": 12290482784,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_parking",
+    "lat": 32.7394844,
+    "lng": -117.1393733,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "bicycle_parking",
+      "bicycle_parking": "stands",
+      "capacity": "4",
+      "covered": "no"
+    }
+  },
+  {
+    "id": 6239155289,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7353503,
+    "lng": -117.1530812,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678105673,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7317631,
+    "lng": -117.1503921,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678105674,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7317937,
+    "lng": -117.1506928,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678105675,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7318131,
+    "lng": -117.1503905,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678105677,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7317805,
+    "lng": -117.150499,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678105678,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.731786,
+    "lng": -117.1504546,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678105679,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7316834,
+    "lng": -117.1502501,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678105681,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.731754,
+    "lng": -117.1504809,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "check_date": "2024-01-21",
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134896,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.731787,
+    "lng": -117.1503817,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "check_date": "2024-01-21",
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134897,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7318452,
+    "lng": -117.1506983,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134900,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7317393,
+    "lng": -117.1506914,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134904,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.731691,
+    "lng": -117.1503796,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134907,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7317966,
+    "lng": -117.1502506,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "check_date": "2024-01-21",
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134908,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7316837,
+    "lng": -117.1504878,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134909,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7316819,
+    "lng": -117.1506998,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "check_date": "2024-06-13",
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134910,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7318473,
+    "lng": -117.1502523,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134918,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7318102,
+    "lng": -117.1504816,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134919,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7317136,
+    "lng": -117.1503918,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134921,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7316608,
+    "lng": -117.1504783,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134923,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7316821,
+    "lng": -117.1504557,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134925,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7316576,
+    "lng": -117.1503904,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134926,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7317087,
+    "lng": -117.1504791,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134928,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7316797,
+    "lng": -117.1504152,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134929,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.731786,
+    "lng": -117.1504095,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "check_date": "2024-01-21",
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 6678134931,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.731738,
+    "lng": -117.1502505,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "covered": "yes",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9488397028,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7406557,
+    "lng": -117.1394377,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851647,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7383858,
+    "lng": -117.1394222,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851648,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7385724,
+    "lng": -117.1391732,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851649,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7386981,
+    "lng": -117.1391621,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851650,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7385961,
+    "lng": -117.1387651,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851651,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7367917,
+    "lng": -117.1389222,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851652,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7367519,
+    "lng": -117.1394912,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851653,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7371954,
+    "lng": -117.1400575,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851654,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7401379,
+    "lng": -117.1397303,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9786851655,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7400517,
+    "lng": -117.1402673,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 9858965421,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7333657,
+    "lng": -117.1539808,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "bench": "yes",
+      "covered": "yes",
+      "leisure": "picnic_table",
+      "material": "metal"
+    }
+  },
+  {
+    "id": 9858965422,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7333643,
+    "lng": -117.154007,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "bench": "yes",
+      "covered": "yes",
+      "leisure": "picnic_table",
+      "material": "metal"
+    }
+  },
+  {
+    "id": 9858965423,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7333614,
+    "lng": -117.154032,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "bench": "yes",
+      "covered": "yes",
+      "leisure": "picnic_table",
+      "material": "metal"
+    }
+  },
+  {
+    "id": 10119385443,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7366658,
+    "lng": -117.1382088,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10119385444,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7384008,
+    "lng": -117.1388661,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10119385445,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.738881,
+    "lng": -117.1390564,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10119388523,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7383754,
+    "lng": -117.1395252,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10119399467,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7365631,
+    "lng": -117.1380657,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10119403419,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7365417,
+    "lng": -117.1382188,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10197420452,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7395422,
+    "lng": -117.136248,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10197434862,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7393896,
+    "lng": -117.1362143,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10197438333,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7395179,
+    "lng": -117.1365804,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10197439564,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7396421,
+    "lng": -117.1363859,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 12771319635,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7333242,
+    "lng": -117.1568068,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "bench": "yes",
+      "covered": "no",
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 13395196266,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7391416,
+    "lng": -117.1339789,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 13395196267,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7391692,
+    "lng": -117.1339816,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 13395196287,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7405681,
+    "lng": -117.1372402,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 13395196290,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7406479,
+    "lng": -117.1384417,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 13395196295,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7405335,
+    "lng": -117.1385993,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 13395196298,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7406474,
+    "lng": -117.139369,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 13395196299,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_picnic",
+    "lat": 32.7405784,
+    "lng": -117.1393398,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "picnic_table"
+    }
+  },
+  {
+    "id": 10958388555,
+    "osmType": "node",
+    "name": "Restroom",
+    "category": "amenity_restroom",
+    "lat": 32.7391846,
+    "lng": -117.150957,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "toilets",
+      "name": "Restroom"
+    }
+  },
+  {
+    "id": 529832142,
+    "osmType": "way",
+    "name": "Restrooms",
+    "category": "amenity_restroom",
+    "lat": 32.7343018,
+    "lng": -117.1549509,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "toilets",
+      "building": "yes",
+      "name": "Restrooms",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 2140587650,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.728077,
+    "lng": -117.1518381,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "source": "survey"
+    }
+  },
+  {
+    "id": 2140587651,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7280551,
+    "lng": -117.1518187,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling:cans": "yes",
+      "recycling:glass_bottles": "yes",
+      "recycling_type": "container",
+      "source": "survey"
+    }
+  },
+  {
+    "id": 6538230106,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7353643,
+    "lng": -117.1514137,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling:cans": "yes",
+      "recycling:cardboard": "yes",
+      "recycling:glass_bottles": "yes",
+      "recycling:paper": "yes",
+      "recycling:plastic_bottles": "yes",
+      "recycling:plastic_packaging": "yes",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6538230109,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.73537,
+    "lng": -117.1514079,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078007,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7317671,
+    "lng": -117.1493572,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6554078008,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7320021,
+    "lng": -117.1493576,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078010,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7317367,
+    "lng": -117.1499814,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078012,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316167,
+    "lng": -117.1490674,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078013,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.731966,
+    "lng": -117.1499611,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078014,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7317577,
+    "lng": -117.1493552,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078015,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316298,
+    "lng": -117.1501321,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6554078022,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316267,
+    "lng": -117.1505141,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078023,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316177,
+    "lng": -117.1501329,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078024,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7319949,
+    "lng": -117.1493573,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6554078028,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316168,
+    "lng": -117.1490777,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6554078030,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7322306,
+    "lng": -117.1497621,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078031,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7319673,
+    "lng": -117.1499492,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6554078032,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316312,
+    "lng": -117.1505046,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6554078038,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7322563,
+    "lng": -117.149737,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 6554078047,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7317377,
+    "lng": -117.1499711,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6717698706,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.730961,
+    "lng": -117.1458551,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 6717698710,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7309532,
+    "lng": -117.1458568,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 9089591900,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7352452,
+    "lng": -117.1393405,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119288196,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7365363,
+    "lng": -117.138202,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119288197,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7383693,
+    "lng": -117.1393866,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119378392,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7385325,
+    "lng": -117.1391961,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119379546,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.738373,
+    "lng": -117.1395471,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119381989,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7386364,
+    "lng": -117.1391608,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119383115,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7388457,
+    "lng": -117.1390506,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119385050,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7365411,
+    "lng": -117.1380801,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119388521,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7366476,
+    "lng": -117.1381823,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119388522,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.738392,
+    "lng": -117.138909,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119399143,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7387211,
+    "lng": -117.1387984,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197414572,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7394409,
+    "lng": -117.1362038,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197419806,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7393635,
+    "lng": -117.1362715,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197421911,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.739664,
+    "lng": -117.1363363,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197421912,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7395644,
+    "lng": -117.1366147,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197430719,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.739616,
+    "lng": -117.1364253,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197438853,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.73947,
+    "lng": -117.1365696,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197440703,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7394984,
+    "lng": -117.1362644,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10197442620,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7395882,
+    "lng": -117.1362767,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 11046852289,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7293683,
+    "lng": -117.1495878,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 13375356880,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7314103,
+    "lng": -117.1457955,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 13375356881,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7320539,
+    "lng": -117.1462943,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 13375356882,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7320565,
+    "lng": -117.1463044,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 13375356883,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7306813,
+    "lng": -117.1459351,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 13375356884,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7277278,
+    "lng": -117.1471468,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 13375356886,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316028,
+    "lng": -117.1457853,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "waste": "trash"
+    }
+  },
+  {
+    "id": 13375356888,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7314116,
+    "lng": -117.1457854,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 13375356889,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7316006,
+    "lng": -117.1457764,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container",
+      "wheelchair": "yes"
+    }
+  },
+  {
+    "id": 13375356890,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7306753,
+    "lng": -117.1459432,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "recycling",
+      "recycling_type": "container"
+    }
+  },
+  {
+    "id": 13395196284,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7393599,
+    "lng": -117.133757,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196285,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7408796,
+    "lng": -117.1345852,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196286,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7406907,
+    "lng": -117.1347118,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196288,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7405963,
+    "lng": -117.1372448,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196289,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7405969,
+    "lng": -117.1372309,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196291,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7406691,
+    "lng": -117.1384119,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196292,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7406592,
+    "lng": -117.1384125,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196293,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7405988,
+    "lng": -117.1384382,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196294,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7406008,
+    "lng": -117.1384639,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196296,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7404132,
+    "lng": -117.1384189,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196297,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7403907,
+    "lng": -117.1384323,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395196300,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7405849,
+    "lng": -117.1393116,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 13395223301,
+    "osmType": "node",
+    "name": null,
+    "category": "amenity_waste",
+    "lat": 32.7405722,
+    "lng": -117.1393217,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket"
+    }
+  },
+  {
+    "id": 10119400547,
+    "osmType": "node",
+    "name": "Hot coals only",
+    "category": "amenity_waste",
+    "lat": 32.7383633,
+    "lng": -117.139482,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "name": "Hot coals only"
+    }
+  },
+  {
+    "id": 10119385963,
+    "osmType": "node",
+    "name": "Hot coals only trash can",
+    "category": "amenity_waste",
+    "lat": 32.7366575,
+    "lng": -117.1379195,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "amenity": "waste_basket",
+      "name": "Hot coals only trash can"
+    }
+  },
+  {
+    "id": 6222281130,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7359661,
+    "lng": -117.1529591,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "statue",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 6222281131,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7360813,
+    "lng": -117.1529599,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "statue",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 6239154975,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7378987,
+    "lng": -117.1500728,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "material": "metal",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 6239154980,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.735257,
+    "lng": -117.1494546,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "statue",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12047719434,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7318838,
+    "lng": -117.1514731,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12047719435,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.731723,
+    "lng": -117.1514546,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12047719436,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7317022,
+    "lng": -117.1515749,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12047719437,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7318242,
+    "lng": -117.1516846,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12047719438,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7317014,
+    "lng": -117.1513643,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12047719439,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7317543,
+    "lng": -117.1516466,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12047719440,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7318942,
+    "lng": -117.1513643,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 12048010712,
+    "osmType": "node",
+    "name": null,
+    "category": "artwork",
+    "lat": 32.7263568,
+    "lng": -117.1490031,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_type": "sculpture",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 10684041384,
+    "osmType": "node",
+    "name": "Aztec Woman of Tehuantepec",
+    "category": "artwork",
+    "lat": 32.7311161,
+    "lng": -117.1497843,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist_name": "Donal Hord",
+      "artwork_type": "statue",
+      "design:year": "1935",
+      "material": "granite",
+      "name": "Aztec Woman of Tehuantepec",
+      "tourism": "artwork",
+      "wikidata": "Q27704657"
+    }
+  },
+  {
+    "id": 13370727286,
+    "osmType": "node",
+    "name": "Mother and Daughter Seated",
+    "category": "artwork",
+    "lat": 32.7320168,
+    "lng": -117.1507012,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist_name": "Francisco Zúñiga",
+      "artwork_type": "sculpture",
+      "check_date": "2025-12-11",
+      "inscription": "The San Diego Museum of Art: gift of Mr. and Mrs. Edwin S. Larsen, 1971. Installation sponsored by Sheryl and Harvey White.",
+      "material": "bronze",
+      "name": "Mother and Daughter Seated",
+      "name:es": "Madre e hija sentadas",
+      "start_date": "2016-02-11",
+      "tourism": "artwork",
+      "website": "collection.sdmart.org/objects-1/info/2370",
+      "wikidata": "Q27718736",
+      "wikipedia": "en:Mother and Daughter Seated"
+    }
+  },
+  {
+    "id": 13250919793,
+    "osmType": "node",
+    "name": "Nikigator",
+    "category": "artwork",
+    "lat": 32.730935,
+    "lng": -117.150769,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist:wikidata": "Q168704",
+      "artist:wikipedia": "Niki de Saint Phalle",
+      "artist_name": "Niki de Saint Phalle",
+      "artwork_type": "sculpture",
+      "name": "Nikigator",
+      "sculpture_type": "mosaic",
+      "tourism": "artwork",
+      "wikidata": "Q124407516",
+      "wikipedia": "en:Nikigator"
+    }
+  },
+  {
+    "id": 13370648801,
+    "osmType": "node",
+    "name": "Odyssey III",
+    "category": "artwork",
+    "lat": 32.7319875,
+    "lng": -117.1502216,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist_name": "Tony Rosenthal",
+      "artwork_type": "sculpture",
+      "inscription": "The San Diego Museum of Art: museum purchase with matching funds from the National Endowment for the Arts, 1974. \nInstallation sponsored by The Paul Bechtner Foundation and Helen W. and Webster B. Kinnaird.",
+      "material": "aluminium",
+      "name": "Odyssey III",
+      "start_date": "2016-02-11",
+      "tourism": "artwork",
+      "website": "https://collection.sdmart.org/objects-1/info/2591",
+      "wikidata": "Q28222700",
+      "wikipedia": "en:Odyssey III"
+    }
+  },
+  {
+    "id": 13250919794,
+    "osmType": "node",
+    "name": "Poet and Muse",
+    "category": "artwork",
+    "lat": 32.7310808,
+    "lng": -117.1507901,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist:wikidata": "Q168704",
+      "artist:wikipedia": "Niki de Saint Phalle",
+      "artist_name": "Niki de Saint Phalle",
+      "artwork_type": "sculpture",
+      "name": "Poet and Muse",
+      "name:fr": "Le Poète et sa Muse",
+      "sculpture_type": "mosaic",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 6222281132,
+    "osmType": "node",
+    "name": "Rex's Roar",
+    "category": "artwork",
+    "lat": 32.7352761,
+    "lng": -117.1487097,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artwork_subject": "Lion",
+      "artwork_type": "statue",
+      "name": "Rex's Roar",
+      "tourism": "artwork"
+    }
+  },
+  {
+    "id": 13370727287,
+    "osmType": "node",
+    "name": "Solar Bird",
+    "category": "artwork",
+    "lat": 32.7319451,
+    "lng": -117.1503071,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist_name": "Joan Miró",
+      "artwork_type": "sculpture",
+      "check_date": "2025-12-11",
+      "inscription": "The San Diego Museum of Art: museum purchase with funds provided by Mr. and Mrs. Norton S. Walbridge, 1969. Installation sponsored by Peter and Debra Drake.",
+      "material": "bronze",
+      "name": "Solar Bird",
+      "name:es": "Ave solar",
+      "start_date": "2016-02-11",
+      "tourism": "artwork",
+      "website": "https://collection.sdmart.org/objects-1/info/2308",
+      "wikidata": "Q28222703",
+      "wikipedia": "en:Solar Bird"
+    }
+  },
+  {
+    "id": 13370727284,
+    "osmType": "node",
+    "name": "The Prodigal Son",
+    "category": "artwork",
+    "lat": 32.7320084,
+    "lng": -117.1507837,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist_name": "Auguste Rodin",
+      "artwork_type": "sculpture",
+      "check_date": "2025-12-11",
+      "inscription": "The San Diego Museum of Art: museum purchase through the Earle W. Grant Acquisition Fund, 1975",
+      "material": "bronze",
+      "name": "The Prodigal Son",
+      "name:es": "El hijo pródigo",
+      "start_date": "2016-02-11",
+      "tourism": "artwork",
+      "website": "https://collection.sdmart.org/objects-1/info/2672",
+      "wikidata": "Q25415087",
+      "wikipedia": "en:The Prodigal Son (sculpture)"
+    }
+  },
+  {
+    "id": 13370727285,
+    "osmType": "node",
+    "name": "The Watchers",
+    "category": "artwork",
+    "lat": 32.7319286,
+    "lng": -117.1508303,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "artist_name": "Lynn Chadwick",
+      "artwork_type": "sculpture",
+      "check_date": "2025-12-11",
+      "inscription": "The San Diego Museum of Art: gift of Mrs. Jacquelyn Littlefield, 2002. Installation sponsored by Laurie Mitchell and Brent Woods.",
+      "material": "bronze",
+      "name": "The Watchers",
+      "name:es": "Los observadores",
+      "start_date": "2016-02-11",
+      "tourism": "artwork",
+      "website": "https://collection.sdmart.org/objects-1/info/17780",
+      "wikidata": "Q56279351",
+      "wikipedia": "en:The Watchers (sculpture)"
+    }
+  },
+  {
+    "id": 2969275917,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.7308454,
+    "lng": -117.1432425,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "information": "map",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 6538230107,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.7353159,
+    "lng": -117.1513906,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "description": "Map of the San Diego Zoo",
+      "information": "map",
+      "map_size": "site",
+      "map_type": "street",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 6554078041,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.7315922,
+    "lng": -117.1479984,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "description": "Balboa Park map",
+      "information": "map",
+      "map_size": "site",
+      "map_type": "street",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 6595104677,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.7283767,
+    "lng": -117.1522486,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "description": "Balboa Park map",
+      "information": "map",
+      "map_size": "site",
+      "map_type": "street",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 6610777570,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.7303721,
+    "lng": -117.150129,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "board:title": "The History of the Japanese Friendship Garden",
+      "board_type": "history",
+      "information": "board",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 6717698709,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.7319207,
+    "lng": -117.1480656,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "information": "board",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 9786849225,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.740185,
+    "lng": -117.139423,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "information": "route_marker",
+      "operator": "Balboa Park",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 10277643570,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.7271369,
+    "lng": -117.1514719,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "information": "board",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 12046811429,
+    "osmType": "node",
+    "name": null,
+    "category": "attraction",
+    "lat": 32.725381,
+    "lng": -117.1492018,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "information": "board",
+      "tourism": "information"
+    }
+  },
+  {
+    "id": 1189892601,
+    "osmType": "way",
+    "name": "Azumaya",
+    "category": "attraction",
+    "lat": 32.7302106,
+    "lng": -117.1490781,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "building": "roof",
+      "layer": "1",
+      "name": "Azumaya"
+    }
+  },
+  {
+    "id": 257152289,
+    "osmType": "way",
+    "name": "Girl Scouts San Diego",
+    "category": "attraction",
+    "lat": 32.7402789,
+    "lng": -117.1526598,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "building": "yes",
+      "name": "Girl Scouts San Diego"
+    }
+  },
+  {
+    "id": 1189875072,
+    "osmType": "way",
+    "name": "Oribe-Doro",
+    "category": "attraction",
+    "lat": 32.729527,
+    "lng": -117.1497241,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "building": "roof",
+      "layer": "1",
+      "name": "Oribe-Doro"
+    }
+  },
+  {
+    "id": 257152279,
+    "osmType": "way",
+    "name": "Police Horse Stable",
+    "category": "attraction",
+    "lat": 32.7273214,
+    "lng": -117.1502855,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "building": "yes",
+      "name": "Police Horse Stable"
+    }
+  },
+  {
+    "id": 1065711197,
+    "osmType": "way",
+    "name": "Pool Administration and Locker Rooms",
+    "category": "attraction",
+    "lat": 32.7394561,
+    "lng": -117.1392371,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "building": "yes",
+      "name": "Pool Administration and Locker Rooms"
+    }
+  },
+  {
+    "id": 11048431822,
+    "osmType": "node",
+    "name": "Deborah Szekely Activity Center",
+    "category": "museum",
+    "lat": 32.7291762,
+    "lng": -117.1498071,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "name": "Deborah Szekely Activity Center",
+      "operator": "Japanese Friendship Garden",
+      "tourism": "museum"
+    }
+  },
+  {
+    "id": 4234266619,
+    "osmType": "node",
+    "name": null,
+    "category": "other",
+    "lat": 32.7283592,
+    "lng": -117.1475517,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "tourism": "picnic_site"
+    }
+  },
+  {
+    "id": 12463869804,
+    "osmType": "node",
+    "name": null,
+    "category": "recreation",
+    "lat": 32.7355928,
+    "lng": -117.1521596,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "outdoor_seating"
+    }
+  },
+  {
+    "id": 12463869806,
+    "osmType": "node",
+    "name": null,
+    "category": "recreation",
+    "lat": 32.7357615,
+    "lng": -117.1518783,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "outdoor_seating"
+    }
+  },
+  {
+    "id": 9786829267,
+    "osmType": "node",
+    "name": null,
+    "category": "sports",
+    "lat": 32.7399489,
+    "lng": -117.1385768,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "leisure": "fitness_station",
+      "sport": "fitness"
+    }
+  },
+  {
+    "id": 11461733274,
+    "osmType": "node",
+    "name": null,
+    "category": "sports",
+    "lat": 32.727036,
+    "lng": -117.153524,
+    "onOfficialMap": false,
+    "mapGridRef": null,
+    "tags": {
+      "fitness_station": "horizontal_bar",
+      "leisure": "fitness_station"
+    }
+  }
+]
