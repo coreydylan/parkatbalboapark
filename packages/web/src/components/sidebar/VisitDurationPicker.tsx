@@ -2,6 +2,7 @@
 
 import { useAppStore } from '@/store/app-store'
 import { Chip } from '@/components/ui/Chip'
+import { Clock } from 'lucide-react'
 
 const DURATION_OPTIONS: { hours: number; label: string }[] = [
   { hours: 1, label: '1 hr' },
@@ -17,8 +18,10 @@ export function VisitDurationPicker() {
 
   return (
     <div>
-      <label className="text-sm font-medium text-stone-700 mb-2 block">
-        How long will you be visiting?
+      <div className="border-t border-stone-100 pt-4 -mt-1" />
+      <label className="flex items-center gap-2 text-base font-semibold text-stone-800 mb-3">
+        <Clock className="w-4 h-4 text-stone-400" />
+        How long will you visit?
       </label>
       <div className="flex flex-wrap gap-2">
         {DURATION_OPTIONS.map((opt) => (
@@ -30,6 +33,7 @@ export function VisitDurationPicker() {
           />
         ))}
       </div>
+      <div className="border-b border-stone-100 pb-0 mt-4" />
     </div>
   )
 }

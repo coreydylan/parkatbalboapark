@@ -5,22 +5,23 @@ import { useAppStore } from '@/store/app-store'
 import { Badge } from '@/components/ui/Badge'
 import { TIER_NAMES } from '@parkatbalboa/shared'
 import type { ParkingRecommendation, LotTier } from '@parkatbalboa/shared'
+import { PersonStanding, TramFront, Accessibility, Zap, Info } from 'lucide-react'
 
-const TIER_STYLE: Record<LotTier, { bg: string; text: string }> = {
-  0: { bg: 'bg-green-100', text: 'text-green-700' },
-  1: { bg: 'bg-red-100', text: 'text-red-700' },
-  2: { bg: 'bg-amber-100', text: 'text-amber-700' },
-  3: { bg: 'bg-blue-100', text: 'text-blue-700' },
+const TIER_STYLE: Record<LotTier, string> = {
+  0: 'bg-park-green/10 text-park-green',
+  1: 'bg-amber-50 text-amber-700',
+  2: 'bg-blue-50 text-blue-700',
+  3: 'bg-stone-100 text-stone-600',
 }
 
 function deriveFreeReason(tips: string[]): string | null {
   for (const tip of tips) {
     const lower = tip.toLowerCase()
-    if (lower.includes('resident')) return 'Free — resident parking'
+    if (lower.includes('resident')) return 'Free -- resident parking'
     if (lower.includes('enforce') || lower.includes('hours'))
-      return 'Free — outside enforcement hours'
-    if (lower.includes('free lot')) return 'Free — no-cost lot'
-    if (lower.includes('pass')) return 'Free — valid pass'
+      return 'Free -- outside enforcement hours'
+    if (lower.includes('free lot')) return 'Free -- no-cost lot'
+    if (lower.includes('pass')) return 'Free -- valid pass'
   }
   return 'Free parking'
 }
@@ -41,6 +42,7 @@ export function RecommendationCard({
   const isSelected = selectedLot?.slug === rec.lotSlug
   const lot = useMemo(() => lots.find((l) => l.slug === rec.lotSlug), [lots, rec.lotSlug])
   const tierStyle = TIER_STYLE[rec.tier]
+  const isTopThree = rank <= 3
 
   function handleClick() {
     selectLot(isSelected ? null : lot ?? null)
@@ -51,106 +53,85 @@ export function RecommendationCard({
       type="button"
       onClick={handleClick}
       className={`
-        w-full text-left rounded-xl border p-4 transition-all cursor-pointer
-        hover:shadow-md
+        w-full text-left rounded-2xl border p-4 transition-all duration-200 cursor-pointer
+        hover:shadow-md bg-white
         ${
           isSelected
-            ? 'ring-2 ring-park-green border-park-green shadow-md'
-            : 'border-stone-200 shadow-sm'
+            ? 'ring-2 ring-park-green border-park-green/30 shadow-md'
+            : 'border-stone-100 shadow-sm'
         }
       `}
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-stone-400 w-5 h-5 flex items-center justify-center bg-stone-100 rounded-full">
+          <span
+            className={`
+              text-xs font-bold w-7 h-7 flex items-center justify-center rounded-full shrink-0
+              ${isTopThree ? 'bg-park-green text-white' : 'bg-stone-200 text-stone-600'}
+            `}
+          >
             {rank}
           </span>
-          <h4 className="font-semibold text-stone-800 text-sm">
-            {rec.lotDisplayName}
-          </h4>
-          <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${tierStyle.bg} ${tierStyle.text}`}>
-            {TIER_NAMES[rec.tier]}
-          </span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <h4 className="font-semibold text-stone-800 text-base leading-tight">
+              {rec.lotDisplayName}
+            </h4>
+            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${tierStyle}`}>
+              {TIER_NAMES[rec.tier]}
+            </span>
+          </div>
         </div>
         <Badge cost={rec.costCents} label={rec.costDisplay} />
       </div>
 
       {rec.isFree && (
-        <p className="text-xs text-green-600 mb-1.5">
-          {deriveFreeReason(rec.tips)}
-        </p>
+        <div className="bg-park-green/5 rounded-lg px-2 py-1 mb-2 inline-flex items-center gap-1">
+          <Info className="w-3 h-3 text-park-green" />
+          <span className="text-xs text-park-green font-medium">
+            {deriveFreeReason(rec.tips)}
+          </span>
+        </div>
       )}
 
-      <div className="flex items-center gap-3 text-xs text-stone-500 mb-2">
+      <div className="flex items-center gap-3 text-sm text-stone-500 mb-2 flex-wrap">
         {rec.walkingTimeDisplay && (
           <span className="flex items-center gap-1">
-            <svg
-              className="w-3.5 h-3.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M13 4v3.5l2 2" />
-              <circle cx="13" cy="3" r="1" />
-              <path d="M7 21l3-7" />
-              <path d="M10 14l-2-2.5" />
-              <path d="M17 21l-2-5" />
-              <path d="m15 16-1.5-3.5" />
-            </svg>
+            <PersonStanding className="w-3.5 h-3.5" />
             {rec.walkingTimeDisplay}
           </span>
         )}
 
         {rec.hasTram && (
-          <span className="flex items-center gap-1 text-orange-600">
-            <svg
-              className="w-3.5 h-3.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="4" y="3" width="16" height="14" rx="2" />
-              <path d="M8 21h8" />
-              <path d="m12 17 0 4" />
-              <path d="M8 3v4" />
-              <path d="M16 3v4" />
-              <line x1="4" y1="10" x2="20" y2="10" />
-            </svg>
+          <span className="flex items-center gap-1 text-park-gold">
+            <TramFront className="w-3.5 h-3.5" />
             Tram available
           </span>
         )}
 
         {lot?.hasAdaSpaces && (
           <span className="flex items-center gap-1 text-blue-600" title="ADA accessible spaces">
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm-1 8h2l1 5h3l1 2h-5l-.5-2H8.5a4.5 4.5 0 1 1 0-9h1v2h-1a2.5 2.5 0 1 0 0 5h2.5L11 10Z" />
-            </svg>
+            <Accessibility className="w-3.5 h-3.5" />
             ADA
           </span>
         )}
 
         {lot?.hasEvCharging && (
           <span className="flex items-center gap-1 text-emerald-600" title="EV charging available">
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
+            <Zap className="w-3.5 h-3.5" />
             EV
           </span>
         )}
       </div>
 
       {rec.tips.length > 0 && (
-        <div className="space-y-0.5">
+        <div className="flex flex-wrap gap-1.5">
           {rec.tips.slice(0, 2).map((tip, i) => (
-            <p key={i} className="text-xs text-stone-400">
+            <span
+              key={i}
+              className="inline-flex items-center text-[11px] text-stone-500 bg-stone-50 rounded-full px-2 py-0.5"
+            >
               {tip}
-            </p>
+            </span>
           ))}
         </div>
       )}

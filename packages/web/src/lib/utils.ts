@@ -1,4 +1,15 @@
 import type { DestinationArea, DestinationType } from '@parkatbalboa/shared'
+import type { LucideIcon } from 'lucide-react'
+import {
+  Landmark,
+  Flower2,
+  Music,
+  MapPin,
+  Bike,
+  UtensilsCrossed,
+  PawPrint,
+  CircleDot,
+} from 'lucide-react'
 
 export { formatCost, formatWalkTime } from '@parkatbalboa/shared'
 
@@ -36,18 +47,22 @@ export function getAreaLabel(area: DestinationArea): string {
 }
 
 /**
- * Get an icon for a destination type.
+ * Map of destination types to their lucide icon components.
  */
-export function getTypeIcon(type: DestinationType): string {
-  const icons: Record<DestinationType, string> = {
-    museum: '\u{1F3DB}\uFE0F',
-    garden: '\u{1F33F}',
-    theater: '\u{1F3AD}',
-    landmark: '\u{1F3F0}',
-    recreation: '\u26BD',
-    dining: '\u{1F37D}\uFE0F',
-    zoo: '\u{1F981}',
-    other: '\u{1F4CD}',
-  }
-  return icons[type] ?? '\u{1F4CD}'
+const TYPE_ICONS: Record<DestinationType, LucideIcon> = {
+  museum: Landmark,
+  garden: Flower2,
+  theater: Music,
+  landmark: MapPin,
+  recreation: Bike,
+  dining: UtensilsCrossed,
+  zoo: PawPrint,
+  other: CircleDot,
+}
+
+/**
+ * Get the lucide icon component for a destination type.
+ */
+export function getTypeIconComponent(type: DestinationType): LucideIcon {
+  return TYPE_ICONS[type] ?? CircleDot
 }

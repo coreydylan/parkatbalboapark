@@ -5,7 +5,8 @@ import { useAppStore } from '@/store/app-store'
 import type { Waypoint } from '@/store/app-store'
 import { SearchInput } from '@/components/ui/SearchInput'
 import { useDebounce } from '@/lib/hooks'
-import { getAreaLabel, getTypeIcon } from '@/lib/utils'
+import { getAreaLabel, getTypeIconComponent } from '@/lib/utils'
+import { MapPin, X } from 'lucide-react'
 import type { Destination, DestinationArea, DestinationType } from '@parkatbalboa/shared'
 
 function mapCategoryToType(category: string): DestinationType {
@@ -42,6 +43,11 @@ function waypointToDestination(wp: Waypoint): Destination {
     websiteUrl: null,
     createdAt: '',
   }
+}
+
+function DestinationTypeIcon({ type, className }: { type: DestinationType; className?: string }) {
+  const Icon = getTypeIconComponent(type)
+  return <Icon className={className} />
 }
 
 export function DestinationPicker() {
@@ -126,35 +132,24 @@ export function DestinationPicker() {
 
   return (
     <div className="relative">
-      <label className="text-sm font-medium text-stone-700 mb-2 block">
+      <label className="text-base font-semibold text-stone-800 mb-3 block">
         I&apos;m going to...
       </label>
 
       {selectedDestination && !isOpen ? (
-        <div className="flex items-center justify-between p-3 border border-park-green rounded-lg bg-park-cream">
-          <div className="flex items-center gap-2">
-            <span>{getTypeIcon(selectedDestination.type)}</span>
+        <div className="flex items-center justify-between p-3 border border-park-green/30 rounded-xl bg-park-green/5 transition-all duration-200">
+          <div className="flex items-center gap-2.5">
+            <MapPin className="w-4 h-4 text-park-green" />
             <span className="text-sm font-medium text-stone-800">
               {selectedDestination.displayName}
             </span>
           </div>
           <button
             onClick={handleClear}
-            className="text-stone-400 hover:text-stone-600 transition-colors"
+            className="text-stone-400 hover:text-stone-600 transition-all duration-200 p-0.5 rounded-md hover:bg-stone-100"
             aria-label="Clear destination"
           >
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+            <X className="w-4 h-4" />
           </button>
         </div>
       ) : (
@@ -169,9 +164,9 @@ export function DestinationPicker() {
           />
 
           {isOpen && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-stone-200 rounded-lg shadow-lg max-h-64 overflow-y-auto z-30">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-stone-100 rounded-xl shadow-lg max-h-64 overflow-y-auto z-30">
               {!hasResults ? (
-                <div className="p-3 text-sm text-stone-400 text-center">
+                <div className="p-4 text-sm text-stone-400 text-center">
                   No destinations found
                 </div>
               ) : (
@@ -185,9 +180,9 @@ export function DestinationPicker() {
                         <button
                           key={d.id}
                           onClick={() => handleSelect(d)}
-                          className="w-full text-left px-3 py-2 flex items-center gap-2 hover:bg-stone-50 transition-colors"
+                          className="w-full text-left px-3 py-2.5 flex items-center gap-2.5 hover:bg-park-green/5 transition-all duration-200"
                         >
-                          <span className="text-base">{getTypeIcon(d.type)}</span>
+                          <DestinationTypeIcon type={d.type} className="w-4 h-4 text-stone-400" />
                           <span className="text-sm text-stone-700">
                             {d.displayName}
                           </span>
@@ -205,16 +200,14 @@ export function DestinationPicker() {
                         <button
                           key={wp.id}
                           onClick={() => handleSelectWaypoint(wp)}
-                          className="w-full text-left px-3 py-2 flex items-center gap-2 hover:bg-stone-50 transition-colors"
+                          className="w-full text-left px-3 py-2.5 flex items-center gap-2.5 hover:bg-park-green/5 transition-all duration-200"
                         >
-                          <span className="text-base">
-                            {getTypeIcon(mapCategoryToType(wp.category))}
-                          </span>
+                          <DestinationTypeIcon type={mapCategoryToType(wp.category)} className="w-4 h-4 text-stone-400" />
                           <span className="text-sm text-stone-700">
                             {wp.name}
                           </span>
                           {wp.onOfficialMap && (
-                            <span className="ml-auto text-[10px] font-medium text-park-green bg-park-green/10 px-1.5 py-0.5 rounded">
+                            <span className="ml-auto text-[10px] font-semibold text-park-green bg-park-green/10 px-2 py-0.5 rounded-full border border-park-green/20">
                               On Map
                             </span>
                           )}

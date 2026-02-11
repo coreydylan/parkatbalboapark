@@ -2,6 +2,13 @@
 
 import { useState } from 'react'
 import { useAppStore } from '@/store/app-store'
+import {
+  Sparkles,
+  Home,
+  Building2,
+  Accessibility,
+  CheckCircle,
+} from 'lucide-react'
 import type { UserType } from '@parkatbalboa/shared'
 
 const TOTAL_STEPS = 5
@@ -32,7 +39,7 @@ export function OnboardingModal({ onComplete }: OnboardingModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh]">
         {/* Progress dots */}
         <div className="flex justify-center gap-2 pt-6 pb-2">
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
@@ -42,8 +49,8 @@ export function OnboardingModal({ onComplete }: OnboardingModalProps) {
                 i === step
                   ? 'w-6 bg-park-green'
                   : i < step
-                    ? 'w-2 bg-park-green/40'
-                    : 'w-2 bg-stone-200'
+                    ? 'w-2 bg-park-green/60'
+                    : 'w-2 bg-stone-300'
               }`}
             />
           ))}
@@ -51,32 +58,37 @@ export function OnboardingModal({ onComplete }: OnboardingModalProps) {
 
         {/* Step content */}
         <div className="flex-1 px-6 py-6 overflow-y-auto">
-          {step === 0 && <StepWelcome onStart={next} />}
-          {step === 1 && (
-            <StepResidency
-              isResident={hasRole('resident')}
-              hasPass={hasPass}
-              onToggleResident={() => toggleRole('resident')}
-              onTogglePass={(v) => setHasPass(v)}
-            />
-          )}
-          {step === 2 && (
-            <StepAffiliation
-              isStaff={hasRole('staff')}
-              isVolunteer={hasRole('volunteer')}
-              onToggleStaff={() => toggleRole('staff')}
-              onToggleVolunteer={() => toggleRole('volunteer')}
-            />
-          )}
-          {step === 3 && (
-            <StepAccessibility
-              isAda={hasRole('ada')}
-              onToggleAda={() => toggleRole('ada')}
-            />
-          )}
-          {step === 4 && (
-            <StepDone roles={userRoles} hasPass={hasPass} onFinish={onComplete} />
-          )}
+          <div
+            key={step}
+            className="step-animate"
+          >
+            {step === 0 && <StepWelcome onStart={next} />}
+            {step === 1 && (
+              <StepResidency
+                isResident={hasRole('resident')}
+                hasPass={hasPass}
+                onToggleResident={() => toggleRole('resident')}
+                onTogglePass={(v) => setHasPass(v)}
+              />
+            )}
+            {step === 2 && (
+              <StepAffiliation
+                isStaff={hasRole('staff')}
+                isVolunteer={hasRole('volunteer')}
+                onToggleStaff={() => toggleRole('staff')}
+                onToggleVolunteer={() => toggleRole('volunteer')}
+              />
+            )}
+            {step === 3 && (
+              <StepAccessibility
+                isAda={hasRole('ada')}
+                onToggleAda={() => toggleRole('ada')}
+              />
+            )}
+            {step === 4 && (
+              <StepDone roles={userRoles} hasPass={hasPass} onFinish={onComplete} />
+            )}
+          </div>
         </div>
 
         {/* Navigation */}
@@ -85,22 +97,22 @@ export function OnboardingModal({ onComplete }: OnboardingModalProps) {
             <button
               type="button"
               onClick={back}
-              className="text-sm text-stone-500 hover:text-stone-700 transition-colors"
+              className="text-sm text-stone-500 hover:text-stone-700 transition-all duration-200"
             >
               Back
             </button>
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-center">
               <button
                 type="button"
                 onClick={next}
-                className="text-sm text-stone-400 hover:text-stone-600 transition-colors"
+                className="text-sm text-stone-400 hover:text-stone-600 transition-all duration-200"
               >
                 Skip
               </button>
               <button
                 type="button"
                 onClick={next}
-                className="rounded-full bg-park-green px-5 py-2 text-sm font-medium text-white hover:bg-park-green/90 transition-colors"
+                className="rounded-xl bg-park-green px-6 py-2.5 text-sm font-medium text-white shadow-sm hover:shadow-md hover:bg-park-green/90 transition-all duration-200"
               >
                 Next
               </button>
@@ -119,18 +131,20 @@ export function OnboardingModal({ onComplete }: OnboardingModalProps) {
 function StepWelcome({ onStart }: { onStart: () => void }) {
   return (
     <div className="flex flex-col items-center text-center gap-4">
-      <div className="text-5xl">&#x1F17F;&#xFE0F;</div>
+      <div className="w-16 h-16 rounded-2xl bg-park-green/10 flex items-center justify-center">
+        <Sparkles className="w-8 h-8 text-park-green" />
+      </div>
       <h2 className="text-xl font-semibold text-stone-800">
         Help us find your best parking at Balboa Park
       </h2>
-      <p className="text-sm text-stone-500">
+      <p className="text-sm text-stone-500 leading-relaxed">
         Answer a few quick questions so we can show you the lots, rates, and
         tips that matter most.
       </p>
       <button
         type="button"
         onClick={onStart}
-        className="mt-2 rounded-full bg-park-green px-8 py-3 text-sm font-medium text-white hover:bg-park-green/90 transition-colors"
+        className="mt-2 rounded-xl bg-park-green px-8 py-3 text-sm font-medium text-white shadow-sm hover:shadow-md hover:bg-park-green/90 transition-all duration-200"
       >
         Get started
       </button>
@@ -151,9 +165,14 @@ function StepResidency({
 }) {
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-lg font-semibold text-stone-800">
-        Are you a San Diego resident?
-      </h2>
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-park-green/10 flex items-center justify-center shrink-0">
+          <Home className="w-5 h-5 text-park-green" />
+        </div>
+        <h2 className="text-lg font-semibold text-stone-800">
+          Are you a San Diego resident?
+        </h2>
+      </div>
       <p className="text-sm text-stone-500">
         Residents often qualify for free or discounted parking.
       </p>
@@ -197,9 +216,14 @@ function StepAffiliation({
 }) {
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-lg font-semibold text-stone-800">
-        Do you work or volunteer at Balboa Park?
-      </h2>
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-park-green/10 flex items-center justify-center shrink-0">
+          <Building2 className="w-5 h-5 text-park-green" />
+        </div>
+        <h2 className="text-lg font-semibold text-stone-800">
+          Do you work or volunteer at Balboa Park?
+        </h2>
+      </div>
       <p className="text-sm text-stone-500">
         Staff and volunteers have access to reserved lots with special rates.
       </p>
@@ -220,9 +244,14 @@ function StepAccessibility({
 }) {
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-lg font-semibold text-stone-800">
-        Do you have an ADA placard or plate?
-      </h2>
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-park-green/10 flex items-center justify-center shrink-0">
+          <Accessibility className="w-5 h-5 text-park-green" />
+        </div>
+        <h2 className="text-lg font-semibold text-stone-800">
+          Do you have an ADA placard or plate?
+        </h2>
+      </div>
       <p className="text-sm text-stone-500">
         We will highlight accessible parking spaces nearest your destination.
       </p>
@@ -253,7 +282,9 @@ function StepDone({
 }) {
   return (
     <div className="flex flex-col items-center text-center gap-4">
-      <div className="text-5xl">&#x2705;</div>
+      <div className="w-16 h-16 rounded-2xl bg-park-green/10 flex items-center justify-center">
+        <CheckCircle className="w-8 h-8 text-park-green" />
+      </div>
       <h2 className="text-xl font-semibold text-stone-800">You're all set!</h2>
       {roles.length > 0 ? (
         <div className="flex flex-wrap justify-center gap-2">
@@ -280,7 +311,7 @@ function StepDone({
       <button
         type="button"
         onClick={onFinish}
-        className="mt-2 rounded-full bg-park-green px-8 py-3 text-sm font-medium text-white hover:bg-park-green/90 transition-colors"
+        className="mt-2 rounded-xl bg-park-green px-8 py-3 text-sm font-medium text-white shadow-sm hover:shadow-md hover:bg-park-green/90 transition-all duration-200"
       >
         Start exploring
       </button>
@@ -305,9 +336,9 @@ function ToggleButton({
     <button
       type="button"
       onClick={onClick}
-      className={`flex-1 rounded-xl border py-3 text-sm font-medium transition-colors ${
+      className={`flex-1 rounded-xl border py-3 text-sm font-medium transition-all duration-200 ${
         active
-          ? 'bg-park-green text-white border-park-green'
+          ? 'bg-park-green text-white border-park-green shadow-sm'
           : 'bg-white text-stone-600 border-stone-300 hover:border-park-green hover:text-park-green'
       }`}
     >
@@ -329,7 +360,7 @@ function ToggleRow({
     <button
       type="button"
       onClick={onToggle}
-      className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-medium transition-colors ${
+      className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-medium transition-all duration-200 ${
         active
           ? 'bg-park-green/10 text-park-green border-park-green'
           : 'bg-white text-stone-600 border-stone-300 hover:border-park-green'
@@ -337,12 +368,12 @@ function ToggleRow({
     >
       <span>{label}</span>
       <span
-        className={`inline-block w-10 h-6 rounded-full relative transition-colors ${
+        className={`inline-block w-10 h-6 rounded-full relative transition-all duration-200 ${
           active ? 'bg-park-green' : 'bg-stone-300'
         }`}
       >
         <span
-          className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-transform ${
+          className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-200 ${
             active ? 'translate-x-5' : 'translate-x-1'
           }`}
         />

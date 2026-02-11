@@ -1,10 +1,12 @@
 'use client'
 
+import type { ReactNode } from 'react'
+
 interface ChipProps {
   label: string
   selected: boolean
   onClick: () => void
-  icon?: string
+  icon?: ReactNode
 }
 
 export function Chip({ label, selected, onClick, icon }: ChipProps) {
@@ -13,16 +15,16 @@ export function Chip({ label, selected, onClick, icon }: ChipProps) {
       type="button"
       onClick={onClick}
       className={`
-        inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium
-        transition-colors cursor-pointer
+        inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium
+        transition-all duration-200 cursor-pointer
         ${
           selected
-            ? 'bg-park-green text-white border-park-green'
-            : 'bg-white text-stone-700 border-stone-300 hover:border-park-green hover:text-park-green'
+            ? 'bg-park-green text-white border-park-green shadow-sm'
+            : 'bg-white text-stone-600 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
         }
       `}
     >
-      {icon && <span className="text-base">{icon}</span>}
+      {icon && <span className="flex items-center justify-center [&>svg]:w-4 [&>svg]:h-4">{icon}</span>}
       {label}
     </button>
   )

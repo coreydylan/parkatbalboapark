@@ -26,7 +26,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="w-[380px] h-full overflow-y-auto border-r border-stone-200 bg-white shrink-0 z-10">
+    <aside className="w-[380px] h-full overflow-y-auto border-r border-stone-100 bg-gradient-to-b from-white to-stone-50 shrink-0 z-10 scrollbar-thin scrollbar-thumb-stone-200 scrollbar-track-transparent">
       {content}
     </aside>
   )

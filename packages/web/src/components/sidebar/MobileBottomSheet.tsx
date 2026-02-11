@@ -6,12 +6,11 @@ interface MobileBottomSheetProps {
   children: ReactNode
 }
 
-const SNAP_PEEK = 120
-const SNAP_HALF = typeof window !== 'undefined' ? window.innerHeight * 0.5 : 400
+const SNAP_PEEK = 140
 const SNAP_FULL_OFFSET = 56
 
 function getSnapPoints() {
-  if (typeof window === 'undefined') return [120, 400, 744]
+  if (typeof window === 'undefined') return [140, 400, 744]
   const vh = window.innerHeight
   return [SNAP_PEEK, vh * 0.5, vh - SNAP_FULL_OFFSET]
 }
@@ -91,16 +90,23 @@ export function MobileBottomSheet({ children }: MobileBottomSheetProps) {
 
   return (
     <>
-      {isExpanded && (
-        <div
-          className="fixed inset-0 bg-black/20 z-20 transition-opacity"
-          onClick={() => setSheetHeight(SNAP_PEEK)}
-        />
-      )}
-
+      {/* Backdrop */}
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl z-30
-          ${isDragging ? '' : 'transition-[height] duration-300 ease-out'}`}
+        className={`fixed inset-0 z-20 transition-all duration-300 ${
+          isExpanded
+            ? 'bg-black/20 pointer-events-auto'
+            : 'bg-transparent pointer-events-none'
+        }`}
+        onClick={() => setSheetHeight(SNAP_PEEK)}
+      />
+
+      {/* Sheet */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl z-30
+          border-t border-stone-100
+          ${isDragging ? '' : 'transition-[height] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]'}
+          ${isExpanded ? 'shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]' : 'shadow-2xl'}
+        `}
         style={{ height: sheetHeight }}
       >
         {/* Drag handle */}
@@ -111,13 +117,13 @@ export function MobileBottomSheet({ children }: MobileBottomSheetProps) {
           onTouchEnd={onTouchEnd}
           onMouseDown={onMouseDown}
         >
-          <div className="w-10 h-1 rounded-full bg-stone-300" />
+          <div className="w-12 h-1.5 rounded-full bg-stone-300" />
         </div>
 
         {/* Content */}
         <div
           className="overflow-y-auto"
-          style={{ height: sheetHeight - 32 }}
+          style={{ height: sheetHeight - 36 }}
         >
           {children}
         </div>

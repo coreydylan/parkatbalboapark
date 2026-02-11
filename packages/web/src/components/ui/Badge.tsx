@@ -1,26 +1,30 @@
+import { CheckCircle } from 'lucide-react'
+
 interface BadgeProps {
   cost: number
   label: string
 }
 
 export function Badge({ cost, label }: BadgeProps) {
-  let bgClass: string
-  let textClass: string
-
   if (cost <= 0) {
-    bgClass = 'bg-green-100'
-    textClass = 'text-green-800'
-  } else if (cost <= 800) {
-    bgClass = 'bg-yellow-100'
-    textClass = 'text-yellow-800'
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold text-park-green bg-park-green/10">
+        <CheckCircle className="w-3 h-3" />
+        {label}
+      </span>
+    )
+  }
+
+  let colorClasses: string
+  if (cost <= 800) {
+    colorClasses = 'bg-amber-50 text-amber-700'
   } else {
-    bgClass = 'bg-red-100'
-    textClass = 'text-red-800'
+    colorClasses = 'bg-rose-50 text-rose-700'
   }
 
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${bgClass} ${textClass}`}
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${colorClasses}`}
     >
       {label}
     </span>

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Park at Balboa Park — Free & Paid Parking Guide',
   description:
     'Find the best parking spot at Balboa Park, San Diego. Free and paid parking recommendations based on where you are going and who you are.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export const viewport: Viewport = {
