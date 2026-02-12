@@ -63,22 +63,23 @@ struct ContentView: View {
                 }
             }
             .onChange(of: state.expandedPreviewSlug) {
-                if state.expandedPreviewSlug != nil && state.selectedDetailLot == nil {
+                if state.expandedPreviewSlug != nil && state.morph.fullscreenLotSlug == nil {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
                         sheetDetent = .fraction(0.55)
                     }
-                } else if state.expandedPreviewSlug == nil && state.selectedDetailLot == nil {
+                } else if state.expandedPreviewSlug == nil && state.morph.fullscreenLotSlug == nil {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         sheetDetent = .fraction(0.4)
                     }
                 }
             }
-            .onChange(of: state.selectedDetailLot) {
-                if state.selectedDetailLot != nil {
+            .onChange(of: state.morph.fullscreenLotSlug) {
+                if state.morph.fullscreenLotSlug != nil {
                     withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
                         sheetDetent = .large
                     }
                 } else {
+                    // Back to list state
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         sheetDetent = .fraction(0.4)
                     }

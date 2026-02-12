@@ -5,7 +5,8 @@ struct RecommendationSheet: View {
     @Environment(AppState.self) private var state
 
     var body: some View {
-        NavigationStack {
+        ZStack {
+            // Layer 1: Scrollable list of cards
             VStack(spacing: 0) {
                 if state.profile.effectiveUserType == nil {
                     emptyState
@@ -17,13 +18,17 @@ struct RecommendationSheet: View {
                     recommendationList
                 }
             }
-            .navigationDestination(item: Binding(
-                get: { state.selectedDetailLot },
-                set: { newValue in
-                    if newValue == nil { state.closeDetail() }
-                }
-            )) { recommendation in
-                LotDetailView(recommendation: recommendation)
+
+            // Layer 2: Fullscreen overlay (hero morph)
+            if state.morph.fullscreenLotSlug != nil {
+                FullscreenLotOverlay()
+                    .transition(.identity)
+            }
+        }
+        .coordinateSpace(.named("sheet"))
+        .onPreferenceChange(CardFramePreferenceKey.self) { frames in
+            if let slug = state.expandedPreviewSlug, let frame = frames[slug] {
+                state.morph.expandedCardFrame = frame
             }
         }
     }
@@ -242,10 +247,16 @@ private struct LotCardRow: View {
     let option: ParkingOption
     var elevationProfile: WalkingDirectionsService.ElevationProfile? = nil
 
-    @State private var lookAroundScene: MKLookAroundScene?
-
     private var isExpanded: Bool {
         state.expandedPreviewSlug == recommendation.lotSlug
+    }
+
+    private var isOverlayActive: Bool {
+        state.morph.fullscreenLotSlug == recommendation.lotSlug
+    }
+
+    private var scene: MKLookAroundScene? {
+        state.morph.sceneCache[recommendation.lotSlug]
     }
 
     private var lot: ParkingLot? {
@@ -281,16 +292,51 @@ private struct LotCardRow: View {
         .id(option.id)
         .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
         .onTapGesture { handleTap() }
+        // Report expanded card frame to sheet coordinate space
+        .background {
+            if isExpanded {
+                GeometryReader { geo in
+                    Color.clear
+                        .preference(
+                            key: CardFramePreferenceKey.self,
+                            value: [recommendation.lotSlug: geo.frame(in: .named("sheet"))]
+                        )
+                }
+            }
+        }
+        // Hide card when overlay is active
+        .opacity(isOverlayActive ? 0 : 1)
+        // Horizontal swipe gesture when expanded
+        .simultaneousGesture(isExpanded ? expandedSwipeGesture : nil)
         .sensoryFeedback(.impact(flexibility: .soft, intensity: 0.6), trigger: isExpanded)
         .task(id: isExpanded) {
-            if isExpanded && lookAroundScene == nil {
-                lookAroundScene = await LookAroundService.fetchScene(
+            if isExpanded && scene == nil {
+                let fetchedScene = await LookAroundService.fetchScene(
                     lat: recommendation.lat, lng: recommendation.lng
                 )
+                if let fetchedScene {
+                    state.morph.sceneCache[recommendation.lotSlug] = fetchedScene
+                }
             }
         }
         .accessibilityElement(children: .combine)
         .accessibilityHint(isExpanded ? "Double tap for full details" : "Double tap to preview")
+    }
+
+    // MARK: - Expanded Swipe Gesture
+
+    private var expandedSwipeGesture: some Gesture {
+        DragGesture(minimumDistance: 30)
+            .onEnded { value in
+                let horizontal = value.translation.width
+                let vertical = value.translation.height
+                // Only trigger if horizontal movement dominates
+                guard abs(horizontal) > abs(vertical) * 1.5 else { return }
+                guard abs(horizontal) > 80 || abs(value.velocity.width) > 500 else { return }
+
+                let direction: SwipeDirection = horizontal < 0 ? .left : .right
+                state.expandedSwipe(direction: direction)
+            }
     }
 
     // MARK: - Background Layer
@@ -300,8 +346,9 @@ private struct LotCardRow: View {
         if isExpanded {
             // Full-bleed Look Around or tier gradient
             ZStack {
-                if let scene = lookAroundScene {
+                if let scene {
                     LookAroundPreview(initialScene: scene)
+                        .allowsHitTesting(false)
                         .transition(.opacity.animation(.easeIn(duration: 0.4)))
                 } else {
                     expandedFallback
@@ -318,6 +365,11 @@ private struct LotCardRow: View {
                     endPoint: .bottom
                 )
                 .allowsHitTesting(false)
+
+                // Invisible tap catcher — LookAroundPreview is a UIKit view
+                // whose gesture recognizers ignore .allowsHitTesting(false).
+                // This overlay sits on top and forwards taps to .onTapGesture.
+                Color.white.opacity(0.001)
             }
             .frame(height: 300)
             .transition(.opacity)

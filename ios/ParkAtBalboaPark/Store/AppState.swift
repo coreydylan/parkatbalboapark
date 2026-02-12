@@ -1,4 +1,6 @@
 import Foundation
+@preconcurrency import MapKit
+import SwiftUI
 
 @MainActor @Observable
 class AppState {
@@ -6,10 +8,10 @@ class AppState {
     let parking = ParkingStore()
     let map = MapState()
     let locationService = LocationService()
+    let morph = CardMorphState()
 
     var showOnboarding: Bool = false
     var expandedPreviewSlug: String? = nil
-    var selectedDetailLot: ParkingRecommendation? = nil
 
     init() {
         showOnboarding = !profile.onboardingComplete
@@ -54,7 +56,7 @@ class AppState {
         }
     }
 
-    /// Step 1→2: Expand a card in-place to show Look Around preview + key data.
+    /// Step 1→2: Expand a card in-place to show preview + key data.
     func expandPreview(for recommendation: ParkingRecommendation) {
         // Tapping the same expanded card → collapse
         if expandedPreviewSlug == recommendation.lotSlug {
@@ -78,10 +80,11 @@ class AppState {
         }
     }
 
-    /// Step 2→3: Open the full detail view (NavigationStack push).
+    /// Step 2→3: Open the fullscreen overlay morph.
     func openDetail(for recommendation: ParkingRecommendation) {
         selectOption(.lot(recommendation))
-        selectedDetailLot = recommendation
+        expandedPreviewSlug = recommendation.lotSlug
+        morph.fullscreenLotSlug = recommendation.lotSlug
         // Start flyover if not already running
         if expandedPreviewSlug != recommendation.lotSlug {
             map.startFlyover(
@@ -92,13 +95,42 @@ class AppState {
         Task { await parking.fetchPricingData() }
     }
 
-    /// Close the full detail view (back from NavigationStack).
+    /// Close the fullscreen overlay — collapses all the way back to search/list state.
     func closeDetail() {
-        selectedDetailLot = nil
+        morph.fullscreenLotSlug = nil
+        morph.dismissProgress = 0
         expandedPreviewSlug = nil
         map.stopFlyover()
         if let lot = parking.selectedLot {
             map.focusOn(lot.coordinate)
         }
     }
+
+    /// Swipe between expanded cards in the recommendation list.
+    func expandedSwipe(direction: SwipeDirection) {
+        guard let currentSlug = expandedPreviewSlug else { return }
+        let options = parking.displayedOptions
+        guard let currentIndex = options.firstIndex(where: { $0.id == currentSlug }) else { return }
+
+        let targetIndex: Int
+        switch direction {
+        case .left:
+            targetIndex = currentIndex + 1
+        case .right:
+            targetIndex = currentIndex - 1
+        }
+
+        guard targetIndex >= 0, targetIndex < options.count else { return }
+        let targetOption = options[targetIndex]
+
+        if case .lot(let rec) = targetOption {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.88)) {
+                expandPreview(for: rec)
+            }
+        }
+    }
+}
+
+enum SwipeDirection {
+    case left, right
 }
