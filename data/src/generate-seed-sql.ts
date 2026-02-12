@@ -40,25 +40,25 @@ interface Destination {
   geocoded?: { lat: number; lng: number };
 }
 
+interface PricingRule {
+  tier: number;
+  userType: string;
+  durationType: string;
+  rateCents: number;
+  maxDailyCents: number;
+  notes?: string;
+}
+
 interface PricingRules {
   effectiveDate: string;
-  rules: {
-    tier: number;
-    userType: string;
-    durationType: string;
-    rateCents: number;
-    maxDailyCents: number;
-  }[];
+  enforcementHours?: { start: string; end: string };
+  rules: PricingRule[];
   postMarch2: {
     effectiveDate: string;
     changes: string;
-    adaRules: {
-      tier: number;
-      userType: string;
-      durationType: string;
-      rateCents: number;
-      maxDailyCents: number;
-    }[];
+    enforcementHours?: { start: string; end: string };
+    adaRules?: PricingRule[];
+    residentPricingChanges?: PricingRule[];
   };
 }
 
@@ -203,20 +203,47 @@ function main() {
   // --- Pricing Rules ---
   lines.push("-- Pricing Rules");
   lines.push("-- =============================================================");
+
+  // Check which rules get replaced by postMarch2 changes (need end_date)
+  const postMarch2ResidentTiers = new Set<number>();
+  for (const r of pricing.postMarch2.residentPricingChanges ?? []) {
+    if (r.userType === 'resident') postMarch2ResidentTiers.add(r.tier);
+  }
+
   for (const rule of pricing.rules) {
-    lines.push(`INSERT INTO pricing_rules (tier, user_type, duration_type, rate_cents, max_daily_cents, effective_date)`);
-    lines.push(`VALUES (${rule.tier}, '${esc(rule.userType)}', '${esc(rule.durationType)}', ${rule.rateCents}, ${rule.maxDailyCents}, '${pricing.effectiveDate}')`);
+    // Resident rules at tiers that change on March 2 get an end_date
+    const needsEndDate =
+      rule.userType === 'resident' &&
+      rule.rateCents > 0 &&
+      postMarch2ResidentTiers.has(rule.tier);
+    const endDate = needsEndDate ? `'2026-03-01'` : 'NULL';
+
+    lines.push(`INSERT INTO pricing_rules (tier, user_type, duration_type, rate_cents, max_daily_cents, effective_date, end_date)`);
+    lines.push(`VALUES (${rule.tier}, '${esc(rule.userType)}', '${esc(rule.durationType)}', ${rule.rateCents}, ${rule.maxDailyCents}, '${pricing.effectiveDate}', ${endDate})`);
     lines.push(`ON CONFLICT DO NOTHING;`);
     lines.push("");
   }
 
   // Post-March 2 ADA rules
-  lines.push("-- Post-March 2 ADA pricing updates");
-  for (const rule of pricing.postMarch2.adaRules) {
-    lines.push(`INSERT INTO pricing_rules (tier, user_type, duration_type, rate_cents, max_daily_cents, effective_date)`);
-    lines.push(`VALUES (${rule.tier}, '${esc(rule.userType)}', '${esc(rule.durationType)}', ${rule.rateCents}, ${rule.maxDailyCents}, '${pricing.postMarch2.effectiveDate}')`);
-    lines.push(`ON CONFLICT DO NOTHING;`);
-    lines.push("");
+  if (pricing.postMarch2.adaRules) {
+    lines.push("-- Post-March 2 ADA pricing updates");
+    for (const rule of pricing.postMarch2.adaRules) {
+      lines.push(`INSERT INTO pricing_rules (tier, user_type, duration_type, rate_cents, max_daily_cents, effective_date)`);
+      lines.push(`VALUES (${rule.tier}, '${esc(rule.userType)}', '${esc(rule.durationType)}', ${rule.rateCents}, ${rule.maxDailyCents}, '${pricing.postMarch2.effectiveDate}')`);
+      lines.push(`ON CONFLICT DO NOTHING;`);
+      lines.push("");
+    }
+  }
+
+  // Post-March 2 resident pricing changes
+  if (pricing.postMarch2.residentPricingChanges) {
+    lines.push("-- Post-March 2 resident pricing changes (free for verified residents)");
+    for (const rule of pricing.postMarch2.residentPricingChanges) {
+      lines.push(`INSERT INTO pricing_rules (tier, user_type, duration_type, rate_cents, max_daily_cents, effective_date)`);
+      lines.push(`VALUES (${rule.tier}, '${esc(rule.userType)}', '${esc(rule.durationType)}', ${rule.rateCents}, ${rule.maxDailyCents}, '${pricing.postMarch2.effectiveDate}')`);
+      lines.push(`ON CONFLICT DO NOTHING;`);
+      lines.push("");
+    }
   }
 
   // --- Holidays ---
@@ -232,10 +259,28 @@ function main() {
   // --- Enforcement Periods ---
   lines.push("-- Enforcement Periods");
   lines.push("-- =============================================================");
-  lines.push(`INSERT INTO enforcement_periods (start_time, end_time, days_of_week, effective_date, end_date)`);
-  lines.push(`VALUES ('08:00', '18:00', ARRAY[0,1,2,3,4,5,6], '2026-01-05', NULL)`);
-  lines.push(`ON CONFLICT DO NOTHING;`);
-  lines.push("");
+  const enfStart = pricing.enforcementHours?.start ?? '08:00';
+  const enfEnd = pricing.enforcementHours?.end ?? '20:00';
+  const hasPostMarch2Enf = pricing.postMarch2?.enforcementHours;
+
+  if (hasPostMarch2Enf) {
+    // Current period ends day before March 2
+    const endDate = '2026-03-01';
+    lines.push(`INSERT INTO enforcement_periods (start_time, end_time, days_of_week, effective_date, end_date)`);
+    lines.push(`VALUES ('${enfStart}', '${enfEnd}', ARRAY[0,1,2,3,4,5,6], '${pricing.effectiveDate}', '${endDate}')`);
+    lines.push(`ON CONFLICT DO NOTHING;`);
+    lines.push("");
+    // New period starting March 2
+    lines.push(`INSERT INTO enforcement_periods (start_time, end_time, days_of_week, effective_date, end_date)`);
+    lines.push(`VALUES ('${hasPostMarch2Enf.start}', '${hasPostMarch2Enf.end}', ARRAY[0,1,2,3,4,5,6], '${pricing.postMarch2.effectiveDate}', NULL)`);
+    lines.push(`ON CONFLICT DO NOTHING;`);
+    lines.push("");
+  } else {
+    lines.push(`INSERT INTO enforcement_periods (start_time, end_time, days_of_week, effective_date, end_date)`);
+    lines.push(`VALUES ('${enfStart}', '${enfEnd}', ARRAY[0,1,2,3,4,5,6], '${pricing.effectiveDate}', NULL)`);
+    lines.push(`ON CONFLICT DO NOTHING;`);
+    lines.push("");
+  }
 
   // --- Tram Stops ---
   lines.push("-- Tram Stops");

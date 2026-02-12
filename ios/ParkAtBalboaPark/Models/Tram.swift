@@ -26,6 +26,16 @@ struct TramSchedule: Codable, Hashable, Sendable {
 
 struct TramData: Codable, Sendable {
     let stops: [TramStop]
+    let route: [[Double]]
     let schedule: TramSchedule
     let notes: String
+
+    /// Route coordinates as CLLocationCoordinate2D array for MapPolyline.
+    var routeCoordinates: [CLLocationCoordinate2D] {
+        route.compactMap { pair in
+            guard pair.count == 2 else { return nil }
+            // JSON is [lng, lat] (GeoJSON order)
+            return CLLocationCoordinate2D(latitude: pair[1], longitude: pair[0])
+        }
+    }
 }

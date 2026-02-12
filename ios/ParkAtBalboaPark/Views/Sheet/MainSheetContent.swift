@@ -32,7 +32,7 @@ struct MainSheetContent: View {
                 Spacer()
                 collapsedPill
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 14)
             } else {
                 // Expanded: custom drag handle + search bar + content
                 Capsule()
@@ -125,33 +125,37 @@ struct MainSheetContent: View {
     }
 
     private var pillContent: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "magnifyingglass")
-                .foregroundStyle(.secondary)
-                .font(isCollapsed ? .body : .subheadline)
-
-            if isSearching {
-                TextField("Search destinations", text: $searchText)
-                    .font(.subheadline)
-                    .focused($searchFocused)
-                    .submitLabel(.search)
-            } else if let dest = state.parking.selectedDestination {
-                Text(dest.displayName)
-                    .foregroundStyle(.primary)
-                    .font(isCollapsed ? .subheadline.weight(.medium) : .subheadline)
-                    .lineLimit(1)
-            } else if isCollapsed {
-                Text(state.profile.effectiveUserType?.label ?? "Start Here")
+        HStack(spacing: 10) {
+            // Search icon + text
+            HStack(spacing: 6) {
+                Image(systemName: "magnifyingglass")
                     .foregroundStyle(.secondary)
-                    .font(.subheadline.weight(.medium))
-            } else {
-                Text("Where are you headed?")
-                    .foregroundStyle(.tertiary)
-                    .font(.subheadline)
+                    .font(isCollapsed ? .subheadline : .subheadline)
+
+                if isSearching {
+                    TextField("Search destinations", text: $searchText)
+                        .font(.subheadline)
+                        .focused($searchFocused)
+                        .submitLabel(.search)
+                } else if let dest = state.parking.selectedDestination {
+                    Text(dest.displayName)
+                        .foregroundStyle(.primary)
+                        .font(.subheadline.weight(.medium))
+                        .lineLimit(1)
+                } else if isCollapsed && !hasProfile {
+                    Text("Start Here")
+                        .foregroundStyle(.secondary)
+                        .font(.subheadline.weight(.medium))
+                } else {
+                    Text("Where are you headed?")
+                        .foregroundStyle(isCollapsed ? .secondary : .tertiary)
+                        .font(.subheadline)
+                }
             }
 
-            Spacer()
+            Spacer(minLength: 4)
 
+            // Trailing controls
             if isCollapsed {
                 if state.parking.selectedDestination != nil {
                     Button { clearDestination() } label: {
@@ -160,7 +164,7 @@ struct MainSheetContent: View {
                             .font(.subheadline)
                     }
                 } else {
-                    profileButton
+                    profileChip
                 }
             } else if isSearching && !searchText.isEmpty {
                 Button { searchText = "" } label: {
@@ -175,13 +179,14 @@ struct MainSheetContent: View {
                 }
             }
         }
-        .padding(.horizontal, isCollapsed ? 14 : 12)
-        .padding(.vertical, isCollapsed ? 8 : 9)
+        .frame(minHeight: isCollapsed ? 28 : 24)
+        .padding(.horizontal, isCollapsed ? 12 : 12)
+        .padding(.vertical, isCollapsed ? 6 : 9)
         .background {
             if isCollapsed {
                 Capsule()
                     .fill(.ultraThinMaterial)
-                    .shadow(color: .black.opacity(0.1), radius: 8, y: 2)
+                    .shadow(color: .black.opacity(0.12), radius: 10, y: 3)
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.quaternary.opacity(0.8))
@@ -198,11 +203,11 @@ struct MainSheetContent: View {
         )
     }
 
-    // MARK: - Profile Button / Menu
+    // MARK: - Profile Chip
 
     @ViewBuilder
-    private var profileButton: some View {
-        if hasProfile {
+    private var profileChip: some View {
+        if hasProfile, let userType = state.profile.effectiveUserType {
             Menu {
                 // Role switcher
                 if state.profile.userRoles.count > 1 {
@@ -232,9 +237,16 @@ struct MainSheetContent: View {
                     Label("Settings", systemImage: "gearshape")
                 }
             } label: {
-                Image(systemName: "person.circle.fill")
-                    .font(.title3)
-                    .foregroundStyle(Color.accentColor)
+                HStack(spacing: 4) {
+                    Image(systemName: userType.icon)
+                        .font(.caption2)
+                    Text(userType.label)
+                        .font(.caption.weight(.medium))
+                }
+                .foregroundStyle(.primary)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(.quaternary, in: Capsule())
             }
         } else {
             Button {

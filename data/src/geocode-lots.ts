@@ -42,19 +42,26 @@ interface GeocodedLot extends Lot {
 // Manual coordinate overrides for lots that don't geocode well
 // Parking lots are often not well-represented in geocoding services
 const MANUAL_OVERRIDES: Record<string, { lat: number; lng: number }> = {
+  // Level 1 lots
+  "space-theater": { lat: 32.7312, lng: -117.146 },
+  "casa-de-balboa": { lat: 32.7308, lng: -117.1475 },
+  "alcazar-parking-structure": { lat: 32.7306, lng: -117.1519 },
+  "organ-pavilion": { lat: 32.7284, lng: -117.1512 },
+  "palisades": { lat: 32.7282, lng: -117.1495 },
+  "bea-evenson": { lat: 32.7325, lng: -117.1467 },
+  "south-carousel": { lat: 32.7335, lng: -117.1465 },
+  // Level 2 lots
+  "pepper-grove": { lat: 32.73, lng: -117.146 },
+  "federal-building": { lat: 32.7261, lng: -117.1518 },
+  "marston-point": { lat: 32.7275, lng: -117.1575 },
   "inspiration-point-upper": { lat: 32.728, lng: -117.152 },
+  // Level 3 lot
   "inspiration-point-lower": { lat: 32.7275, lng: -117.1515 },
-  "alcazar-parking-structure": { lat: 32.732, lng: -117.148 },
-  "organ-pavilion": { lat: 32.731, lng: -117.15 },
-  "pan-american-plaza": { lat: 32.73, lng: -117.149 },
-  "federal-building": { lat: 32.7315, lng: -117.1465 },
+  // Free lots (tier 0)
   "morley-field": { lat: 32.7395, lng: -117.141 },
   "gold-gulch": { lat: 32.734, lng: -117.1435 },
   "centro-cultural": { lat: 32.733, lng: -117.15 },
   "presidents-way": { lat: 32.7325, lng: -117.1455 },
-  "war-memorial": { lat: 32.735, lng: -117.147 },
-  "balboa-park-activity-center": { lat: 32.7365, lng: -117.1445 },
-  "municipal-gym": { lat: 32.737, lng: -117.143 },
 };
 
 async function geocodeAddress(

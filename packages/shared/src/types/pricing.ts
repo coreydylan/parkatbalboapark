@@ -2,7 +2,7 @@ import type { LotTier } from './lots';
 
 export type UserType = 'resident' | 'nonresident' | 'staff' | 'volunteer' | 'ada';
 
-export type DurationType = 'hourly' | 'daily' | 'event';
+export type DurationType = 'hourly' | 'daily' | 'event' | 'block';
 
 export interface PricingRule {
   id: string;

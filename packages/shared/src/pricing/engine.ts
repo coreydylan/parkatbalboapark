@@ -173,10 +173,25 @@ export function computeLotCost(
     return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
   }
 
+  // ADA: free everywhere (official policy since launch)
+  if (userType === 'ada') {
+    tips.push('ADA parking is free at all lots');
+    return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
+  }
+
   // Staff and volunteers park free in tier 0, 2, 3
   if ((userType === 'staff' || userType === 'volunteer') && tier !== 1) {
     tips.push('Staff and volunteers park free in Free, Standard, and Economy lots');
     return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
+  }
+
+  // Residents at tier 2/3: free when no active paid rule exists
+  if (userType === 'resident' && (tier === 2 || tier === 3)) {
+    const rule = findPricingRule(tier, 'resident', rules, queryDate);
+    if (!rule || rule.rateCents === 0) {
+      tips.push('Free for verified residents');
+      return { costCents: 0, costDisplay: 'FREE', isFree: true, tips };
+    }
   }
 
   // Check lot-specific special rules (e.g. first N hours free)
@@ -221,6 +236,17 @@ function computeCostFromRule(
   let costCents: number;
 
   switch (rule.durationType) {
+    case 'block': {
+      // Flat rate for up to 4 hours, max_daily for longer visits
+      if (visitHours <= 4) {
+        costCents = rule.rateCents;
+        tips.push(`${formatCost(rule.rateCents)} for up to 4 hours`);
+      } else {
+        costCents = rule.maxDailyCents ?? rule.rateCents;
+        tips.push(`${formatCost(costCents)} full day`);
+      }
+      break;
+    }
     case 'hourly': {
       const hours = Math.ceil(visitHours);
       costCents = rule.rateCents * hours;

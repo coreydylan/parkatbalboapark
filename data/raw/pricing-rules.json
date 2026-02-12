@@ -1,26 +1,30 @@
 {
   "effectiveDate": "2026-01-05",
+  "enforcementHours": { "start": "08:00", "end": "20:00" },
   "rules": [
     {
       "tier": 1,
       "userType": "resident",
-      "durationType": "hourly",
+      "durationType": "block",
       "rateCents": 500,
-      "maxDailyCents": 800
+      "maxDailyCents": 800,
+      "notes": "$5 for up to 4 hours; $8 full day"
     },
     {
       "tier": 1,
       "userType": "nonresident",
-      "durationType": "hourly",
+      "durationType": "block",
+      "rateCents": 1000,
+      "maxDailyCents": 1600,
+      "notes": "$10 for up to 4 hours; $16 full day"
+    },
+    {
+      "tier": 2,
+      "userType": "resident",
+      "durationType": "daily",
       "rateCents": 500,
-      "maxDailyCents": 1600
-    },
-    {
-      "tier": 2,
-      "userType": "resident",
-      "durationType": "daily",
-      "rateCents": 0,
-      "maxDailyCents": 0
+      "maxDailyCents": 500,
+      "notes": "$5/day until March 1; free starting March 2"
     },
     {
       "tier": 2,
@@ -33,15 +37,17 @@
       "tier": 3,
       "userType": "resident",
       "durationType": "daily",
-      "rateCents": 0,
-      "maxDailyCents": 0
+      "rateCents": 500,
+      "maxDailyCents": 500,
+      "notes": "$5/day (after 3hr free period) until March 1; free starting March 2"
     },
     {
       "tier": 3,
       "userType": "nonresident",
       "durationType": "daily",
       "rateCents": 1000,
-      "maxDailyCents": 1000
+      "maxDailyCents": 1000,
+      "notes": "$10/day after 3hr free period at Lower Inspiration Point"
     },
     {
       "tier": 0,
@@ -62,7 +68,8 @@
       "userType": "staff",
       "durationType": "daily",
       "rateCents": 500,
-      "maxDailyCents": 800
+      "maxDailyCents": 800,
+      "notes": "Staff pay at Level 1; free at Level 2/3"
     },
     {
       "tier": 2,
@@ -90,7 +97,8 @@
       "userType": "volunteer",
       "durationType": "daily",
       "rateCents": 500,
-      "maxDailyCents": 800
+      "maxDailyCents": 800,
+      "notes": "Volunteers pay at Level 1; free at Level 2/3"
     },
     {
       "tier": 2,
@@ -117,8 +125,9 @@
       "tier": 1,
       "userType": "ada",
       "durationType": "daily",
-      "rateCents": 500,
-      "maxDailyCents": 800
+      "rateCents": 0,
+      "maxDailyCents": 0,
+      "notes": "ADA is free at all tiers in designated and regular spaces"
     },
     {
       "tier": 2,
@@ -144,14 +153,24 @@
   ],
   "postMarch2": {
     "effectiveDate": "2026-03-02",
-    "changes": "ADA becomes free everywhere. 7 lots change from tier 2 to tier 0 (free for all).",
-    "adaRules": [
+    "changes": "Enforcement hours reduce from 8am-8pm to 8am-6pm. Tier 2/3 resident pricing drops to $0 (free for verified city residents). Palisades and Bea Evenson move from tier 1 to tier 2 (free for residents). Nonresidents still pay full rates at all paid lots.",
+    "enforcementHours": { "start": "08:00", "end": "18:00" },
+    "residentPricingChanges": [
       {
-        "tier": 1,
-        "userType": "ada",
+        "tier": 2,
+        "userType": "resident",
         "durationType": "daily",
         "rateCents": 0,
-        "maxDailyCents": 0
+        "maxDailyCents": 0,
+        "notes": "Free for verified city residents at all Level 2 lots"
+      },
+      {
+        "tier": 3,
+        "userType": "resident",
+        "durationType": "daily",
+        "rateCents": 0,
+        "maxDailyCents": 0,
+        "notes": "Free for verified city residents at Lower Inspiration Point"
       }
     ]
   }

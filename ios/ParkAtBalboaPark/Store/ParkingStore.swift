@@ -76,18 +76,6 @@ class ParkingStore {
         }
     }
 
-    // MARK: - Init
-
-    init() {
-        loadBundledData()
-    }
-
-    private func loadBundledData() {
-        lots = BundledDataService.loadLots()
-        destinations = BundledDataService.loadDestinations()
-        tramData = BundledDataService.loadTramData()
-    }
-
     // MARK: - Actions
 
     func selectDestination(_ dest: Destination?) {

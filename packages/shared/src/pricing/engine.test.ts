@@ -114,10 +114,10 @@ describe('computeLotCost', () => {
     expect(result.costCents).toBe(1000) // $5/hr * 2hr = $10, under $16 max
   })
 
-  it('charges ADA $5/day before March 2', () => {
+  it('ADA is free at all tiers', () => {
     const result = computeLotCost(baseLot, 1, 'ada', false, 2, rules, true, new Date('2026-02-15'))
-    expect(result.costCents).toBe(500)
-    expect(result.isFree).toBe(false)
+    expect(result.costCents).toBe(0)
+    expect(result.isFree).toBe(true)
   })
 
   it('ADA is free after March 2', () => {

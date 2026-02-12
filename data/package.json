@@ -7,11 +7,14 @@
     "geocode:destinations": "tsx src/geocode-destinations.ts",
     "compute:distances": "tsx src/compute-distances.ts",
     "generate:seed": "tsx src/generate-seed-sql.ts",
-    "pipeline": "pnpm geocode:lots && pnpm geocode:destinations && pnpm compute:distances && pnpm generate:seed"
+    "pipeline": "pnpm geocode:lots && pnpm geocode:destinations && pnpm compute:distances && pnpm generate:seed",
+    "sync:meters": "tsx src/sync-street-meters.ts"
   },
   "devDependencies": {
     "typescript": "^5.7.0",
     "tsx": "^4.0.0",
-    "dotenv": "^16.4.0"
+    "dotenv": "^16.4.0",
+    "csv-parse": "^5.6.0",
+    "@supabase/supabase-js": "^2.47.0"
   }
 }

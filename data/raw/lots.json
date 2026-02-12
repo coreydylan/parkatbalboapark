@@ -1,42 +1,34 @@
 [
   {
-    "slug": "inspiration-point-upper",
-    "name": "Inspiration Point (Upper)",
-    "displayName": "Inspiration Point Upper Lot",
-    "address": "2040 Pan American Rd, San Diego, CA 92101",
-    "lat": 32.72795,
-    "lng": -117.15273,
-    "capacity": 200,
+    "slug": "space-theater",
+    "name": "Space Theater",
+    "displayName": "Space Theater Lot",
+    "address": "1875 El Prado, San Diego, CA 92101",
+    "lat": 32.7312,
+    "lng": -117.1460,
+    "capacity": 150,
     "hasEvCharging": false,
     "hasAdaSpaces": true,
-    "hasTramStop": true,
-    "notes": "Large lot at east end of park. Free tram stop available for shuttle to central attractions.",
+    "hasTramStop": false,
+    "notes": "Behind Fleet Science Center, accessed from Park Blvd. Previously called North Pepper Grove lot. Walking access to Natural History Museum, Casa del Prado Theatre, Casa de Balboa.",
     "tierHistory": [
       { "tier": 1, "effectiveDate": "2026-01-05", "endDate": null }
     ]
   },
   {
-    "slug": "inspiration-point-lower",
-    "name": "Inspiration Point (Lower)",
-    "displayName": "Inspiration Point Lower Lot",
-    "address": "2050 Pan American Rd, San Diego, CA 92101",
-    "lat": 32.72567,
-    "lng": -117.15361,
+    "slug": "casa-de-balboa",
+    "name": "Casa de Balboa",
+    "displayName": "Casa de Balboa Lot",
+    "address": "1649 El Prado, San Diego, CA 92101",
+    "lat": 32.7308,
+    "lng": -117.1475,
     "capacity": 100,
     "hasEvCharging": false,
     "hasAdaSpaces": true,
     "hasTramStop": false,
-    "notes": "First 3 hours free for all visitors. Adjacent to upper lot tram stop.",
+    "notes": "Behind Casa de Balboa building, accessed from Park Blvd. Walking access to Museum of Photographic Arts, Model Railroad Museum, History Center.",
     "tierHistory": [
       { "tier": 1, "effectiveDate": "2026-01-05", "endDate": null }
-    ],
-    "specialRules": [
-      {
-        "description": "First 3 hours free for everyone",
-        "freeMinutes": 180,
-        "effectiveDate": "2026-01-05",
-        "endDate": null
-      }
     ]
   },
   {
@@ -49,8 +41,8 @@
     "capacity": 400,
     "hasEvCharging": true,
     "hasAdaSpaces": true,
-    "hasTramStop": false,
-    "notes": "Largest parking facility in Balboa Park. Multi-level structure near Alcazar Garden and The Prado. EV charging stations on level 2.",
+    "hasTramStop": true,
+    "notes": "Largest parking facility in Balboa Park. Multi-level structure near Alcazar Garden and The Prado. EV charging stations on level 2. Near House of Charm tram stop.",
     "tierHistory": [
       { "tier": 1, "effectiveDate": "2026-01-05", "endDate": null }
     ]
@@ -72,9 +64,9 @@
     ]
   },
   {
-    "slug": "pan-american-plaza",
-    "name": "Pan American Plaza",
-    "displayName": "Pan American Plaza Lot",
+    "slug": "palisades",
+    "name": "Palisades",
+    "displayName": "Palisades Lot",
     "address": "2175 Pan American Rd, San Diego, CA 92101",
     "lat": 32.72817,
     "lng": -117.14945,
@@ -82,9 +74,59 @@
     "hasEvCharging": false,
     "hasAdaSpaces": true,
     "hasTramStop": false,
-    "notes": "Near Starlight Bowl and Air & Space Museum. Good access to south end of the park.",
+    "notes": "Formerly Pan American Plaza lot. Near Comic-Con Museum, Air & Space Museum, and Municipal Gymnasium. Becomes free for verified city residents March 2, 2026.",
+    "tierHistory": [
+      { "tier": 1, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
+      { "tier": 2, "effectiveDate": "2026-03-02", "endDate": null }
+    ]
+  },
+  {
+    "slug": "bea-evenson",
+    "name": "Bea Evenson",
+    "displayName": "Bea Evenson Lot",
+    "address": "1788 El Prado, San Diego, CA 92101",
+    "lat": 32.7325,
+    "lng": -117.1467,
+    "capacity": 100,
+    "hasEvCharging": false,
+    "hasAdaSpaces": true,
+    "hasTramStop": false,
+    "notes": "On Village Place Rd, east of Natural History Museum. Walking access to Fleet Science Center, Spanish Village Art Center, Botanical Building. Becomes free for verified city residents March 2, 2026.",
+    "tierHistory": [
+      { "tier": 1, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
+      { "tier": 2, "effectiveDate": "2026-03-02", "endDate": null }
+    ]
+  },
+  {
+    "slug": "south-carousel",
+    "name": "South Carousel",
+    "displayName": "South Carousel Lot",
+    "address": "1889 Zoo Pl, San Diego, CA 92101",
+    "lat": 32.7335,
+    "lng": -117.1465,
+    "capacity": 80,
+    "hasEvCharging": false,
+    "hasAdaSpaces": true,
+    "hasTramStop": false,
+    "notes": "Near Balboa Park Carousel and Spanish Village Art Center.",
     "tierHistory": [
       { "tier": 1, "effectiveDate": "2026-01-05", "endDate": null }
+    ]
+  },
+  {
+    "slug": "pepper-grove",
+    "name": "Pepper Grove",
+    "displayName": "Pepper Grove Lot",
+    "address": "1549 El Prado, San Diego, CA 92101",
+    "lat": 32.7300,
+    "lng": -117.1460,
+    "capacity": 120,
+    "hasEvCharging": false,
+    "hasAdaSpaces": true,
+    "hasTramStop": false,
+    "notes": "Adjacent to Space Theater lot, behind Fleet Science Center. Near Pepper Grove Playground. Becomes free for verified city residents March 2, 2026.",
+    "tierHistory": [
+      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": null }
     ]
   },
   {
@@ -97,11 +139,66 @@
     "capacity": 80,
     "hasEvCharging": false,
     "hasAdaSpaces": true,
-    "hasTramStop": false,
-    "notes": "Smaller lot near Federal Building. Becomes free for all users March 2, 2026.",
+    "hasTramStop": true,
+    "notes": "Smaller lot near Federal Building. Free tram stop nearby. Becomes free for verified city residents March 2, 2026.",
     "tierHistory": [
-      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
-      { "tier": 0, "effectiveDate": "2026-03-02", "endDate": null }
+      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": null }
+    ]
+  },
+  {
+    "slug": "marston-point",
+    "name": "Marston Point",
+    "displayName": "Marston Point Lot",
+    "address": "2551 Balboa Dr, San Diego, CA 92101",
+    "lat": 32.7275,
+    "lng": -117.1575,
+    "capacity": 80,
+    "hasEvCharging": false,
+    "hasAdaSpaces": true,
+    "hasTramStop": false,
+    "notes": "Southwest mesa, off Balboa Dr near Bankers Hill. Becomes free for verified city residents March 2, 2026.",
+    "tierHistory": [
+      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": null }
+    ]
+  },
+  {
+    "slug": "inspiration-point-upper",
+    "name": "Inspiration Point (Upper)",
+    "displayName": "Inspiration Point Upper Lot",
+    "address": "2040 Pan American Rd, San Diego, CA 92101",
+    "lat": 32.72795,
+    "lng": -117.15273,
+    "capacity": 200,
+    "hasEvCharging": false,
+    "hasAdaSpaces": true,
+    "hasTramStop": true,
+    "notes": "Large lot at east end of park. Free tram stop available for shuttle to central attractions. Near Veterans Museum. Becomes free for verified city residents March 2, 2026.",
+    "tierHistory": [
+      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": null }
+    ]
+  },
+  {
+    "slug": "inspiration-point-lower",
+    "name": "Inspiration Point (Lower)",
+    "displayName": "Inspiration Point Lower Lot",
+    "address": "2050 Pan American Rd, San Diego, CA 92101",
+    "lat": 32.72567,
+    "lng": -117.15361,
+    "capacity": 100,
+    "hasEvCharging": false,
+    "hasAdaSpaces": true,
+    "hasTramStop": false,
+    "notes": "First 3 hours free for all visitors. Adjacent to upper lot tram stop. Becomes free for verified city residents March 2, 2026.",
+    "tierHistory": [
+      { "tier": 3, "effectiveDate": "2026-01-05", "endDate": null }
+    ],
+    "specialRules": [
+      {
+        "description": "First 3 hours free for everyone",
+        "freeMinutes": 180,
+        "effectiveDate": "2026-01-05",
+        "endDate": null
+      }
     ]
   },
   {
@@ -115,10 +212,9 @@
     "hasEvCharging": false,
     "hasAdaSpaces": true,
     "hasTramStop": false,
-    "notes": "Serves Morley Field recreation area including disc golf, tennis, and pool. Becomes free for all users March 2, 2026.",
+    "notes": "Free parking serving Morley Field Sports Complex (disc golf, tennis, pool, dog park). Located in northeast section of the park, outside the paid parking zone.",
     "tierHistory": [
-      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
-      { "tier": 0, "effectiveDate": "2026-03-02", "endDate": null }
+      { "tier": 0, "effectiveDate": "2026-01-05", "endDate": null }
     ]
   },
   {
@@ -128,14 +224,13 @@
     "address": "2500 Zoo Pl, San Diego, CA 92101",
     "lat": 32.73420,
     "lng": -117.14788,
-    "capacity": 60,
+    "capacity": 40,
     "hasEvCharging": false,
-    "hasAdaSpaces": true,
+    "hasAdaSpaces": false,
     "hasTramStop": false,
-    "notes": "Small lot east of central mesa. Becomes free for all users March 2, 2026.",
+    "notes": "Small informal lot in canyon between Organ Pavilion and Zoo. Named after the 1935 Exposition's Gold Gulch mining town. Used as overflow parking and tram staging area. Free and outside the paid parking zone.",
     "tierHistory": [
-      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
-      { "tier": 0, "effectiveDate": "2026-03-02", "endDate": null }
+      { "tier": 0, "effectiveDate": "2026-01-05", "endDate": null }
     ]
   },
   {
@@ -145,13 +240,13 @@
     "address": "2004 Park Blvd, San Diego, CA 92101",
     "lat": 32.72772,
     "lng": -117.14866,
-    "capacity": 50,
+    "capacity": 9,
     "hasEvCharging": false,
     "hasAdaSpaces": true,
     "hasTramStop": false,
-    "notes": "Small lot near Centro Cultural de la Raza. Tier 3 pricing: free for residents, daily rate for non-residents.",
+    "notes": "Tiny building-frontage parking area in front of Centro Cultural de la Raza. Free and outside the paid parking zone. Very limited spaces.",
     "tierHistory": [
-      { "tier": 3, "effectiveDate": "2026-01-05", "endDate": null }
+      { "tier": 0, "effectiveDate": "2026-01-05", "endDate": null }
     ]
   },
   {
@@ -161,65 +256,13 @@
     "address": "2400 Presidents Way, San Diego, CA 92101",
     "lat": 32.73245,
     "lng": -117.14673,
-    "capacity": 100,
+    "capacity": 30,
     "hasEvCharging": false,
     "hasAdaSpaces": true,
     "hasTramStop": false,
-    "notes": "Mid-size lot along Presidents Way. Becomes free for all users March 2, 2026.",
+    "notes": "Small parking area along Presidents Way near Park Blvd intersection. May partially overlap with metered street parking along the road. Free and outside the named paid lot system.",
     "tierHistory": [
-      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
-      { "tier": 0, "effectiveDate": "2026-03-02", "endDate": null }
-    ]
-  },
-  {
-    "slug": "war-memorial",
-    "name": "War Memorial",
-    "displayName": "War Memorial Lot",
-    "address": "2115 Park Blvd, San Diego, CA 92101",
-    "lat": 32.73499,
-    "lng": -117.14638,
-    "capacity": 60,
-    "hasEvCharging": false,
-    "hasAdaSpaces": true,
-    "hasTramStop": false,
-    "notes": "Near Park Blvd entrance. Becomes free for all users March 2, 2026.",
-    "tierHistory": [
-      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
-      { "tier": 0, "effectiveDate": "2026-03-02", "endDate": null }
-    ]
-  },
-  {
-    "slug": "balboa-park-activity-center",
-    "name": "Balboa Park Activity Center",
-    "displayName": "Activity Center Lot",
-    "address": "2145 Park Blvd, San Diego, CA 92101",
-    "lat": 32.73385,
-    "lng": -117.14661,
-    "capacity": 80,
-    "hasEvCharging": false,
-    "hasAdaSpaces": true,
-    "hasTramStop": false,
-    "notes": "Serves the Balboa Park Activity Center and nearby recreation areas. Becomes free for all users March 2, 2026.",
-    "tierHistory": [
-      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
-      { "tier": 0, "effectiveDate": "2026-03-02", "endDate": null }
-    ]
-  },
-  {
-    "slug": "municipal-gym",
-    "name": "Municipal Gym",
-    "displayName": "Municipal Gym Lot",
-    "address": "2111 Pan American Plaza, San Diego, CA 92101",
-    "lat": 32.73013,
-    "lng": -117.14695,
-    "capacity": 70,
-    "hasEvCharging": false,
-    "hasAdaSpaces": true,
-    "hasTramStop": false,
-    "notes": "Near Municipal Gymnasium. Becomes free for all users March 2, 2026.",
-    "tierHistory": [
-      { "tier": 2, "effectiveDate": "2026-01-05", "endDate": "2026-03-01" },
-      { "tier": 0, "effectiveDate": "2026-03-02", "endDate": null }
+      { "tier": 0, "effectiveDate": "2026-01-05", "endDate": null }
     ]
   }
 ]

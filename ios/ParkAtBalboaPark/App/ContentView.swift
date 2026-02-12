@@ -9,7 +9,6 @@ struct ContentView: View {
         @Bindable var appState = state
 
         ParkMapView()
-            .ignoresSafeArea()
             .sheet(isPresented: .constant(true)) {
                 MainSheetContent(
                     showProfile: $showProfile,

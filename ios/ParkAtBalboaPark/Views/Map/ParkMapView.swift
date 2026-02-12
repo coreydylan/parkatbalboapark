@@ -70,21 +70,20 @@ struct ParkMapView: View {
             }
 
             if state.map.filters.showTram, let tramData = state.parking.tramData {
-                let tramCoords = tramData.stops.sorted(by: { $0.stopOrder < $1.stopOrder }).map(
-                    \.coordinate)
-                if tramCoords.count >= 2 {
-                    MapPolyline(coordinates: tramCoords + [tramCoords[0]])
+                let routeCoords = tramData.routeCoordinates
+                if routeCoords.count >= 2 {
+                    MapPolyline(coordinates: routeCoords)
                         .stroke(
                             Color.tram,
                             style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [5, 3]))
+                }
 
-                    ForEach(tramData.stops) { stop in
-                        Annotation(stop.name, coordinate: stop.coordinate) {
-                            Circle()
-                                .fill(Color.tram)
-                                .frame(width: 12, height: 12)
-                                .overlay(Circle().stroke(.white, lineWidth: 2))
-                        }
+                ForEach(tramData.stops) { stop in
+                    Annotation(stop.name, coordinate: stop.coordinate) {
+                        Circle()
+                            .fill(Color.tram)
+                            .frame(width: 12, height: 12)
+                            .overlay(Circle().stroke(.white, lineWidth: 2))
                     }
                 }
             }
