@@ -12,7 +12,7 @@ struct RecommendationSheet: View {
             } else if state.parking.recommendations.isEmpty {
                 noResultsState
             } else {
-                VisitDurationPicker()
+                VisitTimePicker()
                     .padding(.horizontal, 16)
                     .padding(.vertical, 6)
                 filterBar

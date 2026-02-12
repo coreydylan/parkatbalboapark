@@ -480,6 +480,9 @@ struct MainSheetContent: View {
     }
 
     private func commitToParking() {
+        if state.parking.tripDate == nil {
+            state.parking.resetToNow()
+        }
         showParkingResults = true
         sheetDetent = .fraction(0.4)
         Task { await state.fetchRecommendations() }
@@ -523,59 +526,63 @@ struct MainSheetContent: View {
 struct TripPlannerSheet: View {
     @Environment(AppState.self) private var state
     @Environment(\.dismiss) private var dismiss
-    @State private var arrivalDate = Date()
+    @State private var selectedDate = Calendar.current.date(
+        byAdding: .day, value: 1, to: Date()
+    )!
     var onCommit: () -> Void
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 24) {
-                VStack(spacing: 8) {
-                    Image(systemName: "calendar.badge.clock")
-                        .font(.largeTitle)
-                        .foregroundStyle(Color.accentColor)
-                    Text("Plan Your Visit")
-                        .font(.title3.weight(.semibold))
-                    Text("Choose when you're arriving and how long you'll stay.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(.top, 8)
+            ScrollView {
+                VStack(spacing: 24) {
+                    VStack(spacing: 8) {
+                        Image(systemName: "calendar.badge.clock")
+                            .font(.largeTitle)
+                            .foregroundStyle(Color.accentColor)
+                        Text("Plan Your Visit")
+                            .font(.title3.weight(.semibold))
+                        Text("Choose a date and set your start and end times.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(.top, 8)
 
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Arriving")
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.secondary)
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Date")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.secondary)
 
-                    DatePicker(
-                        "Arrival",
-                        selection: $arrivalDate,
-                        in: Date()...,
-                        displayedComponents: [.date, .hourAndMinute]
-                    )
-                    .datePickerStyle(.compact)
-                    .labelsHidden()
-                }
-                .padding(.horizontal, 4)
-
-                VisitDurationPicker()
+                        DatePicker(
+                            "Date",
+                            selection: $selectedDate,
+                            in: Date()...,
+                            displayedComponents: .date
+                        )
+                        .datePickerStyle(.compact)
+                        .labelsHidden()
+                    }
                     .padding(.horizontal, 4)
 
-                Spacer()
+                    VisitTimePicker(isParkNow: false)
+                        .padding(.horizontal, 4)
 
-                Button {
-                    onCommit()
-                } label: {
-                    Label("Find Parking", systemImage: "car.fill")
-                        .font(.subheadline.weight(.semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
+                    Button {
+                        state.parking.tripDate = selectedDate
+                        onCommit()
+                    } label: {
+                        Label("Find Parking", systemImage: "car.fill")
+                            .font(.subheadline.weight(.semibold))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color.accentColor)
+                    .disabled(state.parking.visitDurationMinutes <= 0)
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Color.accentColor)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
             .navigationTitle("Plan a Trip")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -584,6 +591,6 @@ struct TripPlannerSheet: View {
                 }
             }
         }
-        .presentationDetents([.medium])
+        .presentationDetents([.medium, .large])
     }
 }

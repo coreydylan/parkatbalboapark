@@ -51,6 +51,7 @@
 		F59BD351A2B8F99BD8D2437B /* LotTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B95DAE17DCB05F78423463 /* LotTier.swift */; };
 		AA11BB22CC33DD44EE55FF01 /* StreetSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF02 /* StreetSegment.swift */; };
 		AA11BB22CC33DD44EE55FF03 /* StreetMeterMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF04 /* StreetMeterMarkerView.swift */; };
+		CC99DD88EE77FF66AA550022 /* SupabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99DD88EE77FF66AA550011 /* SupabaseClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		FA99524B9A4285D570C555B1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA11BB22CC33DD44EE55FF02 /* StreetSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetSegment.swift; sourceTree = "<group>"; };
 		AA11BB22CC33DD44EE55FF04 /* StreetMeterMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetMeterMarkerView.swift; sourceTree = "<group>"; };
+		CC99DD88EE77FF66AA550011 /* SupabaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -263,6 +265,7 @@
 			children = (
 				5E2145A346A018AB09AC5F08 /* APIClient.swift */,
 				4E5D015E7D6EC0A07A64553E /* LocationService.swift */,
+				CC99DD88EE77FF66AA550011 /* SupabaseClient.swift */,
 				BB66CC77DD88EE99FF001122 /* WalkingDirectionsService.swift */,
 			);
 			path = Services;
@@ -395,6 +398,7 @@
 				E11221574E7FF1EF413A369C /* Tram.swift in Sources */,
 				22AA33BB44CC55DD66EE77FF /* UserProfile.swift in Sources */,
 				DCB73A0E76D2423B99914A2E /* UserType.swift in Sources */,
+				CC99DD88EE77FF66AA550022 /* SupabaseClient.swift in Sources */,
 				DD39BAA326282053A25A36DD /* VisitDurationPicker.swift in Sources */,
 				D4333BE3E2888F090DA992C3 /* Waypoint.swift in Sources */,
 			);

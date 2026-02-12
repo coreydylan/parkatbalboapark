@@ -32,8 +32,12 @@ struct ContentView: View {
                     state.map.focusOn(dest.coordinate)
                 }
             }
-            .onChange(of: state.parking.visitHours) {
-                // Only re-fetch if we already have results showing
+            .onChange(of: state.parking.startTime) {
+                if !state.parking.recommendations.isEmpty {
+                    Task { await state.fetchRecommendations() }
+                }
+            }
+            .onChange(of: state.parking.endTime) {
                 if !state.parking.recommendations.isEmpty {
                     Task { await state.fetchRecommendations() }
                 }
