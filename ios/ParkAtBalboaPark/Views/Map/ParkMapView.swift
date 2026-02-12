@@ -95,9 +95,9 @@ struct ParkMapView: View {
             MapCompass()
             MapScaleView()
         }
-        .overlay(alignment: .top) {
+        .safeAreaInset(edge: .top) {
             MapFilterBar()
-                .padding(.top, 8)
+                .padding(.top, 4)
         }
         .onChange(of: state.map.filters.showStreetMeters) {
             if state.map.filters.showStreetMeters {

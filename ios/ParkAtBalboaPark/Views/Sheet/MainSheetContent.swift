@@ -13,7 +13,7 @@ struct MainSheetContent: View {
     @FocusState private var searchFocused: Bool
 
     private var isCollapsed: Bool {
-        sheetDetent == .fraction(0.15)
+        sheetDetent == .fraction(0.08)
     }
 
     private var hasProfile: Bool {
@@ -29,9 +29,10 @@ struct MainSheetContent: View {
         VStack(spacing: 0) {
             if isCollapsed {
                 // Collapsed: floating pill only, no sheet chrome
+                Spacer()
                 collapsedPill
                     .padding(.horizontal, 16)
-                    .padding(.top, 12)
+                    .padding(.bottom, 8)
             } else {
                 // Expanded: custom drag handle + search bar + content
                 Capsule()
@@ -174,8 +175,8 @@ struct MainSheetContent: View {
                 }
             }
         }
-        .padding(.horizontal, isCollapsed ? 16 : 12)
-        .padding(.vertical, isCollapsed ? 12 : 9)
+        .padding(.horizontal, isCollapsed ? 14 : 12)
+        .padding(.vertical, isCollapsed ? 8 : 9)
         .background {
             if isCollapsed {
                 Capsule()
@@ -461,7 +462,7 @@ struct MainSheetContent: View {
         state.parking.selectDestination(nil)
         showParkingResults = false
         withAnimation(.smooth(duration: 0.3)) {
-            sheetDetent = .fraction(0.15)
+            sheetDetent = .fraction(0.08)
         }
     }
 

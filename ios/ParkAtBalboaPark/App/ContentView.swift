@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(AppState.self) private var state
     @State private var showProfile = false
-    @State private var sheetDetent: PresentationDetent = .fraction(0.15)
+    @State private var sheetDetent: PresentationDetent = .fraction(0.08)
 
     var body: some View {
         @Bindable var appState = state
@@ -16,7 +16,7 @@ struct ContentView: View {
                     sheetDetent: $sheetDetent
                 )
                 .presentationDetents(
-                    [.fraction(0.15), .fraction(0.4), .large],
+                    [.fraction(0.08), .fraction(0.4), .large],
                     selection: $sheetDetent
                 )
                 .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.4)))
