@@ -4,6 +4,7 @@ struct RecommendationCard: View {
     let recommendation: ParkingRecommendation
     let rank: Int
     let isSelected: Bool
+    var elevationProfile: WalkingDirectionsService.ElevationProfile? = nil
 
     var body: some View {
         HStack(spacing: 12) {
@@ -22,6 +23,15 @@ struct RecommendationCard: View {
                         Label(walkTime, systemImage: "figure.walk")
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                    }
+
+                    if let elevation = elevationProfile, elevation.gainMeters >= 3 {
+                        Label(
+                            "\(Int(elevation.gainMeters * 3.281))ft↑",
+                            systemImage: "arrow.up.right"
+                        )
+                        .font(.caption)
+                        .foregroundStyle(elevation.gainMeters > 15 ? .orange : .secondary)
                     }
 
                     if recommendation.hasTram {

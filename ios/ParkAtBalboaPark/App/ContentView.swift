@@ -2,9 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(AppState.self) private var state
-    @State private var showSearch = false
     @State private var showProfile = false
-    @State private var showInfo = false
     @State private var sheetDetent: PresentationDetent = .fraction(0.15)
 
     var body: some View {
@@ -14,9 +12,8 @@ struct ContentView: View {
             .ignoresSafeArea()
             .sheet(isPresented: .constant(true)) {
                 MainSheetContent(
-                    showSearch: $showSearch,
                     showProfile: $showProfile,
-                    showInfo: $showInfo
+                    sheetDetent: $sheetDetent
                 )
                 .presentationDetents(
                     [.fraction(0.15), .fraction(0.4), .large],
@@ -30,6 +27,9 @@ struct ContentView: View {
                 OnboardingView()
             }
             .onChange(of: state.parking.selectedDestination) {
+                if let dest = state.parking.selectedDestination {
+                    state.map.focusOn(dest.coordinate)
+                }
                 Task { await state.fetchRecommendations() }
             }
             .onChange(of: state.parking.visitHours) {

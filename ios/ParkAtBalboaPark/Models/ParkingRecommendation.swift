@@ -11,9 +11,9 @@ struct ParkingRecommendation: Codable, Identifiable, Hashable, Sendable {
     let costCents: Int
     let costDisplay: String
     let isFree: Bool
-    let walkingDistanceMeters: Double?
-    let walkingTimeSeconds: Double?
-    let walkingTimeDisplay: String?
+    var walkingDistanceMeters: Double?
+    var walkingTimeSeconds: Double?
+    var walkingTimeDisplay: String?
     let hasTram: Bool
     let tramTimeMinutes: Int?
     let score: Double

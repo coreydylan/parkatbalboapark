@@ -5,8 +5,6 @@ struct RecommendationSheet: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            sheetHeader
-
             if state.profile.effectiveUserType == nil {
                 emptyState
             } else if state.parking.isLoading {
@@ -21,49 +19,6 @@ struct RecommendationSheet: View {
                 recommendationList
             }
         }
-    }
-
-    // MARK: - Header
-
-    private var sheetHeader: some View {
-        VStack(spacing: 4) {
-            if state.profile.effectiveUserType != nil {
-                HStack(spacing: 6) {
-                    Circle()
-                        .fill(
-                            state.parking.enforcementActive
-                                ? Color.enforcementActive : Color.costFree
-                        )
-                        .frame(width: 8, height: 8)
-                    Text(
-                        state.parking.enforcementActive
-                            ? "Enforcement active" : "Free parking hours"
-                    )
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(
-                        state.parking.enforcementActive
-                            ? Color.enforcementActive : Color.costFree
-                    )
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 4)
-                .background(.ultraThinMaterial, in: Capsule())
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel(
-                    state.parking.enforcementActive
-                        ? "Parking enforcement is currently active"
-                        : "Currently free parking hours"
-                )
-            }
-
-            if !state.parking.displayedRecommendations.isEmpty {
-                Text("\(state.parking.displayedRecommendations.count) parking options")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-        }
-        .padding(.top, 8)
-        .padding(.bottom, 4)
     }
 
     // MARK: - Filter Bar
@@ -182,7 +137,8 @@ struct RecommendationSheet: View {
                             RecommendationCard(
                                 recommendation: rec,
                                 rank: index + 1,
-                                isSelected: state.parking.selectedLot?.lotSlug == rec.lotSlug
+                                isSelected: state.parking.selectedLot?.lotSlug == rec.lotSlug,
+                                elevationProfile: state.parking.elevationProfiles[rec.lotSlug]
                             )
                             .onTapGesture {
                                 state.selectLot(rec)

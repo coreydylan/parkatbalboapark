@@ -23,6 +23,12 @@ class ParkingStore {
 
     var isLoading: Bool = false
 
+    /// Walking route polylines keyed by lot slug, populated by MapKit directions.
+    var walkingRoutes: [String: [CLLocationCoordinate2D]] = [:]
+
+    /// Elevation profiles keyed by lot slug, populated from Open-Meteo API.
+    var elevationProfiles: [String: WalkingDirectionsService.ElevationProfile] = [:]
+
     // MARK: - Services
 
     private let api = APIClient.shared
@@ -86,6 +92,8 @@ class ParkingStore {
     func selectDestination(_ dest: Destination?) {
         selectedDestination = dest
         selectedLot = nil
+        walkingRoutes = [:]
+        elevationProfiles = [:]
     }
 
     // MARK: - Data Loading
@@ -135,6 +143,38 @@ class ParkingStore {
                 self.recommendations = response.recommendations
                 self.enforcementActive = response.enforcementActive
                 self.isLoading = false
+
+                // Enrich with real MapKit walking times and routes
+                if let dest = self.selectedDestination {
+                    self.walkingRoutes = [:]
+                    Task {
+                        let walkTimes = await WalkingDirectionsService.fetchWalkingTimes(
+                            for: self.recommendations,
+                            to: dest.coordinate
+                        )
+                        var routes: [String: [CLLocationCoordinate2D]] = [:]
+                        for i in self.recommendations.indices {
+                            let slug = self.recommendations[i].lotSlug
+                            if let result = walkTimes[slug] {
+                                self.recommendations[i].walkingDistanceMeters = result.distanceMeters
+                                self.recommendations[i].walkingTimeSeconds = result.timeSeconds
+                                self.recommendations[i].walkingTimeDisplay =
+                                    WalkingDirectionsService.formatWalkTime(seconds: result.timeSeconds)
+                                routes[slug] = result.routeCoordinates
+                            }
+                        }
+                        self.walkingRoutes = routes
+
+                        // Fetch elevation profiles for all routes
+                        let profiles = await WalkingDirectionsService.fetchElevationProfiles(
+                            for: routes
+                        )
+                        self.elevationProfiles = profiles
+                    }
+                } else {
+                    self.walkingRoutes = [:]
+                    self.elevationProfiles = [:]
+                }
             } catch is CancellationError {
                 // Task was cancelled; do not update state
             } catch {

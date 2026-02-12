@@ -39,13 +39,22 @@ struct ParkMapView: View {
                 }
             }
 
-            if let selectedLot = state.parking.selectedLot,
-                let dest = state.parking.selectedDestination
-            {
-                MapPolyline(coordinates: [selectedLot.coordinate, dest.coordinate])
-                    .stroke(
-                        .blue,
-                        style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [6, 4]))
+            if let selectedLot = state.parking.selectedLot {
+                if let routeCoords = state.parking.walkingRoutes[selectedLot.lotSlug],
+                    routeCoords.count >= 2
+                {
+                    // Real walking route from MapKit
+                    MapPolyline(coordinates: routeCoords)
+                        .stroke(
+                            Color.accentColor,
+                            style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                } else if let dest = state.parking.selectedDestination {
+                    // Fallback dashed line while route loads
+                    MapPolyline(coordinates: [selectedLot.coordinate, dest.coordinate])
+                        .stroke(
+                            Color.accentColor.opacity(0.5),
+                            style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [6, 4]))
+                }
             }
 
             if state.map.filters.showTram, let tramData = state.parking.tramData {

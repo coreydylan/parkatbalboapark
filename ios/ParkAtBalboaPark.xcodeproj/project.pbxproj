@@ -21,6 +21,7 @@
 		6239C0362BBCB1ADF817E89D /* ParkingRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EC1991F1C49CC6E75A63DC /* ParkingRecommendation.swift */; };
 		6C03D8A2B663AC21E82F8033 /* PricingRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF70F8239AC2B6FEE1CDEA1 /* PricingRule.swift */; };
 		6DD97295CB764F14D86B325E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5D015E7D6EC0A07A64553E /* LocationService.swift */; };
+		66BB77CC88DD99EEFF001122 /* WalkingDirectionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66CC77DD88EE99FF001122 /* WalkingDirectionsService.swift */; };
 		72CE035E8612BE51CF5545B9 /* LotTierAssignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3C7E0303446D115BF1662C /* LotTierAssignment.swift */; };
 		73D6EAAAA7B8DE628A99F408 /* RecommendationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A118AF29B6DF9D0FD71D14 /* RecommendationSheet.swift */; };
 		7833F886A146EBA0461FBCFC /* ParkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88BC611170FFFE9194EE31 /* ParkMapView.swift */; };
@@ -63,6 +64,7 @@
 		40736356271781626E15EDD1 /* EnforcementStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnforcementStatus.swift; sourceTree = "<group>"; };
 		40FEAFBC46871DCE6E9FED33 /* MapFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterBar.swift; sourceTree = "<group>"; };
 		4E5D015E7D6EC0A07A64553E /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		BB66CC77DD88EE99FF001122 /* WalkingDirectionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingDirectionsService.swift; sourceTree = "<group>"; };
 		54EC1991F1C49CC6E75A63DC /* ParkingRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRecommendation.swift; sourceTree = "<group>"; };
 		5E2145A346A018AB09AC5F08 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		6CEDC4B74BE8CF42783D160F /* Tram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tram.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				5E2145A346A018AB09AC5F08 /* APIClient.swift */,
 				01B356F87872115D1E8191D4 /* BundledDataService.swift */,
 				4E5D015E7D6EC0A07A64553E /* LocationService.swift */,
+				BB66CC77DD88EE99FF001122 /* WalkingDirectionsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				C1ACA83645C48AE32474B134 /* Holiday.swift in Sources */,
 				CCB67078E148DCBD124CE6EA /* InfoView.swift in Sources */,
 				6DD97295CB764F14D86B325E /* LocationService.swift in Sources */,
+				66BB77CC88DD99EEFF001122 /* WalkingDirectionsService.swift in Sources */,
 				4E7A8C05E8E32831B7147E2A /* LotMarkerView.swift in Sources */,
 				F59BD351A2B8F99BD8D2437B /* LotTier.swift in Sources */,
 				72CE035E8612BE51CF5545B9 /* LotTierAssignment.swift in Sources */,
