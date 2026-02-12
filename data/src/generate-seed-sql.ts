@@ -1,3 +1,12 @@
+/**
+ * @deprecated This script generates seed SQL from data/raw/ JSON files.
+ * The JSON files are NO LONGER the source of truth — Supabase migrations are.
+ * See data/raw/DEPRECATED.md for details.
+ *
+ * The generated seed.sql uses ON CONFLICT DO NOTHING, so re-running it will
+ * NOT update existing data in Supabase. To update data, write a new migration
+ * in supabase/migrations/ instead.
+ */
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
