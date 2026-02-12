@@ -9,6 +9,8 @@ import { useLotLayers } from './hooks/useLotLayers'
 import { useWalkingRoute } from './hooks/useWalkingRoute'
 import { useLotPopup } from './hooks/useLotPopup'
 import { useWaypointLayers } from './hooks/useWaypointLayers'
+import { useStreetMeterLayers } from './hooks/useStreetMeterLayers'
+import { useStreetMeterPopup } from './hooks/useStreetMeterPopup'
 import { MapFilters } from './MapFilters'
 
 export function ParkMap() {
@@ -68,6 +70,8 @@ export function ParkMap() {
   useWalkingRoute(mapRef.current, mapReady)
   useLotPopup(mapRef.current)
   useWaypointLayers(mapRef.current, mapReady, mapFilters)
+  useStreetMeterLayers(mapRef.current, mapReady, !!mapFilters.street_parking)
+  useStreetMeterPopup(mapRef.current, !!mapFilters.street_parking)
 
   // Pan map when center/zoom changes from store
   useEffect(() => {

@@ -39,6 +39,14 @@ struct MapFilterBar: View {
                 ) {
                     state.map.filters.showEvCharging.toggle()
                 }
+
+                FilterChip(
+                    label: "Meters",
+                    icon: "parkingsign",
+                    isActive: state.map.filters.showStreetMeters
+                ) {
+                    state.map.filters.showStreetMeters.toggle()
+                }
             }
             .padding(.horizontal, 16)
         }

@@ -26,4 +26,5 @@ struct MapFilters {
     var showRestrooms: Bool = false
     var showWater: Bool = false
     var showEvCharging: Bool = false
+    var showStreetMeters: Bool = false
 }

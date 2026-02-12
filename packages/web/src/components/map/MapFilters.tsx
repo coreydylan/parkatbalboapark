@@ -1,13 +1,14 @@
 'use client'
 
 import { useAppStore } from '@/store/app-store'
-import { Train, DoorOpen, Droplets, Zap, type LucideIcon } from 'lucide-react'
+import { Train, DoorOpen, Droplets, Zap, ParkingMeter, type LucideIcon } from 'lucide-react'
 
 const FILTERS: readonly { key: string; label: string; Icon: LucideIcon }[] = [
   { key: 'tram', label: 'Tram', Icon: Train },
   { key: 'restrooms', label: 'Restrooms', Icon: DoorOpen },
   { key: 'water', label: 'Water', Icon: Droplets },
   { key: 'ev_charging', label: 'EV Charging', Icon: Zap },
+  { key: 'street_parking', label: 'Street Meters', Icon: ParkingMeter },
 ]
 
 export function MapFilters() {

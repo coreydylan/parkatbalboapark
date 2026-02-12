@@ -50,6 +50,8 @@
 		EED6E28CC62DBB1EAEEDBBA5 /* EnforcementStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40736356271781626E15EDD1 /* EnforcementStatus.swift */; };
 		EF910EA1D77E704C8EAA74A6 /* PricingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50457AB5F132C52402B1796 /* PricingEngine.swift */; };
 		F59BD351A2B8F99BD8D2437B /* LotTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B95DAE17DCB05F78423463 /* LotTier.swift */; };
+		AA11BB22CC33DD44EE55FF01 /* StreetSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF02 /* StreetSegment.swift */; };
+		AA11BB22CC33DD44EE55FF03 /* StreetMeterMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF04 /* StreetMeterMarkerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +99,8 @@
 		F48D784B07A3C299FF51CC08 /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		F7C7CF1FCD043EDF0B43E832 /* RecommendationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationResponse.swift; sourceTree = "<group>"; };
 		FA99524B9A4285D570C555B1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF02 /* StreetSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetSegment.swift; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF04 /* StreetMeterMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetMeterMarkerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -137,6 +141,7 @@
 				54EC1991F1C49CC6E75A63DC /* ParkingRecommendation.swift */,
 				BAF70F8239AC2B6FEE1CDEA1 /* PricingRule.swift */,
 				F7C7CF1FCD043EDF0B43E832 /* RecommendationResponse.swift */,
+				AA11BB22CC33DD44EE55FF02 /* StreetSegment.swift */,
 				6CEDC4B74BE8CF42783D160F /* Tram.swift */,
 				A3F4F77F0D5D42C787A0332E /* UserType.swift */,
 				F48D784B07A3C299FF51CC08 /* Waypoint.swift */,
@@ -245,6 +250,7 @@
 				2B614276D322F64DEC3CEE80 /* LotMarkerView.swift */,
 				40FEAFBC46871DCE6E9FED33 /* MapFilterBar.swift */,
 				0F88BC611170FFFE9194EE31 /* ParkMapView.swift */,
+				AA11BB22CC33DD44EE55FF04 /* StreetMeterMarkerView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -404,6 +410,8 @@
 				191665741A530E8700BE8534 /* RecommendationCard.swift in Sources */,
 				8376D13CB5245CADA7F7D277 /* RecommendationResponse.swift in Sources */,
 				73D6EAAAA7B8DE628A99F408 /* RecommendationSheet.swift in Sources */,
+				AA11BB22CC33DD44EE55FF01 /* StreetSegment.swift in Sources */,
+				AA11BB22CC33DD44EE55FF03 /* StreetMeterMarkerView.swift in Sources */,
 				E11221574E7FF1EF413A369C /* Tram.swift in Sources */,
 				22AA33BB44CC55DD66EE77FF /* UserProfile.swift in Sources */,
 				DCB73A0E76D2423B99914A2E /* UserType.swift in Sources */,

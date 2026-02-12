@@ -82,6 +82,17 @@ actor APIClient {
         return try await fetch("/api/recommend", queryItems: queryItems)
     }
 
+    /// Fetch street meter segments (grouped by block).
+    ///
+    /// Calls `GET /api/street-meters?grouped=true` and unwraps the `{ segments: [...] }` envelope.
+    func fetchStreetSegments() async throws -> [StreetSegment] {
+        let response: StreetSegmentsResponse = try await fetch(
+            "/api/street-meters",
+            queryItems: [URLQueryItem(name: "grouped", value: "true")]
+        )
+        return response.segments
+    }
+
     /// Fetch current enforcement status (active hours, next holiday).
     ///
     /// Calls `GET /api/enforcement`.
@@ -146,6 +157,11 @@ actor APIClient {
     /// Envelope for `GET /api/destinations`.
     private struct DestinationsResponse: Codable {
         let destinations: [Destination]
+    }
+
+    /// Envelope for `GET /api/street-meters?grouped=true`.
+    private struct StreetSegmentsResponse: Codable {
+        let segments: [StreetSegment]
     }
 }
 

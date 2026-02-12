@@ -11,6 +11,7 @@ class ParkingStore {
     var recommendations: [ParkingRecommendation] = []
     var enforcementActive: Bool = false
     var tramData: TramData? = nil
+    var streetSegments: [StreetSegment] = []
 
     // MARK: - Selections
 
@@ -112,6 +113,15 @@ class ParkingStore {
             self.enforcementActive = enforcement.active
         } catch {
             print("Failed to load data: \(error)")
+        }
+    }
+
+    func fetchStreetSegments() async {
+        guard streetSegments.isEmpty else { return }
+        do {
+            streetSegments = try await api.fetchStreetSegments()
+        } catch {
+            print("Failed to fetch street segments: \(error)")
         }
     }
 

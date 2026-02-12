@@ -4,6 +4,7 @@ import type {
   Destination,
   ParkingLot,
   ParkingRecommendation,
+  StreetSegment,
 } from '@parkatbalboa/shared'
 
 export interface Waypoint {
@@ -28,6 +29,7 @@ interface AppState {
   lots: ParkingLot[]
   destinations: Destination[]
   waypoints: Waypoint[]
+  streetSegments: StreetSegment[]
   recommendations: ParkingRecommendation[]
   selectedLot: ParkingLot | null
 
@@ -54,6 +56,7 @@ interface AppState {
   fetchLots: () => Promise<void>
   fetchDestinations: () => Promise<void>
   fetchWaypoints: () => Promise<void>
+  fetchStreetSegments: () => Promise<void>
   fetchRecommendations: () => Promise<void>
   fetchEnforcement: () => Promise<void>
   toggleMapFilter: (key: string) => void
@@ -71,6 +74,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   lots: [],
   destinations: [],
   waypoints: [],
+  streetSegments: [],
   recommendations: [],
   selectedLot: null,
 
@@ -84,6 +88,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     restrooms: false,
     water: false,
     ev_charging: false,
+    street_parking: false,
   },
   _abortController: null,
 
@@ -184,6 +189,17 @@ export const useAppStore = create<AppState>((set, get) => ({
       if (!res.ok) return
       const data = await res.json()
       set({ waypoints: data.waypoints ?? [] })
+    } catch {
+      // silently fail
+    }
+  },
+
+  fetchStreetSegments: async () => {
+    try {
+      const res = await fetch('/api/street-meters?grouped=true')
+      if (!res.ok) return
+      const data = await res.json()
+      set({ streetSegments: data.segments ?? [] })
     } catch {
       // silently fail
     }

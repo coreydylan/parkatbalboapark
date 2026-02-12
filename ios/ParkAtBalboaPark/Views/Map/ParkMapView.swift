@@ -57,6 +57,18 @@ struct ParkMapView: View {
                 }
             }
 
+            if state.map.filters.showStreetMeters {
+                ForEach(state.parking.streetSegments) { segment in
+                    Annotation(segment.streetName, coordinate: segment.coordinate) {
+                        StreetMeterMarkerView(
+                            meterCount: segment.meterCount,
+                            markerColor: segment.markerColor
+                        )
+                    }
+                    .annotationTitles(.hidden)
+                }
+            }
+
             if state.map.filters.showTram, let tramData = state.parking.tramData {
                 let tramCoords = tramData.stops.sorted(by: { $0.stopOrder < $1.stopOrder }).map(
                     \.coordinate)
@@ -86,6 +98,11 @@ struct ParkMapView: View {
         .overlay(alignment: .top) {
             MapFilterBar()
                 .padding(.top, 8)
+        }
+        .onChange(of: state.map.filters.showStreetMeters) {
+            if state.map.filters.showStreetMeters {
+                Task { await state.parking.fetchStreetSegments() }
+            }
         }
     }
 }
