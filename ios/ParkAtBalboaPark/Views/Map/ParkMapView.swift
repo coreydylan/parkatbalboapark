@@ -16,14 +16,19 @@ struct ParkMapView: View {
                         label: "P",
                         tier: annotation.tier,
                         costColor: annotation.costColor,
-                        isSelected: state.parking.selectedLot?.lotSlug == annotation.lotSlug,
+                        isSelected: {
+                            if case .lot(let rec) = state.parking.selectedOption {
+                                return rec.lotSlug == annotation.lotSlug
+                            }
+                            return false
+                        }(),
                         hasTram: annotation.hasTram
                     )
                     .onTapGesture {
                         if let rec = state.parking.recommendations.first(where: {
                             $0.lotSlug == annotation.lotSlug
                         }) {
-                            state.selectLot(rec)
+                            state.selectOption(.lot(rec))
                         }
                     }
                 }
@@ -39,8 +44,9 @@ struct ParkMapView: View {
                 }
             }
 
-            if let selectedLot = state.parking.selectedLot {
-                if let routeCoords = state.parking.walkingRoutes[selectedLot.lotSlug],
+            if let selectedOption = state.parking.selectedOption {
+                let routeKey = state.parking.walkingRouteKey(for: selectedOption)
+                if let routeCoords = state.parking.walkingRoutes[routeKey],
                     routeCoords.count >= 2
                 {
                     // Real walking route from MapKit
@@ -50,20 +56,37 @@ struct ParkMapView: View {
                             style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                 } else if let dest = state.parking.selectedDestination {
                     // Fallback dashed line while route loads
-                    MapPolyline(coordinates: [selectedLot.coordinate, dest.coordinate])
+                    MapPolyline(coordinates: [selectedOption.coordinate, dest.coordinate])
                         .stroke(
                             Color.accentColor.opacity(0.5),
                             style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [6, 4]))
                 }
             }
 
-            if state.map.filters.showStreetMeters {
+            if state.map.filters.showStreetMeters || state.parking.showMeters {
                 ForEach(state.parking.streetSegments) { segment in
                     Annotation(segment.streetName, coordinate: segment.coordinate) {
                         StreetMeterMarkerView(
                             meterCount: segment.meterCount,
-                            markerColor: segment.markerColor
+                            markerColor: segment.markerColor,
+                            isSelected: {
+                                if case .meter(let seg, _) = state.parking.selectedOption {
+                                    return seg.segmentId == segment.segmentId
+                                }
+                                return false
+                            }()
                         )
+                        .onTapGesture {
+                            let cost = MeterCostResult.compute(
+                                segment: segment,
+                                enforcedHours: state.parking.enforcedVisitHours,
+                                visitDurationMinutes: state.parking.visitDurationMinutes,
+                                isHoliday: ParkingStore.checkHoliday(
+                                    state.parking.effectiveStartTime
+                                ).isHoliday
+                            )
+                            state.selectOption(.meter(segment, cost: cost))
+                        }
                     }
                     .annotationTitles(.hidden)
                 }
@@ -100,6 +123,12 @@ struct ParkMapView: View {
         }
         .onChange(of: state.map.filters.showStreetMeters) {
             if state.map.filters.showStreetMeters {
+                Task { await state.parking.fetchStreetSegments() }
+            }
+        }
+        .onChange(of: state.parking.showMeters) {
+            if state.parking.showMeters {
+                state.map.filters.showStreetMeters = true
                 Task { await state.parking.fetchStreetSegments() }
             }
         }

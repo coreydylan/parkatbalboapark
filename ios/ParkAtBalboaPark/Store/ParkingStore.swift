@@ -1,5 +1,6 @@
 import CoreLocation
 import Foundation
+import MapKit
 import OSLog
 import SwiftUI
 
@@ -20,7 +21,15 @@ class ParkingStore {
 
     var selectedDestination: Destination? = nil
     var selectedLot: ParkingRecommendation? = nil
+    var selectedOption: ParkingOption? = nil
     var showFreeOnly: Bool = false
+    var showMeters: Bool = true
+
+    // MARK: - Meter Walking Data
+
+    var meterWalkingDistances: [String: Double] = [:]
+    var meterWalkingTimes: [String: Double] = [:]
+    var meterWalkingDisplays: [String: String] = [:]
 
     // MARK: - Time Window
 
@@ -147,6 +156,72 @@ class ParkingStore {
         return recs
     }
 
+    var displayedOptions: [ParkingOption] {
+        // Lots
+        var options: [ParkingOption] = displayedRecommendations.map { .lot($0) }
+
+        // Meters
+        if showMeters && !streetSegments.isEmpty {
+            let enforcedHours = enforcedVisitHours
+            let duration = visitDurationMinutes
+            let (isHoliday, _) = Self.checkHoliday(effectiveStartTime)
+
+            let meterOptions: [ParkingOption] = streetSegments.compactMap { seg in
+                let cost = MeterCostResult.compute(
+                    segment: seg,
+                    enforcedHours: enforcedHours,
+                    visitDurationMinutes: duration,
+                    isHoliday: isHoliday
+                )
+                if showFreeOnly && !cost.isFree { return nil }
+                return .meter(seg, cost: cost)
+            }
+            options.append(contentsOf: meterOptions)
+        }
+
+        // Sort: by walking distance when destination selected, else by cost
+        if selectedDestination != nil {
+            options.sort { a, b in
+                walkingDistance(for: a) < walkingDistance(for: b)
+            }
+        } else {
+            options.sort { a, b in
+                if a.isFree != b.isFree { return a.isFree }
+                return a.costCents < b.costCents
+            }
+        }
+
+        return options
+    }
+
+    /// Walking distance for a parking option, used for sorting.
+    func walkingDistance(for option: ParkingOption) -> Double {
+        switch option {
+        case .lot(let rec):
+            return rec.walkingDistanceMeters ?? .infinity
+        case .meter(let seg, _):
+            return meterWalkingDistances[seg.segmentId] ?? .infinity
+        }
+    }
+
+    /// Walking time display for a parking option.
+    func walkingTimeDisplay(for option: ParkingOption) -> String? {
+        switch option {
+        case .lot(let rec):
+            return rec.walkingTimeDisplay
+        case .meter(let seg, _):
+            return meterWalkingDisplays[seg.segmentId]
+        }
+    }
+
+    /// Walking route key for a parking option.
+    func walkingRouteKey(for option: ParkingOption) -> String {
+        switch option {
+        case .lot(let rec): rec.lotSlug
+        case .meter(let seg, _): "meter-\(seg.segmentId)"
+        }
+    }
+
     var lotAnnotations: [LotAnnotation] {
         if recommendations.isEmpty {
             return lots.map { lot in
@@ -178,8 +253,12 @@ class ParkingStore {
     func selectDestination(_ dest: Destination?) {
         selectedDestination = dest
         selectedLot = nil
+        selectedOption = nil
         walkingRoutes = [:]
         elevationProfiles = [:]
+        meterWalkingDistances = [:]
+        meterWalkingTimes = [:]
+        meterWalkingDisplays = [:]
     }
 
     /// Reset start time to next 10-minute mark for "Park Now" flow.
@@ -240,9 +319,112 @@ class ParkingStore {
     func fetchStreetSegments() async {
         guard streetSegments.isEmpty else { return }
         do {
-            streetSegments = try await api.fetchStreetSegments()
+            // Fetch all raw meters from Supabase (paginate past 1000 limit)
+            let batch1: [RawStreetMeter] = try await supabase.query(
+                table: "street_meters",
+                select: "pole,zone,area,sub_area,lat,lng,rate_cents_per_hour,time_start,time_end,time_limit,days_in_operation,mobile_pay",
+                queryItems: [
+                    URLQueryItem(name: "limit", value: "1000"),
+                    URLQueryItem(name: "offset", value: "0"),
+                ]
+            )
+            let batch2: [RawStreetMeter] = try await supabase.query(
+                table: "street_meters",
+                select: "pole,zone,area,sub_area,lat,lng,rate_cents_per_hour,time_start,time_end,time_limit,days_in_operation,mobile_pay",
+                queryItems: [
+                    URLQueryItem(name: "limit", value: "1000"),
+                    URLQueryItem(name: "offset", value: "1000"),
+                ]
+            )
+            let allMeters = batch1 + batch2
+            logger.info("fetchStreetSegments: fetched \(allMeters.count) raw meters")
+
+            // Group by sub_area (street block) into segments
+            let grouped = Dictionary(grouping: allMeters) { $0.subArea }
+            streetSegments = grouped.compactMap { subArea, meters in
+                guard let first = meters.first else { return nil }
+                // Average lat/lng for the cluster centroid
+                let avgLat = meters.map(\.lat).reduce(0, +) / Double(meters.count)
+                let avgLng = meters.map(\.lng).reduce(0, +) / Double(meters.count)
+                // Use the most common rate (skip nulls, default to 0)
+                let rates = meters.compactMap(\.rateCentsPerHour)
+                let rate = rates.sorted().last ?? 0
+                let hasMobile = meters.contains { $0.mobilePay }
+
+                return StreetSegment(
+                    segmentId: subArea.lowercased().replacingOccurrences(of: " ", with: "-"),
+                    zone: first.zone,
+                    area: first.area,
+                    subArea: subArea,
+                    lat: avgLat,
+                    lng: avgLng,
+                    meterCount: meters.count,
+                    rateCentsPerHour: rate,
+                    rateDisplay: PricingEngine.formatCost(rate) + "/hr",
+                    timeStart: first.timeStart,
+                    timeEnd: first.timeEnd,
+                    timeLimit: first.timeLimit,
+                    daysInOperation: first.daysInOperation,
+                    hasMobilePay: hasMobile
+                )
+            }
+            logger.info("fetchStreetSegments: grouped into \(self.streetSegments.count) segments")
         } catch {
-            print("Failed to fetch street segments: \(error)")
+            logger.error("Failed to fetch street segments: \(error)")
+        }
+    }
+
+    /// Fetch walking directions from nearby meter segments to a destination.
+    /// Pre-filters segments within ~2km to avoid MapKit rate limiting.
+    func fetchMeterWalkingTimes(to destination: CLLocationCoordinate2D) async {
+        let destLocation = CLLocation(latitude: destination.latitude, longitude: destination.longitude)
+
+        let nearbySegments = streetSegments.filter { seg in
+            let segLocation = CLLocation(latitude: seg.lat, longitude: seg.lng)
+            return segLocation.distance(from: destLocation) < 2000
+        }
+
+        guard !nearbySegments.isEmpty else { return }
+
+        let destPlacemark = MKPlacemark(coordinate: destination)
+
+        await withTaskGroup(of: (String, Double, Double, [CLLocationCoordinate2D])?.self) { group in
+            for seg in nearbySegments {
+                group.addTask {
+                    let request = MKDirections.Request()
+                    request.source = MKMapItem(
+                        placemark: MKPlacemark(coordinate: seg.coordinate)
+                    )
+                    request.destination = MKMapItem(placemark: destPlacemark)
+                    request.transportType = .walking
+
+                    do {
+                        let directions = MKDirections(request: request)
+                        let response = try await directions.calculate()
+                        guard let route = response.routes.first else { return nil }
+
+                        let polyline = route.polyline
+                        let count = polyline.pointCount
+                        var coords = [CLLocationCoordinate2D](
+                            repeating: CLLocationCoordinate2D(), count: count
+                        )
+                        polyline.getCoordinates(&coords, range: NSRange(location: 0, length: count))
+
+                        return (seg.segmentId, route.distance, route.expectedTravelTime, coords)
+                    } catch {
+                        return nil
+                    }
+                }
+            }
+
+            for await result in group {
+                if let (segId, distance, time, coords) = result {
+                    meterWalkingDistances[segId] = distance
+                    meterWalkingTimes[segId] = time
+                    meterWalkingDisplays[segId] = WalkingDirectionsService.formatWalkTime(seconds: time)
+                    walkingRoutes["meter-\(segId)"] = coords
+                }
+            }
         }
     }
 
@@ -320,6 +502,10 @@ class ParkingStore {
                 // Enrich with real MapKit walking times and routes
                 if let dest = self.selectedDestination {
                     self.walkingRoutes = [:]
+                    self.meterWalkingDistances = [:]
+                    self.meterWalkingTimes = [:]
+                    self.meterWalkingDisplays = [:]
+                    // Lot walking times + elevation
                     Task {
                         let walkTimes = await WalkingDirectionsService.fetchWalkingTimes(
                             for: self.recommendations,
@@ -336,7 +522,7 @@ class ParkingStore {
                                 routes[slug] = result.routeCoordinates
                             }
                         }
-                        self.walkingRoutes = routes
+                        self.walkingRoutes.merge(routes) { _, new in new }
 
                         // Fetch elevation profiles for all routes
                         let profiles = await WalkingDirectionsService.fetchElevationProfiles(
@@ -344,9 +530,18 @@ class ParkingStore {
                         )
                         self.elevationProfiles = profiles
                     }
+                    // Fetch segments first, then meter walking times
+                    Task {
+                        await self.fetchStreetSegments()
+                        await self.fetchMeterWalkingTimes(to: dest.coordinate)
+                    }
                 } else {
                     self.walkingRoutes = [:]
                     self.elevationProfiles = [:]
+                    self.meterWalkingDistances = [:]
+                    self.meterWalkingTimes = [:]
+                    self.meterWalkingDisplays = [:]
+                    Task { await self.fetchStreetSegments() }
                 }
             } catch is CancellationError {
                 // Task was cancelled; do not update state
@@ -546,6 +741,25 @@ class ParkingStore {
         let period = hour >= 12 ? "PM" : "AM"
         return "\(h) \(period)"
     }
+}
+
+// MARK: - Raw Street Meter (Supabase row)
+
+/// One individual street meter from the `street_meters` table.
+/// Grouped client-side by `subArea` into `StreetSegment` clusters.
+private struct RawStreetMeter: Decodable {
+    let pole: String
+    let zone: String
+    let area: String
+    let subArea: String
+    let lat: Double
+    let lng: Double
+    let rateCentsPerHour: Int?
+    let timeStart: String?
+    let timeEnd: String?
+    let timeLimit: String?
+    let daysInOperation: String?
+    let mobilePay: Bool
 }
 
 // MARK: - RPC Response Decoding

@@ -3,6 +3,7 @@ import SwiftUI
 struct StreetMeterMarkerView: View {
     let meterCount: Int
     let markerColor: StreetSegment.MarkerColor
+    var isSelected: Bool = false
 
     private var fillColor: Color {
         switch markerColor {
@@ -14,12 +15,13 @@ struct StreetMeterMarkerView: View {
     }
 
     private var size: CGFloat {
-        switch meterCount {
+        let base: CGFloat = switch meterCount {
         case 1...4: 20
         case 5...14: 24
         case 15...29: 28
         default: 32
         }
+        return isSelected ? base + 8 : base
     }
 
     var body: some View {
@@ -29,14 +31,16 @@ struct StreetMeterMarkerView: View {
                 .frame(width: size, height: size)
                 .overlay(
                     Circle()
-                        .stroke(.white, lineWidth: 1.5)
+                        .stroke(.white, lineWidth: isSelected ? 3 : 1.5)
                 )
-                .shadow(color: fillColor.opacity(0.3), radius: 2)
+                .shadow(color: fillColor.opacity(isSelected ? 0.6 : 0.3), radius: isSelected ? 6 : 2)
 
             Text("\(meterCount)")
                 .font(.system(size: size * 0.38, weight: .bold))
                 .foregroundStyle(.white)
         }
-        .accessibilityLabel("\(meterCount) street meter\(meterCount == 1 ? "" : "s")")
+        .animation(.spring(response: 0.3), value: isSelected)
+        .sensoryFeedback(.impact(flexibility: .soft), trigger: isSelected)
+        .accessibilityLabel("\(meterCount) street meter\(meterCount == 1 ? "" : "s")\(isSelected ? ", selected" : "")")
     }
 }

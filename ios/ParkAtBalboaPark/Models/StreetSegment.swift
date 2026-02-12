@@ -1,7 +1,7 @@
 import CoreLocation
 import Foundation
 
-struct StreetSegment: Codable, Identifiable {
+struct StreetSegment: Codable, Identifiable, Hashable, Sendable {
     let segmentId: String
     let zone: String
     let area: String

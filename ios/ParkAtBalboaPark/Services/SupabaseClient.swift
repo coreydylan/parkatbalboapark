@@ -23,6 +23,56 @@ actor SupabaseClient {
         self.decoder = decoder
     }
 
+    /// Query a Supabase table via the REST API.
+    ///
+    /// - Parameters:
+    ///   - table: The table name (e.g., "street_meters").
+    ///   - select: Columns to select (default "*").
+    ///   - queryItems: Additional query parameters (filters, ordering, limits).
+    /// - Returns: The decoded response array of type `[T]`.
+    func query<T: Decodable>(
+        table: String,
+        select: String = "*",
+        queryItems: [URLQueryItem] = []
+    ) async throws -> [T] {
+        var components = URLComponents(
+            url: baseURL.appendingPathComponent("/rest/v1/\(table)"),
+            resolvingAgainstBaseURL: false
+        )!
+        var items = [URLQueryItem(name: "select", value: select)]
+        items.append(contentsOf: queryItems)
+        components.queryItems = items
+
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+        request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+
+        logger.debug("Query: \(table)")
+
+        let (data, response) = try await session.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.httpError(statusCode: 0)
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            if let body = String(data: data, encoding: .utf8) {
+                logger.error("Query \(table) failed (\(httpResponse.statusCode)): \(body)")
+            }
+            throw APIError.httpError(statusCode: httpResponse.statusCode)
+        }
+
+        do {
+            return try decoder.decode([T].self, from: data)
+        } catch let error as DecodingError {
+            if let body = String(data: data, encoding: .utf8) {
+                logger.error("Query \(table) decode error: \(error)\nBody: \(body)")
+            }
+            throw APIError.decodingError(error)
+        }
+    }
+
     /// Call a Supabase RPC function and decode the response.
     ///
     /// - Parameters:

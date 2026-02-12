@@ -57,8 +57,8 @@ struct ContentView: View {
                     Task { await state.fetchRecommendations() }
                 }
             }
-            .onChange(of: state.parking.selectedLot) {
-                if state.parking.selectedLot != nil {
+            .onChange(of: state.parking.selectedOption) {
+                if state.parking.selectedOption != nil {
                     sheetDetent = .fraction(0.4)
                 }
             }

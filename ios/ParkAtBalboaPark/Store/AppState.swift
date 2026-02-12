@@ -31,10 +31,24 @@ class AppState {
         )
     }
 
+    func selectOption(_ option: ParkingOption?) {
+        parking.selectedOption = option
+        // Keep selectedLot in sync for backwards compatibility
+        if case .lot(let rec) = option {
+            parking.selectedLot = rec
+        } else {
+            parking.selectedLot = nil
+        }
+        if let option {
+            map.focusOn(option.coordinate)
+        }
+    }
+
     func selectLot(_ recommendation: ParkingRecommendation?) {
-        parking.selectedLot = recommendation
         if let rec = recommendation {
-            map.focusOn(rec.coordinate)
+            selectOption(.lot(rec))
+        } else {
+            selectOption(nil)
         }
     }
 }
