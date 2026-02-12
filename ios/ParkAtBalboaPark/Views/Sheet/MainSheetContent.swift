@@ -268,7 +268,7 @@ struct MainSheetContent: View {
         if isCollapsed && state.parking.selectedDestination != nil {
             // Tapping collapsed pill when destination is set → expand to show card or results
             withAnimation(.smooth(duration: 0.3)) {
-                sheetDetent = .fraction(0.4)
+                sheetDetent = showParkingResults ? .fraction(0.4) : .fraction(0.5)
             }
             return
         }
@@ -475,8 +475,8 @@ struct MainSheetContent: View {
         searchFocused = false
         isSearching = false
         searchText = ""
-        // Go to destination card (half detent) if destination was just selected
-        sheetDetent = state.parking.selectedDestination != nil ? .fraction(0.4) : .fraction(0.4)
+        // Go to destination card (taller detent) if destination was just selected
+        sheetDetent = state.parking.selectedDestination != nil ? .fraction(0.5) : .fraction(0.4)
     }
 
     private func commitToParking() {
