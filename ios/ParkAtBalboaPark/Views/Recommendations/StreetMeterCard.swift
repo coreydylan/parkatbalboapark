@@ -5,6 +5,7 @@ struct StreetMeterCard: View {
     let cost: MeterCostResult
     let isSelected: Bool
     var walkingTimeDisplay: String? = nil
+    var walkingDistanceMeters: Double? = nil
     var elevationProfile: WalkingDirectionsService.ElevationProfile? = nil
 
     var body: some View {
@@ -26,13 +27,14 @@ struct StreetMeterCard: View {
                             .foregroundStyle(.secondary)
                     }
 
-                    if let elevation = elevationProfile, elevation.gainMeters >= 3 {
+                    if let elevation = elevationProfile,
+                       elevation.isNotable(distanceMeters: walkingDistanceMeters) {
                         Label(
                             "\(Int(elevation.gainMeters * 3.281))ft\u{2191}",
                             systemImage: "arrow.up.right"
                         )
                         .font(.caption)
-                        .foregroundStyle(elevation.gainMeters > 15 ? .orange : .secondary)
+                        .foregroundStyle(elevation.isSteep(distanceMeters: walkingDistanceMeters) ? .orange : .secondary)
                     }
 
                     Label("\(segment.meterCount)", systemImage: "parkingsign.circle")

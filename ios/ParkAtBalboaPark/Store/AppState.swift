@@ -8,6 +8,8 @@ class AppState {
     let locationService = LocationService()
 
     var showOnboarding: Bool = false
+    var expandedPreviewSlug: String? = nil
+    var selectedDetailLot: ParkingRecommendation? = nil
 
     init() {
         showOnboarding = !profile.onboardingComplete
@@ -49,6 +51,54 @@ class AppState {
             selectOption(.lot(rec))
         } else {
             selectOption(nil)
+        }
+    }
+
+    /// Step 1→2: Expand a card in-place to show Look Around preview + key data.
+    func expandPreview(for recommendation: ParkingRecommendation) {
+        // Tapping the same expanded card → collapse
+        if expandedPreviewSlug == recommendation.lotSlug {
+            collapsePreview()
+            return
+        }
+        expandedPreviewSlug = recommendation.lotSlug
+        selectOption(.lot(recommendation))
+        map.startFlyover(
+            lotCoordinate: recommendation.coordinate,
+            destinationCoordinate: parking.selectedDestination?.coordinate
+        )
+    }
+
+    /// Collapse the expanded preview back to compact card.
+    func collapsePreview() {
+        expandedPreviewSlug = nil
+        map.stopFlyover()
+        if let lot = parking.selectedLot {
+            map.focusOn(lot.coordinate)
+        }
+    }
+
+    /// Step 2→3: Open the full detail view (NavigationStack push).
+    func openDetail(for recommendation: ParkingRecommendation) {
+        selectOption(.lot(recommendation))
+        selectedDetailLot = recommendation
+        // Start flyover if not already running
+        if expandedPreviewSlug != recommendation.lotSlug {
+            map.startFlyover(
+                lotCoordinate: recommendation.coordinate,
+                destinationCoordinate: parking.selectedDestination?.coordinate
+            )
+        }
+        Task { await parking.fetchPricingData() }
+    }
+
+    /// Close the full detail view (back from NavigationStack).
+    func closeDetail() {
+        selectedDetailLot = nil
+        expandedPreviewSlug = nil
+        map.stopFlyover()
+        if let lot = parking.selectedLot {
+            map.focusOn(lot.coordinate)
         }
     }
 }

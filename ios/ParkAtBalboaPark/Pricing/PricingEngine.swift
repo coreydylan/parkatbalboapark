@@ -206,7 +206,7 @@ enum PricingEngine {
     ///
     /// Filters rules by tier, user type, and date range, then returns the most
     /// recently effective rule. Returns `nil` if no rule applies.
-    private static func findPricingRule(
+    static func findPricingRule(
         tier: LotTier,
         userType: UserType,
         rules: [PricingRule],

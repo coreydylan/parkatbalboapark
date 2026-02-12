@@ -16,6 +16,14 @@ class ParkingStore {
     var enforcementActive: Bool = false
     var tramData: TramData? = nil
     var streetSegments: [StreetSegment] = []
+    var lotLookup: [String: ParkingLot] = [:]
+
+    // MARK: - Pricing Data Cache (for client-side rate comparisons)
+    var cachedPricingRules: [PricingRule] = []
+    var cachedTierAssignments: [LotTierAssignment] = []
+    var cachedEnforcementPeriods: [EnforcementPeriod] = []
+    var cachedHolidays: [Holiday] = []
+    var pricingDataLoaded: Bool = false
 
     // MARK: - Selections
 
@@ -292,6 +300,7 @@ class ParkingStore {
         switch lr {
         case .success(let fetchedLots):
             self.lots = fetchedLots
+            self.lotLookup = Dictionary(uniqueKeysWithValues: fetchedLots.map { ($0.slug, $0) })
             logger.info("loadData: loaded \(fetchedLots.count) lots")
         case .failure(let error):
             logger.error("loadData: lots failed – \(error)")
@@ -314,6 +323,41 @@ class ParkingStore {
         }
 
         logger.info("loadData: complete – \(self.lots.count) lots, \(self.destinations.count) destinations")
+    }
+
+    /// Fetch pricing rules, tier assignments, enforcement periods, and holidays
+    /// from Supabase for client-side rate comparison in the detail view.
+    func fetchPricingData() async {
+        guard !pricingDataLoaded else { return }
+
+        do {
+            async let rulesResult: [PricingRule] = supabase.query(
+                table: "pricing_rules",
+                select: "tier,user_type,duration_type,rate_cents,max_daily_cents,effective_date,end_date"
+            )
+            async let tiersResult: [LotTierAssignment] = supabase.query(
+                table: "lot_tier_assignments",
+                select: "lot_id,tier,effective_date,end_date"
+            )
+            async let enfResult: [EnforcementPeriod] = supabase.query(
+                table: "enforcement_periods",
+                select: "start_time,end_time,days_of_week,effective_date,end_date"
+            )
+            async let holidaysResult: [Holiday] = supabase.query(
+                table: "holidays",
+                select: "name,date,is_recurring"
+            )
+
+            let (rules, tiers, enf, holidays) = try await (rulesResult, tiersResult, enfResult, holidaysResult)
+            self.cachedPricingRules = rules
+            self.cachedTierAssignments = tiers
+            self.cachedEnforcementPeriods = enf
+            self.cachedHolidays = holidays
+            self.pricingDataLoaded = true
+            logger.info("fetchPricingData: loaded \(rules.count) rules, \(tiers.count) tier assignments, \(enf.count) enforcement periods, \(holidays.count) holidays")
+        } catch {
+            logger.error("fetchPricingData failed: \(error)")
+        }
     }
 
     func fetchStreetSegments() async {
@@ -417,12 +461,26 @@ class ParkingStore {
                 }
             }
 
+            var meterRoutes: [String: [CLLocationCoordinate2D]] = [:]
             for await result in group {
                 if let (segId, distance, time, coords) = result {
                     meterWalkingDistances[segId] = distance
                     meterWalkingTimes[segId] = time
                     meterWalkingDisplays[segId] = WalkingDirectionsService.formatWalkTime(seconds: time)
-                    walkingRoutes["meter-\(segId)"] = coords
+                    let key = "meter-\(segId)"
+                    walkingRoutes[key] = coords
+                    meterRoutes[key] = coords
+                }
+            }
+        }
+
+        // Fetch elevation profiles for meter routes
+        if !walkingRoutes.isEmpty {
+            let meterKeys = walkingRoutes.filter { $0.key.hasPrefix("meter-") }
+            if !meterKeys.isEmpty {
+                let profiles = await WalkingDirectionsService.fetchElevationProfiles(for: meterKeys)
+                for (key, profile) in profiles {
+                    elevationProfiles[key] = profile
                 }
             }
         }
@@ -528,7 +586,7 @@ class ParkingStore {
                         let profiles = await WalkingDirectionsService.fetchElevationProfiles(
                             for: routes
                         )
-                        self.elevationProfiles = profiles
+                        self.elevationProfiles.merge(profiles) { _, new in new }
                     }
                     // Fetch segments first, then meter walking times
                     Task {

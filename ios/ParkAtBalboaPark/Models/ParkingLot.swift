@@ -16,6 +16,7 @@ struct ParkingLot: Codable, Identifiable, Hashable, Sendable {
     let hasTramStop: Bool
     let notes: String?
     let specialRules: [SpecialRule]?
+    let tierHistory: [TierHistoryEntry]?
     let createdAt: String?
 
     var coordinate: CLLocationCoordinate2D {
@@ -25,6 +26,12 @@ struct ParkingLot: Codable, Identifiable, Hashable, Sendable {
     struct SpecialRule: Codable, Hashable, Sendable {
         let description: String
         let freeMinutes: Int
+        let effectiveDate: String
+        let endDate: String?
+    }
+
+    struct TierHistoryEntry: Codable, Hashable, Sendable {
+        let tier: Int
         let effectiveDate: String
         let endDate: String?
     }
@@ -44,6 +51,7 @@ struct ParkingLot: Codable, Identifiable, Hashable, Sendable {
         hasTramStop = try container.decode(Bool.self, forKey: .hasTramStop)
         notes = try container.decodeIfPresent(String.self, forKey: .notes)
         specialRules = try container.decodeIfPresent([SpecialRule].self, forKey: .specialRules)
+        tierHistory = try container.decodeIfPresent([TierHistoryEntry].self, forKey: .tierHistory)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
     }
 }

@@ -1,22 +1,29 @@
+import MapKit
 import SwiftUI
 
 struct RecommendationSheet: View {
     @Environment(AppState.self) private var state
 
     var body: some View {
-        VStack(spacing: 0) {
-            if state.profile.effectiveUserType == nil {
-                emptyState
-            } else if state.parking.isLoading {
-                loadingState
-            } else if state.parking.recommendations.isEmpty {
-                noResultsState
-            } else {
-                VisitTimePicker()
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 6)
-                filterBar
-                recommendationList
+        NavigationStack {
+            VStack(spacing: 0) {
+                if state.profile.effectiveUserType == nil {
+                    emptyState
+                } else if state.parking.isLoading {
+                    loadingState
+                } else if state.parking.recommendations.isEmpty {
+                    noResultsState
+                } else {
+                    recommendationList
+                }
+            }
+            .navigationDestination(item: Binding(
+                get: { state.selectedDetailLot },
+                set: { newValue in
+                    if newValue == nil { state.closeDetail() }
+                }
+            )) { recommendation in
+                LotDetailView(recommendation: recommendation)
             }
         }
     }
@@ -140,61 +147,27 @@ struct RecommendationSheet: View {
 
         return Group {
             if options.isEmpty && (state.parking.showFreeOnly || !state.parking.showMeters) {
-                VStack(spacing: 12) {
-                    Image(systemName: "car.fill")
-                        .font(.largeTitle)
-                        .foregroundStyle(.secondary)
-                    Text("No parking options match\nyour current filters")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                    Button("Reset filters") {
-                        state.parking.showFreeOnly = false
-                        state.parking.showMeters = true
-                    }
-                    .font(.subheadline.weight(.medium))
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 40)
+                emptyFilterState
             } else {
                 ScrollViewReader { proxy in
                     ScrollView {
-                        LazyVStack(spacing: 10) {
-                            ForEach(Array(options.enumerated()), id: \.element.id) {
-                                index, option in
-                                switch option {
-                                case .lot(let rec):
-                                    RecommendationCard(
-                                        recommendation: rec,
-                                        rank: index + 1,
-                                        isSelected: state.parking.selectedOption == option,
-                                        elevationProfile: state.parking.elevationProfiles[
-                                            rec.lotSlug]
-                                    )
-                                    .id(option.id)
-                                    .onTapGesture {
-                                        state.selectOption(option)
-                                    }
-                                case .meter(let seg, let cost):
-                                    StreetMeterCard(
-                                        segment: seg,
-                                        cost: cost,
-                                        isSelected: state.parking.selectedOption == option,
-                                        walkingTimeDisplay: state.parking.meterWalkingDisplays[
-                                            seg.segmentId],
-                                        elevationProfile: state.parking.elevationProfiles[
-                                            "meter-\(seg.segmentId)"]
-                                    )
-                                    .id(option.id)
-                                    .onTapGesture {
-                                        state.selectOption(option)
-                                    }
+                        VStack(spacing: 0) {
+                            filterBar
+
+                            VStack(spacing: 10) {
+                                ForEach(Array(options.enumerated()), id: \.element.id) {
+                                    index, option in
+                                    optionRow(option: option, index: index)
                                 }
                             }
+                            .padding(.horizontal, 16)
+                            .padding(.top, 4)
+                            .padding(.bottom, 100)
+                            .animation(
+                                .spring(response: 0.5, dampingFraction: 0.88),
+                                value: state.expandedPreviewSlug
+                            )
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 4)
-                        .padding(.bottom, 100)
                     }
                     .scrollIndicators(.hidden)
                     .onChange(of: state.parking.selectedOption) {
@@ -205,6 +178,352 @@ struct RecommendationSheet: View {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private var emptyFilterState: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "car.fill")
+                .font(.largeTitle)
+                .foregroundStyle(.secondary)
+            Text("No parking options match\nyour current filters")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            Button("Reset filters") {
+                state.parking.showFreeOnly = false
+                state.parking.showMeters = true
+            }
+            .font(.subheadline.weight(.medium))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 40)
+    }
+
+    @ViewBuilder
+    private func optionRow(option: ParkingOption, index: Int) -> some View {
+        switch option {
+        case .lot(let rec):
+            LotCardRow(
+                recommendation: rec,
+                rank: index + 1,
+                option: option,
+                elevationProfile: state.parking.elevationProfiles[rec.lotSlug]
+            )
+        case .meter(let seg, let cost):
+            StreetMeterCard(
+                segment: seg,
+                cost: cost,
+                isSelected: state.parking.selectedOption == option,
+                walkingTimeDisplay: state.parking.meterWalkingDisplays[seg.segmentId],
+                walkingDistanceMeters: state.parking.meterWalkingDistances[seg.segmentId],
+                elevationProfile: state.parking.elevationProfiles["meter-\(seg.segmentId)"]
+            )
+            .id(option.id)
+            .onTapGesture {
+                state.selectOption(option)
+            }
+        }
+    }
+}
+
+// MARK: - Lot Card Row — Single morphing view
+
+/// A unified card that smoothly morphs between compact and expanded states.
+/// Uses `matchedGeometryEffect` on shared elements (name, cost) so they
+/// glide between positions instead of popping. The expanded state shows
+/// full-bleed Look Around imagery with content overlaid on a gradient.
+private struct LotCardRow: View {
+    @Environment(AppState.self) private var state
+    @Namespace private var cardNS
+    let recommendation: ParkingRecommendation
+    let rank: Int
+    let option: ParkingOption
+    var elevationProfile: WalkingDirectionsService.ElevationProfile? = nil
+
+    @State private var lookAroundScene: MKLookAroundScene?
+
+    private var isExpanded: Bool {
+        state.expandedPreviewSlug == recommendation.lotSlug
+    }
+
+    private var lot: ParkingLot? {
+        state.parking.lotLookup[recommendation.lotSlug]
+    }
+
+    // MARK: - Body
+
+    var body: some View {
+        ZStack(alignment: .bottomLeading) {
+            // Layer 1: Background
+            backgroundLayer
+
+            // Layer 2: Content overlay
+            contentLayer
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .strokeBorder(
+                    isExpanded
+                        ? Color.accentColor.opacity(0.3)
+                        : (state.parking.selectedOption == option
+                            ? Color.accentColor.opacity(0.5) : .clear),
+                    lineWidth: isExpanded ? 1.5 : 2
+                )
+        )
+        .shadow(
+            color: .black.opacity(isExpanded ? 0.18 : 0.06),
+            radius: isExpanded ? 16 : 4,
+            y: isExpanded ? 8 : 2
+        )
+        .id(option.id)
+        .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .onTapGesture { handleTap() }
+        .sensoryFeedback(.impact(flexibility: .soft, intensity: 0.6), trigger: isExpanded)
+        .task(id: isExpanded) {
+            if isExpanded && lookAroundScene == nil {
+                lookAroundScene = await LookAroundService.fetchScene(
+                    lat: recommendation.lat, lng: recommendation.lng
+                )
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityHint(isExpanded ? "Double tap for full details" : "Double tap to preview")
+    }
+
+    // MARK: - Background Layer
+
+    @ViewBuilder
+    private var backgroundLayer: some View {
+        if isExpanded {
+            // Full-bleed Look Around or tier gradient
+            ZStack {
+                if let scene = lookAroundScene {
+                    LookAroundPreview(initialScene: scene)
+                        .transition(.opacity.animation(.easeIn(duration: 0.4)))
+                } else {
+                    expandedFallback
+                }
+
+                // Gradient for text readability
+                LinearGradient(
+                    stops: [
+                        .init(color: .clear, location: 0.0),
+                        .init(color: .black.opacity(0.25), location: 0.35),
+                        .init(color: .black.opacity(0.85), location: 1.0),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .allowsHitTesting(false)
+            }
+            .frame(height: 300)
+            .transition(.opacity)
+        } else {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(.regularMaterial)
+                .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        }
+    }
+
+    // MARK: - Content Layer
+
+    @ViewBuilder
+    private var contentLayer: some View {
+        if isExpanded {
+            expandedContent
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+        } else {
+            compactContent
+                .transition(.opacity)
+        }
+    }
+
+    // MARK: - Compact Content
+
+    private var compactContent: some View {
+        HStack(spacing: 12) {
+            rankBadge
+
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(recommendation.lotDisplayName)
+                        .font(.subheadline.weight(.semibold))
+                        .lineLimit(1)
+                        .matchedGeometryEffect(id: "name", in: cardNS)
+                    Spacer()
+                    Text(recommendation.costDisplay)
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(recommendation.costColor)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(
+                            Capsule().fill(recommendation.costColor.opacity(0.12))
+                        )
+                        .matchedGeometryEffect(id: "cost", in: cardNS)
+                }
+
+                HStack(spacing: 12) {
+                    if let walkTime = recommendation.walkingTimeDisplay {
+                        Label(walkTime, systemImage: "figure.walk")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    if let elevation = elevationProfile,
+                        elevation.isNotable(
+                            distanceMeters: recommendation.walkingDistanceMeters)
+                    {
+                        Label(
+                            "\(Int(elevation.gainMeters * 3.281))ft\u{2191}",
+                            systemImage: "arrow.up.right"
+                        )
+                        .font(.caption)
+                        .foregroundStyle(
+                            elevation.isSteep(
+                                distanceMeters: recommendation.walkingDistanceMeters)
+                                ? .orange : .secondary)
+                    }
+
+                    if recommendation.hasTram {
+                        Label("Tram", systemImage: "tram.fill")
+                            .font(.caption)
+                            .foregroundStyle(Color.tram)
+                    }
+
+                    Spacer()
+                }
+
+                if let tip = recommendation.tips.first {
+                    Text(tip)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(12)
+    }
+
+    // MARK: - Expanded Content
+
+    private var expandedContent: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Spacer(minLength: 0)
+
+            // Tier badge
+            Text(recommendation.tier.name)
+                .font(.caption2.weight(.bold))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 3)
+                .background(recommendation.tier.color.opacity(0.9), in: Capsule())
+
+            // Name + cost
+            HStack(alignment: .bottom) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(recommendation.lotDisplayName)
+                        .font(.title3.weight(.bold))
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .matchedGeometryEffect(id: "name", in: cardNS)
+
+                    if let lot {
+                        Text(lot.address)
+                            .font(.caption)
+                            .foregroundStyle(.white.opacity(0.7))
+                            .lineLimit(1)
+                    }
+                }
+
+                Spacer()
+
+                Text(recommendation.costDisplay)
+                    .font(.title2.weight(.bold))
+                    .foregroundStyle(recommendation.isFree ? .green : .white)
+                    .matchedGeometryEffect(id: "cost", in: cardNS)
+            }
+
+            // Stats + details affordance
+            HStack(spacing: 14) {
+                if let walkTime = recommendation.walkingTimeDisplay {
+                    Label(walkTime, systemImage: "figure.walk")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.white.opacity(0.8))
+                }
+
+                if recommendation.hasTram {
+                    Label("Tram", systemImage: "tram.fill")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.white.opacity(0.8))
+                }
+
+                if let lot, let capacity = lot.capacity {
+                    Label("\(capacity) spots", systemImage: "car.fill")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.white.opacity(0.7))
+                }
+
+                Spacer()
+
+                HStack(spacing: 4) {
+                    Text("Details")
+                        .font(.caption.weight(.semibold))
+                    Image(systemName: "chevron.right")
+                        .font(.caption2.weight(.bold))
+                }
+                .foregroundStyle(.white.opacity(0.9))
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 16)
+        .padding(.top, 16)
+        .frame(height: 300, alignment: .bottom)
+    }
+
+    // MARK: - Components
+
+    private var rankBadge: some View {
+        Text("#\(rank)")
+            .font(.caption.weight(.bold))
+            .foregroundStyle(rank <= 3 ? .white : .secondary)
+            .frame(width: 32, height: 32)
+            .background(
+                Circle()
+                    .fill(rank <= 3 ? Color.accentColor : Color(.systemGray5))
+            )
+    }
+
+    private var expandedFallback: some View {
+        LinearGradient(
+            colors: [
+                recommendation.tier.color.opacity(0.5),
+                recommendation.tier.color.opacity(0.15),
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .overlay {
+            Image(systemName: "car.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(.white.opacity(0.12))
+        }
+    }
+
+    // MARK: - Tap
+
+    private func handleTap() {
+        if isExpanded {
+            state.openDetail(for: recommendation)
+        } else {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.88)) {
+                state.expandPreview(for: recommendation)
             }
         }
     }

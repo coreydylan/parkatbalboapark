@@ -55,6 +55,19 @@
 		BB11CC22DD33EE44FF550020 /* ParkingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB11CC22DD33EE44FF550021 /* ParkingOption.swift */; };
 		BB11CC22DD33EE44FF550030 /* StreetMeterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB11CC22DD33EE44FF550031 /* StreetMeterCard.swift */; };
 		CC99DD88EE77FF66AA550022 /* SupabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99DD88EE77FF66AA550011 /* SupabaseClient.swift */; };
+		DD11EE22FF33AA44BB550001 /* TierTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550002 /* TierTransition.swift */; };
+		DD11EE22FF33AA44BB550003 /* CompactTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550004 /* CompactTimePicker.swift */; };
+		DD11EE22FF33AA44BB550005 /* StreetViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550006 /* StreetViewService.swift */; };
+		DD11EE22FF33AA44BB550007 /* PricingExplanationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550008 /* PricingExplanationEngine.swift */; };
+		DD11EE22FF33AA44BB550009 /* LotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB55000A /* LotDetailView.swift */; };
+		DD11EE22FF33AA44BB55000B /* LotPhotoCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB55000C /* LotPhotoCarousel.swift */; };
+		DD11EE22FF33AA44BB55000D /* PricingExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB55000E /* PricingExplanationView.swift */; };
+		DD11EE22FF33AA44BB55000F /* ElevationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550010 /* ElevationChartView.swift */; };
+		DD11EE22FF33AA44BB550012 /* RateComparisonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550013 /* RateComparisonSection.swift */; };
+		DD11EE22FF33AA44BB550014 /* TierChangeTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550015 /* TierChangeTimeline.swift */; };
+		DD11EE22FF33AA44BB550016 /* AmenitiesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550017 /* AmenitiesGrid.swift */; };
+		DD11EE22FF33AA44BB550018 /* DataFreshnessFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11EE22FF33AA44BB550019 /* DataFreshnessFooter.swift */; };
+		EE11FF22AA33BB44CC550040 /* ExpandedLotCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE11FF22AA33BB44CC550041 /* ExpandedLotCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +121,19 @@
 		BB11CC22DD33EE44FF550021 /* ParkingOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingOption.swift; sourceTree = "<group>"; };
 		BB11CC22DD33EE44FF550031 /* StreetMeterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetMeterCard.swift; sourceTree = "<group>"; };
 		CC99DD88EE77FF66AA550011 /* SupabaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClient.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550002 /* TierTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierTransition.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550004 /* CompactTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactTimePicker.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550006 /* StreetViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetViewService.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550008 /* PricingExplanationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingExplanationEngine.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB55000A /* LotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotDetailView.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB55000C /* LotPhotoCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotPhotoCarousel.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB55000E /* PricingExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingExplanationView.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550010 /* ElevationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevationChartView.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550013 /* RateComparisonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateComparisonSection.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550015 /* TierChangeTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierChangeTimeline.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550017 /* AmenitiesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenitiesGrid.swift; sourceTree = "<group>"; };
+		DD11EE22FF33AA44BB550019 /* DataFreshnessFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFreshnessFooter.swift; sourceTree = "<group>"; };
+		EE11FF22AA33BB44CC550041 /* ExpandedLotCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedLotCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -151,6 +177,7 @@
 				BAF70F8239AC2B6FEE1CDEA1 /* PricingRule.swift */,
 				F7C7CF1FCD043EDF0B43E832 /* RecommendationResponse.swift */,
 				AA11BB22CC33DD44EE55FF02 /* StreetSegment.swift */,
+				DD11EE22FF33AA44BB550002 /* TierTransition.swift */,
 				6CEDC4B74BE8CF42783D160F /* Tram.swift */,
 				A3F4F77F0D5D42C787A0332E /* UserType.swift */,
 				F48D784B07A3C299FF51CC08 /* Waypoint.swift */,
@@ -193,10 +220,26 @@
 			path = Store;
 			sourceTree = "<group>";
 		};
+		DD11EE22FF33AA44BB55001A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				DD11EE22FF33AA44BB550017 /* AmenitiesGrid.swift */,
+				DD11EE22FF33AA44BB550019 /* DataFreshnessFooter.swift */,
+				DD11EE22FF33AA44BB550010 /* ElevationChartView.swift */,
+				DD11EE22FF33AA44BB55000A /* LotDetailView.swift */,
+				DD11EE22FF33AA44BB55000C /* LotPhotoCarousel.swift */,
+				DD11EE22FF33AA44BB55000E /* PricingExplanationView.swift */,
+				DD11EE22FF33AA44BB550013 /* RateComparisonSection.swift */,
+				DD11EE22FF33AA44BB550015 /* TierChangeTimeline.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		610A7B14C5701117E0BF5E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B49DBE2C3A8DBCFCBCEE440E /* Components */,
+				DD11EE22FF33AA44BB55001A /* Detail */,
 				C82466D08E912E913CC3B786 /* Info */,
 				B21EDEB061EBE6F1EE4C1474 /* Map */,
 				B689A743D811A28FEA99AE0C /* Onboarding */,
@@ -254,6 +297,7 @@
 		B49DBE2C3A8DBCFCBCEE440E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				DD11EE22FF33AA44BB550004 /* CompactTimePicker.swift */,
 				2FC9C97747641D9CEE466FDA /* CostBadge.swift */,
 				375FD8919307C0532C73CBA5 /* VisitDurationPicker.swift */,
 			);
@@ -273,6 +317,8 @@
 			children = (
 				5E2145A346A018AB09AC5F08 /* APIClient.swift */,
 				4E5D015E7D6EC0A07A64553E /* LocationService.swift */,
+				DD11EE22FF33AA44BB550008 /* PricingExplanationEngine.swift */,
+				DD11EE22FF33AA44BB550006 /* StreetViewService.swift */,
 				CC99DD88EE77FF66AA550011 /* SupabaseClient.swift */,
 				BB66CC77DD88EE99FF001122 /* WalkingDirectionsService.swift */,
 			);
@@ -298,6 +344,7 @@
 		F3897D289503AB7FFF4F5A04 /* Recommendations */ = {
 			isa = PBXGroup;
 			children = (
+				EE11FF22AA33BB44CC550041 /* ExpandedLotCard.swift */,
 				BEB293C0023BC73F1B4C178D /* RecommendationCard.swift */,
 				C9A118AF29B6DF9D0FD71D14 /* RecommendationSheet.swift */,
 				BB11CC22DD33EE44FF550031 /* StreetMeterCard.swift */,
@@ -411,6 +458,19 @@
 				22AA33BB44CC55DD66EE77FF /* UserProfile.swift in Sources */,
 				DCB73A0E76D2423B99914A2E /* UserType.swift in Sources */,
 				CC99DD88EE77FF66AA550022 /* SupabaseClient.swift in Sources */,
+				DD11EE22FF33AA44BB550016 /* AmenitiesGrid.swift in Sources */,
+				DD11EE22FF33AA44BB550003 /* CompactTimePicker.swift in Sources */,
+				DD11EE22FF33AA44BB550018 /* DataFreshnessFooter.swift in Sources */,
+				DD11EE22FF33AA44BB55000F /* ElevationChartView.swift in Sources */,
+				EE11FF22AA33BB44CC550040 /* ExpandedLotCard.swift in Sources */,
+				DD11EE22FF33AA44BB550009 /* LotDetailView.swift in Sources */,
+				DD11EE22FF33AA44BB55000B /* LotPhotoCarousel.swift in Sources */,
+				DD11EE22FF33AA44BB550007 /* PricingExplanationEngine.swift in Sources */,
+				DD11EE22FF33AA44BB55000D /* PricingExplanationView.swift in Sources */,
+				DD11EE22FF33AA44BB550012 /* RateComparisonSection.swift in Sources */,
+				DD11EE22FF33AA44BB550005 /* StreetViewService.swift in Sources */,
+				DD11EE22FF33AA44BB550014 /* TierChangeTimeline.swift in Sources */,
+				DD11EE22FF33AA44BB550001 /* TierTransition.swift in Sources */,
 				DD39BAA326282053A25A36DD /* VisitDurationPicker.swift in Sources */,
 				D4333BE3E2888F090DA992C3 /* Waypoint.swift in Sources */,
 			);

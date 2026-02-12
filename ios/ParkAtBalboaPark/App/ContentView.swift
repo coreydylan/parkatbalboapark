@@ -15,7 +15,7 @@ struct ContentView: View {
                     sheetDetent: $sheetDetent
                 )
                 .presentationDetents(
-                    [.fraction(0.08), .fraction(0.4), .fraction(0.5), .large],
+                    [.fraction(0.08), .fraction(0.4), .fraction(0.5), .fraction(0.55), .large],
                     selection: $sheetDetent
                 )
                 .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.4)))
@@ -60,6 +60,17 @@ struct ContentView: View {
             .onChange(of: state.parking.selectedOption) {
                 if state.parking.selectedOption != nil {
                     sheetDetent = .fraction(0.4)
+                }
+            }
+            .onChange(of: state.expandedPreviewSlug) {
+                if state.expandedPreviewSlug != nil && state.selectedDetailLot == nil {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+                        sheetDetent = .fraction(0.55)
+                    }
+                } else if state.expandedPreviewSlug == nil && state.selectedDetailLot == nil {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+                        sheetDetent = .fraction(0.4)
+                    }
                 }
             }
             .onChange(of: state.selectedDetailLot) {

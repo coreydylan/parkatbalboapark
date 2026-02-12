@@ -14,6 +14,30 @@ enum WalkingDirectionsService {
     struct ElevationProfile: Sendable {
         let gainMeters: Double
         let lossMeters: Double
+
+        /// Average grade as a percentage (gain / distance * 100).
+        /// Returns nil if distance is unavailable or zero.
+        func averageGrade(distanceMeters: Double?) -> Double? {
+            guard let d = distanceMeters, d > 0 else { return nil }
+            return (gainMeters / d) * 100
+        }
+
+        /// Whether the elevation gain is notable enough to display (≥ 5% average grade).
+        func isNotable(distanceMeters: Double?) -> Bool {
+            guard let grade = averageGrade(distanceMeters: distanceMeters) else {
+                // No distance data — fall back to absolute gain (steep short walks)
+                return gainMeters >= 10
+            }
+            return grade >= 5
+        }
+
+        /// Whether the grade is steep enough to warn about (≥ 10% average grade).
+        func isSteep(distanceMeters: Double?) -> Bool {
+            guard let grade = averageGrade(distanceMeters: distanceMeters) else {
+                return gainMeters >= 20
+            }
+            return grade >= 10
+        }
     }
 
     // MARK: - Walking Directions
@@ -74,16 +98,16 @@ enum WalkingDirectionsService {
     // MARK: - Elevation
 
     /// Fetch elevation profiles for multiple routes using Open-Meteo API.
-    /// Samples points along each route to reduce API calls.
+    /// Samples points along each route and batches requests (API limit: 100 coords).
     static func fetchElevationProfiles(
         for routes: [String: [CLLocationCoordinate2D]]
     ) async -> [String: ElevationProfile] {
-        // Collect all sampled points with their lot slug + index
+        // Collect all sampled points with their route key + index
         var allPoints: [(slug: String, coord: CLLocationCoordinate2D)] = []
         var slugSampleCounts: [(slug: String, count: Int)] = []
 
         for (slug, coords) in routes {
-            let sampled = sampleRoute(coords, maxPoints: 20)
+            let sampled = sampleRoute(coords, maxPoints: 10)
             for coord in sampled {
                 allPoints.append((slug: slug, coord: coord))
             }
@@ -92,51 +116,65 @@ enum WalkingDirectionsService {
 
         guard !allPoints.isEmpty else { return [:] }
 
-        // Query Open-Meteo for all points in one request
-        let lats = allPoints.map { String(format: "%.6f", $0.coord.latitude) }.joined(separator: ",")
-        let lngs = allPoints.map { String(format: "%.6f", $0.coord.longitude) }.joined(separator: ",")
+        // Fetch elevations in batches of 100 (API limit)
+        var allElevations: [Double] = []
+        let batchSize = 100
 
-        guard var components = URLComponents(string: "https://api.open-meteo.com/v1/elevation") else {
-            return [:]
-        }
-        components.queryItems = [
-            URLQueryItem(name: "latitude", value: lats),
-            URLQueryItem(name: "longitude", value: lngs),
-        ]
+        for batchStart in stride(from: 0, to: allPoints.count, by: batchSize) {
+            let batchEnd = min(batchStart + batchSize, allPoints.count)
+            let batch = Array(allPoints[batchStart..<batchEnd])
 
-        guard let url = components.url else { return [:] }
+            let lats = batch.map { String(format: "%.6f", $0.coord.latitude) }.joined(separator: ",")
+            let lngs = batch.map { String(format: "%.6f", $0.coord.longitude) }.joined(separator: ",")
 
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let response = try JSONDecoder().decode(OpenMeteoResponse.self, from: data)
-            let elevations = response.elevation
+            guard var components = URLComponents(string: "https://api.open-meteo.com/v1/elevation") else {
+                return [:]
+            }
+            components.queryItems = [
+                URLQueryItem(name: "latitude", value: lats),
+                URLQueryItem(name: "longitude", value: lngs),
+            ]
 
-            guard elevations.count == allPoints.count else { return [:] }
+            guard let url = components.url else { return [:] }
 
-            // Split elevations back into per-route arrays
-            var profiles: [String: ElevationProfile] = [:]
-            var offset = 0
+            do {
+                let (data, response) = try await URLSession.shared.data(from: url)
 
-            for (slug, count) in slugSampleCounts {
-                let routeElevations = Array(elevations[offset..<(offset + count)])
-                offset += count
-
-                var gain: Double = 0
-                var loss: Double = 0
-                for i in 1..<routeElevations.count {
-                    let diff = routeElevations[i] - routeElevations[i - 1]
-                    if diff > 0 { gain += diff }
-                    else { loss += abs(diff) }
+                if let httpResponse = response as? HTTPURLResponse,
+                   httpResponse.statusCode != 200 {
+                    return [:]
                 }
 
-                profiles[slug] = ElevationProfile(gainMeters: gain, lossMeters: loss)
+                let decoded = try JSONDecoder().decode(OpenMeteoResponse.self, from: data)
+                guard decoded.elevation.count == batch.count else { return [:] }
+                allElevations.append(contentsOf: decoded.elevation)
+            } catch {
+                return [:]
+            }
+        }
+
+        guard allElevations.count == allPoints.count else { return [:] }
+
+        // Split elevations back into per-route arrays
+        var profiles: [String: ElevationProfile] = [:]
+        var offset = 0
+
+        for (slug, count) in slugSampleCounts {
+            let routeElevations = Array(allElevations[offset..<(offset + count)])
+            offset += count
+
+            var gain: Double = 0
+            var loss: Double = 0
+            for i in 1..<routeElevations.count {
+                let diff = routeElevations[i] - routeElevations[i - 1]
+                if diff > 0 { gain += diff }
+                else { loss += abs(diff) }
             }
 
-            return profiles
-        } catch {
-            print("Elevation fetch failed: \(error)")
-            return [:]
+            profiles[slug] = ElevationProfile(gainMeters: gain, lossMeters: loss)
         }
+
+        return profiles
     }
 
     // MARK: - Helpers
@@ -148,13 +186,47 @@ enum WalkingDirectionsService {
     }
 
     /// Evenly sample points along a route polyline.
-    private static func sampleRoute(
+    static func sampleRoute(
         _ coords: [CLLocationCoordinate2D], maxPoints: Int
     ) -> [CLLocationCoordinate2D] {
         guard coords.count > maxPoints else { return coords }
         let step = Double(coords.count - 1) / Double(maxPoints - 1)
         return (0..<maxPoints).map { i in
             coords[min(Int(Double(i) * step), coords.count - 1)]
+        }
+    }
+
+    /// Fetch raw elevation values along a route for charting.
+    /// Returns an array of elevation values (meters) at evenly sampled points.
+    static func fetchRawElevations(
+        coords: [CLLocationCoordinate2D],
+        maxPoints: Int = 25
+    ) async -> [Double]? {
+        let sampled = sampleRoute(coords, maxPoints: maxPoints)
+        guard !sampled.isEmpty else { return nil }
+
+        let lats = sampled.map { String(format: "%.6f", $0.latitude) }.joined(separator: ",")
+        let lngs = sampled.map { String(format: "%.6f", $0.longitude) }.joined(separator: ",")
+
+        guard var components = URLComponents(string: "https://api.open-meteo.com/v1/elevation") else {
+            return nil
+        }
+        components.queryItems = [
+            URLQueryItem(name: "latitude", value: lats),
+            URLQueryItem(name: "longitude", value: lngs),
+        ]
+
+        guard let url = components.url else { return nil }
+
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else { return nil }
+            let decoded = try JSONDecoder().decode(OpenMeteoResponse.self, from: data)
+            guard decoded.elevation.count == sampled.count else { return nil }
+            return decoded.elevation
+        } catch {
+            return nil
         }
     }
 

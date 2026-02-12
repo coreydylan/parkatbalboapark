@@ -10,6 +10,7 @@ struct MainSheetContent: View {
     @State private var profileSetupPrompt = false
     @State private var showTripPlanner = false
     @State private var searchText = ""
+    @State private var showTimePicker = false
     @FocusState private var searchFocused: Bool
 
     private var isCollapsed: Bool {
@@ -110,9 +111,9 @@ struct MainSheetContent: View {
                         }
                         .font(.subheadline.weight(.medium))
                         .transition(.move(edge: .trailing).combined(with: .opacity))
-                    } else {
+                    } else if !showParkingResults {
                         Button { showProfile = true } label: {
-                            Image(systemName: "gearshape.fill")
+                            Image(systemName: "person.circle.fill")
                                 .font(.title3)
                                 .foregroundStyle(.secondary)
                         }
@@ -120,6 +121,7 @@ struct MainSheetContent: View {
                     }
                 }
                 .animation(.smooth(duration: 0.3), value: isSearching)
+                .animation(.smooth(duration: 0.3), value: showParkingResults)
             }
         }
     }
@@ -172,10 +174,14 @@ struct MainSheetContent: View {
                         .foregroundStyle(.tertiary)
                 }
                 .transition(.scale.combined(with: .opacity))
-            } else if !isSearching && state.parking.selectedDestination != nil && showParkingResults {
-                Button { clearDestination() } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(.tertiary)
+            } else if !isSearching && showParkingResults {
+                HStack(spacing: 6) {
+                    timeSummaryChip
+                    inlineProfileMenu
+                    Button { clearDestination() } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.tertiary)
+                    }
                 }
             }
         }
@@ -256,6 +262,79 @@ struct MainSheetContent: View {
                 Image(systemName: "person.circle")
                     .font(.title3)
                     .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    // MARK: - Inline Time & Profile
+
+    private var timeSummaryChip: some View {
+        let totalMinutes = state.parking.visitDurationMinutes
+        let hours = totalMinutes / 60
+        let mins = totalMinutes % 60
+        let durationStr: String
+        if hours > 0 && mins > 0 {
+            durationStr = "\(hours)h\(mins)m"
+        } else if hours > 0 {
+            durationStr = "\(hours)h"
+        } else {
+            durationStr = "\(mins)m"
+        }
+
+        return Button { showTimePicker.toggle() } label: {
+            HStack(spacing: 3) {
+                Image(systemName: "clock")
+                    .font(.system(size: 9))
+                Text(durationStr)
+                    .font(.caption2.weight(.medium))
+            }
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 7)
+            .padding(.vertical, 4)
+            .background(.quaternary, in: Capsule())
+        }
+        .popover(isPresented: $showTimePicker) {
+            CompactTimePicker()
+                .padding()
+                .presentationCompactAdaptation(.popover)
+        }
+    }
+
+    @ViewBuilder
+    private var inlineProfileMenu: some View {
+        if let userType = state.profile.effectiveUserType {
+            Menu {
+                if state.profile.userRoles.count > 1 {
+                    ForEach(
+                        Array(state.profile.userRoles).sorted(by: { $0.rawValue < $1.rawValue })
+                    ) { role in
+                        Button {
+                            state.profile.activeCapacity = role
+                        } label: {
+                            Label {
+                                Text(role.label)
+                            } icon: {
+                                if state.profile.effectiveUserType == role {
+                                    Image(systemName: "checkmark")
+                                } else {
+                                    Image(systemName: role.icon)
+                                }
+                            }
+                        }
+                    }
+                    Divider()
+                }
+                Button {
+                    showProfile = true
+                } label: {
+                    Label("Settings", systemImage: "gearshape")
+                }
+            } label: {
+                Image(systemName: userType.icon)
+                    .font(.system(size: 10))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 22, height: 22)
+                    .background(.quaternary, in: Circle())
             }
         }
     }

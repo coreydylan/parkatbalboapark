@@ -25,13 +25,14 @@ struct RecommendationCard: View {
                             .foregroundStyle(.secondary)
                     }
 
-                    if let elevation = elevationProfile, elevation.gainMeters >= 3 {
+                    if let elevation = elevationProfile,
+                       elevation.isNotable(distanceMeters: recommendation.walkingDistanceMeters) {
                         Label(
                             "\(Int(elevation.gainMeters * 3.281))ft↑",
                             systemImage: "arrow.up.right"
                         )
                         .font(.caption)
-                        .foregroundStyle(elevation.gainMeters > 15 ? .orange : .secondary)
+                        .foregroundStyle(elevation.isSteep(distanceMeters: recommendation.walkingDistanceMeters) ? .orange : .secondary)
                     }
 
                     if recommendation.hasTram {
@@ -51,6 +52,10 @@ struct RecommendationCard: View {
                         .lineLimit(1)
                 }
             }
+
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(.tertiary)
         }
         .padding(12)
         .background {
