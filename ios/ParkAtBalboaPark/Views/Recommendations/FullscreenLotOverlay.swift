@@ -31,7 +31,11 @@ struct FullscreenLotOverlay: View {
     var body: some View {
         GeometryReader { geo in
             if let recommendation {
-                let frame = morph.morphFrame(in: geo.size)
+                // During drag: keep full frame, apply GPU transforms (scaleEffect + offset).
+                // After gesture ends: use morphFrame for animated position interpolation.
+                let frame = morph.isDragging
+                    ? CGRect(origin: .zero, size: geo.size)
+                    : morph.morphFrame(in: geo.size)
 
                 ZStack {
                     // Background: Look Around or fallback gradient
@@ -75,6 +79,8 @@ struct FullscreenLotOverlay: View {
                 }
                 .frame(width: frame.width, height: frame.height)
                 .position(x: frame.midX, y: frame.midY)
+                .scaleEffect(morph.isDragging ? morph.dismissScale : 1.0)
+                .offset(y: morph.isDragging ? morph.dismissOffsetY : 0)
                 .clipShape(RoundedRectangle(cornerRadius: morph.cornerRadius, style: .continuous))
                 .shadow(color: .black.opacity(0.3), radius: 20, y: 10)
                 .gesture(dismissGesture)
@@ -82,9 +88,7 @@ struct FullscreenLotOverlay: View {
                 .onAppear {
                     withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
                         morph.dismissProgress = 0
-                    }
-                    // Stagger detail sections
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    } completion: {
                         withAnimation(.easeOut(duration: 0.35)) {
                             detailAppeared = true
                         }
@@ -310,8 +314,7 @@ struct FullscreenLotOverlay: View {
                     // Commit dismiss
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.88)) {
                         morph.dismissProgress = 1
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    } completion: {
                         state.closeDetail()
                     }
                 } else {
@@ -358,15 +361,14 @@ struct FullscreenLotOverlay: View {
         let targetOption = options[targetIndex]
 
         if case .lot(let rec) = targetOption {
+            // Reset detail sections for the new lot
+            detailAppeared = false
+            rawElevations = nil
             withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
                 morph.fullscreenLotSlug = rec.lotSlug
                 state.expandedPreviewSlug = rec.lotSlug
                 state.selectOption(.lot(rec))
-            }
-            // Reset detail sections for the new lot
-            detailAppeared = false
-            rawElevations = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            } completion: {
                 withAnimation(.easeOut(duration: 0.35)) {
                     detailAppeared = true
                 }

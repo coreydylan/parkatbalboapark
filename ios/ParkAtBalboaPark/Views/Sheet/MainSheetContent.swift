@@ -1,16 +1,21 @@
+import MapKit
 import SwiftUI
+import UIKit
 
 struct MainSheetContent: View {
     @Environment(AppState.self) private var state
     @Binding var showProfile: Bool
     @Binding var sheetDetent: PresentationDetent
 
+    @Namespace private var searchNS
     @State private var isSearching = false
     @State private var showParkingResults = false
     @State private var profileSetupPrompt = false
     @State private var showTripPlanner = false
     @State private var searchText = ""
     @State private var showTimePicker = false
+    @State private var poiResults: [MKMapItem] = []
+    @State private var poiSearchTask: Task<Void, Never>?
     @FocusState private var searchFocused: Bool
 
     private var isCollapsed: Bool {
@@ -58,8 +63,6 @@ struct MainSheetContent: View {
                             .transition(.opacity.combined(with: .offset(y: 8)))
                     }
                 }
-                .animation(.smooth(duration: 0.3), value: isSearching)
-                .animation(.smooth(duration: 0.3), value: showDestinationCard)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -75,7 +78,6 @@ struct MainSheetContent: View {
                 .ignoresSafeArea(edges: .bottom)
             }
         }
-        .animation(.smooth(duration: 0.35), value: isCollapsed)
         .sheet(isPresented: $showProfile) {
             ProfileView(showSetupPrompt: profileSetupPrompt)
         }
@@ -93,6 +95,18 @@ struct MainSheetContent: View {
                 showParkingResults = false
             }
         }
+        .onChange(of: searchText) {
+            poiSearchTask?.cancel()
+            if searchText.count >= 2 && filteredDestinations.isEmpty {
+                poiSearchTask = Task {
+                    try? await Task.sleep(for: .milliseconds(400))
+                    guard !Task.isCancelled else { return }
+                    await searchMapKitPOIs(query: searchText)
+                }
+            } else {
+                poiResults = []
+            }
+        }
     }
 
     // MARK: - Collapsed Pill / Search Bar
@@ -105,9 +119,7 @@ struct MainSheetContent: View {
                 ZStack {
                     if isSearching {
                         Button("Cancel") {
-                            withAnimation(.smooth(duration: 0.3)) {
-                                dismissSearch()
-                            }
+                            dismissSearch()
                         }
                         .font(.subheadline.weight(.medium))
                         .transition(.move(edge: .trailing).combined(with: .opacity))
@@ -120,19 +132,23 @@ struct MainSheetContent: View {
                         .transition(.scale.combined(with: .opacity))
                     }
                 }
-                .animation(.smooth(duration: 0.3), value: isSearching)
-                .animation(.smooth(duration: 0.3), value: showParkingResults)
             }
         }
     }
 
     private var pillContent: some View {
         HStack(spacing: 10) {
-            // Search icon + text
-            HStack(spacing: 6) {
-                Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.secondary)
-                    .font(isCollapsed ? .subheadline : .subheadline)
+            // Search icon / branded thumbnail + text
+            HStack(spacing: 8) {
+                if !isSearching, let dest = state.parking.selectedDestination {
+                    // Branded: circular photo thumbnail or type icon
+                    destinationPillThumbnail(dest)
+                        .matchedGeometryEffect(id: "destName-\(dest.id)", in: searchNS)
+                } else {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(.secondary)
+                        .font(.subheadline)
+                }
 
                 if isSearching {
                     TextField("Search destinations", text: $searchText)
@@ -198,15 +214,51 @@ struct MainSheetContent: View {
                     .fill(.quaternary.opacity(0.8))
             }
         }
-        .clipShape(isCollapsed ? AnyShape(Capsule()) : AnyShape(RoundedRectangle(cornerRadius: 10)))
-        .contentShape(isCollapsed ? AnyShape(Capsule()) : AnyShape(RoundedRectangle(cornerRadius: 10)))
+        .overlay {
+            // Type-colored accent border when destination is selected
+            if !isSearching, let dest = state.parking.selectedDestination {
+                Group {
+                    if isCollapsed {
+                        Capsule()
+                            .strokeBorder(dest.type.color.opacity(0.4), lineWidth: 1.5)
+                    } else {
+                        RoundedRectangle(cornerRadius: 10)
+                            .strokeBorder(dest.type.color.opacity(0.3), lineWidth: 1.5)
+                    }
+                }
+                .transition(.opacity)
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: isCollapsed ? 50 : 10, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: isCollapsed ? 50 : 10, style: .continuous))
         .onTapGesture { handlePillTap() }
-        .animation(.smooth(duration: 0.35), value: isCollapsed)
         .accessibilityLabel(
             state.parking.selectedDestination != nil
                 ? "Destination: \(state.parking.selectedDestination!.displayName)"
                 : "Search for a destination"
         )
+    }
+
+    // MARK: - Destination Pill Thumbnail
+
+    @ViewBuilder
+    private func destinationPillThumbnail(_ dest: Destination) -> some View {
+        let size: CGFloat = isCollapsed ? 24 : 28
+        if let image = DestinationCard.loadBundledImage(slug: dest.slug) {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: size, height: size)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(dest.type.color.opacity(0.6), lineWidth: 1.5))
+        } else {
+            // Fallback: type icon in a colored circle
+            Image(systemName: dest.type.icon)
+                .font(.system(size: size * 0.45))
+                .foregroundStyle(.white)
+                .frame(width: size, height: size)
+                .background(dest.type.color.opacity(0.8), in: Circle())
+        }
     }
 
     // MARK: - Profile Chip
@@ -356,9 +408,7 @@ struct MainSheetContent: View {
             profileSetupPrompt = true
             showProfile = true
         } else {
-            withAnimation(.smooth(duration: 0.3)) {
-                activateSearch()
-            }
+            activateSearch()
         }
     }
 
@@ -395,9 +445,7 @@ struct MainSheetContent: View {
                     // Action buttons
                     VStack(spacing: 10) {
                         Button {
-                            withAnimation(.smooth(duration: 0.3)) {
-                                commitToParking()
-                            }
+                            commitToParking()
                         } label: {
                             Label("Park Now", systemImage: "car.fill")
                                 .font(.subheadline.weight(.semibold))
@@ -420,9 +468,7 @@ struct MainSheetContent: View {
 
                     // Change destination
                     Button {
-                        withAnimation(.smooth(duration: 0.3)) {
-                            activateSearch()
-                        }
+                        activateSearch()
                     } label: {
                         Text("Change destination")
                             .font(.caption)
@@ -461,8 +507,32 @@ struct MainSheetContent: View {
 
                     ForEach(sortedAreas, id: \.self) { area in
                         sectionHeader(area.displayName)
-                        ForEach(filteredByArea(area)) { dest in
-                            destinationRow(dest)
+                        LazyVStack(spacing: 10) {
+                            ForEach(filteredByArea(area)) { dest in
+                                DestinationCard(
+                                    destination: dest,
+                                    namespace: searchNS
+                                )
+                                .onTapGesture {
+                                    selectDestinationWithAnimation(dest)
+                                }
+                            }
+                        }
+                    }
+
+                    // MapKit POI fallback when no internal results match
+                    if !poiResults.isEmpty {
+                        if filteredDestinations.isEmpty {
+                            sectionDivider
+                        }
+                        sectionHeader("Nearby Places")
+                        LazyVStack(spacing: 2) {
+                            ForEach(poiResults, id: \.self) { item in
+                                poiRow(item)
+                                    .onTapGesture {
+                                        selectDestinationWithAnimation(destinationFromMapItem(item))
+                                    }
+                            }
                         }
                     }
                 }
@@ -505,36 +575,6 @@ struct MainSheetContent: View {
             .padding(.bottom, 6)
     }
 
-    private func destinationRow(_ dest: Destination) -> some View {
-        Button {
-            state.parking.selectDestination(dest)
-            withAnimation(.smooth(duration: 0.3)) {
-                dismissSearch()
-            }
-        } label: {
-            HStack(spacing: 10) {
-                Image(systemName: dest.type.icon)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .frame(width: 24)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(dest.displayName)
-                        .font(.subheadline)
-                        .foregroundStyle(.primary)
-                    if let address = dest.address {
-                        Text(address)
-                            .font(.caption2)
-                            .foregroundStyle(.tertiary)
-                            .lineLimit(1)
-                    }
-                }
-                Spacer()
-            }
-            .padding(.vertical, 8)
-            .contentShape(Rectangle())
-        }
-    }
-
     private var sectionDivider: some View {
         Divider().padding(.vertical, 4)
     }
@@ -542,29 +582,53 @@ struct MainSheetContent: View {
     // MARK: - Actions
 
     private func activateSearch() {
-        isSearching = true
-        searchText = ""
-        sheetDetent = .large
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+        withAnimation(.smooth(duration: 0.3)) {
+            isSearching = true
+            searchText = ""
+            sheetDetent = .large
+        }
+        Task {
+            try? await Task.sleep(for: .milliseconds(150))
             searchFocused = true
         }
     }
 
     private func dismissSearch() {
-        searchFocused = false
-        isSearching = false
-        searchText = ""
-        // Go to destination card (taller detent) if destination was just selected
-        sheetDetent = state.parking.selectedDestination != nil ? .fraction(0.5) : .fraction(0.4)
+        withAnimation(.smooth(duration: 0.3)) {
+            searchFocused = false
+            isSearching = false
+            searchText = ""
+            poiResults = []
+            poiSearchTask?.cancel()
+            // Go to destination card (taller detent) if destination was just selected
+            sheetDetent = state.parking.selectedDestination != nil ? .fraction(0.5) : .fraction(0.4)
+        }
     }
 
     private func commitToParking() {
         if state.parking.tripDate == nil {
             state.parking.resetToNow()
         }
-        showParkingResults = true
-        sheetDetent = .fraction(0.4)
+        withAnimation(.smooth(duration: 0.3)) {
+            showParkingResults = true
+            sheetDetent = .fraction(0.4)
+        }
         Task { await state.fetchRecommendations() }
+    }
+
+    private func selectDestinationWithAnimation(_ dest: Destination) {
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.88)) {
+            state.parking.selectDestination(dest)
+            searchFocused = false
+            isSearching = false
+            searchText = ""
+            poiResults = []
+            poiSearchTask?.cancel()
+            sheetDetent = .fraction(0.5)
+        }
+        // Haptic on the moment the card "lands" in the pill
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
     }
 
     private func clearDestination() {
@@ -573,6 +637,155 @@ struct MainSheetContent: View {
         withAnimation(.smooth(duration: 0.3)) {
             sheetDetent = .fraction(0.08)
         }
+    }
+
+    // MARK: - MapKit POI Search
+
+    @MainActor
+    private func searchMapKitPOIs(query: String) async {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = query
+        request.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 32.7341, longitude: -117.1446),
+            span: MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025)
+        )
+        request.resultTypes = .pointOfInterest
+
+        do {
+            let search = MKLocalSearch(request: request)
+            let response = try await search.start()
+            poiResults = Array(response.mapItems.prefix(10))
+        } catch {
+            poiResults = []
+        }
+    }
+
+    private func destinationFromMapItem(_ item: MKMapItem) -> Destination {
+        let itemName = item.name ?? "Unknown Place"
+        let slug = "poi-" + itemName.lowercased()
+            .replacingOccurrences(of: "[^a-z0-9]+", with: "-", options: .regularExpression)
+            .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
+
+        let type: DestinationType = {
+            guard let category = item.pointOfInterestCategory else { return .other }
+            switch category {
+            case .restaurant, .cafe, .bakery, .brewery, .winery, .foodMarket:
+                return .dining
+            case .museum:
+                return .museum
+            case .park, .nationalPark:
+                return .garden
+            case .theater:
+                return .theater
+            case .stadium, .fitnessCenter, .golf, .kayaking, .swimming, .tennis:
+                return .recreation
+            case .zoo, .aquarium, .animalService:
+                return .zoo
+            default:
+                return .other
+            }
+        }()
+
+        let coordinate = item.location.coordinate
+        let address: String? = item.address?.shortAddress
+
+        return Destination(
+            id: slug,
+            slug: slug,
+            name: itemName,
+            displayName: itemName,
+            area: .centralMesa,
+            type: type,
+            address: address,
+            lat: coordinate.latitude,
+            lng: coordinate.longitude
+        )
+    }
+
+    private func poiCategoryIcon(_ item: MKMapItem) -> String {
+        guard let category = item.pointOfInterestCategory else { return "mappin" }
+        switch category {
+        case .restaurant, .cafe, .bakery, .brewery, .winery, .foodMarket:
+            return "fork.knife"
+        case .museum:
+            return "building.columns"
+        case .park, .nationalPark:
+            return "leaf"
+        case .theater:
+            return "theatermasks"
+        case .stadium, .fitnessCenter, .golf, .kayaking, .swimming, .tennis:
+            return "figure.run"
+        case .zoo, .aquarium, .animalService:
+            return "tortoise"
+        case .store, .pharmacy:
+            return "bag"
+        case .hotel:
+            return "bed.double"
+        case .hospital:
+            return "cross.case"
+        case .parking:
+            return "car"
+        default:
+            return "mappin"
+        }
+    }
+
+    private func poiCategoryColor(_ item: MKMapItem) -> Color {
+        guard let category = item.pointOfInterestCategory else { return .secondary }
+        switch category {
+        case .restaurant, .cafe, .bakery, .brewery, .winery, .foodMarket:
+            return DestinationType.dining.color
+        case .museum:
+            return DestinationType.museum.color
+        case .park, .nationalPark:
+            return DestinationType.garden.color
+        case .theater:
+            return DestinationType.theater.color
+        case .stadium, .fitnessCenter, .golf, .kayaking, .swimming, .tennis:
+            return DestinationType.recreation.color
+        case .zoo, .aquarium, .animalService:
+            return DestinationType.zoo.color
+        default:
+            return .secondary
+        }
+    }
+
+    private func poiRow(_ item: MKMapItem) -> some View {
+        HStack(spacing: 12) {
+            // Category icon
+            Image(systemName: poiCategoryIcon(item))
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(.white)
+                .frame(width: 32, height: 32)
+                .background(poiCategoryColor(item).opacity(0.85), in: Circle())
+
+            // Name + address
+            VStack(alignment: .leading, spacing: 2) {
+                Text(item.name ?? "Unknown")
+                    .font(.subheadline.weight(.medium))
+                    .lineLimit(1)
+
+                if let subtitle = item.address?.shortAddress,
+                   !subtitle.isEmpty {
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+
+            Spacer(minLength: 4)
+
+            Text("Nearby")
+                .font(.caption2.weight(.medium))
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 3)
+                .background(.quaternary, in: Capsule())
+        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 4)
+        .contentShape(Rectangle())
     }
 
     // MARK: - Filtering

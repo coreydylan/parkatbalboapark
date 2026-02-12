@@ -11,17 +11,16 @@ class MapState {
 
     var filters: MapFilters = MapFilters()
 
-    private var rotationTimer: Timer?
-    private var rotationHeading: Double = 0
-
     // Two-phase flyover state
     private var phase1Center: CLLocationCoordinate2D?
     private var phase2Center: CLLocationCoordinate2D?
     private var phase1Distance: Double = 400
     private var phase2Distance: Double = 600
-    private var flyoverStartTime: Date?
     private let closeOrbitDuration: TimeInterval = 3.5
     private let zoomOutDuration: TimeInterval = 2.5
+    private let orbitPeriod: TimeInterval = 20 // seconds for one full 360° rotation
+
+    private var phaseTransitionTask: Task<Void, Never>?
 
     func focusOn(_ coordinate: CLLocationCoordinate2D) {
         withAnimation(.smooth) {
@@ -33,6 +32,8 @@ class MapState {
     }
 
     /// Two-phase flyover: first orbits close around the lot, then zooms out to show the walking route.
+    /// Phase 1 uses a single long-duration linear animation for the orbit (MapKit interpolates on GPU).
+    /// Phase 2 transitions camera to a wider view after `closeOrbitDuration` seconds.
     func startFlyover(
         lotCoordinate: CLLocationCoordinate2D,
         destinationCoordinate: CLLocationCoordinate2D?
@@ -41,8 +42,6 @@ class MapState {
 
         phase1Center = lotCoordinate
         phase1Distance = 400
-        rotationHeading = 0
-        flyoverStartTime = Date()
 
         // Calculate phase 2 target (midpoint between lot and destination)
         if let dest = destinationCoordinate {
@@ -58,7 +57,7 @@ class MapState {
             phase2Center = nil
         }
 
-        // Initial tilt into 3D close orbit
+        // Initial tilt into 3D close orbit (no rotation yet)
         withAnimation(.easeInOut(duration: 1.2)) {
             cameraPosition = .camera(MapCamera(
                 centerCoordinate: lotCoordinate,
@@ -68,64 +67,46 @@ class MapState {
             ))
         }
 
-        // Start rotation
-        rotationTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
-            Task { @MainActor in
-                self?.tickRotation()
+        // After the tilt animation settles, start the continuous orbit via a single long animation.
+        // MapKit smoothly interpolates heading from 0→360 on the GPU — no per-frame Timer needed.
+        phaseTransitionTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(1.2))
+            guard !Task.isCancelled, let self else { return }
+
+            // Phase 1: continuous orbit — single linear animation for full rotation
+            withAnimation(.linear(duration: self.orbitPeriod).repeatForever(autoreverses: false)) {
+                self.cameraPosition = .camera(MapCamera(
+                    centerCoordinate: lotCoordinate,
+                    distance: 400,
+                    heading: 360,
+                    pitch: 60
+                ))
+            }
+
+            // Wait for the close orbit duration before transitioning
+            try? await Task.sleep(for: .seconds(self.closeOrbitDuration))
+            guard !Task.isCancelled else { return }
+
+            // Phase 2: zoom out to show lot + destination (if available)
+            if let center2 = self.phase2Center {
+                withAnimation(.easeInOut(duration: self.zoomOutDuration)) {
+                    self.cameraPosition = .camera(MapCamera(
+                        centerCoordinate: center2,
+                        distance: self.phase2Distance,
+                        heading: 360,
+                        pitch: 50
+                    ))
+                }
             }
         }
     }
 
     /// Exit flyover mode and return to standard overhead view.
     func stopFlyover() {
-        rotationTimer?.invalidate()
-        rotationTimer = nil
+        phaseTransitionTask?.cancel()
+        phaseTransitionTask = nil
         phase1Center = nil
         phase2Center = nil
-        flyoverStartTime = nil
-    }
-
-    private func tickRotation() {
-        guard let center1 = phase1Center, let startTime = flyoverStartTime else { return }
-
-        let elapsed = Date().timeIntervalSince(startTime)
-
-        let currentCenter: CLLocationCoordinate2D
-        let currentDistance: Double
-        let currentPitch: Double
-
-        if elapsed < closeOrbitDuration {
-            // Phase 1: close orbit around the parking lot
-            currentCenter = center1
-            currentDistance = phase1Distance
-            currentPitch = 60
-        } else if let center2 = phase2Center {
-            // Phase 2: smoothly zoom out to show lot + destination
-            let t = min(1.0, (elapsed - closeOrbitDuration) / zoomOutDuration)
-            let eased = t * t * (3 - 2 * t) // smoothStep easing
-
-            currentCenter = CLLocationCoordinate2D(
-                latitude: center1.latitude + (center2.latitude - center1.latitude) * eased,
-                longitude: center1.longitude + (center2.longitude - center1.longitude) * eased
-            )
-            currentDistance = phase1Distance + (phase2Distance - phase1Distance) * eased
-            currentPitch = 60 + (50 - 60) * eased
-        } else {
-            // No destination: continue close orbit
-            currentCenter = center1
-            currentDistance = phase1Distance
-            currentPitch = 60
-        }
-
-        rotationHeading += 0.15
-        if rotationHeading >= 360 { rotationHeading -= 360 }
-
-        cameraPosition = .camera(MapCamera(
-            centerCoordinate: currentCenter,
-            distance: currentDistance,
-            heading: rotationHeading,
-            pitch: currentPitch
-        ))
     }
 }
 

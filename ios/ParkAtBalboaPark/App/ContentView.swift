@@ -4,6 +4,17 @@ struct ContentView: View {
     @Environment(AppState.self) private var state
     @State private var showProfile = false
     @State private var sheetDetent: PresentationDetent = .fraction(0.08)
+    @State private var recommendationTask: Task<Void, Never>?
+
+    private var recommendationSignature: Int {
+        var hasher = Hasher()
+        hasher.combine(state.parking.startTime)
+        hasher.combine(state.parking.endTime)
+        hasher.combine(state.profile.effectiveUserType)
+        hasher.combine(state.profile.hasPass)
+        hasher.combine(state.profile.isVerifiedResident)
+        return hasher.finalize()
+    }
 
     var body: some View {
         @Bindable var appState = state
@@ -32,29 +43,14 @@ struct ContentView: View {
                     state.map.focusOn(dest.coordinate)
                 }
             }
-            .onChange(of: state.parking.startTime) {
-                if !state.parking.recommendations.isEmpty {
-                    Task { await state.fetchRecommendations() }
-                }
-            }
-            .onChange(of: state.parking.endTime) {
-                if !state.parking.recommendations.isEmpty {
-                    Task { await state.fetchRecommendations() }
-                }
-            }
-            .onChange(of: state.profile.effectiveUserType) {
-                if state.parking.selectedDestination != nil && !state.parking.recommendations.isEmpty {
-                    Task { await state.fetchRecommendations() }
-                }
-            }
-            .onChange(of: state.profile.hasPass) {
-                if !state.parking.recommendations.isEmpty {
-                    Task { await state.fetchRecommendations() }
-                }
-            }
-            .onChange(of: state.profile.isVerifiedResident) {
-                if !state.parking.recommendations.isEmpty {
-                    Task { await state.fetchRecommendations() }
+            .onChange(of: recommendationSignature) {
+                guard state.parking.selectedDestination != nil else { return }
+                guard !state.parking.recommendations.isEmpty else { return }
+                recommendationTask?.cancel()
+                recommendationTask = Task {
+                    try? await Task.sleep(for: .milliseconds(100))
+                    guard !Task.isCancelled else { return }
+                    await state.fetchRecommendations()
                 }
             }
             .onChange(of: state.parking.selectedOption) {

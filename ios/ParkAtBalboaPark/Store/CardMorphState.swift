@@ -26,6 +26,16 @@ class CardMorphState {
         20 * dismissProgress
     }
 
+    /// GPU-friendly scale transform during drag (scales down to 85% at full dismiss).
+    var dismissScale: CGFloat {
+        1.0 - (dismissProgress * 0.15)
+    }
+
+    /// GPU-friendly vertical offset during drag (slides down 200pt at full dismiss).
+    var dismissOffsetY: CGFloat {
+        dismissProgress * 200
+    }
+
     /// Interpolates between the expanded card frame and full container.
     func morphFrame(in containerSize: CGSize) -> CGRect {
         let fullFrame = CGRect(origin: .zero, size: containerSize)
