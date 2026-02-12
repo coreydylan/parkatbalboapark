@@ -4,40 +4,40 @@ struct MapFilterBar: View {
     @Environment(AppState.self) private var state
 
     var body: some View {
-        @Bindable var state = state
+        @Bindable var mapState = state.map
 
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 FilterChip(
                     label: "Tram",
                     icon: "tram.fill",
-                    isActive: state.mapFilters.showTram
+                    isActive: state.map.filters.showTram
                 ) {
-                    state.mapFilters.showTram.toggle()
+                    state.map.filters.showTram.toggle()
                 }
 
                 FilterChip(
                     label: "Restrooms",
                     icon: "toilet",
-                    isActive: state.mapFilters.showRestrooms
+                    isActive: state.map.filters.showRestrooms
                 ) {
-                    state.mapFilters.showRestrooms.toggle()
+                    state.map.filters.showRestrooms.toggle()
                 }
 
                 FilterChip(
                     label: "Water",
                     icon: "drop.fill",
-                    isActive: state.mapFilters.showWater
+                    isActive: state.map.filters.showWater
                 ) {
-                    state.mapFilters.showWater.toggle()
+                    state.map.filters.showWater.toggle()
                 }
 
                 FilterChip(
                     label: "EV",
                     icon: "ev.plug.ac.type.2",
-                    isActive: state.mapFilters.showEvCharging
+                    isActive: state.map.filters.showEvCharging
                 ) {
-                    state.mapFilters.showEvCharging.toggle()
+                    state.map.filters.showEvCharging.toggle()
                 }
             }
             .padding(.horizontal, 16)
@@ -58,8 +58,10 @@ struct FilterChip: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
         }
-        .tint(isActive ? .green : .primary)
+        .tint(isActive ? Color.accentColor : .primary)
         .glassEffect(.regular.interactive())
         .sensoryFeedback(.selection, trigger: isActive)
+        .accessibilityAddTraits(.isToggle)
+        .accessibilityValue(isActive ? "On" : "Off")
     }
 }

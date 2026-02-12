@@ -7,46 +7,33 @@ struct RecommendationCard: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // Rank badge
             rankBadge
-
-            // Main content
             VStack(alignment: .leading, spacing: 4) {
-                // Lot name + tier
                 HStack {
                     Text(recommendation.lotDisplayName)
                         .font(.subheadline.weight(.semibold))
                         .lineLimit(1)
-
                     Spacer()
-
-                    // Cost badge
                     costBadge
                 }
 
-                // Details row
                 HStack(spacing: 12) {
-                    // Walking time
                     if let walkTime = recommendation.walkingTimeDisplay {
                         Label(walkTime, systemImage: "figure.walk")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
 
-                    // Tram
                     if recommendation.hasTram {
                         Label("Tram", systemImage: "tram.fill")
                             .font(.caption)
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Color.tram)
                     }
 
                     Spacer()
-
-                    // Amenity badges
                     amenityBadges
                 }
 
-                // Tips (first tip only in compact view)
                 if let tip = recommendation.tips.first {
                     Text(tip)
                         .font(.caption2)
@@ -56,16 +43,21 @@ struct RecommendationCard: View {
             }
         }
         .padding(12)
-        .background(
+        .background {
             RoundedRectangle(cornerRadius: 16)
                 .fill(.regularMaterial)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(isSelected ? Color.green.opacity(0.6) : .clear, lineWidth: 2)
+                        .stroke(
+                            isSelected ? Color.accentColor.opacity(0.6) : .clear, lineWidth: 2)
                 )
-        )
+        }
+        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 16))
         .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
         .sensoryFeedback(.impact(flexibility: .soft), trigger: isSelected)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityDescription)
+        .accessibilityHint("Double tap to select this lot")
     }
 
     // MARK: - Components
@@ -77,7 +69,7 @@ struct RecommendationCard: View {
             .frame(width: 32, height: 32)
             .background(
                 Circle()
-                    .fill(rank <= 3 ? Color.green : Color(.systemGray5))
+                    .fill(rank <= 3 ? Color.accentColor : Color(.systemGray5))
             )
     }
 
@@ -96,11 +88,10 @@ struct RecommendationCard: View {
     @ViewBuilder
     private var amenityBadges: some View {
         HStack(spacing: 4) {
-            // Check tips for EV charging, ADA
             if recommendation.tips.contains(where: { $0.contains("EV") }) {
                 Image(systemName: "ev.plug.ac.type.2")
                     .font(.caption2)
-                    .foregroundStyle(.green)
+                    .foregroundStyle(Color.accentColor)
             }
             if recommendation.tips.contains(where: { $0.contains("ADA") }) {
                 Image(systemName: "accessibility")
@@ -108,5 +99,23 @@ struct RecommendationCard: View {
                     .foregroundStyle(.blue)
             }
         }
+    }
+
+    // MARK: - Accessibility
+
+    private var accessibilityDescription: String {
+        var parts = ["Rank \(rank)", recommendation.lotDisplayName]
+        if recommendation.isFree {
+            parts.append("Free parking")
+        } else {
+            parts.append("Cost: \(recommendation.costDisplay)")
+        }
+        if let walkTime = recommendation.walkingTimeDisplay {
+            parts.append("\(walkTime) walk")
+        }
+        if recommendation.hasTram {
+            parts.append("Tram available")
+        }
+        return parts.joined(separator: ", ")
     }
 }

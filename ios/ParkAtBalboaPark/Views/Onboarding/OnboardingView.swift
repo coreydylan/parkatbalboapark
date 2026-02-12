@@ -4,7 +4,6 @@ struct OnboardingView: View {
     @Environment(AppState.self) private var state
     @State private var step: OnboardingStep = .welcome
 
-    // Local state for building profile before committing
     @State private var isResident = false
     @State private var isNonresident = false
     @State private var isStaff = false
@@ -18,7 +17,6 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            // Blurred background
             Color.black.opacity(0.3)
                 .ignoresSafeArea()
 
@@ -46,16 +44,18 @@ struct OnboardingView: View {
 
             Image(systemName: "tree.fill")
                 .font(.system(size: 60))
-                .foregroundStyle(.green)
+                .foregroundStyle(Color.accentColor)
 
             VStack(spacing: 8) {
                 Text("Park at Balboa Park")
                     .font(.title.bold())
 
-                Text("Find the best parking lot based on\nwhere you're going, how long you're\nstaying, and who you are.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
+                Text(
+                    "Find the best parking lot based on\nwhere you're going, how long you're\nstaying, and who you are."
+                )
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
             }
 
             Spacer()
@@ -67,7 +67,6 @@ struct OnboardingView: View {
                     .padding(.vertical, 14)
             }
             .buttonStyle(.borderedProminent)
-            .tint(.green)
             .padding(.horizontal, 40)
             .padding(.bottom, 20)
         }
@@ -85,7 +84,6 @@ struct OnboardingView: View {
                 .font(.title2.bold())
 
             VStack(alignment: .leading, spacing: 16) {
-                // Residency
                 VStack(alignment: .leading, spacing: 8) {
                     Text("San Diego resident?")
                         .font(.subheadline.weight(.medium))
@@ -102,14 +100,13 @@ struct OnboardingView: View {
                     if isResident {
                         Toggle("I have a parking pass", isOn: $hasParkingPass)
                             .font(.subheadline)
-                            .tint(.green)
+                            .tint(Color.accentColor)
                             .padding(.top, 4)
                     }
                 }
 
                 Divider()
 
-                // Affiliation
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Work or volunteer at the park?")
                         .font(.subheadline.weight(.medium))
@@ -117,7 +114,9 @@ struct OnboardingView: View {
                         ToggleChip(label: "Staff", icon: "briefcase.fill", isActive: isStaff) {
                             isStaff.toggle()
                         }
-                        ToggleChip(label: "Volunteer", icon: "heart.fill", isActive: isVolunteer) {
+                        ToggleChip(
+                            label: "Volunteer", icon: "heart.fill", isActive: isVolunteer
+                        ) {
                             isVolunteer.toggle()
                         }
                     }
@@ -125,7 +124,6 @@ struct OnboardingView: View {
 
                 Divider()
 
-                // ADA
                 VStack(alignment: .leading, spacing: 8) {
                     Text("ADA parking placard?")
                         .font(.subheadline.weight(.medium))
@@ -149,8 +147,7 @@ struct OnboardingView: View {
                     .padding(.vertical, 14)
             }
             .buttonStyle(.borderedProminent)
-            .tint(.green)
-            .disabled(!isResident && !isNonresident)  // Must answer residency
+            .disabled(!isResident && !isNonresident)
         }
         .padding(24)
         .frame(maxWidth: 380)
@@ -161,12 +158,12 @@ struct OnboardingView: View {
     // MARK: - Actions
 
     private func commitProfile() {
-        if isResident { state.toggleRole(.resident) }
-        if isNonresident { state.toggleRole(.nonresident) }
-        if isStaff { state.toggleRole(.staff) }
-        if isVolunteer { state.toggleRole(.volunteer) }
-        if isADA { state.toggleRole(.ada) }
-        state.hasPass = hasParkingPass
+        if isResident { state.profile.toggleRole(.resident) }
+        if isNonresident { state.profile.toggleRole(.nonresident) }
+        if isStaff { state.profile.toggleRole(.staff) }
+        if isVolunteer { state.profile.toggleRole(.volunteer) }
+        if isADA { state.profile.toggleRole(.ada) }
+        state.profile.hasPass = hasParkingPass
         state.completeOnboarding()
     }
 }
@@ -193,10 +190,12 @@ struct ToggleChip: View {
             .padding(.vertical, 10)
             .background(
                 Capsule()
-                    .fill(isActive ? Color.green : Color(.systemGray6))
+                    .fill(isActive ? Color.accentColor : Color(.systemGray6))
             )
             .foregroundStyle(isActive ? .white : .primary)
         }
         .sensoryFeedback(.selection, trigger: isActive)
+        .accessibilityAddTraits(.isToggle)
+        .accessibilityValue(isActive ? "Selected" : "Not selected")
     }
 }

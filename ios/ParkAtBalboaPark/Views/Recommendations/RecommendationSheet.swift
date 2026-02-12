@@ -7,13 +7,16 @@ struct RecommendationSheet: View {
         VStack(spacing: 0) {
             sheetHeader
 
-            if state.effectiveUserType == nil {
+            if state.profile.effectiveUserType == nil {
                 emptyState
-            } else if state.isLoading {
+            } else if state.parking.isLoading {
                 loadingState
-            } else if state.recommendations.isEmpty {
+            } else if state.parking.recommendations.isEmpty {
                 noResultsState
             } else {
+                VisitDurationPicker()
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 6)
                 filterBar
                 recommendationList
             }
@@ -24,22 +27,37 @@ struct RecommendationSheet: View {
 
     private var sheetHeader: some View {
         VStack(spacing: 4) {
-            if state.effectiveUserType != nil {
+            if state.profile.effectiveUserType != nil {
                 HStack(spacing: 6) {
                     Circle()
-                        .fill(state.enforcementActive ? .orange : .green)
+                        .fill(
+                            state.parking.enforcementActive
+                                ? Color.enforcementActive : Color.costFree
+                        )
                         .frame(width: 8, height: 8)
-                    Text(state.enforcementActive ? "Enforcement active" : "Free parking hours")
-                        .font(.caption.weight(.medium))
-                        .foregroundStyle(state.enforcementActive ? .orange : .green)
+                    Text(
+                        state.parking.enforcementActive
+                            ? "Enforcement active" : "Free parking hours"
+                    )
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(
+                        state.parking.enforcementActive
+                            ? Color.enforcementActive : Color.costFree
+                    )
                 }
                 .padding(.horizontal, 10)
                 .padding(.vertical, 4)
                 .background(.ultraThinMaterial, in: Capsule())
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(
+                    state.parking.enforcementActive
+                        ? "Parking enforcement is currently active"
+                        : "Currently free parking hours"
+                )
             }
 
-            if !state.displayedRecommendations.isEmpty {
-                Text("\(state.displayedRecommendations.count) parking options")
+            if !state.parking.displayedRecommendations.isEmpty {
+                Text("\(state.parking.displayedRecommendations.count) parking options")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -52,10 +70,10 @@ struct RecommendationSheet: View {
 
     private var filterBar: some View {
         HStack(spacing: 8) {
-            // Sort indicator
             Label(
-                state.selectedDestination != nil ? "Closest" : "Best match",
-                systemImage: state.selectedDestination != nil ? "location.fill" : "star.fill"
+                state.parking.selectedDestination != nil ? "Closest" : "Best match",
+                systemImage: state.parking.selectedDestination != nil
+                    ? "location.fill" : "star.fill"
             )
             .font(.caption.weight(.medium))
             .foregroundStyle(.secondary)
@@ -63,23 +81,30 @@ struct RecommendationSheet: View {
             .padding(.vertical, 5)
             .background(.quaternary.opacity(0.6), in: Capsule())
 
-            // Free only filter
             Button {
                 withAnimation(.snappy(duration: 0.2)) {
-                    state.showFreeOnly.toggle()
+                    state.parking.showFreeOnly.toggle()
                 }
             } label: {
-                Label("Free only", systemImage: state.showFreeOnly ? "checkmark.circle.fill" : "circle")
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(state.showFreeOnly ? .white : .secondary)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(
-                        state.showFreeOnly ? AnyShapeStyle(.green) : AnyShapeStyle(.quaternary.opacity(0.6)),
-                        in: Capsule()
-                    )
+                Label(
+                    "Free only",
+                    systemImage: state.parking.showFreeOnly
+                        ? "checkmark.circle.fill" : "circle"
+                )
+                .font(.caption.weight(.medium))
+                .foregroundStyle(state.parking.showFreeOnly ? .white : .secondary)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(
+                    state.parking.showFreeOnly
+                        ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(
+                            .quaternary.opacity(0.6)),
+                    in: Capsule()
+                )
             }
-            .sensoryFeedback(.selection, trigger: state.showFreeOnly)
+            .sensoryFeedback(.selection, trigger: state.parking.showFreeOnly)
+            .accessibilityAddTraits(.isToggle)
+            .accessibilityValue(state.parking.showFreeOnly ? "On" : "Off")
 
             Spacer()
         }
@@ -131,10 +156,10 @@ struct RecommendationSheet: View {
     // MARK: - List
 
     private var recommendationList: some View {
-        let recs = state.displayedRecommendations
+        let recs = state.parking.displayedRecommendations
 
         return Group {
-            if recs.isEmpty && state.showFreeOnly {
+            if recs.isEmpty && state.parking.showFreeOnly {
                 VStack(spacing: 12) {
                     Image(systemName: "car.fill")
                         .font(.largeTitle)
@@ -144,7 +169,7 @@ struct RecommendationSheet: View {
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                     Button("Show all") {
-                        state.showFreeOnly = false
+                        state.parking.showFreeOnly = false
                     }
                     .font(.subheadline.weight(.medium))
                 }
@@ -157,7 +182,7 @@ struct RecommendationSheet: View {
                             RecommendationCard(
                                 recommendation: rec,
                                 rank: index + 1,
-                                isSelected: state.selectedLot?.lotSlug == rec.lotSlug
+                                isSelected: state.parking.selectedLot?.lotSlug == rec.lotSlug
                             )
                             .onTapGesture {
                                 state.selectLot(rec)

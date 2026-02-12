@@ -9,8 +9,7 @@ struct DestinationSearchView: View {
     var body: some View {
         NavigationStack {
             List {
-                // Selected destination (if any)
-                if let selected = state.selectedDestination {
+                if let selected = state.parking.selectedDestination {
                     Section {
                         HStack {
                             Image(systemName: "mappin.circle.fill")
@@ -24,7 +23,7 @@ struct DestinationSearchView: View {
                             }
                             Spacer()
                             Button("Clear") {
-                                state.selectedDestination = nil
+                                state.parking.selectDestination(nil)
                             }
                             .font(.subheadline)
                             .foregroundStyle(.red)
@@ -34,12 +33,11 @@ struct DestinationSearchView: View {
                     }
                 }
 
-                // Grouped results
                 ForEach(sortedAreas, id: \.self) { area in
                     Section {
                         ForEach(filteredByArea(area)) { dest in
                             Button {
-                                state.selectedDestination = dest
+                                state.parking.selectDestination(dest)
                                 dismiss()
                             } label: {
                                 HStack(spacing: 10) {
@@ -81,9 +79,9 @@ struct DestinationSearchView: View {
 
     private var filteredDestinations: [Destination] {
         if searchText.isEmpty {
-            return state.destinations
+            return state.parking.destinations
         }
-        return state.destinations.filter {
+        return state.parking.destinations.filter {
             $0.name.localizedCaseInsensitiveContains(searchText)
                 || $0.displayName.localizedCaseInsensitiveContains(searchText)
         }

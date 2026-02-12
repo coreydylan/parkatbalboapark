@@ -5,10 +5,8 @@ struct CostBadge: View {
     let costCents: Int
     let isFree: Bool
 
-    var color: Color {
-        if isFree { return .green }
-        if costCents <= 800 { return .orange }
-        return .red
+    private var color: Color {
+        Color.costColor(cents: costCents, isFree: isFree)
     }
 
     var body: some View {
@@ -24,5 +22,7 @@ struct CostBadge: View {
         .padding(.horizontal, 8)
         .padding(.vertical, 3)
         .background(color.opacity(0.12), in: Capsule())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(isFree ? "Free parking" : "Cost: \(costDisplay)")
     }
 }

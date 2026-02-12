@@ -7,18 +7,26 @@ struct InfoView: View {
     var body: some View {
         NavigationStack {
             List {
-                // Enforcement section
                 Section {
                     HStack {
                         Circle()
-                            .fill(state.enforcementActive ? .orange : .green)
+                            .fill(
+                                state.parking.enforcementActive
+                                    ? Color.enforcementActive : Color.costFree
+                            )
                             .frame(width: 10, height: 10)
                         Text(
-                            state.enforcementActive
+                            state.parking.enforcementActive
                                 ? "Currently enforced" : "Free parking right now"
                         )
                         .font(.subheadline.weight(.medium))
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(
+                        state.parking.enforcementActive
+                            ? "Parking is currently enforced"
+                            : "Free parking right now"
+                    )
 
                     Label("8:00 AM \u{2013} 6:00 PM daily", systemImage: "clock")
                         .font(.subheadline)
@@ -33,12 +41,11 @@ struct InfoView: View {
                     )
                 }
 
-                // Tram section
-                if let tram = state.tramData {
+                if let tram = state.parking.tramData {
                     Section {
                         Label("Free tram service", systemImage: "tram.fill")
                             .font(.subheadline.weight(.medium))
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Color.tram)
 
                         Label(
                             "\(tram.schedule.startTime) \u{2013} \(tram.schedule.endTime)",
@@ -52,7 +59,6 @@ struct InfoView: View {
                         )
                         .font(.subheadline)
 
-                        // Stops
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Stops")
                                 .font(.caption.weight(.medium))
@@ -63,7 +69,7 @@ struct InfoView: View {
                             ) { stop in
                                 HStack(spacing: 8) {
                                     Circle()
-                                        .fill(.orange)
+                                        .fill(Color.tram)
                                         .frame(width: 8, height: 8)
                                     Text(stop.name)
                                         .font(.subheadline)
@@ -77,7 +83,6 @@ struct InfoView: View {
                     }
                 }
 
-                // About section
                 Section {
                     Label("Balboa Park, San Diego", systemImage: "tree.fill")
                         .font(.subheadline)

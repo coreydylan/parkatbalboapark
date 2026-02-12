@@ -26,12 +26,6 @@ struct ParkingRecommendation: Codable, Identifiable, Hashable, Sendable {
     }
 
     var costColor: Color {
-        if isFree {
-            return .green
-        } else if costCents <= 800 {
-            return .orange
-        } else {
-            return .red
-        }
+        Color.costColor(cents: costCents, isFree: isFree)
     }
 }
