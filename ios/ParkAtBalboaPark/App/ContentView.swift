@@ -20,26 +20,39 @@ struct ContentView: View {
                     selection: $sheetDetent
                 )
                 .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.4)))
-                .presentationCornerRadius(20)
+                .presentationBackground(.clear)
+                .presentationDragIndicator(.hidden)
                 .interactiveDismissDisabled()
             }
             .fullScreenCover(isPresented: $appState.showOnboarding) {
                 OnboardingView()
             }
             .onChange(of: state.parking.selectedDestination) {
+                // Pan map to destination immediately
                 if let dest = state.parking.selectedDestination {
                     state.map.focusOn(dest.coordinate)
                 }
-                Task { await state.fetchRecommendations() }
             }
             .onChange(of: state.parking.visitHours) {
-                Task { await state.fetchRecommendations() }
+                // Only re-fetch if we already have results showing
+                if !state.parking.recommendations.isEmpty {
+                    Task { await state.fetchRecommendations() }
+                }
             }
             .onChange(of: state.profile.effectiveUserType) {
-                Task { await state.fetchRecommendations() }
+                if state.parking.selectedDestination != nil && !state.parking.recommendations.isEmpty {
+                    Task { await state.fetchRecommendations() }
+                }
             }
             .onChange(of: state.profile.hasPass) {
-                Task { await state.fetchRecommendations() }
+                if !state.parking.recommendations.isEmpty {
+                    Task { await state.fetchRecommendations() }
+                }
+            }
+            .onChange(of: state.profile.isVerifiedResident) {
+                if !state.parking.recommendations.isEmpty {
+                    Task { await state.fetchRecommendations() }
+                }
             }
             .onChange(of: state.parking.selectedLot) {
                 if state.parking.selectedLot != nil {

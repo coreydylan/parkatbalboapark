@@ -3,10 +3,34 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(AppState.self) private var state
     @Environment(\.dismiss) private var dismiss
+    var showSetupPrompt: Bool = false
+
+    private var march2Date: Date {
+        DateComponents(calendar: .current, year: 2026, month: 3, day: 2).date!
+    }
 
     var body: some View {
         NavigationStack {
             List {
+                if showSetupPrompt && state.profile.effectiveUserType == nil {
+                    Section {
+                        VStack(spacing: 8) {
+                            Image(systemName: "car.side.rear.and.collision.and.car.side.front")
+                                .font(.largeTitle)
+                                .foregroundStyle(Color.accentColor)
+                            Text("Welcome to Balboa Park")
+                                .font(.headline)
+                            Text("Tell us a little about yourself so we can find the best parking options and pricing just for you.")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .listRowBackground(Color.clear)
+                    }
+                }
+
                 Section {
                     ForEach(UserType.allCases) { type in
                         HStack {
@@ -75,6 +99,18 @@ struct ProfileView: View {
                 if state.profile.userRoles.contains(.resident) {
                     Section {
                         @Bindable var profile = state.profile
+                        Toggle(isOn: $profile.isVerifiedResident) {
+                            Label("Verified Resident", systemImage: "checkmark.seal.fill")
+                        }
+                        .tint(Color.accentColor)
+                    } footer: {
+                        Text(
+                            "Registered with the City of San Diego ($5 one-time fee). Verified residents get 50% off; free at most lots after March 2, 2026."
+                        )
+                    }
+
+                    Section {
+                        @Bindable var profile = state.profile
                         Toggle(isOn: $profile.hasPass) {
                             Label("Parking Pass", systemImage: "creditcard.fill")
                         }
@@ -101,8 +137,13 @@ struct ProfileView: View {
                         .font(.subheadline.weight(.medium))
                     }
 
-                    Label("8:00 AM \u{2013} 8:00 PM daily", systemImage: "clock")
-                        .font(.subheadline)
+                    Label(
+                        Date.now >= march2Date
+                            ? "8:00 AM \u{2013} 6:00 PM daily"
+                            : "8:00 AM \u{2013} 8:00 PM daily",
+                        systemImage: "clock"
+                    )
+                    .font(.subheadline)
 
                     Label("Free on holidays", systemImage: "calendar")
                         .font(.subheadline)

@@ -6,69 +6,128 @@ struct MainSheetContent: View {
     @Binding var sheetDetent: PresentationDetent
 
     @State private var isSearching = false
+    @State private var showParkingResults = false
+    @State private var profileSetupPrompt = false
+    @State private var showTripPlanner = false
     @State private var searchText = ""
     @FocusState private var searchFocused: Bool
-    @Namespace private var sheetNamespace
+
+    private var isCollapsed: Bool {
+        sheetDetent == .fraction(0.15)
+    }
+
+    private var hasProfile: Bool {
+        state.profile.effectiveUserType != nil
+    }
+
+    /// After a destination is selected but before "Park Now" / "Plan a Trip"
+    private var showDestinationCard: Bool {
+        state.parking.selectedDestination != nil && !showParkingResults && !isSearching
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            headerBar
-                .padding(.horizontal, 16)
-                .padding(.top, 12)
-                .padding(.bottom, 8)
+            if isCollapsed {
+                // Collapsed: floating pill only, no sheet chrome
+                collapsedPill
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
+            } else {
+                // Expanded: custom drag handle + search bar + content
+                Capsule()
+                    .fill(.quaternary)
+                    .frame(width: 36, height: 5)
+                    .padding(.top, 8)
+                    .padding(.bottom, 4)
 
-            // Crossfade between search and recommendations
-            ZStack {
-                if isSearching {
-                    destinationList
-                        .transition(.opacity.combined(with: .offset(y: 8)))
-                } else {
-                    RecommendationSheet()
-                        .transition(.opacity.combined(with: .offset(y: 8)))
+                collapsedPill
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+
+                ZStack {
+                    if isSearching {
+                        destinationList
+                            .transition(.opacity.combined(with: .offset(y: 8)))
+                    } else if showDestinationCard {
+                        destinationCard
+                            .transition(.opacity.combined(with: .offset(y: 8)))
+                    } else {
+                        RecommendationSheet()
+                            .transition(.opacity.combined(with: .offset(y: 8)))
+                    }
                 }
+                .animation(.smooth(duration: 0.3), value: isSearching)
+                .animation(.smooth(duration: 0.3), value: showDestinationCard)
             }
-            .animation(.smooth(duration: 0.3), value: isSearching)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background {
+            if !isCollapsed {
+                UnevenRoundedRectangle(
+                    topLeadingRadius: 16,
+                    bottomLeadingRadius: 0,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 16
+                )
+                .fill(.regularMaterial)
+                .ignoresSafeArea(edges: .bottom)
+            }
+        }
+        .animation(.smooth(duration: 0.35), value: isCollapsed)
         .sheet(isPresented: $showProfile) {
-            ProfileView()
+            ProfileView(showSetupPrompt: profileSetupPrompt)
         }
-    }
-
-    // MARK: - Header Bar
-
-    private var headerBar: some View {
-        HStack(spacing: 12) {
-            searchBar
-
-            ZStack {
-                if isSearching {
-                    Button("Cancel") {
-                        withAnimation(.smooth(duration: 0.3)) {
-                            dismissSearch()
-                        }
-                    }
-                    .font(.subheadline.weight(.medium))
-                    .transition(.move(edge: .trailing).combined(with: .opacity))
-                } else {
-                    Button { showProfile = true } label: {
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.title2)
-                            .foregroundStyle(.secondary)
-                    }
-                    .transition(.scale.combined(with: .opacity))
-                }
+        .sheet(isPresented: $showTripPlanner) {
+            TripPlannerSheet {
+                showTripPlanner = false
+                commitToParking()
             }
-            .animation(.smooth(duration: 0.3), value: isSearching)
+        }
+        .onChange(of: showProfile) {
+            if !showProfile { profileSetupPrompt = false }
+        }
+        .onChange(of: state.parking.selectedDestination) {
+            if state.parking.selectedDestination == nil {
+                showParkingResults = false
+            }
         }
     }
 
-    // MARK: - Search Bar
+    // MARK: - Collapsed Pill / Search Bar
 
-    private var searchBar: some View {
+    private var collapsedPill: some View {
+        HStack(spacing: 12) {
+            pillContent
+
+            if !isCollapsed {
+                ZStack {
+                    if isSearching {
+                        Button("Cancel") {
+                            withAnimation(.smooth(duration: 0.3)) {
+                                dismissSearch()
+                            }
+                        }
+                        .font(.subheadline.weight(.medium))
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                    } else {
+                        Button { showProfile = true } label: {
+                            Image(systemName: "gearshape.fill")
+                                .font(.title3)
+                                .foregroundStyle(.secondary)
+                        }
+                        .transition(.scale.combined(with: .opacity))
+                    }
+                }
+                .animation(.smooth(duration: 0.3), value: isSearching)
+            }
+        }
+    }
+
+    private var pillContent: some View {
         HStack(spacing: 8) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
-                .font(.subheadline)
+                .font(isCollapsed ? .body : .subheadline)
 
             if isSearching {
                 TextField("Search destinations", text: $searchText)
@@ -78,8 +137,12 @@ struct MainSheetContent: View {
             } else if let dest = state.parking.selectedDestination {
                 Text(dest.displayName)
                     .foregroundStyle(.primary)
-                    .font(.subheadline)
+                    .font(isCollapsed ? .subheadline.weight(.medium) : .subheadline)
                     .lineLimit(1)
+            } else if isCollapsed {
+                Text(state.profile.effectiveUserType?.label ?? "Start Here")
+                    .foregroundStyle(.secondary)
+                    .font(.subheadline.weight(.medium))
             } else {
                 Text("Where are you headed?")
                     .foregroundStyle(.tertiary)
@@ -88,39 +151,196 @@ struct MainSheetContent: View {
 
             Spacer()
 
-            if isSearching && !searchText.isEmpty {
-                Button {
-                    searchText = ""
-                } label: {
+            if isCollapsed {
+                if state.parking.selectedDestination != nil {
+                    Button { clearDestination() } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.tertiary)
+                            .font(.subheadline)
+                    }
+                } else {
+                    profileButton
+                }
+            } else if isSearching && !searchText.isEmpty {
+                Button { searchText = "" } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(.tertiary)
                 }
                 .transition(.scale.combined(with: .opacity))
-            } else if !isSearching && state.parking.selectedDestination != nil {
-                Button {
-                    state.parking.selectDestination(nil)
-                } label: {
+            } else if !isSearching && state.parking.selectedDestination != nil && showParkingResults {
+                Button { clearDestination() } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(.tertiary)
                 }
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 9)
-        .background(.quaternary.opacity(0.8), in: RoundedRectangle(cornerRadius: 10))
-        .contentShape(RoundedRectangle(cornerRadius: 10))
-        .onTapGesture {
-            if !isSearching {
-                withAnimation(.smooth(duration: 0.3)) {
-                    activateSearch()
-                }
+        .padding(.horizontal, isCollapsed ? 16 : 12)
+        .padding(.vertical, isCollapsed ? 12 : 9)
+        .background {
+            if isCollapsed {
+                Capsule()
+                    .fill(.ultraThinMaterial)
+                    .shadow(color: .black.opacity(0.1), radius: 8, y: 2)
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.quaternary.opacity(0.8))
             }
         }
+        .clipShape(isCollapsed ? AnyShape(Capsule()) : AnyShape(RoundedRectangle(cornerRadius: 10)))
+        .contentShape(isCollapsed ? AnyShape(Capsule()) : AnyShape(RoundedRectangle(cornerRadius: 10)))
+        .onTapGesture { handlePillTap() }
+        .animation(.smooth(duration: 0.35), value: isCollapsed)
         .accessibilityLabel(
             state.parking.selectedDestination != nil
                 ? "Destination: \(state.parking.selectedDestination!.displayName)"
                 : "Search for a destination"
         )
+    }
+
+    // MARK: - Profile Button / Menu
+
+    @ViewBuilder
+    private var profileButton: some View {
+        if hasProfile {
+            Menu {
+                // Role switcher
+                if state.profile.userRoles.count > 1 {
+                    ForEach(
+                        Array(state.profile.userRoles).sorted(by: { $0.rawValue < $1.rawValue })
+                    ) { role in
+                        Button {
+                            state.profile.activeCapacity = role
+                        } label: {
+                            Label {
+                                Text(role.label)
+                            } icon: {
+                                if state.profile.effectiveUserType == role {
+                                    Image(systemName: "checkmark")
+                                } else {
+                                    Image(systemName: role.icon)
+                                }
+                            }
+                        }
+                    }
+                    Divider()
+                }
+
+                Button {
+                    showProfile = true
+                } label: {
+                    Label("Settings", systemImage: "gearshape")
+                }
+            } label: {
+                Image(systemName: "person.circle.fill")
+                    .font(.title3)
+                    .foregroundStyle(Color.accentColor)
+            }
+        } else {
+            Button {
+                profileSetupPrompt = true
+                showProfile = true
+            } label: {
+                Image(systemName: "person.circle")
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    // MARK: - Pill Tap Logic
+
+    private func handlePillTap() {
+        if isSearching { return }
+
+        if isCollapsed && state.parking.selectedDestination != nil {
+            // Tapping collapsed pill when destination is set → expand to show card or results
+            withAnimation(.smooth(duration: 0.3)) {
+                sheetDetent = .fraction(0.4)
+            }
+            return
+        }
+
+        if !hasProfile {
+            profileSetupPrompt = true
+            showProfile = true
+        } else {
+            withAnimation(.smooth(duration: 0.3)) {
+                activateSearch()
+            }
+        }
+    }
+
+    // MARK: - Destination Card
+
+    private var destinationCard: some View {
+        VStack(spacing: 0) {
+            if let dest = state.parking.selectedDestination {
+                VStack(spacing: 16) {
+                    // Destination info
+                    VStack(spacing: 6) {
+                        Image(systemName: dest.type.icon)
+                            .font(.title2)
+                            .foregroundStyle(Color.accentColor)
+                            .frame(width: 48, height: 48)
+                            .background(Color.accentColor.opacity(0.12), in: Circle())
+
+                        Text(dest.displayName)
+                            .font(.title3.weight(.semibold))
+                            .multilineTextAlignment(.center)
+
+                        Text(dest.area.displayName)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+
+                        if let address = dest.address {
+                            Text(address)
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
+                    .padding(.top, 8)
+
+                    // Action buttons
+                    VStack(spacing: 10) {
+                        Button {
+                            withAnimation(.smooth(duration: 0.3)) {
+                                commitToParking()
+                            }
+                        } label: {
+                            Label("Park Now", systemImage: "car.fill")
+                                .font(.subheadline.weight(.semibold))
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(Color.accentColor)
+
+                        Button {
+                            showTripPlanner = true
+                        } label: {
+                            Label("Plan a Trip", systemImage: "calendar")
+                                .font(.subheadline.weight(.medium))
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                        }
+                        .buttonStyle(.bordered)
+                    }
+
+                    // Change destination
+                    Button {
+                        withAnimation(.smooth(duration: 0.3)) {
+                            activateSearch()
+                        }
+                    } label: {
+                        Text("Change destination")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(.horizontal, 24)
+                .padding(.vertical, 8)
+            }
+        }
     }
 
     // MARK: - Destination List
@@ -135,7 +355,6 @@ struct MainSheetContent: View {
 
                 ForEach(sortedAreas, id: \.self) { area in
                     sectionHeader(area.displayName)
-
                     ForEach(filteredByArea(area)) { dest in
                         destinationRow(dest)
                     }
@@ -161,10 +380,7 @@ struct MainSheetContent: View {
             }
             Spacer()
             Button("Clear") {
-                state.parking.selectDestination(nil)
-                withAnimation(.smooth(duration: 0.3)) {
-                    dismissSearch()
-                }
+                clearDestination()
             }
             .font(.subheadline)
             .foregroundStyle(.red)
@@ -216,7 +432,7 @@ struct MainSheetContent: View {
         Divider().padding(.vertical, 4)
     }
 
-    // MARK: - Search Logic
+    // MARK: - Actions
 
     private func activateSearch() {
         isSearching = true
@@ -231,8 +447,25 @@ struct MainSheetContent: View {
         searchFocused = false
         isSearching = false
         searchText = ""
-        sheetDetent = .fraction(0.4)
+        // Go to destination card (half detent) if destination was just selected
+        sheetDetent = state.parking.selectedDestination != nil ? .fraction(0.4) : .fraction(0.4)
     }
+
+    private func commitToParking() {
+        showParkingResults = true
+        sheetDetent = .fraction(0.4)
+        Task { await state.fetchRecommendations() }
+    }
+
+    private func clearDestination() {
+        state.parking.selectDestination(nil)
+        showParkingResults = false
+        withAnimation(.smooth(duration: 0.3)) {
+            sheetDetent = .fraction(0.15)
+        }
+    }
+
+    // MARK: - Filtering
 
     private var filteredDestinations: [Destination] {
         if searchText.isEmpty {
@@ -254,5 +487,75 @@ struct MainSheetContent: View {
 
     private func filteredByArea(_ area: DestinationArea) -> [Destination] {
         filteredDestinations.filter { $0.area == area }.sorted(by: { $0.name < $1.name })
+    }
+}
+
+// MARK: - Trip Planner Sheet
+
+struct TripPlannerSheet: View {
+    @Environment(AppState.self) private var state
+    @Environment(\.dismiss) private var dismiss
+    @State private var arrivalDate = Date()
+    var onCommit: () -> Void
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 24) {
+                VStack(spacing: 8) {
+                    Image(systemName: "calendar.badge.clock")
+                        .font(.largeTitle)
+                        .foregroundStyle(Color.accentColor)
+                    Text("Plan Your Visit")
+                        .font(.title3.weight(.semibold))
+                    Text("Choose when you're arriving and how long you'll stay.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.top, 8)
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Arriving")
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.secondary)
+
+                    DatePicker(
+                        "Arrival",
+                        selection: $arrivalDate,
+                        in: Date()...,
+                        displayedComponents: [.date, .hourAndMinute]
+                    )
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+                }
+                .padding(.horizontal, 4)
+
+                VisitDurationPicker()
+                    .padding(.horizontal, 4)
+
+                Spacer()
+
+                Button {
+                    onCommit()
+                } label: {
+                    Label("Find Parking", systemImage: "car.fill")
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(Color.accentColor)
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
+            .navigationTitle("Plan a Trip")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+            }
+        }
+        .presentationDetents([.medium])
     }
 }

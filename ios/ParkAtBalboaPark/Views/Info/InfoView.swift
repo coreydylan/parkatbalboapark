@@ -28,7 +28,7 @@ struct InfoView: View {
                             : "Free parking right now"
                     )
 
-                    Label("8:00 AM \u{2013} 6:00 PM daily", systemImage: "clock")
+                    Label("8:00 AM \u{2013} 8:00 PM daily", systemImage: "clock")
                         .font(.subheadline)
 
                     Label("Free on holidays", systemImage: "calendar")

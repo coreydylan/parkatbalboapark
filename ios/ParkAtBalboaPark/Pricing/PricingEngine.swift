@@ -328,6 +328,15 @@ enum PricingEngine {
         case .event:
             costCents = rule.rateCents
             tips.append("Event rate applies")
+
+        case .block:
+            if visitHours <= 4 {
+                costCents = rule.rateCents
+                tips.append("Flat rate for visits up to 4 hours")
+            } else {
+                costCents = rule.maxDailyCents ?? rule.rateCents
+                tips.append("Daily max rate for visits over 4 hours")
+            }
         }
 
         return CostResult(

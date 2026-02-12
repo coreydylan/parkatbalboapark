@@ -4,6 +4,7 @@ enum DurationType: String, Codable, Hashable, Sendable {
     case hourly
     case daily
     case event
+    case block
 }
 
 struct PricingRule: Codable, Identifiable, Hashable, Sendable {

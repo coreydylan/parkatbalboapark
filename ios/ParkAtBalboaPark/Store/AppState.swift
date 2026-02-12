@@ -26,7 +26,7 @@ class AppState {
 
     func fetchRecommendations() async {
         await parking.fetchRecommendations(
-            userType: profile.effectiveUserType,
+            userType: profile.apiUserType,
             hasPass: profile.hasPass
         )
     }

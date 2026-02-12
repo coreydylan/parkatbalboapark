@@ -10,6 +10,7 @@ struct OnboardingView: View {
     @State private var isVolunteer = false
     @State private var isADA = false
     @State private var hasParkingPass = false
+    @State private var isVerifiedResident = false
 
     enum OnboardingStep {
         case welcome, profile
@@ -98,6 +99,23 @@ struct OnboardingView: View {
                         }
                     }
                     if isResident {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Registered with the city?")
+                                .font(.subheadline.weight(.medium))
+                                .padding(.top, 4)
+                            HStack(spacing: 10) {
+                                ToggleChip(label: "Yes", isActive: isVerifiedResident) {
+                                    isVerifiedResident = true
+                                }
+                                ToggleChip(label: "No", isActive: !isVerifiedResident) {
+                                    isVerifiedResident = false
+                                }
+                            }
+                            Text("Verified residents get 50% off. After March 2, park free at most lots.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+
                         Toggle("I have a parking pass", isOn: $hasParkingPass)
                             .font(.subheadline)
                             .tint(Color.accentColor)
@@ -164,6 +182,7 @@ struct OnboardingView: View {
         if isVolunteer { state.profile.toggleRole(.volunteer) }
         if isADA { state.profile.toggleRole(.ada) }
         state.profile.hasPass = hasParkingPass
+        state.profile.isVerifiedResident = isVerifiedResident
         state.completeOnboarding()
     }
 }

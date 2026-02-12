@@ -18,12 +18,28 @@ class UserProfile {
         }
     }
 
+    var isVerifiedResident: Bool = false {
+        didSet {
+            UserDefaults.standard.set(isVerifiedResident, forKey: "isVerifiedResident")
+        }
+    }
+
     var onboardingComplete: Bool = false {
         didSet { UserDefaults.standard.set(onboardingComplete, forKey: "onboardingComplete") }
     }
 
     var effectiveUserType: UserType? {
         activeCapacity ?? userRoles.first
+    }
+
+    /// User type sent to the API. Unverified residents are mapped to nonresident
+    /// so they see full (non-discounted) pricing from the backend.
+    var apiUserType: UserType? {
+        guard let effective = effectiveUserType else { return nil }
+        if effective == .resident && !isVerifiedResident {
+            return .nonresident
+        }
+        return effective
     }
 
     init() {
@@ -33,6 +49,7 @@ class UserProfile {
     private func loadPersistedState() {
         onboardingComplete = UserDefaults.standard.bool(forKey: "onboardingComplete")
         hasPass = UserDefaults.standard.bool(forKey: "hasPass")
+        isVerifiedResident = UserDefaults.standard.bool(forKey: "isVerifiedResident")
 
         if let rolesData = UserDefaults.standard.data(forKey: "userRoles"),
             let roles = try? JSONDecoder().decode(Set<UserType>.self, from: rolesData)

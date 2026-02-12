@@ -33,7 +33,7 @@ enum UserType: String, Codable, CaseIterable, Identifiable, Hashable, Sendable {
     var description: String {
         switch self {
         case .resident:
-            "San Diego residents with valid ID get discounted parking rates"
+            "San Diego residents. Verified residents get discounted rates."
         case .nonresident:
             "Visitors and tourists pay standard parking rates"
         case .staff:
