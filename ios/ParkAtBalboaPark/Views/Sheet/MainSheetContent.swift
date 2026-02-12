@@ -361,15 +361,30 @@ struct MainSheetContent: View {
     private var destinationList: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                if let selected = state.parking.selectedDestination {
-                    currentDestinationRow(selected)
-                    sectionDivider
-                }
+                if state.parking.destinations.isEmpty {
+                    VStack(spacing: 12) {
+                        ProgressView()
+                        Text("Loading destinations…")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Button("Retry") {
+                            Task { await state.parking.loadData() }
+                        }
+                        .font(.subheadline.weight(.medium))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 40)
+                } else {
+                    if let selected = state.parking.selectedDestination {
+                        currentDestinationRow(selected)
+                        sectionDivider
+                    }
 
-                ForEach(sortedAreas, id: \.self) { area in
-                    sectionHeader(area.displayName)
-                    ForEach(filteredByArea(area)) { dest in
-                        destinationRow(dest)
+                    ForEach(sortedAreas, id: \.self) { area in
+                        sectionHeader(area.displayName)
+                        ForEach(filteredByArea(area)) { dest in
+                            destinationRow(dest)
+                        }
                     }
                 }
             }

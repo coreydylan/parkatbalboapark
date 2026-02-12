@@ -1,6 +1,9 @@
 import CoreLocation
 import Foundation
+import OSLog
 import SwiftUI
+
+private let logger = Logger(subsystem: "com.parkatbalboapark.app", category: "ParkingStore")
 
 @MainActor @Observable
 class ParkingStore {
@@ -88,20 +91,49 @@ class ParkingStore {
     // MARK: - Data Loading
 
     func loadData() async {
-        async let lotsResult = api.fetchLots()
-        async let destinationsResult = api.fetchDestinations()
-        async let enforcementResult = api.fetchEnforcement()
+        logger.info("loadData: starting API calls")
 
-        do {
-            let (fetchedLots, fetchedDestinations, enforcement) = try await (
-                lotsResult, destinationsResult, enforcementResult
-            )
+        // Run all three fetches concurrently, capture results independently
+        async let lotsResult: Result<[ParkingLot], Error> = {
+            do { return .success(try await api.fetchLots()) }
+            catch { return .failure(error) }
+        }()
+        async let destinationsResult: Result<[Destination], Error> = {
+            do { return .success(try await api.fetchDestinations()) }
+            catch { return .failure(error) }
+        }()
+        async let enforcementResult: Result<EnforcementStatus, Error> = {
+            do { return .success(try await api.fetchEnforcement()) }
+            catch { return .failure(error) }
+        }()
+
+        let (lr, dr, er) = await (lotsResult, destinationsResult, enforcementResult)
+
+        switch lr {
+        case .success(let fetchedLots):
             self.lots = fetchedLots
-            self.destinations = fetchedDestinations
-            self.enforcementActive = enforcement.active
-        } catch {
-            print("Failed to load data: \(error)")
+            logger.info("loadData: loaded \(fetchedLots.count) lots")
+        case .failure(let error):
+            logger.error("loadData: lots failed – \(error)")
         }
+
+        switch dr {
+        case .success(let fetchedDestinations):
+            self.destinations = fetchedDestinations
+            logger.info("loadData: loaded \(fetchedDestinations.count) destinations")
+        case .failure(let error):
+            logger.error("loadData: destinations failed – \(error)")
+        }
+
+        switch er {
+        case .success(let enforcement):
+            self.enforcementActive = enforcement.active
+            logger.info("loadData: enforcement active=\(enforcement.active)")
+        case .failure(let error):
+            logger.error("loadData: enforcement failed – \(error)")
+        }
+
+        logger.info("loadData: complete – \(self.lots.count) lots, \(self.destinations.count) destinations")
     }
 
     func fetchStreetSegments() async {
