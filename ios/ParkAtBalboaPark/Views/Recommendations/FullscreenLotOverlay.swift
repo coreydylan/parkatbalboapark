@@ -10,6 +10,7 @@ struct FullscreenLotOverlay: View {
     @State private var detailAppeared = false
     @State private var rawElevations: [Double]? = nil
     @State private var dismissHapticFired = false
+    @State private var scrollDismissTriggered = false
 
     private var morph: CardMorphState { state.morph }
 
@@ -70,10 +71,49 @@ struct FullscreenLotOverlay: View {
                         .padding(.bottom, 60)
                     }
                     .scrollIndicators(.hidden)
+                    .onScrollGeometryChange(for: CGFloat.self) { geo in
+                        geo.contentOffset.y
+                    } action: { _, newOffset in
+                        // Overscroll past top → collapse back to list
+                        if newOffset < -60 && !scrollDismissTriggered {
+                            scrollDismissTriggered = true
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            dismissOverlay()
+                        }
+                    }
 
-                    // Dismiss handle at top
-                    VStack {
-                        dismissHandle
+                    // Top controls: drag handle + close button
+                    VStack(spacing: 0) {
+                        ZStack(alignment: .topTrailing) {
+                            // Full-width drag zone for dismiss gesture
+                            Color.clear
+                                .frame(height: 56)
+                                .contentShape(Rectangle())
+                                .gesture(dismissGesture)
+
+                            // Centered drag handle
+                            Capsule()
+                                .fill(.white.opacity(0.5))
+                                .frame(width: 36, height: 5)
+                                .frame(maxWidth: .infinity)
+                                .padding(.top, 14)
+                                .allowsHitTesting(false)
+
+                            // Close button
+                            Button {
+                                dismissOverlay()
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.title2)
+                                    .symbolRenderingMode(.palette)
+                                    .foregroundStyle(.white, .white.opacity(0.35))
+                                    .frame(width: 44, height: 44)
+                                    .contentShape(Circle())
+                            }
+                            .padding(.trailing, 12)
+                            .padding(.top, 8)
+                        }
+
                         Spacer()
                     }
                 }
@@ -83,9 +123,9 @@ struct FullscreenLotOverlay: View {
                 .offset(y: morph.isDragging ? morph.dismissOffsetY : 0)
                 .clipShape(RoundedRectangle(cornerRadius: morph.cornerRadius, style: .continuous))
                 .shadow(color: .black.opacity(0.3), radius: 20, y: 10)
-                .gesture(dismissGesture)
                 .simultaneousGesture(pagingGesture)
                 .onAppear {
+                    scrollDismissTriggered = false
                     withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
                         morph.dismissProgress = 0
                     } completion: {
@@ -96,6 +136,8 @@ struct FullscreenLotOverlay: View {
                 }
                 .onDisappear {
                     detailAppeared = false
+                    morph.isDragging = false
+                    morph.dismissProgress = 0
                 }
                 .task {
                     // Fetch raw elevation data for chart
@@ -109,13 +151,14 @@ struct FullscreenLotOverlay: View {
         .ignoresSafeArea()
     }
 
-    // MARK: - Dismiss Handle
+    // MARK: - Dismiss Helper
 
-    private var dismissHandle: some View {
-        Capsule()
-            .fill(.white.opacity(0.5))
-            .frame(width: 36, height: 5)
-            .padding(.top, 12)
+    private func dismissOverlay() {
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.88)) {
+            morph.dismissProgress = 1
+        } completion: {
+            state.closeDetail()
+        }
     }
 
     // MARK: - Look Around Background

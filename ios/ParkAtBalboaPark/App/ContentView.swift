@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var showProfile = false
     @State private var sheetDetent: PresentationDetent = .fraction(0.08)
     @State private var recommendationTask: Task<Void, Never>?
+    @State private var lockSheetDetent = false
 
     private var recommendationSignature: Int {
         var hasher = Hasher()
@@ -26,7 +27,9 @@ struct ContentView: View {
                     sheetDetent: $sheetDetent
                 )
                 .presentationDetents(
-                    [.fraction(0.08), .fraction(0.4), .fraction(0.5), .fraction(0.55), .large],
+                    lockSheetDetent
+                        ? [.large]
+                        : [.fraction(0.08), .fraction(0.4), .fraction(0.5), .fraction(0.55), .large],
                     selection: $sheetDetent
                 )
                 .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.4)))
@@ -71,11 +74,17 @@ struct ContentView: View {
             }
             .onChange(of: state.morph.fullscreenLotSlug) {
                 if state.morph.fullscreenLotSlug != nil {
+                    // First move selection to .large (safe — it's in the current set)
                     withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
                         sheetDetent = .large
                     }
+                    // Then lock detents on next render (selection is already .large)
+                    Task { @MainActor in
+                        lockSheetDetent = true
+                    }
                 } else {
-                    // Back to list state
+                    // Unlock detents first (restores full set including .fraction(0.4))
+                    lockSheetDetent = false
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         sheetDetent = .fraction(0.4)
                     }
