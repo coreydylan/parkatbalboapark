@@ -441,6 +441,16 @@ struct MainSheetContent: View {
                         }
                     }
                     .padding(.top, 8)
+                    .overlay(alignment: .topTrailing) {
+                        Button {
+                            clearDestination()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title3)
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(.secondary, .quaternary)
+                        }
+                    }
 
                     // Action buttons
                     VStack(spacing: 10) {
@@ -818,9 +828,7 @@ struct MainSheetContent: View {
 struct TripPlannerSheet: View {
     @Environment(AppState.self) private var state
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedDate = Calendar.current.date(
-        byAdding: .day, value: 1, to: Date()
-    )!
+    @State private var selectedDate = Date()
     var onCommit: () -> Void
 
     var body: some View {
@@ -858,6 +866,12 @@ struct TripPlannerSheet: View {
 
                     VisitTimePicker(isParkNow: false)
                         .padding(.horizontal, 4)
+
+                    if state.parking.visitDurationMinutes <= 0 {
+                        Text("Set an end time after your start time")
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                    }
 
                     Button {
                         state.parking.tripDate = selectedDate

@@ -8,7 +8,9 @@ struct RecommendationSheet: View {
         ZStack {
             // Layer 1: Scrollable list of cards
             VStack(spacing: 0) {
-                if state.profile.effectiveUserType == nil {
+                if let error = state.parking.fetchError {
+                    errorState(error)
+                } else if state.profile.effectiveUserType == nil {
                     emptyState
                 } else if state.parking.isLoading {
                     loadingState
@@ -145,6 +147,24 @@ struct RecommendationSheet: View {
         .padding(.vertical, 40)
     }
 
+    private func errorState(_ error: ParkingStore.FetchError) -> some View {
+        VStack(spacing: 12) {
+            Image(systemName: "wifi.slash")
+                .font(.largeTitle)
+                .foregroundStyle(.secondary)
+            Text(error.userMessage)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            Button("Try Again") {
+                Task { await state.parking.retryLastFetch() }
+            }
+            .buttonStyle(.bordered)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(40)
+    }
+
     // MARK: - List
 
     private var recommendationList: some View {
@@ -192,7 +212,7 @@ struct RecommendationSheet: View {
             Image(systemName: "car.fill")
                 .font(.largeTitle)
                 .foregroundStyle(.secondary)
-            Text("No parking options match\nyour current filters")
+            Text(emptyFilterMessage)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -204,6 +224,22 @@ struct RecommendationSheet: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
+    }
+
+    private var emptyFilterMessage: String {
+        if state.parking.showFreeOnly {
+            switch state.profile.effectiveUserType {
+            case .nonresident:
+                return "No free parking available for visitors. Verified San Diego residents can park free at most lots."
+            case .resident:
+                return "No free lots match your destination. Try a different location."
+            case .ada:
+                return "No parking options match your current filters."
+            default:
+                return "No free parking available with your current filters."
+            }
+        }
+        return "No parking options match\nyour current filters"
     }
 
     @ViewBuilder
@@ -504,6 +540,12 @@ private struct LotCardRow: View {
 
             // Stats + details affordance
             HStack(spacing: 14) {
+                if state.profile.activeCapacity == .ada {
+                    Label("ADA", systemImage: "figure.roll")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.blue)
+                }
+
                 if let walkTime = recommendation.walkingTimeDisplay {
                     Label(walkTime, systemImage: "figure.walk")
                         .font(.caption.weight(.medium))

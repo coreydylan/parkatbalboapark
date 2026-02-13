@@ -17,6 +17,9 @@ class AppState {
         showOnboarding = !profile.onboardingComplete
     }
 
+    private var lastApiUserType: UserType?
+    private var lastHasPass: Bool = false
+
     func completeOnboarding() {
         profile.completeOnboarding()
         showOnboarding = false
@@ -29,10 +32,30 @@ class AppState {
     }
 
     func fetchRecommendations() async {
+        lastApiUserType = profile.apiUserType
+        lastHasPass = profile.hasPass
         await parking.fetchRecommendations(
             userType: profile.apiUserType,
             hasPass: profile.hasPass
         )
+    }
+
+    func selectDestination(_ dest: Destination?) {
+        if morph.fullscreenLotSlug != nil {
+            closeDetail()
+        }
+        expandedPreviewSlug = nil
+        parking.selectDestination(dest)
+    }
+
+    func refreshIfProfileChanged() {
+        guard parking.selectedDestination != nil,
+              !parking.recommendations.isEmpty
+        else { return }
+        let currentType = profile.apiUserType
+        let currentPass = profile.hasPass
+        guard currentType != lastApiUserType || currentPass != lastHasPass else { return }
+        Task { await fetchRecommendations() }
     }
 
     func selectOption(_ option: ParkingOption?) {

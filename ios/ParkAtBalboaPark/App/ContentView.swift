@@ -57,7 +57,7 @@ struct ContentView: View {
                 }
             }
             .onChange(of: state.parking.selectedOption) {
-                if state.parking.selectedOption != nil {
+                if state.parking.selectedOption != nil && state.morph.fullscreenLotSlug == nil {
                     sheetDetent = .fraction(0.4)
                 }
             }
@@ -74,16 +74,12 @@ struct ContentView: View {
             }
             .onChange(of: state.morph.fullscreenLotSlug) {
                 if state.morph.fullscreenLotSlug != nil {
-                    // First move selection to .large (safe — it's in the current set)
                     withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
                         sheetDetent = .large
-                    }
-                    // Then lock detents on next render (selection is already .large)
-                    Task { @MainActor in
+                    } completion: {
                         lockSheetDetent = true
                     }
                 } else {
-                    // Unlock detents first (restores full set including .fraction(0.4))
                     lockSheetDetent = false
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         sheetDetent = .fraction(0.4)

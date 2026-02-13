@@ -49,6 +49,24 @@ class ParkingStore {
     // MARK: - UI State
 
     var isLoading: Bool = false
+    var fetchError: FetchError? = nil
+
+    enum FetchError {
+        case network
+        case server(statusCode: Int)
+        case noResults
+
+        var userMessage: String {
+            switch self {
+            case .network:
+                return "Unable to connect. Check your internet and try again."
+            case .server:
+                return "Something went wrong. Please try again."
+            case .noResults:
+                return "No parking options found for this destination."
+            }
+        }
+    }
 
     /// Walking route polylines keyed by lot slug, populated by MapKit directions.
     var walkingRoutes: [String: [CLLocationCoordinate2D]] = [:]
@@ -488,18 +506,26 @@ class ParkingStore {
 
     // MARK: - Recommendations (Direct Supabase RPC)
 
+    private var lastFetchUserType: UserType?
+    private var lastFetchHasPass: Bool = false
+
     func fetchRecommendations(userType: UserType?, hasPass: Bool) async {
         recommendationTask?.cancel()
+
+        lastFetchUserType = userType
+        lastFetchHasPass = hasPass
 
         let task = Task { @MainActor [weak self] in
             guard let self else { return }
 
             guard let userType else {
                 self.recommendations = []
+                self.fetchError = nil
                 return
             }
 
             self.isLoading = true
+            self.fetchError = nil
 
             do {
                 try Task.checkCancellation()
@@ -557,6 +583,10 @@ class ParkingStore {
                 self.enforcementActive = isEnforced
                 self.isLoading = false
 
+                if recs.isEmpty {
+                    self.fetchError = .noResults
+                }
+
                 // Enrich with real MapKit walking times and routes
                 if let dest = self.selectedDestination {
                     self.walkingRoutes = [:]
@@ -604,13 +634,30 @@ class ParkingStore {
             } catch is CancellationError {
                 // Task was cancelled; do not update state
             } catch {
-                print("Failed to fetch recommendations: \(error)")
+                logger.error("Failed to fetch recommendations: \(error)")
                 self.isLoading = false
+                if let apiError = error as? APIError {
+                    switch apiError {
+                    case .httpError(let statusCode):
+                        self.fetchError = .server(statusCode: statusCode)
+                    default:
+                        self.fetchError = .network
+                    }
+                } else if (error as? URLError) != nil {
+                    self.fetchError = .network
+                } else {
+                    self.fetchError = .network
+                }
             }
         }
 
         recommendationTask = task
         await task.value
+    }
+
+    func retryLastFetch() async {
+        fetchError = nil
+        await fetchRecommendations(userType: lastFetchUserType, hasPass: lastFetchHasPass)
     }
 
     // MARK: - Direct Supabase RPC

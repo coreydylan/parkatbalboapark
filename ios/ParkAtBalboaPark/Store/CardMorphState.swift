@@ -9,7 +9,11 @@ class CardMorphState {
     var fullscreenLotSlug: String? = nil
 
     /// Interactive dismiss progress: 0 = fullscreen, 1 = dismissed back to card position.
-    var dismissProgress: CGFloat = 0
+    var dismissProgress: CGFloat = 0 {
+        didSet {
+            dismissProgress = min(max(dismissProgress, 0), 1)
+        }
+    }
 
     /// True while the user's finger is down during a dismiss drag gesture.
     var isDragging: Bool = false

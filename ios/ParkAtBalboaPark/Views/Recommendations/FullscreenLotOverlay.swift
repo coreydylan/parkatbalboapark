@@ -11,6 +11,7 @@ struct FullscreenLotOverlay: View {
     @State private var rawElevations: [Double]? = nil
     @State private var dismissHapticFired = false
     @State private var scrollDismissTriggered = false
+    @State private var elevationTask: Task<Void, Never>?
 
     private var morph: CardMorphState { state.morph }
 
@@ -70,6 +71,7 @@ struct FullscreenLotOverlay: View {
                         }
                         .padding(.bottom, 60)
                     }
+                    .id(morph.fullscreenLotSlug)
                     .scrollIndicators(.hidden)
                     .onScrollGeometryChange(for: CGFloat.self) { geo in
                         geo.contentOffset.y
@@ -140,15 +142,23 @@ struct FullscreenLotOverlay: View {
                     morph.dismissProgress = 0
                 }
                 .task {
-                    // Fetch raw elevation data for chart
-                    if let coords = state.parking.walkingRoutes[recommendation.lotSlug] {
-                        rawElevations = await WalkingDirectionsService.fetchRawElevations(
-                            coords: coords)
+                    elevationTask?.cancel()
+                    elevationTask = Task {
+                        if let coords = state.parking.walkingRoutes[recommendation.lotSlug] {
+                            rawElevations = await WalkingDirectionsService.fetchRawElevations(
+                                coords: coords)
+                        }
                     }
+                    await elevationTask?.value
                 }
             }
         }
         .ignoresSafeArea()
+        .onChange(of: recommendation == nil) { _, isNil in
+            if isNil && morph.fullscreenLotSlug != nil {
+                dismissOverlay()
+            }
+        }
     }
 
     // MARK: - Dismiss Helper
@@ -331,19 +341,18 @@ struct FullscreenLotOverlay: View {
     private var dismissGesture: some Gesture {
         DragGesture(minimumDistance: 20)
             .onChanged { value in
+                guard !scrollDismissTriggered else { return }
                 let verticalTranslation = value.translation.height
-                // Only handle downward drags
                 guard verticalTranslation > 0 else { return }
-                // Require vertical to dominate horizontal
                 guard abs(verticalTranslation) > abs(value.translation.width) else { return }
 
                 morph.isDragging = true
                 let progress = min(max(verticalTranslation / 400, 0), 1)
                 morph.dismissProgress = progress
 
-                // Haptic at threshold crossing
                 if progress > 0.4 && !dismissHapticFired {
                     dismissHapticFired = true
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 } else if progress <= 0.4 {
                     dismissHapticFired = false
                 }
@@ -361,9 +370,10 @@ struct FullscreenLotOverlay: View {
                         state.closeDetail()
                     }
                 } else {
-                    // Snap back to fullscreen
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.9)) {
                         morph.dismissProgress = 0
+                    } completion: {
+                        scrollDismissTriggered = false
                     }
                 }
 
@@ -404,20 +414,14 @@ struct FullscreenLotOverlay: View {
         let targetOption = options[targetIndex]
 
         if case .lot(let rec) = targetOption {
-            // Reset detail sections for the new lot
-            detailAppeared = false
             rawElevations = nil
             withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
                 morph.fullscreenLotSlug = rec.lotSlug
                 state.expandedPreviewSlug = rec.lotSlug
                 state.selectOption(.lot(rec))
-            } completion: {
-                withAnimation(.easeOut(duration: 0.35)) {
-                    detailAppeared = true
-                }
             }
-            // Fetch elevation for new lot
-            Task {
+            elevationTask?.cancel()
+            elevationTask = Task {
                 if let coords = state.parking.walkingRoutes[rec.lotSlug] {
                     rawElevations = await WalkingDirectionsService.fetchRawElevations(coords: coords)
                 }
