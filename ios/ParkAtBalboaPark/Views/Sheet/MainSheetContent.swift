@@ -619,11 +619,14 @@ struct MainSheetContent: View {
         if state.parking.tripDate == nil {
             state.parking.resetToNow()
         }
-        withAnimation(.smooth(duration: 0.3)) {
-            showParkingResults = true
+        showParkingResults = true
+        withAnimation(.smooth(duration: 0.25)) {
             sheetDetent = .fraction(0.4)
         }
-        Task { await state.fetchRecommendations() }
+        Task {
+            try? await Task.sleep(for: .milliseconds(100))
+            await state.fetchRecommendations()
+        }
     }
 
     private func selectDestinationWithAnimation(_ dest: Destination) {

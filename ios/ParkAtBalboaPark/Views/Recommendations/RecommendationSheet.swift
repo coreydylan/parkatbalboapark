@@ -179,7 +179,7 @@ struct RecommendationSheet: View {
                         VStack(spacing: 0) {
                             filterBar
 
-                            VStack(spacing: 10) {
+                            LazyVStack(spacing: 10) {
                                 ForEach(Array(options.enumerated()), id: \.element.id) {
                                     index, option in
                                     optionRow(option: option, index: index)
@@ -188,10 +188,6 @@ struct RecommendationSheet: View {
                             .padding(.horizontal, 16)
                             .padding(.top, 4)
                             .padding(.bottom, 100)
-                            .animation(
-                                .spring(response: 0.5, dampingFraction: 0.88),
-                                value: state.expandedPreviewSlug
-                            )
                         }
                     }
                     .scrollIndicators(.hidden)
