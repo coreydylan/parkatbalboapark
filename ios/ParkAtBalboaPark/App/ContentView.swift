@@ -5,7 +5,6 @@ struct ContentView: View {
     @State private var showProfile = false
     @State private var sheetDetent: PresentationDetent = .fraction(0.08)
     @State private var recommendationTask: Task<Void, Never>?
-    @State private var lockSheetDetent = false
 
     private var recommendationSignature: Int {
         var hasher = Hasher()
@@ -27,9 +26,7 @@ struct ContentView: View {
                     sheetDetent: $sheetDetent
                 )
                 .presentationDetents(
-                    lockSheetDetent
-                        ? [.large]
-                        : [.fraction(0.08), .fraction(0.4), .large],
+                    [.fraction(0.08), .fraction(0.4), .large],
                     selection: $sheetDetent
                 )
                 .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.4)))
@@ -59,24 +56,26 @@ struct ContentView: View {
             .onChange(of: state.parking.selectedOption) {
                 // Only expand from collapsed pill — never shrink the sheet
                 if state.parking.selectedOption != nil
-                    && state.morph.fullscreenLotSlug == nil
                     && sheetDetent == .fraction(0.08)
                 {
                     sheetDetent = .fraction(0.4)
                 }
             }
-            .onChange(of: state.morph.fullscreenLotSlug) {
-                if state.morph.fullscreenLotSlug != nil {
-                    withAnimation(.spring(response: 0.45, dampingFraction: 0.9)) {
-                        sheetDetent = .large
-                    } completion: {
-                        lockSheetDetent = true
-                    }
-                } else {
-                    lockSheetDetent = false
-                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                        sheetDetent = .fraction(0.4)
-                    }
+            .sheet(item: Bindable(appState).detailRecommendation) { rec in
+                NavigationStack {
+                    LotDetailView(recommendation: rec)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button {
+                                    state.closeDetail()
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .symbolRenderingMode(.hierarchical)
+                                        .font(.title3)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
                 }
             }
             .task {

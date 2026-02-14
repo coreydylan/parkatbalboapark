@@ -12,6 +12,7 @@ class AppState {
 
     var showOnboarding: Bool = false
     var expandedPreviewSlug: String? = nil
+    var detailRecommendation: ParkingRecommendation? = nil
 
     init() {
         showOnboarding = !profile.onboardingComplete
@@ -107,25 +108,16 @@ class AppState {
         }
     }
 
-    /// Step 2→3: Open the fullscreen overlay morph.
+    /// Open the lot detail sheet.
     func openDetail(for recommendation: ParkingRecommendation) {
-        // Set fullscreenLotSlug FIRST — this blocks the selectedOption and
-        // expandedPreviewSlug onChange guards from firing competing detent animations.
-        morph.fullscreenLotSlug = recommendation.lotSlug
-        expandedPreviewSlug = recommendation.lotSlug
         selectOption(.lot(recommendation))
+        detailRecommendation = recommendation
         Task { await parking.fetchPricingData() }
     }
 
-    /// Close the fullscreen overlay — collapses all the way back to search/list state.
+    /// Close the lot detail sheet.
     func closeDetail() {
-        morph.fullscreenLotSlug = nil
-        morph.dismissProgress = 0
-        expandedPreviewSlug = nil
-        map.stopFlyover()
-        if let lot = parking.selectedLot {
-            map.focusOn(lot.coordinate)
-        }
+        detailRecommendation = nil
     }
 
     /// Swipe between expanded cards in the recommendation list.

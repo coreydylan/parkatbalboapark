@@ -211,18 +211,11 @@ struct MainSheetContent: View {
             }
         }
         .overlay {
-            // Type-colored accent border when destination is selected
-            if !isSearching, let dest = state.parking.selectedDestination {
-                Group {
-                    if isCollapsed {
-                        Capsule()
-                            .strokeBorder(dest.type.color.opacity(0.4), lineWidth: 1.5)
-                    } else {
-                        RoundedRectangle(cornerRadius: 10)
-                            .strokeBorder(dest.type.color.opacity(0.3), lineWidth: 1.5)
-                    }
-                }
-                .transition(.opacity)
+            // Type-colored accent border when destination is selected (expanded only)
+            if !isSearching && !isCollapsed, let dest = state.parking.selectedDestination {
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(dest.type.color.opacity(0.3), lineWidth: 1.5)
+                    .transition(.opacity)
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: isCollapsed ? 50 : 10, style: .continuous))

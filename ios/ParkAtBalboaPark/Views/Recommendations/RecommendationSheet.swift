@@ -6,32 +6,17 @@ struct RecommendationSheet: View {
     @Environment(AppState.self) private var state
 
     var body: some View {
-        ZStack {
-            // Layer 1: Scrollable list of cards
-            VStack(spacing: 0) {
-                if let error = state.parking.fetchError {
-                    errorState(error)
-                } else if state.profile.effectiveUserType == nil {
-                    emptyState
-                } else if state.parking.isLoading {
-                    loadingState
-                } else if state.parking.recommendations.isEmpty {
-                    noResultsState
-                } else {
-                    recommendationList
-                }
-            }
-
-            // Layer 2: Fullscreen overlay (hero morph)
-            if state.morph.fullscreenLotSlug != nil {
-                FullscreenLotOverlay()
-                    .transition(.identity)
-            }
-        }
-        .coordinateSpace(.named("sheet"))
-        .onPreferenceChange(CardFramePreferenceKey.self) { frames in
-            if let slug = state.expandedPreviewSlug, let frame = frames[slug] {
-                state.morph.expandedCardFrame = frame
+        VStack(spacing: 0) {
+            if let error = state.parking.fetchError {
+                errorState(error)
+            } else if state.profile.effectiveUserType == nil {
+                emptyState
+            } else if state.parking.isLoading {
+                loadingState
+            } else if state.parking.recommendations.isEmpty {
+                noResultsState
+            } else {
+                recommendationList
             }
         }
     }
@@ -280,10 +265,6 @@ private struct LotCardRow: View {
     let option: ParkingOption
     var elevationProfile: WalkingDirectionsService.ElevationProfile? = nil
 
-    private var isOverlayActive: Bool {
-        state.morph.fullscreenLotSlug == recommendation.lotSlug
-    }
-
     private var lot: ParkingLot? {
         state.parking.lotLookup[recommendation.lotSlug]
     }
@@ -311,18 +292,6 @@ private struct LotCardRow: View {
         .id(option.id)
         .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
         .onTapGesture { handleTap() }
-        // Report card frame to sheet coordinate space (needed for morph animation)
-        .background {
-            GeometryReader { geo in
-                Color.clear
-                    .preference(
-                        key: CardFramePreferenceKey.self,
-                        value: [recommendation.lotSlug: geo.frame(in: .named("sheet"))]
-                    )
-            }
-        }
-        // Hide card when overlay is active
-        .opacity(isOverlayActive ? 0 : 1)
         .confirmationDialog("Get Directions", isPresented: $showDirectionsSheet) {
             Button("Apple Maps") {
                 DirectionsHelper.openAppleMaps(

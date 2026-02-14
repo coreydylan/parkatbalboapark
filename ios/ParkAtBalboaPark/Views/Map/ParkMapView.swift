@@ -75,7 +75,7 @@ struct ParkMapView: View {
                 }
             }
 
-            if state.map.filters.showStreetMeters || state.parking.showMeters {
+            if state.parking.showMeters {
                 ForEach(filteredMeterSegments) { segment in
                     Annotation(segment.streetName, coordinate: segment.coordinate) {
                         StreetMeterMarkerView(
@@ -104,48 +104,59 @@ struct ParkMapView: View {
                 }
             }
 
-            if state.map.filters.showTram, let tramData = state.parking.tramData {
-                let routeCoords = tramData.routeCoordinates
-                if routeCoords.count >= 2 {
-                    MapPolyline(coordinates: routeCoords)
-                        .stroke(
-                            Color.tram,
-                            style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [5, 3]))
-                }
-
-                ForEach(tramData.stops) { stop in
-                    Annotation(stop.name, coordinate: stop.coordinate) {
-                        Circle()
-                            .fill(Color.tram)
-                            .frame(width: 12, height: 12)
-                            .overlay(Circle().stroke(.white, lineWidth: 2))
-                    }
-                }
-            }
         }
         .onMapCameraChange(frequency: .continuous) { context in
             currentSpan = context.region.span
         }
-        .mapStyle(.standard(elevation: .realistic, pointsOfInterest: .including([.park])))
+        .mapStyle(mapStyleForOption(state.map.mapStyle))
         .mapControls {
-            MapUserLocationButton()
             MapCompass()
             MapScaleView()
         }
         .safeAreaInset(edge: .top) {
-            MapFilterBar()
-                .padding(.top, 4)
-        }
-        .onChange(of: state.map.filters.showStreetMeters) {
-            if state.map.filters.showStreetMeters {
-                Task { await state.parking.fetchStreetSegments() }
+            HStack(spacing: 12) {
+                MapStylePicker()
+                Spacer()
+                locationButton
             }
+            .padding(.horizontal, 16)
+            .padding(.top, 4)
         }
         .onChange(of: state.parking.showMeters) {
             if state.parking.showMeters {
-                state.map.filters.showStreetMeters = true
                 Task { await state.parking.fetchStreetSegments() }
             }
+        }
+    }
+
+    private var locationButton: some View {
+        Button {
+            withAnimation(.smooth) {
+                state.map.cameraPosition = .userLocation(
+                    fallback: .region(MKCoordinateRegion(
+                        center: CLLocationCoordinate2D(latitude: 32.7341, longitude: -117.1446),
+                        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                    ))
+                )
+            }
+        } label: {
+            Image(systemName: "location.fill")
+                .font(.system(size: 14))
+                .foregroundStyle(Color.accentColor)
+                .frame(width: 36, height: 36)
+        }
+        .glassEffect(.regular.interactive())
+    }
+
+    private func mapStyleForOption(_ option: MapStyleOption) -> MapStyle {
+        let parkPOIs = PointOfInterestCategories.including([.park])
+        switch option {
+        case .standard:
+            return .standard(elevation: .realistic, pointsOfInterest: parkPOIs)
+        case .satellite:
+            return .imagery(elevation: .realistic)
+        case .hybrid:
+            return .hybrid(elevation: .realistic, pointsOfInterest: parkPOIs)
         }
     }
 }

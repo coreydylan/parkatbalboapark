@@ -1,6 +1,14 @@
 import MapKit
 import SwiftUI
 
+enum MapStyleOption: String, CaseIterable, Identifiable {
+    case standard = "Map"
+    case satellite = "Satellite"
+    case hybrid = "Hybrid"
+
+    var id: String { rawValue }
+}
+
 @MainActor @Observable
 class MapState {
     var cameraPosition: MapCameraPosition = .region(
@@ -9,7 +17,7 @@ class MapState {
             span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         ))
 
-    var filters: MapFilters = MapFilters()
+    var mapStyle: MapStyleOption = .standard
 
     // Two-phase flyover state
     private var phase1Center: CLLocationCoordinate2D?
@@ -184,12 +192,4 @@ class MapState {
         phase1Center = nil
         phase2Center = nil
     }
-}
-
-struct MapFilters {
-    var showTram: Bool = false
-    var showRestrooms: Bool = false
-    var showWater: Bool = false
-    var showEvCharging: Bool = false
-    var showStreetMeters: Bool = false
 }
