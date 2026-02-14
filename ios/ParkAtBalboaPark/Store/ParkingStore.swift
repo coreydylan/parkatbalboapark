@@ -272,18 +272,28 @@ class ParkingStore {
                     coordinate: lot.coordinate,
                     tier: nil,
                     costColor: .gray,
-                    hasTram: lot.hasTramStop
+                    hasTram: lot.hasTramStop,
+                    rank: nil
                 )
             }
         } else {
+            // Build rank lookup from displayedOptions (lot options only)
+            var rankBySlug: [String: Int] = [:]
+            for (index, option) in displayedOptions.enumerated() {
+                if case .lot(let rec) = option {
+                    rankBySlug[rec.lotSlug] = index + 1
+                }
+            }
             return recommendations.map { rec in
-                LotAnnotation(
+                let rank = rankBySlug[rec.lotSlug]
+                return LotAnnotation(
                     lotSlug: rec.lotSlug,
                     displayName: rec.lotDisplayName,
                     coordinate: rec.coordinate,
                     tier: rec.tier,
                     costColor: rec.costColor,
-                    hasTram: rec.hasTram
+                    hasTram: rec.hasTram,
+                    rank: rank != nil && rank! <= 3 ? rank : nil
                 )
             }
         }

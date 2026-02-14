@@ -24,16 +24,17 @@ struct ParkMapView: View {
             ForEach(state.parking.lotAnnotations) { annotation in
                 Annotation(annotation.displayName, coordinate: annotation.coordinate) {
                     LotMarkerView(
-                        label: "P",
+                        label: annotation.rank.map { "\($0)" } ?? "P",
                         tier: annotation.tier,
-                        costColor: annotation.costColor,
+                        costColor: annotation.rank != nil ? .accentColor : annotation.costColor,
                         isSelected: {
                             if case .lot(let rec) = state.parking.selectedOption {
                                 return rec.lotSlug == annotation.lotSlug
                             }
                             return false
                         }(),
-                        hasTram: annotation.hasTram
+                        hasTram: annotation.hasTram,
+                        isRanked: annotation.rank != nil
                     )
                     .onTapGesture {
                         if let rec = state.parking.recommendations.first(where: {
@@ -158,6 +159,7 @@ struct LotAnnotation: Identifiable {
     let tier: LotTier?
     let costColor: Color
     let hasTram: Bool
+    let rank: Int?  // 1-based rank in displayed options (nil = unranked)
 
     var id: String { lotSlug }
 }

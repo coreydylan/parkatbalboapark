@@ -22,6 +22,20 @@ class MapState {
 
     private var phaseTransitionTask: Task<Void, Never>?
 
+    // The sheet covers ~55% of the screen. To place a target point in the
+    // center of the VISIBLE area (top ~45%), we shift the map center south.
+    // Visible center ≈ 22% from top; map center = 50%; delta = 28% of displayed span.
+    // We use the span's latitudeDelta to compute this in degrees.
+    private func sheetAdjustedCenter(
+        target: CLLocationCoordinate2D,
+        spanLatDelta: Double
+    ) -> CLLocationCoordinate2D {
+        CLLocationCoordinate2D(
+            latitude: target.latitude - spanLatDelta * 0.15,
+            longitude: target.longitude
+        )
+    }
+
     func fitRoute(from origin: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
         let midLat = (origin.latitude + destination.latitude) / 2
         let midLng = (origin.longitude + destination.longitude) / 2
@@ -31,18 +45,63 @@ class MapState {
             latitudeDelta: max(latDelta, 0.005),
             longitudeDelta: max(lngDelta, 0.005)
         )
+        let target = CLLocationCoordinate2D(latitude: midLat, longitude: midLng)
+        let adjusted = sheetAdjustedCenter(target: target, spanLatDelta: span.latitudeDelta)
         withAnimation(.smooth(duration: 0.6)) {
             cameraPosition = .region(MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: midLat, longitude: midLng),
+                center: adjusted,
+                span: span
+            ))
+        }
+    }
+
+    /// Zoom to show the destination + top N lot options.
+    /// Centers on the centroid of the top lots (shifted for the sheet),
+    /// with a span wide enough to include the destination.
+    func fitDestinationAndTopLots(
+        destination: CLLocationCoordinate2D,
+        topLotCoordinates: [CLLocationCoordinate2D]
+    ) {
+        guard !topLotCoordinates.isEmpty else {
+            focusOn(destination)
+            return
+        }
+
+        // Centroid of the top lots
+        let centroidLat = topLotCoordinates.map(\.latitude).reduce(0, +) / Double(topLotCoordinates.count)
+        let centroidLng = topLotCoordinates.map(\.longitude).reduce(0, +) / Double(topLotCoordinates.count)
+        let centroid = CLLocationCoordinate2D(latitude: centroidLat, longitude: centroidLng)
+
+        // Span must include all lots + destination
+        let allPoints = [destination] + topLotCoordinates
+        let minLat = allPoints.map(\.latitude).min()!
+        let maxLat = allPoints.map(\.latitude).max()!
+        let minLng = allPoints.map(\.longitude).min()!
+        let maxLng = allPoints.map(\.longitude).max()!
+
+        let span = MKCoordinateSpan(
+            latitudeDelta: max((maxLat - minLat) * 1.8, 0.008),
+            longitudeDelta: max((maxLng - minLng) * 1.8, 0.008)
+        )
+
+        let adjusted = sheetAdjustedCenter(target: centroid, spanLatDelta: span.latitudeDelta)
+
+        withAnimation(.smooth(duration: 0.6)) {
+            cameraPosition = .region(MKCoordinateRegion(
+                center: adjusted,
                 span: span
             ))
         }
     }
 
     func focusOn(_ coordinate: CLLocationCoordinate2D) {
+        // distance 800 ≈ 0.007° lat span on screen. Shift center south
+        // so the target appears in the visible area above the sheet.
+        let approxSpanDegrees = 0.007
+        let adjusted = sheetAdjustedCenter(target: coordinate, spanLatDelta: approxSpanDegrees)
         withAnimation(.smooth) {
             cameraPosition = .camera(MapCamera(
-                centerCoordinate: coordinate,
+                centerCoordinate: adjusted,
                 distance: 800
             ))
         }

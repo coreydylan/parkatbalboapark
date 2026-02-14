@@ -685,6 +685,13 @@ struct MainSheetContent: View {
             Task {
                 try? await Task.sleep(for: .milliseconds(100))
                 await state.fetchRecommendations()
+                try? await Task.sleep(for: .milliseconds(300))
+                zoomToShowTopResults()
+            }
+        } else {
+            Task {
+                try? await Task.sleep(for: .milliseconds(350))
+                zoomToShowTopResults()
             }
         }
     }
@@ -706,6 +713,18 @@ struct MainSheetContent: View {
         // Pre-fetch recommendations so data is ready when "Park Now" is tapped
         state.parking.resetToNow()
         Task { await state.fetchRecommendations() }
+    }
+
+    private func zoomToShowTopResults() {
+        guard let dest = state.parking.selectedDestination else { return }
+        let topLots = state.parking.displayedOptions.prefix(3).compactMap { option -> CLLocationCoordinate2D? in
+            if case .lot(let rec) = option { return rec.coordinate }
+            return nil
+        }
+        state.map.fitDestinationAndTopLots(
+            destination: dest.coordinate,
+            topLotCoordinates: topLots
+        )
     }
 
     private func clearDestination() {
