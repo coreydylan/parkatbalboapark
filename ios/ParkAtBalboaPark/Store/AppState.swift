@@ -67,7 +67,11 @@ class AppState {
             parking.selectedLot = nil
         }
         if let option {
-            map.focusOn(option.coordinate)
+            if let dest = parking.selectedDestination {
+                map.fitRoute(from: option.coordinate, to: dest.coordinate)
+            } else {
+                map.focusOn(option.coordinate)
+            }
         }
     }
 
@@ -105,16 +109,11 @@ class AppState {
 
     /// Step 2→3: Open the fullscreen overlay morph.
     func openDetail(for recommendation: ParkingRecommendation) {
-        selectOption(.lot(recommendation))
-        expandedPreviewSlug = recommendation.lotSlug
+        // Set fullscreenLotSlug FIRST — this blocks the selectedOption and
+        // expandedPreviewSlug onChange guards from firing competing detent animations.
         morph.fullscreenLotSlug = recommendation.lotSlug
-        // Start flyover if not already running
-        if expandedPreviewSlug != recommendation.lotSlug {
-            map.startFlyover(
-                lotCoordinate: recommendation.coordinate,
-                destinationCoordinate: parking.selectedDestination?.coordinate
-            )
-        }
+        expandedPreviewSlug = recommendation.lotSlug
+        selectOption(.lot(recommendation))
         Task { await parking.fetchPricingData() }
     }
 

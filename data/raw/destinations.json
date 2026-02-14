@@ -8,7 +8,9 @@
     "address": "2100 Pan American Rd, San Diego, CA 92101",
     "lat": 32.73113,
     "lng": -117.15159,
-    "websiteUrl": "https://balboapark.org/explore/alcazar-garden"
+    "websiteUrl": "https://balboapark.org/explore/alcazar-garden",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 35
   },
   {
     "slug": "arizona-street-landfill-park",
@@ -17,9 +19,11 @@
     "area": "east_mesa",
     "type": "recreation",
     "address": "Arizona St, San Diego, CA 92104",
-    "lat": 32.73400,
-    "lng": -117.14100,
-    "websiteUrl": ""
+    "lat": 32.734,
+    "lng": -117.141,
+    "websiteUrl": "",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 66
   },
   {
     "slug": "australian-garden",
@@ -28,9 +32,11 @@
     "area": "palisades",
     "type": "garden",
     "address": "2150 Pan American Rd, San Diego, CA 92101",
-    "lat": 32.73140,
+    "lat": 32.7314,
     "lng": -117.15044,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 44
   },
   {
     "slug": "balboa-park-carousel",
@@ -41,7 +47,9 @@
     "address": "1889 Zoo Pl, San Diego, CA 92101",
     "lat": 32.73458,
     "lng": -117.14666,
-    "websiteUrl": "https://balboapark.org/explore/balboa-park-carousel"
+    "websiteUrl": "https://balboapark.org/explore/balboa-park-carousel",
+    "hours": "Sat–Sun 11am–5:30pm",
+    "popularityRank": 17
   },
   {
     "slug": "balboa-park-club",
@@ -52,7 +60,8 @@
     "address": "2150 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72901,
     "lng": -117.15363,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 64
   },
   {
     "slug": "craft-coffee",
@@ -63,7 +72,8 @@
     "address": "1889 Zoo Pl, San Diego, CA 92101",
     "lat": 32.73384,
     "lng": -117.14769,
-    "websiteUrl": ""
+    "websiteUrl": "",
+    "popularityRank": 42
   },
   {
     "slug": "balboa-park-dog-park",
@@ -74,7 +84,9 @@
     "address": "2167 6th Ave, San Diego, CA 92101",
     "lat": 32.73058,
     "lng": -117.15656,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 29
   },
   {
     "slug": "balboa-park-miniature-train",
@@ -85,7 +97,9 @@
     "address": "1800 Zoo Pl, San Diego, CA 92101",
     "lat": 32.73474,
     "lng": -117.14812,
-    "websiteUrl": "https://bfrr.org"
+    "websiteUrl": "https://bfrr.org",
+    "hours": "Sat–Sun 11am–4:30pm",
+    "popularityRank": 21
   },
   {
     "slug": "municipal-gymnasium",
@@ -96,7 +110,8 @@
     "address": "2111 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72913,
     "lng": -117.14721,
-    "websiteUrl": "https://www.sandiego.gov"
+    "websiteUrl": "https://www.sandiego.gov",
+    "popularityRank": 54
   },
   {
     "slug": "balboa-park-visitor-center",
@@ -107,7 +122,9 @@
     "address": "1549 El Prado, San Diego, CA 92101",
     "lat": 32.73097,
     "lng": -117.14968,
-    "websiteUrl": "https://balboapark.org/plan-your-visit"
+    "websiteUrl": "https://balboapark.org/plan-your-visit",
+    "hours": "9:30am–4:30pm daily",
+    "popularityRank": 12
   },
   {
     "slug": "botanical-building",
@@ -118,7 +135,9 @@
     "address": "1549 El Prado, San Diego, CA 92101",
     "lat": 32.73252,
     "lng": -117.14923,
-    "websiteUrl": "https://balboapark.org/explore/botanical-building"
+    "websiteUrl": "https://balboapark.org/explore/botanical-building",
+    "hours": "10am–4pm daily",
+    "popularityRank": 2
   },
   {
     "slug": "cabrillo-bridge",
@@ -127,9 +146,10 @@
     "area": "central_mesa",
     "type": "landmark",
     "address": "Cabrillo Bridge, San Diego, CA 92101",
-    "lat": 32.73180,
-    "lng": -117.15840,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.7318,
+    "lng": -117.1584,
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 18
   },
   {
     "slug": "california-tower",
@@ -140,7 +160,8 @@
     "address": "1350 El Prado, San Diego, CA 92101",
     "lat": 32.73148,
     "lng": -117.15255,
-    "websiteUrl": "https://www.museumofus.org"
+    "websiteUrl": "https://www.museumofus.org",
+    "popularityRank": 19
   },
   {
     "slug": "canyonside-community-park",
@@ -149,9 +170,11 @@
     "area": "florida_canyon",
     "type": "recreation",
     "address": "Pershing Dr, San Diego, CA 92101",
-    "lat": 32.73550,
-    "lng": -117.14350,
-    "websiteUrl": ""
+    "lat": 32.7355,
+    "lng": -117.1435,
+    "websiteUrl": "",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 67
   },
   {
     "slug": "casa-de-balboa",
@@ -161,8 +184,9 @@
     "type": "landmark",
     "address": "1649 El Prado, San Diego, CA 92101",
     "lat": 32.73116,
-    "lng": -117.14880,
-    "websiteUrl": "https://balboapark.org"
+    "lng": -117.1488,
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 22
   },
   {
     "slug": "casa-del-prado",
@@ -173,7 +197,8 @@
     "address": "1650 El Prado, San Diego, CA 92101",
     "lat": 32.73249,
     "lng": -117.14839,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 25
   },
   {
     "slug": "centro-cultural-de-la-raza",
@@ -184,7 +209,9 @@
     "address": "2004 Park Blvd, San Diego, CA 92101",
     "lat": 32.72772,
     "lng": -117.14866,
-    "websiteUrl": "https://centroraza.com"
+    "websiteUrl": "https://centroraza.com",
+    "hours": "Tue–Sun 12–4pm",
+    "popularityRank": 41
   },
   {
     "slug": "desert-garden",
@@ -195,7 +222,9 @@
     "address": "Park Blvd, San Diego, CA 92101",
     "lat": 32.73211,
     "lng": -117.14565,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 27
   },
   {
     "slug": "el-prado-walkway",
@@ -204,9 +233,10 @@
     "area": "central_mesa",
     "type": "landmark",
     "address": "El Prado, San Diego, CA 92101",
-    "lat": 32.73200,
-    "lng": -117.15000,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.732,
+    "lng": -117.15,
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 23
   },
   {
     "slug": "fleet-science-center",
@@ -217,7 +247,9 @@
     "address": "1875 El Prado, San Diego, CA 92101",
     "lat": 32.73082,
     "lng": -117.14707,
-    "websiteUrl": "https://www.fleetscience.org"
+    "websiteUrl": "https://www.fleetscience.org",
+    "hours": "10am–5pm daily",
+    "popularityRank": 3
   },
   {
     "slug": "florida-canyon-native-plant-garden",
@@ -226,9 +258,11 @@
     "area": "florida_canyon",
     "type": "garden",
     "address": "Morley Field Dr, San Diego, CA 92104",
-    "lat": 32.73580,
-    "lng": -117.14400,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.7358,
+    "lng": -117.144,
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 68
   },
   {
     "slug": "florida-canyon-nature-center",
@@ -237,9 +271,10 @@
     "area": "florida_canyon",
     "type": "landmark",
     "address": "Morley Field Dr, San Diego, CA 92104",
-    "lat": 32.73600,
-    "lng": -117.14400,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.736,
+    "lng": -117.144,
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 69
   },
   {
     "slug": "food-truck-alley",
@@ -248,9 +283,10 @@
     "area": "central_mesa",
     "type": "dining",
     "address": "Zoo Pl, San Diego, CA 92101",
-    "lat": 32.73420,
-    "lng": -117.14650,
-    "websiteUrl": ""
+    "lat": 32.7342,
+    "lng": -117.1465,
+    "websiteUrl": "",
+    "popularityRank": 28
   },
   {
     "slug": "house-of-hospitality",
@@ -261,7 +297,8 @@
     "address": "1549 El Prado, San Diego, CA 92101",
     "lat": 32.73097,
     "lng": -117.14968,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 59
   },
   {
     "slug": "international-cottages",
@@ -270,9 +307,10 @@
     "area": "palisades",
     "type": "landmark",
     "address": "2191 Pan American Rd, San Diego, CA 92101",
-    "lat": 32.72890,
-    "lng": -117.15220,
-    "websiteUrl": "https://www.sdhpr.org"
+    "lat": 32.7289,
+    "lng": -117.1522,
+    "websiteUrl": "https://www.sdhpr.org",
+    "popularityRank": 31
   },
   {
     "slug": "inez-grant-parker-memorial-rose-garden",
@@ -283,7 +321,9 @@
     "address": "Park Blvd, San Diego, CA 92101",
     "lat": 32.73119,
     "lng": -117.14568,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 16
   },
   {
     "slug": "japanese-friendship-garden",
@@ -294,7 +334,9 @@
     "address": "2215 Pan American Rd, San Diego, CA 92101",
     "lat": 32.72943,
     "lng": -117.14917,
-    "websiteUrl": "https://www.niwa.org"
+    "websiteUrl": "https://www.niwa.org",
+    "hours": "10am–6pm daily",
+    "popularityRank": 8
   },
   {
     "slug": "tea-pavilion",
@@ -305,7 +347,9 @@
     "address": "2215 Pan American Rd, San Diego, CA 92101",
     "lat": 32.73011,
     "lng": -117.14998,
-    "websiteUrl": "https://www.niwa.org"
+    "websiteUrl": "https://www.niwa.org",
+    "hours": "10am–5pm daily",
+    "popularityRank": 43
   },
   {
     "slug": "puppet-theater",
@@ -315,8 +359,10 @@
     "type": "theater",
     "address": "2130 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72827,
-    "lng": -117.15360,
-    "websiteUrl": "https://www.bfrr.org"
+    "lng": -117.1536,
+    "websiteUrl": "https://www.bfrr.org",
+    "hours": "Fri–Sun, shows at 11am, 1pm & 3pm",
+    "popularityRank": 30
   },
   {
     "slug": "mingei-international-museum",
@@ -327,7 +373,9 @@
     "address": "1439 El Prado, San Diego, CA 92101",
     "lat": 32.73101,
     "lng": -117.15103,
-    "websiteUrl": "https://www.mingei.org"
+    "websiteUrl": "https://www.mingei.org",
+    "hours": "Tue–Sun 10am–5pm",
+    "popularityRank": 10
   },
   {
     "slug": "morley-field-baseball",
@@ -336,9 +384,11 @@
     "area": "morley_field",
     "type": "recreation",
     "address": "Morley Field Dr, San Diego, CA 92104",
-    "lat": 32.73920,
-    "lng": -117.14250,
-    "websiteUrl": ""
+    "lat": 32.7392,
+    "lng": -117.1425,
+    "websiteUrl": "",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 71
   },
   {
     "slug": "morley-field-disc-golf",
@@ -349,7 +399,9 @@
     "address": "2300 Morley Field Dr, San Diego, CA 92104",
     "lat": 32.73762,
     "lng": -117.13576,
-    "websiteUrl": "https://bfrr.org"
+    "websiteUrl": "https://bfrr.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 72
   },
   {
     "slug": "morley-field-pool",
@@ -358,9 +410,10 @@
     "area": "morley_field",
     "type": "recreation",
     "address": "2229 Morley Field Dr, San Diego, CA 92104",
-    "lat": 32.73950,
-    "lng": -117.14200,
-    "websiteUrl": "https://www.sandiego.gov"
+    "lat": 32.7395,
+    "lng": -117.142,
+    "websiteUrl": "https://www.sandiego.gov",
+    "popularityRank": 73
   },
   {
     "slug": "morley-field-tennis",
@@ -369,9 +422,11 @@
     "area": "morley_field",
     "type": "recreation",
     "address": "2221 Morley Field Dr, San Diego, CA 92104",
-    "lat": 32.73900,
-    "lng": -117.14100,
-    "websiteUrl": "https://www.bfrr.org"
+    "lat": 32.739,
+    "lng": -117.141,
+    "websiteUrl": "https://www.bfrr.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 74
   },
   {
     "slug": "museum-of-photographic-arts",
@@ -382,7 +437,9 @@
     "address": "1649 El Prado, San Diego, CA 92101",
     "lat": 32.73116,
     "lng": -117.14889,
-    "websiteUrl": "https://mopa.org"
+    "websiteUrl": "https://mopa.org",
+    "hours": "Thu–Sun 11am–5pm",
+    "popularityRank": 34
   },
   {
     "slug": "museum-of-us",
@@ -393,7 +450,9 @@
     "address": "1350 El Prado, San Diego, CA 92101",
     "lat": 32.73148,
     "lng": -117.15255,
-    "websiteUrl": "https://www.museumofus.org"
+    "websiteUrl": "https://www.museumofus.org",
+    "hours": "10am–5pm daily",
+    "popularityRank": 5
   },
   {
     "slug": "palm-canyon",
@@ -402,9 +461,11 @@
     "area": "palisades",
     "type": "garden",
     "address": "Pan American Rd, San Diego, CA 92101",
-    "lat": 32.73040,
-    "lng": -117.15200,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.7304,
+    "lng": -117.152,
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 36
   },
   {
     "slug": "pan-american-community-park",
@@ -413,9 +474,11 @@
     "area": "pan_american",
     "type": "recreation",
     "address": "Pan American Rd, San Diego, CA 92101",
-    "lat": 32.72900,
-    "lng": -117.14900,
-    "websiteUrl": ""
+    "lat": 32.729,
+    "lng": -117.149,
+    "websiteUrl": "",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 63
   },
   {
     "slug": "panama-66",
@@ -426,7 +489,9 @@
     "address": "1450 El Prado, San Diego, CA 92101",
     "lat": 32.73176,
     "lng": -117.15103,
-    "websiteUrl": "https://www.panama66.com"
+    "websiteUrl": "https://www.panama66.com",
+    "hours": "Mon–Fri 11am–6pm, Sat–Sun 10am–8pm",
+    "popularityRank": 24
   },
   {
     "slug": "redwood-circle",
@@ -437,7 +502,9 @@
     "address": "Cabrillo Bridge area, San Diego, CA 92101",
     "lat": 32.73332,
     "lng": -117.15709,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 60
   },
   {
     "slug": "san-diego-air-space-museum",
@@ -448,7 +515,9 @@
     "address": "2001 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72624,
     "lng": -117.15441,
-    "websiteUrl": "https://www.sandiegoairandspace.org"
+    "websiteUrl": "https://www.sandiegoairandspace.org",
+    "hours": "10am–4:30pm daily",
+    "popularityRank": 11
   },
   {
     "slug": "san-diego-automotive-museum",
@@ -459,7 +528,9 @@
     "address": "2080 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72749,
     "lng": -117.15391,
-    "websiteUrl": "https://www.sdautomuseum.org"
+    "websiteUrl": "https://www.sdautomuseum.org",
+    "hours": "Tue–Sun 10am–5pm",
+    "popularityRank": 32
   },
   {
     "slug": "san-diego-hall-of-champions",
@@ -468,9 +539,10 @@
     "area": "pan_american",
     "type": "museum",
     "address": "2131 Pan American Plaza, San Diego, CA 92101",
-    "lat": 32.72950,
-    "lng": -117.14850,
-    "websiteUrl": ""
+    "lat": 32.7295,
+    "lng": -117.1485,
+    "websiteUrl": "",
+    "popularityRank": 53
   },
   {
     "slug": "san-diego-history-center",
@@ -481,7 +553,9 @@
     "address": "1649 El Prado, San Diego, CA 92101",
     "lat": 32.73116,
     "lng": -117.14827,
-    "websiteUrl": "https://www.sandiegohistory.org"
+    "websiteUrl": "https://www.sandiegohistory.org",
+    "hours": "Wed–Sun 10am–5pm",
+    "popularityRank": 14
   },
   {
     "slug": "san-diego-junior-theatre",
@@ -492,7 +566,9 @@
     "address": "1650 El Prado, San Diego, CA 92101",
     "lat": 32.73249,
     "lng": -117.14884,
-    "websiteUrl": "https://www.juniortheatre.com"
+    "websiteUrl": "https://www.juniortheatre.com",
+    "hours": "Show times vary",
+    "popularityRank": 38
   },
   {
     "slug": "san-diego-model-railroad-museum",
@@ -503,7 +579,9 @@
     "address": "1649 El Prado, San Diego, CA 92101",
     "lat": 32.73116,
     "lng": -117.14874,
-    "websiteUrl": "https://www.sdmrm.org"
+    "websiteUrl": "https://www.sdmrm.org",
+    "hours": "Tue–Sun 10am–4pm",
+    "popularityRank": 33
   },
   {
     "slug": "san-diego-museum-of-art",
@@ -514,7 +592,9 @@
     "address": "1450 El Prado, San Diego, CA 92101",
     "lat": 32.73217,
     "lng": -117.15045,
-    "websiteUrl": "https://www.sdmart.org"
+    "websiteUrl": "https://www.sdmart.org",
+    "hours": "Thu–Tue 10am–5pm",
+    "popularityRank": 4
   },
   {
     "slug": "san-diego-natural-history-museum",
@@ -525,7 +605,9 @@
     "address": "1788 El Prado, San Diego, CA 92101",
     "lat": 32.73205,
     "lng": -117.14736,
-    "websiteUrl": "https://www.sdnhm.org"
+    "websiteUrl": "https://www.sdnhm.org",
+    "hours": "10am–5pm daily",
+    "popularityRank": 6
   },
   {
     "slug": "morley-field-velodrome",
@@ -534,9 +616,10 @@
     "area": "morley_field",
     "type": "recreation",
     "address": "2221 Morley Field Dr, San Diego, CA 92104",
-    "lat": 32.73870,
+    "lat": 32.7387,
     "lng": -117.13824,
-    "websiteUrl": "https://www.sdvelodrome.com"
+    "websiteUrl": "https://www.sdvelodrome.com",
+    "popularityRank": 75
   },
   {
     "slug": "san-diego-zoo",
@@ -545,9 +628,11 @@
     "area": "central_mesa",
     "type": "zoo",
     "address": "2920 Zoo Dr, San Diego, CA 92101",
-    "lat": 32.73530,
-    "lng": -117.14900,
-    "websiteUrl": "https://zoo.sandiegozoo.org"
+    "lat": 32.7353,
+    "lng": -117.149,
+    "websiteUrl": "https://zoo.sandiegozoo.org",
+    "hours": "9am–5pm daily",
+    "popularityRank": 1
   },
   {
     "slug": "spanish-village-art-center",
@@ -558,7 +643,9 @@
     "address": "1770 Village Pl, San Diego, CA 92101",
     "lat": 32.73375,
     "lng": -117.14759,
-    "websiteUrl": "https://www.spanishvillageart.com"
+    "websiteUrl": "https://www.spanishvillageart.com",
+    "hours": "11am–4pm daily",
+    "popularityRank": 15
   },
   {
     "slug": "spreckels-organ-pavilion",
@@ -569,7 +656,9 @@
     "address": "1549 El Prado, San Diego, CA 92101",
     "lat": 32.72948,
     "lng": -117.15042,
-    "websiteUrl": "https://www.spreckelsorgan.org"
+    "websiteUrl": "https://www.spreckelsorgan.org",
+    "hours": "Free concerts Sun 2pm",
+    "popularityRank": 9
   },
   {
     "slug": "starlight-bowl",
@@ -580,7 +669,9 @@
     "address": "2005 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72635,
     "lng": -117.15334,
-    "websiteUrl": ""
+    "websiteUrl": "",
+    "hours": "Show times vary",
+    "popularityRank": 49
   },
   {
     "slug": "old-globe-theatre",
@@ -591,7 +682,9 @@
     "address": "1363 Old Globe Way, San Diego, CA 92101",
     "lat": 32.73226,
     "lng": -117.15227,
-    "websiteUrl": "https://www.theoldglobe.org"
+    "websiteUrl": "https://www.theoldglobe.org",
+    "hours": "Show times vary",
+    "popularityRank": 7
   },
   {
     "slug": "the-prado-restaurant",
@@ -602,7 +695,9 @@
     "address": "1549 El Prado, San Diego, CA 92101",
     "lat": 32.73097,
     "lng": -117.14968,
-    "websiteUrl": "https://www.pradobalboa.com"
+    "websiteUrl": "https://www.pradobalboa.com",
+    "hours": "Tue–Sat 11:30am–8pm, Sun 11:30am–7:30pm",
+    "popularityRank": 26
   },
   {
     "slug": "timken-museum-of-art",
@@ -613,7 +708,9 @@
     "address": "1500 El Prado, San Diego, CA 92101",
     "lat": 32.73185,
     "lng": -117.14963,
-    "websiteUrl": "https://www.timkenmuseum.org"
+    "websiteUrl": "https://www.timkenmuseum.org",
+    "hours": "Wed–Sun 10am–5pm",
+    "popularityRank": 13
   },
   {
     "slug": "veterans-museum",
@@ -622,9 +719,11 @@
     "area": "pan_american",
     "type": "museum",
     "address": "2115 Park Blvd, San Diego, CA 92101",
-    "lat": 32.72580,
+    "lat": 32.7258,
     "lng": -117.14879,
-    "websiteUrl": "https://www.veteranmuseum.org"
+    "websiteUrl": "https://www.veteranmuseum.org",
+    "hours": "Wed–Sat 11am–4pm",
+    "popularityRank": 47
   },
   {
     "slug": "war-memorial-building",
@@ -633,9 +732,10 @@
     "area": "central_mesa",
     "type": "landmark",
     "address": "3325 Zoo Dr, San Diego, CA 92101",
-    "lat": 32.73520,
-    "lng": -117.14680,
-    "websiteUrl": "https://www.sandiego.gov"
+    "lat": 32.7352,
+    "lng": -117.1468,
+    "websiteUrl": "https://www.sandiego.gov",
+    "popularityRank": 45
   },
   {
     "slug": "worldbeat-cultural-center",
@@ -646,7 +746,9 @@
     "address": "2100 Park Blvd, San Diego, CA 92101",
     "lat": 32.72721,
     "lng": -117.14957,
-    "websiteUrl": "https://www.worldbeatcenter.org"
+    "websiteUrl": "https://www.worldbeatcenter.org",
+    "hours": "Fri–Sun 11am–6pm",
+    "popularityRank": 46
   },
   {
     "slug": "zoro-garden",
@@ -656,8 +758,10 @@
     "type": "garden",
     "address": "Park Blvd, San Diego, CA 92101",
     "lat": 32.73112,
-    "lng": -117.14780,
-    "websiteUrl": "https://balboapark.org"
+    "lng": -117.1478,
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 37
   },
   {
     "slug": "comic-con-museum",
@@ -668,7 +772,9 @@
     "address": "2131 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72728,
     "lng": -117.15241,
-    "websiteUrl": "https://www.comic-con.org/museum"
+    "websiteUrl": "https://www.comic-con.org/museum",
+    "hours": "Thu–Tue 10am–5pm",
+    "popularityRank": 20
   },
   {
     "slug": "marston-house",
@@ -679,7 +785,9 @@
     "address": "3525 7th Ave, San Diego, CA 92103",
     "lat": 32.74171,
     "lng": -117.15783,
-    "websiteUrl": "https://www.sandiegohistory.org/marston-house"
+    "websiteUrl": "https://www.sandiegohistory.org/marston-house",
+    "hours": "Fri–Sun 10am–4pm",
+    "popularityRank": 48
   },
   {
     "slug": "kate-sessions-cactus-garden",
@@ -690,7 +798,9 @@
     "address": "Pan American Rd, San Diego, CA 92101",
     "lat": 32.72894,
     "lng": -117.15426,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 51
   },
   {
     "slug": "bea-evenson-fountain",
@@ -701,7 +811,8 @@
     "address": "1549 El Prado, San Diego, CA 92101",
     "lat": 32.73119,
     "lng": -117.14584,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 39
   },
   {
     "slug": "plaza-de-panama",
@@ -710,9 +821,10 @@
     "area": "central_mesa",
     "type": "landmark",
     "address": "El Prado, San Diego, CA 92101",
-    "lat": 32.73200,
-    "lng": -117.15000,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.732,
+    "lng": -117.15,
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 55
   },
   {
     "slug": "palisades-building",
@@ -722,8 +834,9 @@
     "type": "landmark",
     "address": "2130 Pan American Plaza, San Diego, CA 92101",
     "lat": 32.72827,
-    "lng": -117.15360,
-    "websiteUrl": "https://balboapark.org"
+    "lng": -117.1536,
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 52
   },
   {
     "slug": "casa-del-rey-moro-garden",
@@ -732,9 +845,11 @@
     "area": "palisades",
     "type": "garden",
     "address": "Pan American Rd, San Diego, CA 92101",
-    "lat": 32.73180,
+    "lat": 32.7318,
     "lng": -117.15153,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 50
   },
   {
     "slug": "ethnobotany-peace-garden",
@@ -745,7 +860,9 @@
     "address": "2004 Park Blvd, San Diego, CA 92101",
     "lat": 32.72691,
     "lng": -117.14982,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 80
   },
   {
     "slug": "lawn-bowling-green",
@@ -754,9 +871,10 @@
     "area": "palisades",
     "type": "recreation",
     "address": "Pan American Rd, San Diego, CA 92101",
-    "lat": 32.73100,
-    "lng": -117.15700,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.731,
+    "lng": -117.157,
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 57
   },
   {
     "slug": "veterans-memorial-garden",
@@ -765,9 +883,11 @@
     "area": "palisades",
     "type": "garden",
     "address": "Pan American Rd, San Diego, CA 92101",
-    "lat": 32.73150,
-    "lng": -117.15600,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.7315,
+    "lng": -117.156,
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 58
   },
   {
     "slug": "trees-for-health-garden",
@@ -778,7 +898,9 @@
     "address": "6th Ave, San Diego, CA 92101",
     "lat": 32.73719,
     "lng": -117.15838,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 61
   },
   {
     "slug": "may-marcy-sculpture-garden",
@@ -789,7 +911,9 @@
     "address": "1450 El Prado, San Diego, CA 92101",
     "lat": 32.73182,
     "lng": -117.15153,
-    "websiteUrl": "https://www.sdmart.org"
+    "websiteUrl": "https://www.sdmart.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 56
   },
   {
     "slug": "institute-of-contemporary-art",
@@ -800,7 +924,9 @@
     "address": "1439 El Prado, San Diego, CA 92101",
     "lat": 32.73101,
     "lng": -117.15103,
-    "websiteUrl": "https://www.icasandiego.org"
+    "websiteUrl": "https://www.icasandiego.org",
+    "hours": "Thu–Sun 12–5pm",
+    "popularityRank": 40
   },
   {
     "slug": "grape-street-dog-park",
@@ -810,8 +936,10 @@
     "type": "recreation",
     "address": "Grape St, San Diego, CA 92102",
     "lat": 32.72621,
-    "lng": -117.13480,
-    "websiteUrl": ""
+    "lng": -117.1348,
+    "websiteUrl": "",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 79
   },
   {
     "slug": "administration-building",
@@ -822,7 +950,8 @@
     "address": "2125 Park Blvd, San Diego, CA 92101",
     "lat": 32.72668,
     "lng": -117.14771,
-    "websiteUrl": "https://balboapark.org"
+    "websiteUrl": "https://balboapark.org",
+    "popularityRank": 62
   },
   {
     "slug": "morley-field-dog-park",
@@ -833,7 +962,9 @@
     "address": "Morley Field Dr, San Diego, CA 92104",
     "lat": 32.73886,
     "lng": -117.14242,
-    "websiteUrl": ""
+    "websiteUrl": "",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 76
   },
   {
     "slug": "california-native-plant-garden",
@@ -842,9 +973,11 @@
     "area": "morley_field",
     "type": "garden",
     "address": "Morley Field Dr, San Diego, CA 92104",
-    "lat": 32.73800,
-    "lng": -117.14400,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.738,
+    "lng": -117.144,
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 70
   },
   {
     "slug": "rube-powell-archery-range",
@@ -853,9 +986,11 @@
     "area": "central_mesa",
     "type": "recreation",
     "address": "Balboa Park, San Diego, CA 92101",
-    "lat": 32.73350,
-    "lng": -117.15500,
-    "websiteUrl": "https://balboapark.org"
+    "lat": 32.7335,
+    "lng": -117.155,
+    "websiteUrl": "https://balboapark.org",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 65
   },
   {
     "slug": "golden-hill-recreation-center",
@@ -864,9 +999,10 @@
     "area": "east_mesa",
     "type": "recreation",
     "address": "2600 Golf Course Dr, San Diego, CA 92102",
-    "lat": 32.72490,
-    "lng": -117.13760,
-    "websiteUrl": "https://www.sandiego.gov"
+    "lat": 32.7249,
+    "lng": -117.1376,
+    "websiteUrl": "https://www.sandiego.gov",
+    "popularityRank": 77
   },
   {
     "slug": "balboa-park-golf-course",
@@ -875,8 +1011,10 @@
     "area": "east_mesa",
     "type": "recreation",
     "address": "2600 Golf Course Dr, San Diego, CA 92102",
-    "lat": 32.72500,
-    "lng": -117.13800,
-    "websiteUrl": "https://www.sandiego.gov"
+    "lat": 32.725,
+    "lng": -117.138,
+    "websiteUrl": "https://www.sandiego.gov",
+    "hours": "Dawn–Dusk",
+    "popularityRank": 78
   }
 ]

@@ -1,5 +1,6 @@
 import MapKit
 import SwiftUI
+import UIKit
 
 /// Observable state driving the hero morph animation between expanded card and fullscreen overlay.
 /// Separated from `AppState` for single responsibility — only morph animation concerns live here.
@@ -24,6 +25,9 @@ class CardMorphState {
     /// Shared Look Around scene cache — cards write, overlay reads (no refetch).
     /// `MKLookAroundScene` is a reference type so `LookAroundPreview` reuses without reloading.
     var sceneCache: [String: MKLookAroundScene] = [:]
+
+    /// Static snapshot images from Look Around — lightweight alternative for scrolling lists.
+    var snapshotCache: [String: UIImage] = [:]
 
     /// Corner radius interpolated from 0 (fullscreen) to 20 (card).
     var cornerRadius: CGFloat {

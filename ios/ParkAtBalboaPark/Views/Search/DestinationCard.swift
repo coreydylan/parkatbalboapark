@@ -33,14 +33,6 @@ struct DestinationCard: View {
             VStack(alignment: .leading, spacing: 6) {
                 Spacer(minLength: 0)
 
-                // Area badge
-                Text(destination.area.displayName)
-                    .font(.caption2.weight(.bold))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(destination.type.color.opacity(0.85), in: Capsule())
-
                 // Name
                 Text(destination.displayName)
                     .font(.headline.weight(.bold))

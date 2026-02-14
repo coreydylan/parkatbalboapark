@@ -31,13 +31,28 @@ class ParkingStore {
     var selectedLot: ParkingRecommendation? = nil
     var selectedOption: ParkingOption? = nil
     var showFreeOnly: Bool = false
-    var showMeters: Bool = true
+    var showMeters: Bool = false
 
     // MARK: - Meter Walking Data
 
     var meterWalkingDistances: [String: Double] = [:]
     var meterWalkingTimes: [String: Double] = [:]
     var meterWalkingDisplays: [String: String] = [:]
+
+    // MARK: - Local Popularity Tracking
+
+    var localSelectionCounts: [String: Int] = [:]
+
+    func loadSelectionCounts() {
+        if let data = UserDefaults.standard.dictionary(forKey: "destinationSelectionCounts") as? [String: Int] {
+            localSelectionCounts = data
+        }
+    }
+
+    func recordSelection(slug: String) {
+        localSelectionCounts[slug, default: 0] += 1
+        UserDefaults.standard.set(localSelectionCounts, forKey: "destinationSelectionCounts")
+    }
 
     // MARK: - Time Window
 
@@ -297,6 +312,7 @@ class ParkingStore {
     // MARK: - Data Loading
 
     func loadData() async {
+        loadSelectionCounts()
         logger.info("loadData: starting API calls")
 
         // Run all three fetches concurrently, capture results independently

@@ -22,6 +22,23 @@ class MapState {
 
     private var phaseTransitionTask: Task<Void, Never>?
 
+    func fitRoute(from origin: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
+        let midLat = (origin.latitude + destination.latitude) / 2
+        let midLng = (origin.longitude + destination.longitude) / 2
+        let latDelta = abs(origin.latitude - destination.latitude) * 1.6
+        let lngDelta = abs(origin.longitude - destination.longitude) * 1.6
+        let span = MKCoordinateSpan(
+            latitudeDelta: max(latDelta, 0.005),
+            longitudeDelta: max(lngDelta, 0.005)
+        )
+        withAnimation(.smooth(duration: 0.6)) {
+            cameraPosition = .region(MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: midLat, longitude: midLng),
+                span: span
+            ))
+        }
+    }
+
     func focusOn(_ coordinate: CLLocationCoordinate2D) {
         withAnimation(.smooth) {
             cameraPosition = .camera(MapCamera(

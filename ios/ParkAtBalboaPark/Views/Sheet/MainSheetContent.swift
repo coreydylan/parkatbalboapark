@@ -35,10 +35,14 @@ struct MainSheetContent: View {
         VStack(spacing: 0) {
             if isCollapsed {
                 // Collapsed: floating pill only, no sheet chrome
-                Spacer()
+                Spacer(minLength: 0)
                 collapsedPill
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 14)
+                Spacer(minLength: 0)
+            } else if showDestinationCard {
+                // Destination card: photo fills the entire sheet
+                destinationCard
+                    .transition(.opacity.combined(with: .offset(y: 8)))
             } else {
                 // Expanded: custom drag handle + search bar + content
                 Capsule()
@@ -55,9 +59,6 @@ struct MainSheetContent: View {
                     if isSearching {
                         destinationList
                             .transition(.opacity.combined(with: .offset(y: 8)))
-                    } else if showDestinationCard {
-                        destinationCard
-                            .transition(.opacity.combined(with: .offset(y: 8)))
                     } else {
                         RecommendationSheet()
                             .transition(.opacity.combined(with: .offset(y: 8)))
@@ -67,7 +68,7 @@ struct MainSheetContent: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background {
-            if !isCollapsed {
+            if !isCollapsed && !showDestinationCard {
                 UnevenRoundedRectangle(
                     topLeadingRadius: 16,
                     bottomLeadingRadius: 0,
@@ -147,7 +148,7 @@ struct MainSheetContent: View {
                 } else {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(.secondary)
-                        .font(.subheadline)
+                        .font(isCollapsed ? .callout.weight(.semibold) : .subheadline)
                 }
 
                 if isSearching {
@@ -163,11 +164,11 @@ struct MainSheetContent: View {
                 } else if isCollapsed && !hasProfile {
                     Text("Start Here")
                         .foregroundStyle(.secondary)
-                        .font(.subheadline.weight(.medium))
+                        .font(.callout.weight(.semibold))
                 } else {
                     Text("Where are you headed?")
                         .foregroundStyle(isCollapsed ? .secondary : .tertiary)
-                        .font(.subheadline)
+                        .font(isCollapsed ? .callout.weight(.semibold) : .subheadline)
                 }
             }
 
@@ -201,17 +202,12 @@ struct MainSheetContent: View {
                 }
             }
         }
-        .frame(minHeight: isCollapsed ? 28 : 24)
-        .padding(.horizontal, isCollapsed ? 12 : 12)
-        .padding(.vertical, isCollapsed ? 6 : 9)
+        .frame(minHeight: isCollapsed ? 40 : 24)
+        .padding(.horizontal, isCollapsed ? 16 : 12)
+        .padding(.vertical, isCollapsed ? 10 : 9)
         .background {
-            if isCollapsed {
-                Capsule()
-                    .fill(.ultraThinMaterial)
-                    .shadow(color: .black.opacity(0.12), radius: 10, y: 3)
-            } else {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.quaternary.opacity(0.8))
+            if !isCollapsed {
+                // No background in collapsed mode — the sheet's glass is enough
             }
         }
         .overlay {
@@ -399,7 +395,7 @@ struct MainSheetContent: View {
         if isCollapsed && state.parking.selectedDestination != nil {
             // Tapping collapsed pill when destination is set → expand to show card or results
             withAnimation(.smooth(duration: 0.3)) {
-                sheetDetent = showParkingResults ? .fraction(0.4) : .fraction(0.5)
+                sheetDetent = .fraction(0.4)
             }
             return
         }
@@ -414,79 +410,143 @@ struct MainSheetContent: View {
 
     // MARK: - Destination Card
 
+    @State private var cardImage: UIImage?
+
     private var destinationCard: some View {
-        VStack(spacing: 0) {
+        Group {
             if let dest = state.parking.selectedDestination {
-                VStack(spacing: 16) {
-                    // Destination info
-                    VStack(spacing: 6) {
-                        Image(systemName: dest.type.icon)
-                            .font(.title2)
-                            .foregroundStyle(Color.accentColor)
-                            .frame(width: 48, height: 48)
-                            .background(Color.accentColor.opacity(0.12), in: Circle())
+                ZStack(alignment: .bottomLeading) {
+                    // Background: photo or type-colored fallback
+                    if let image = cardImage {
+                        GeometryReader { geo in
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geo.size.width, height: geo.size.height)
+                                .clipped()
+                        }
+                    } else {
+                        LinearGradient(
+                            colors: [
+                                dest.type.color.opacity(0.6),
+                                dest.type.color.opacity(0.2),
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        .overlay {
+                            Image(systemName: dest.type.icon)
+                                .font(.system(size: 40))
+                                .foregroundStyle(.white.opacity(0.15))
+                        }
+                    }
 
+                    // Gradient overlay for text readability
+                    LinearGradient(
+                        stops: [
+                            .init(color: .clear, location: 0.0),
+                            .init(color: .black.opacity(0.15), location: 0.25),
+                            .init(color: .black.opacity(0.5), location: 0.5),
+                            .init(color: .black.opacity(0.85), location: 1.0),
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .allowsHitTesting(false)
+
+                    // Content overlay
+                    VStack(alignment: .leading, spacing: 8) {
+                        Spacer(minLength: 0)
+
+                        // Destination name
                         Text(dest.displayName)
-                            .font(.title3.weight(.semibold))
-                            .multilineTextAlignment(.center)
-
-                        Text(dest.area.displayName)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .font(.title3.weight(.bold))
+                            .foregroundStyle(.white)
+                            .lineLimit(2)
 
                         if let address = dest.address {
                             Text(address)
                                 .font(.caption)
-                                .foregroundStyle(.tertiary)
+                                .foregroundStyle(.white.opacity(0.7))
+                                .lineLimit(1)
                         }
-                    }
-                    .padding(.top, 8)
-                    .overlay(alignment: .topTrailing) {
-                        Button {
-                            clearDestination()
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.title3)
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(.secondary, .quaternary)
-                        }
-                    }
 
-                    // Action buttons
-                    VStack(spacing: 10) {
-                        Button {
-                            commitToParking()
-                        } label: {
-                            Label("Park Now", systemImage: "car.fill")
-                                .font(.subheadline.weight(.semibold))
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 12)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(Color.accentColor)
+                        // Side-by-side buttons
+                        HStack(spacing: 10) {
+                            Button {
+                                commitToParking()
+                            } label: {
+                                Label("Park Now", systemImage: "car.fill")
+                                    .font(.subheadline.weight(.semibold))
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 10)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(Color.accentColor)
 
-                        Button {
-                            showTripPlanner = true
-                        } label: {
-                            Label("Plan a Trip", systemImage: "calendar")
-                                .font(.subheadline.weight(.medium))
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 12)
+                            Button {
+                                showTripPlanner = true
+                            } label: {
+                                Label("Plan a Trip", systemImage: "calendar")
+                                    .font(.subheadline.weight(.medium))
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 10)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.white)
                         }
-                        .buttonStyle(.bordered)
+
+                        // Change destination link
+                        Button {
+                            activateSearch()
+                        } label: {
+                            Text("Change destination")
+                                .font(.caption)
+                                .foregroundStyle(.white.opacity(0.7))
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-
-                    // Change destination
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 16)
+                    .padding(.top, 12)
+                }
+                .frame(maxHeight: .infinity)
+                .clipShape(UnevenRoundedRectangle(
+                    topLeadingRadius: 16,
+                    bottomLeadingRadius: 0,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 16
+                ))
+                .ignoresSafeArea(edges: .bottom)
+                .overlay(alignment: .top) {
+                    Capsule()
+                        .fill(.white.opacity(0.4))
+                        .frame(width: 36, height: 5)
+                        .padding(.top, 8)
+                }
+                .overlay(alignment: .topTrailing) {
                     Button {
-                        activateSearch()
+                        clearDestination()
                     } label: {
-                        Text("Change destination")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title3)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.white, .white.opacity(0.3))
+                    }
+                    .padding(12)
+                }
+                .task(id: dest.slug) {
+                    cardImage = DestinationCard.loadBundledImage(slug: dest.slug)
+                    if cardImage == nil {
+                        let slug = dest.slug
+                        cardImage = await Task.detached {
+                            guard let url = Bundle.main.url(forResource: slug, withExtension: "jpg"),
+                                  let data = try? Data(contentsOf: url),
+                                  let img = UIImage(data: data) else { return nil as UIImage? }
+                            return img
+                        }.value
                     }
                 }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 8)
             }
         }
     }
@@ -515,17 +575,14 @@ struct MainSheetContent: View {
                         sectionDivider
                     }
 
-                    ForEach(sortedAreas, id: \.self) { area in
-                        sectionHeader(area.displayName)
-                        LazyVStack(spacing: 10) {
-                            ForEach(filteredByArea(area)) { dest in
-                                DestinationCard(
-                                    destination: dest,
-                                    namespace: searchNS
-                                )
-                                .onTapGesture {
-                                    selectDestinationWithAnimation(dest)
-                                }
+                    LazyVStack(spacing: 10) {
+                        ForEach(sortedDestinations) { dest in
+                            DestinationCard(
+                                destination: dest,
+                                namespace: searchNS
+                            )
+                            .onTapGesture {
+                                selectDestinationWithAnimation(dest)
                             }
                         }
                     }
@@ -611,7 +668,7 @@ struct MainSheetContent: View {
             poiResults = []
             poiSearchTask?.cancel()
             // Go to destination card (taller detent) if destination was just selected
-            sheetDetent = state.parking.selectedDestination != nil ? .fraction(0.5) : .fraction(0.4)
+            sheetDetent = .fraction(0.4)
         }
     }
 
@@ -623,13 +680,17 @@ struct MainSheetContent: View {
         withAnimation(.smooth(duration: 0.25)) {
             sheetDetent = .fraction(0.4)
         }
-        Task {
-            try? await Task.sleep(for: .milliseconds(100))
-            await state.fetchRecommendations()
+        // Only fetch if not already pre-fetched when destination was selected
+        if state.parking.recommendations.isEmpty {
+            Task {
+                try? await Task.sleep(for: .milliseconds(100))
+                await state.fetchRecommendations()
+            }
         }
     }
 
     private func selectDestinationWithAnimation(_ dest: Destination) {
+        state.parking.recordSelection(slug: dest.slug)
         withAnimation(.spring(response: 0.45, dampingFraction: 0.88)) {
             state.parking.selectDestination(dest)
             searchFocused = false
@@ -637,11 +698,14 @@ struct MainSheetContent: View {
             searchText = ""
             poiResults = []
             poiSearchTask?.cancel()
-            sheetDetent = .fraction(0.5)
+            sheetDetent = .fraction(0.4)
         }
         // Haptic on the moment the card "lands" in the pill
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        // Pre-fetch recommendations so data is ready when "Park Now" is tapped
+        state.parking.resetToNow()
+        Task { await state.fetchRecommendations() }
     }
 
     private func clearDestination() {
@@ -802,6 +866,18 @@ struct MainSheetContent: View {
     }
 
     // MARK: - Filtering
+
+    private var sortedDestinations: [Destination] {
+        filteredDestinations.sorted { a, b in
+            let countA = state.parking.localSelectionCounts[a.slug] ?? 0
+            let countB = state.parking.localSelectionCounts[b.slug] ?? 0
+            if countA != countB { return countA > countB }
+            let rankA = a.popularityRank ?? 999
+            let rankB = b.popularityRank ?? 999
+            if rankA != rankB { return rankA < rankB }
+            return a.name < b.name
+        }
+    }
 
     private var filteredDestinations: [Destination] {
         if searchText.isEmpty {

@@ -3,6 +3,17 @@ import SwiftUI
 
 struct ParkMapView: View {
     @Environment(AppState.self) private var state
+    @State private var currentSpan = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+
+    private var filteredMeterSegments: [StreetSegment] {
+        let latDelta = currentSpan.latitudeDelta
+        return state.parking.streetSegments.filter { seg in
+            if latDelta < 0.005 { return true }
+            if latDelta < 0.01 { return seg.meterCount >= 5 }
+            if latDelta < 0.02 { return seg.meterCount >= 10 }
+            return seg.meterCount >= 20
+        }
+    }
 
     var body: some View {
         @Bindable var mapState = state.map
@@ -64,7 +75,7 @@ struct ParkMapView: View {
             }
 
             if state.map.filters.showStreetMeters || state.parking.showMeters {
-                ForEach(state.parking.streetSegments) { segment in
+                ForEach(filteredMeterSegments) { segment in
                     Annotation(segment.streetName, coordinate: segment.coordinate) {
                         StreetMeterMarkerView(
                             meterCount: segment.meterCount,
@@ -110,6 +121,9 @@ struct ParkMapView: View {
                     }
                 }
             }
+        }
+        .onMapCameraChange(frequency: .continuous) { context in
+            currentSpan = context.region.span
         }
         .mapStyle(.standard(elevation: .realistic, pointsOfInterest: .including([.park])))
         .mapControls {

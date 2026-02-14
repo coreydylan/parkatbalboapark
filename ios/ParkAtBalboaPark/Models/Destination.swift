@@ -78,6 +78,7 @@ struct Destination: Codable, Identifiable, Hashable, Sendable {
     let address: String?
     let lat: Double
     let lng: Double
+    let popularityRank: Int?
     let websiteUrl: String?
     let hours: String?
     let createdAt: String?
@@ -97,6 +98,7 @@ struct Destination: Codable, Identifiable, Hashable, Sendable {
         address: String?,
         lat: Double,
         lng: Double,
+        popularityRank: Int? = nil,
         websiteUrl: String? = nil,
         hours: String? = nil,
         createdAt: String? = nil
@@ -110,6 +112,7 @@ struct Destination: Codable, Identifiable, Hashable, Sendable {
         self.address = address
         self.lat = lat
         self.lng = lng
+        self.popularityRank = popularityRank
         self.websiteUrl = websiteUrl
         self.hours = hours
         self.createdAt = createdAt
@@ -126,6 +129,7 @@ struct Destination: Codable, Identifiable, Hashable, Sendable {
         address = try container.decodeIfPresent(String.self, forKey: .address)
         lat = try container.decode(Double.self, forKey: .lat)
         lng = try container.decode(Double.self, forKey: .lng)
+        popularityRank = try container.decodeIfPresent(Int.self, forKey: .popularityRank)
         websiteUrl = try container.decodeIfPresent(String.self, forKey: .websiteUrl)
         hours = try container.decodeIfPresent(String.self, forKey: .hours)
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt)
