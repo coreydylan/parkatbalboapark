@@ -39,6 +39,10 @@ struct MainSheetContent: View {
                 collapsedPill
                     .padding(.horizontal, 16)
                 Spacer(minLength: 0)
+            } else if let detailRec = state.detailRecommendation {
+                // Lot detail card: fills sheet like destination card
+                LotDetailCard(recommendation: detailRec)
+                    .transition(.opacity.combined(with: .offset(y: 8)))
             } else if showDestinationCard {
                 // Destination card: photo fills the entire sheet
                 destinationCard
@@ -68,7 +72,7 @@ struct MainSheetContent: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background {
-            if !isCollapsed && !showDestinationCard {
+            if !isCollapsed && !showDestinationCard && state.detailRecommendation == nil {
                 UnevenRoundedRectangle(
                     topLeadingRadius: 16,
                     bottomLeadingRadius: 0,

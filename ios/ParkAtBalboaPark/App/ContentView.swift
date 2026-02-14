@@ -61,21 +61,18 @@ struct ContentView: View {
                     sheetDetent = .fraction(0.4)
                 }
             }
-            .sheet(item: Bindable(appState).detailRecommendation) { rec in
-                NavigationStack {
-                    LotDetailView(recommendation: rec)
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button {
-                                    state.closeDetail()
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .symbolRenderingMode(.hierarchical)
-                                        .font(.title3)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                        }
+            .onChange(of: state.detailRecommendation) {
+                // Expand sheet when lot detail opens
+                if state.detailRecommendation != nil && sheetDetent != .large {
+                    withAnimation(.smooth(duration: 0.3)) {
+                        sheetDetent = .large
+                    }
+                }
+                // Return to recommendations list when lot detail closes
+                if state.detailRecommendation == nil && sheetDetent == .large {
+                    withAnimation(.smooth(duration: 0.3)) {
+                        sheetDetent = .fraction(0.4)
+                    }
                 }
             }
             .task {
