@@ -23,6 +23,7 @@ struct OnboardingView: View {
     @State private var orgRegisteredAnswered: Bool = false
 
     @State private var hasADA: Bool = false
+    @State private var safariURL: URL?
 
     // MARK: - Organizations
 
@@ -108,6 +109,10 @@ struct OnboardingView: View {
                 removal: .move(edge: .leading).combined(with: .opacity)
             ))
             .animation(.smooth, value: currentStep)
+        }
+        .sheet(item: $safariURL) { url in
+            SafariView(url: url)
+                .ignoresSafeArea()
         }
     }
 
@@ -285,7 +290,7 @@ struct OnboardingView: View {
                     Text("Resident Discount")
                         .font(.title2.bold())
 
-                    Text("The City of San Diego offers discounted parking rates at Balboa Park for residents who register through the city\u{2019}s permit portal. Without registering, you\u{2019}ll pay the same rates as visitors.")
+                    Text("The kiosks at the lots cannot verify residency \u{2014} everyone pays non-resident rates there. To get the resident discount, you must register online and buy your parking through the city\u{2019}s permit portal before you arrive.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -320,7 +325,9 @@ struct OnboardingView: View {
                             Text("Registration is $5 one-time at the city's permit portal. You'll need your license plate number and a driver's license, vehicle registration, or utility bill. Verification takes up to 2 business days.")
                                 .font(.caption)
 
-                            Link(destination: URL(string: "https://sandiego.thepermitportal.com/")!) {
+                            Button {
+                                safariURL = URL(string: "https://sandiego.thepermitportal.com/Register/Create")
+                            } label: {
                                 Label("Register Now", systemImage: "arrow.up.right.square")
                                     .font(.subheadline.weight(.medium))
                             }
@@ -346,7 +353,7 @@ struct OnboardingView: View {
                 // MARK: Rate Comparison
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Rate Comparison")
+                    Text("Rate Comparison (pre-purchased online)")
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(.secondary)
 
@@ -354,14 +361,18 @@ struct OnboardingView: View {
                         rateCard(
                             title: "Verified Resident",
                             icon: "house.fill",
-                            rates: ["Level 1: $5\u{2013}$8/day", "Level 2: $5/day", "Level 3: Free"]
+                            rates: ["Level 1: $4\u{2013}$8/day", "Level 2\u{2013}3: $5/day"]
                         )
                         rateCard(
-                            title: "Visitor",
-                            icon: "airplane",
-                            rates: ["Level 1: $10\u{2013}$16/day", "Level 2: $10/day", "Level 3: $10/day"]
+                            title: "At the Kiosk",
+                            icon: "dollarsign.square",
+                            rates: ["Level 1: $10\u{2013}$16/day", "Level 2\u{2013}3: $10/day"]
                         )
                     }
+
+                    Text("Kiosks can\u{2019}t verify residency. Everyone pays kiosk rates unless you pre-purchase online.")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
                 }
 
                 Divider()
@@ -401,9 +412,25 @@ struct OnboardingView: View {
                                 }
                             }
 
-                            Text("With a pass, all paid lots are included.")
+                            Text("Your pass covers all paid lots and metered park roads. Passes are virtual \u{2014} linked to your license plate.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+                        }
+                        .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
+                    }
+
+                    if passAnswered && !hasPass {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Passes cover all paid lots and metered roads inside the park. They\u{2019}re purchased through the city\u{2019}s permit portal ($5 one-time registration required).")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+
+                            Button {
+                                safariURL = URL(string: "https://sandiego.thepermitportal.com/")
+                            } label: {
+                                Label("Buy a pass", systemImage: "arrow.up.right.square")
+                                    .font(.subheadline.weight(.medium))
+                            }
                         }
                         .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
                     }
@@ -675,7 +702,7 @@ struct OnboardingView: View {
             }
 
             if hasADA {
-                Label("You qualify for free parking at every lot in Balboa Park. You can use any available space, not just designated accessible spaces.", systemImage: "checkmark.circle.fill")
+                Label("You park free in the blue accessible spaces in any lot (no time limit) and at all meters on park roads. If blue spaces are full and you use a regular space, the normal lot rate applies.", systemImage: "checkmark.circle.fill")
                     .font(.subheadline)
                     .foregroundStyle(.green)
                     .multilineTextAlignment(.leading)
@@ -734,7 +761,9 @@ struct OnboardingView: View {
                         .font(.subheadline.bold())
 
                     if hasADA {
-                        pricingRow(tier: "All Lots", price: "Free", highlight: true)
+                        pricingRow(tier: "Blue Spaces (any lot)", price: "Free", highlight: true)
+                        pricingRow(tier: "Meters (park roads)", price: "Free", highlight: true)
+                        pricingRow(tier: "Regular spaces", price: "Normal rate", highlight: false)
                     } else if hasPass {
                         pricingRow(tier: "All Paid Lots", price: "Included", highlight: true)
                         pricingRow(tier: "Free Lots", price: "Free", highlight: false)

@@ -101,6 +101,12 @@ interface PaymentMethod {
   methods: string[];
 }
 
+interface Organization {
+  slug: string;
+  name: string;
+  category: string;
+}
+
 interface DistanceEntry {
   lotSlug: string;
   destinationSlug: string;
@@ -134,6 +140,7 @@ function main() {
   const holidays = readJSON<Holiday[]>(join(rawDir, "holidays.json"));
   const tramData = readJSON<TramData>(join(rawDir, "tram-data.json"));
   const paymentMethods = readJSON<PaymentMethod[]>(join(rawDir, "payment-methods.json"));
+  const organizations = readJSON<Organization[]>(join(rawDir, "organizations.json"));
 
   // Try to load generated data (may not exist yet)
   let geocodedLots: Lot[] | null = null;
@@ -334,6 +341,16 @@ function main() {
       lines.push(`ON CONFLICT (lot_id, destination_id) DO UPDATE SET walking_distance_meters = EXCLUDED.walking_distance_meters, walking_time_seconds = EXCLUDED.walking_time_seconds;`);
       lines.push("");
     }
+  }
+
+  // --- Park Organizations ---
+  lines.push("-- Park Organizations");
+  lines.push("-- =============================================================");
+  for (const org of organizations) {
+    lines.push(`INSERT INTO park_organizations (slug, name, category)`);
+    lines.push(`VALUES ('${esc(org.slug)}', '${esc(org.name)}', '${esc(org.category)}')`);
+    lines.push(`ON CONFLICT (slug) DO NOTHING;`);
+    lines.push("");
   }
 
   const outPath = join(outDir, "seed.sql");

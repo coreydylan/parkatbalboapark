@@ -3,9 +3,8 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(AppState.self) private var state
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL
-
     @State private var showResetAlert = false
+    @State private var safariURL: URL?
 
     private var march2Date: Date {
         DateComponents(calendar: .current, year: 2026, month: 3, day: 2).date!
@@ -52,6 +51,10 @@ struct ProfileView: View {
                         state.refreshIfProfileChanged()
                     }
                 }
+            }
+            .sheet(item: $safariURL) { url in
+                SafariView(url: url)
+                    .ignoresSafeArea()
             }
             .alert("Reset Onboarding", isPresented: $showResetAlert) {
                 Button("Reset", role: .destructive) {
@@ -102,7 +105,7 @@ struct ProfileView: View {
                 }
 
                 if state.profile.hasADAPlaccard {
-                    Label("Free parking at all lots", systemImage: "checkmark.circle.fill")
+                    Label("Free at blue spaces in lots + all park meters", systemImage: "checkmark.circle.fill")
                         .font(.subheadline.weight(.medium))
                         .foregroundStyle(Color.costFree)
                 }
@@ -123,7 +126,7 @@ struct ProfileView: View {
         let profile = state.profile
 
         if profile.hasADAPlaccard {
-            return "ADA Placard Holder \u{2014} You park free at every lot in the park."
+            return "ADA Placard Holder \u{2014} Free at blue spaces in lots and all meters on park roads."
         }
 
         var parts: [String] = []
@@ -196,9 +199,7 @@ struct ProfileView: View {
 
             if state.profile.isSDCityResident && !state.profile.isVerifiedResident {
                 Button {
-                    if let url = URL(string: "https://sandiego.thepermitportal.com/") {
-                        openURL(url)
-                    }
+                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Register/Create")
                 } label: {
                     Label("Register at the city\u{2019}s permit portal", systemImage: "arrow.up.right.square")
                         .foregroundStyle(Color.accentColor)
@@ -213,11 +214,11 @@ struct ProfileView: View {
 
     private var residencyFooterText: String {
         if state.profile.isSDCityResident && !state.profile.isVerifiedResident {
-            return "Even though you live in San Diego, you\u{2019}re currently paying the same rates as visitors. The city requires a one-time $5 registration at their permit portal to unlock resident pricing. You\u{2019}ll need your license plate and a driver\u{2019}s license, vehicle registration, or utility bill. Once approved (1\u{2013}2 business days), you\u{2019}ll save up to 50% at paid lots."
+            return "Important: the parking kiosks at the lots cannot verify residency. If you just show up and pay at a kiosk, you\u{2019}ll pay full non-resident rates even though you live here. To get the resident discount, you must register online ($5 one-time) and pre-purchase your parking through the city\u{2019}s permit portal before you arrive. You\u{2019}ll need your license plate and a driver\u{2019}s license, vehicle registration, or utility bill. Approval takes 1\u{2013}2 business days."
         } else if state.profile.isSDCityResident && state.profile.isVerifiedResident {
-            return "You\u{2019}re registered with the city and getting discounted resident rates at paid lots. Starting March 2, 2026, seven lots become completely free for verified residents and enforcement hours shorten to 8 AM \u{2013} 6 PM."
+            return "You\u{2019}re registered and can pre-purchase parking at resident rates through the permit portal. Remember: the kiosks at the lots cannot verify residency, so always buy your permit online before you arrive. Starting March 2, 2026, seven lots become completely free for verified residents."
         } else {
-            return "Balboa Park\u{2019}s resident discount program is only for people who live within City of San Diego limits \u{2014} not the broader San Diego County. If you live in places like Chula Vista, La Mesa, or Poway, visitor rates apply. Your ZIP code determines eligibility automatically."
+            return "Balboa Park\u{2019}s resident discount is only for people who live within City of San Diego limits \u{2014} not the broader San Diego County. If you live in places like Chula Vista, La Mesa, or Poway, visitor rates apply. Non-residents pay at the kiosks in the lots or can buy passes online."
         }
     }
 
@@ -240,11 +241,57 @@ struct ProfileView: View {
                 }
                 .pickerStyle(.segmented)
             }
+
+            if !state.profile.hasPass {
+                passPricingGrid
+
+                Button {
+                    safariURL = URL(string: "https://sandiego.thepermitportal.com/")
+                } label: {
+                    Label("Buy a pass at the city\u{2019}s permit portal", systemImage: "arrow.up.right.square")
+                        .foregroundStyle(Color.accentColor)
+                }
+            }
         } header: {
             Text("Parking Pass")
         } footer: {
             Text(parkingPassFooterText)
         }
+    }
+
+    @ViewBuilder
+    private var passPricingGrid: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("")
+                    .frame(width: 70, alignment: .leading)
+                Text("Resident")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+                Text("Non-Res")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+            }
+
+            ForEach(ParkingPassType.allCases) { passType in
+                HStack {
+                    Text(passType.label)
+                        .font(.caption.weight(.medium))
+                        .frame(width: 70, alignment: .leading)
+                    Text(passType.price(isResident: true))
+                        .font(.caption)
+                        .foregroundStyle(state.profile.isSDCityResident ? Color.accentColor : .secondary)
+                        .frame(maxWidth: .infinity)
+                    Text(passType.price(isResident: false))
+                        .font(.caption)
+                        .foregroundStyle(state.profile.isSDCityResident ? .secondary : Color.accentColor)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+        }
+        .padding(.vertical, 4)
     }
 
     private var passTypeBinding: Binding<ParkingPassType> {
@@ -256,11 +303,11 @@ struct ProfileView: View {
 
     private var parkingPassFooterText: String {
         if state.profile.hasPass {
-            return "A parking pass lets you park at any paid lot without paying per visit. It also covers metered park roads. Passes are purchased separately through the City of San Diego \u{2014} this app just needs to know if you have one so we can show you accurate pricing."
+            return "Your pass covers all paid lots and metered park roads (not 6th Ave/Park Blvd meters or Zoo lots). Passes are virtual \u{2014} tied to your license plate, no physical tag. This app just needs to know you have one so we can show you accurate pricing."
         } else if state.profile.isSDCityResident {
-            return "If you park at Balboa Park regularly, a pass can save you money. Passes cover all paid lots and metered roads. Resident passes start at $30/month ($60/quarter, $150/year). You can purchase one at sandiego.thepermitportal.com."
+            return "The permit portal also sells single-day permits at resident rates (e.g. $4 half-day or $8/day at Level 1 lots, $5/day at Level 2 & 3). These must be purchased online before your visit \u{2014} the kiosks at the lots only charge non-resident rates. If you visit often, a monthly pass ($30) is cheaper than buying day permits. Registration is required first ($5 one-time)."
         } else {
-            return "If you park at Balboa Park regularly, a pass can save you money. Passes cover all paid lots and metered roads. Visitor passes start at $40/month ($120/quarter, $300/year). You can purchase one at sandiego.thepermitportal.com."
+            return "Passes cover all paid lots and metered roads inside the park. They\u{2019}re virtual (tied to your license plate) and purchased through the city\u{2019}s permit portal. You must register first ($5 one-time). Non-residents pay at the kiosks in the lots for single visits, or buy a pass for regular visits."
         }
     }
 
@@ -336,11 +383,11 @@ struct ProfileView: View {
         } footer: {
             if state.profile.hasADAPlaccard {
                 Text(
-                    "Balboa Park policy: vehicles displaying a valid disabled person placard or plate park free at every lot in the park, at all times. You are not limited to designated blue accessible spaces \u{2014} you may use any available space in any lot."
+                    "With a valid placard or plate, you park free in the designated blue accessible spaces in any parking lot, with no time limit. You also park free at any metered spot on roads in and near the park. However, if all blue spaces are taken and you park in a regular space in a lot, the normal lot rate applies."
                 )
             } else {
                 Text(
-                    "If you have a California disabled person parking placard (hanging or dashboard) or a disabled person license plate, turn this on. It overrides all other pricing \u{2014} you\u{2019}ll park free everywhere in the park."
+                    "If you have a disabled person parking placard or license plate, turn this on. You\u{2019}ll get free parking in blue accessible spaces in lots (no time limit) and at all meters on park roads. Note: regular (non-blue) spaces in lots still require payment."
                 )
             }
         }

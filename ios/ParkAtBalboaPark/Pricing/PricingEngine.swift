@@ -481,7 +481,9 @@ enum PricingEngine {
             if lot.hasEvCharging {
                 costResult.tips.append("EV charging available")
             }
-            if lot.hasAdaSpaces {
+            if lot.hasAdaSpaces && request.userType == .ada {
+                costResult.tips.append("ADA: Free in blue accessible spaces only — regular spaces are the normal lot rate")
+            } else if lot.hasAdaSpaces {
                 costResult.tips.append("ADA accessible spaces available")
             }
             if hasTram {

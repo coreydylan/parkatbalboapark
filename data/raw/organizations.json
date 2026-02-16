@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "museo-de-las-americas",
+    "name": "Centro Cultural de la Raza",
+    "category": "museum"
+  },
+  {
+    "slug": "comic-con-museum",
+    "name": "Comic-Con Museum",
+    "category": "museum"
+  },
+  {
+    "slug": "fleet-science-center",
+    "name": "Fleet Science Center",
+    "category": "museum"
+  },
+  {
+    "slug": "house-of-pacific-relations",
+    "name": "House of Pacific Relations International Cottages",
+    "category": "cultural"
+  },
+  {
+    "slug": "ica-san-diego",
+    "name": "Institute of Contemporary Art San Diego",
+    "category": "museum"
+  },
+  {
+    "slug": "japanese-friendship-garden",
+    "name": "Japanese Friendship Garden",
+    "category": "garden"
+  },
+  {
+    "slug": "marston-house",
+    "name": "Marston House Museum",
+    "category": "museum"
+  },
+  {
+    "slug": "mingei-international",
+    "name": "Mingei International Museum",
+    "category": "museum"
+  },
+  {
+    "slug": "museum-of-photographic-arts",
+    "name": "Museum of Photographic Arts",
+    "category": "museum"
+  },
+  {
+    "slug": "museum-of-us",
+    "name": "Museum of Us",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-air-space-museum",
+    "name": "San Diego Air & Space Museum",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-art-institute",
+    "name": "San Diego Art Institute",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-automotive-museum",
+    "name": "San Diego Automotive Museum",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-history-center",
+    "name": "San Diego History Center",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-mineral-gem",
+    "name": "San Diego Mineral & Gem Society",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-model-railroad",
+    "name": "San Diego Model Railroad Museum",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-museum-of-art",
+    "name": "San Diego Museum of Art",
+    "category": "museum"
+  },
+  {
+    "slug": "san-diego-natural-history",
+    "name": "San Diego Natural History Museum",
+    "category": "museum"
+  },
+  {
+    "slug": "timken-museum",
+    "name": "Timken Museum of Art",
+    "category": "museum"
+  },
+  {
+    "slug": "veterans-museum",
+    "name": "Veterans Museum at Balboa Park",
+    "category": "museum"
+  },
+  {
+    "slug": "worldbeat-center",
+    "name": "WorldBeat Center",
+    "category": "cultural"
+  },
+  {
+    "slug": "the-old-globe",
+    "name": "The Old Globe Theatre",
+    "category": "performing-arts"
+  },
+  {
+    "slug": "sd-youth-symphony",
+    "name": "San Diego Youth Symphony and Conservatory",
+    "category": "performing-arts"
+  },
+  {
+    "slug": "spreckels-organ-society",
+    "name": "Spreckels Organ Society",
+    "category": "performing-arts"
+  },
+  {
+    "slug": "spanish-village-art-center",
+    "name": "Spanish Village Art Center",
+    "category": "cultural"
+  },
+  {
+    "slug": "forever-balboa-park",
+    "name": "Forever Balboa Park",
+    "category": "nonprofit"
+  },
+  {
+    "slug": "balboa-art-conservation",
+    "name": "Balboa Art Conservation Center",
+    "category": "nonprofit"
+  },
+  {
+    "slug": "committee-of-100",
+    "name": "Committee of 100",
+    "category": "nonprofit"
+  },
+  {
+    "slug": "sd-zoo-wildlife-alliance",
+    "name": "San Diego Zoo Wildlife Alliance",
+    "category": "zoo"
+  },
+  {
+    "slug": "sd-lawn-bowling",
+    "name": "San Diego Lawn Bowling Club",
+    "category": "club"
+  },
+  {
+    "slug": "sd-archers",
+    "name": "San Diego Archers",
+    "category": "club"
+  },
+  {
+    "slug": "redwood-bridge-club",
+    "name": "Redwood Bridge Club",
+    "category": "club"
+  },
+  {
+    "slug": "balboa-park-chess-club",
+    "name": "Balboa Park Chess Club",
+    "category": "club"
+  },
+  {
+    "slug": "house-of-scotland",
+    "name": "House of Scotland Pipe Band",
+    "category": "club"
+  },
+  {
+    "slug": "balboa-park-horseshoe",
+    "name": "Balboa Park Horseshoe Club",
+    "category": "club"
+  },
+  {
+    "slug": "city-parks-recreation",
+    "name": "City of San Diego Parks & Recreation",
+    "category": "government"
+  }
+]

@@ -71,9 +71,9 @@ enum PricingExplanationEngine {
             return "\(timePrefix), the \(lotName) is free for Balboa Park \(userType.label.lowercased()) at \(tier.name) lots."
         }
 
-        // ADA free
+        // ADA free (in designated blue spaces)
         if isFree && userType == .ada {
-            return "\(timePrefix), the \(lotName) is free for ADA placard holders."
+            return "\(timePrefix), the blue accessible spaces at the \(lotName) are free with a valid placard or plate. Regular spaces are subject to the standard lot rate."
         }
 
         // Generic free (resident at free tiers after March 2)

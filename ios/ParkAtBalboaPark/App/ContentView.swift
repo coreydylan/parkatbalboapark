@@ -26,7 +26,7 @@ struct ContentView: View {
                     sheetDetent: $sheetDetent
                 )
                 .presentationDetents(
-                    [.fraction(0.08), .fraction(0.4), .large],
+                    [.fraction(0.08), .fraction(0.4), .fraction(0.65), .large],
                     selection: $sheetDetent
                 )
                 .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.4)))
@@ -61,20 +61,7 @@ struct ContentView: View {
                     sheetDetent = .fraction(0.4)
                 }
             }
-            .onChange(of: state.detailRecommendation) {
-                // Expand sheet when lot detail opens
-                if state.detailRecommendation != nil && sheetDetent != .large {
-                    withAnimation(.smooth(duration: 0.3)) {
-                        sheetDetent = .large
-                    }
-                }
-                // Return to recommendations list when lot detail closes
-                if state.detailRecommendation == nil && sheetDetent == .large {
-                    withAnimation(.smooth(duration: 0.3)) {
-                        sheetDetent = .fraction(0.4)
-                    }
-                }
-            }
+            // Detail detent management moved to MainSheetContent
             .task {
                 state.locationService.requestPermission()
             }

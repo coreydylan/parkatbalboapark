@@ -17,6 +17,7 @@ class ParkingStore {
     var tramData: TramData? = nil
     var streetSegments: [StreetSegment] = []
     var lotLookup: [String: ParkingLot] = [:]
+    var organizations: [Organization] = []
 
     // MARK: - Pricing Data Cache (for client-side rate comparisons)
     var cachedPricingRules: [PricingRule] = []
@@ -338,8 +339,12 @@ class ParkingStore {
             do { return .success(try await api.fetchEnforcement()) }
             catch { return .failure(error) }
         }()
+        async let orgsResult: Result<[Organization], Error> = {
+            do { return .success(try await supabase.query(table: "park_organizations")) }
+            catch { return .failure(error) }
+        }()
 
-        let (lr, dr, er) = await (lotsResult, destinationsResult, enforcementResult)
+        let (lr, dr, er, or_) = await (lotsResult, destinationsResult, enforcementResult, orgsResult)
 
         switch lr {
         case .success(let fetchedLots):
@@ -364,6 +369,14 @@ class ParkingStore {
             logger.info("loadData: enforcement active=\(enforcement.active)")
         case .failure(let error):
             logger.error("loadData: enforcement failed – \(error)")
+        }
+
+        switch or_ {
+        case .success(let fetchedOrgs):
+            self.organizations = fetchedOrgs.sorted(by: { $0.name < $1.name })
+            logger.info("loadData: loaded \(fetchedOrgs.count) organizations")
+        case .failure(let error):
+            logger.error("loadData: organizations failed – \(error)")
         }
 
         logger.info("loadData: complete – \(self.lots.count) lots, \(self.destinations.count) destinations")
@@ -867,7 +880,7 @@ class ParkingStore {
     }
 
     /// Format an hour integer as a time string (e.g. 20 → "8 PM", 18 → "6 PM").
-    private static func formatHour(_ hour: Int) -> String {
+    static func formatHour(_ hour: Int) -> String {
         let h = hour > 12 ? hour - 12 : hour
         let period = hour >= 12 ? "PM" : "AM"
         return "\(h) \(period)"

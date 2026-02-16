@@ -57,13 +57,13 @@ struct DestinationCard: View {
                     Spacer()
                 }
             }
-            .padding(.horizontal, 14)
-            .padding(.bottom, 16)
-            .padding(.top, 10)
+            .padding(.horizontal, 12)
+            .padding(.bottom, 12)
+            .padding(.top, 8)
         }
-        .frame(height: 130)
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .shadow(color: .black.opacity(0.12), radius: 8, y: 4)
+        .frame(height: 110)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .shadow(color: .black.opacity(0.1), radius: 6, y: 3)
         .opacity(appeared ? 1 : 0.85)
         .scaleEffect(appeared ? 1 : 0.97)
         .onAppear {

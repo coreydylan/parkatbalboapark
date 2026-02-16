@@ -1,6 +1,5 @@
 import MapKit
 import SwiftUI
-import UIKit
 
 struct MainSheetContent: View {
     @Environment(AppState.self) private var state
@@ -33,16 +32,16 @@ struct MainSheetContent: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if isCollapsed {
+            if let detailRec = state.detailRecommendation {
+                // Lot detail card: fills sheet — takes priority over all states
+                LotDetailCard(recommendation: detailRec)
+                    .transition(.opacity.combined(with: .offset(y: 8)))
+            } else if isCollapsed {
                 // Collapsed: floating pill only, no sheet chrome
                 Spacer(minLength: 0)
                 collapsedPill
                     .padding(.horizontal, 16)
                 Spacer(minLength: 0)
-            } else if let detailRec = state.detailRecommendation {
-                // Lot detail card: fills sheet like destination card
-                LotDetailCard(recommendation: detailRec)
-                    .transition(.opacity.combined(with: .offset(y: 8)))
             } else if showDestinationCard {
                 // Destination card: photo fills the entire sheet
                 destinationCard
@@ -84,7 +83,7 @@ struct MainSheetContent: View {
             }
         }
         .sheet(isPresented: $showProfile) {
-            ProfileView(showSetupPrompt: profileSetupPrompt)
+            ProfileView()
         }
         .sheet(isPresented: $showTripPlanner) {
             TripPlannerSheet {
@@ -98,6 +97,23 @@ struct MainSheetContent: View {
         .onChange(of: state.parking.selectedDestination) {
             if state.parking.selectedDestination == nil {
                 showParkingResults = false
+            }
+        }
+        .onChange(of: state.detailRecommendation) {
+            if state.detailRecommendation != nil {
+                // Expand to detail view when lot detail opens
+                sheetDetent = .fraction(0.65)
+            } else if sheetDetent == .fraction(0.65) || sheetDetent == .large {
+                // Return to recommendations when lot detail closes
+                sheetDetent = .fraction(0.4)
+            }
+        }
+        .onChange(of: sheetDetent) {
+            // Dismiss lot detail when user drags sheet below the detail detent
+            if state.detailRecommendation != nil
+                && (sheetDetent == .fraction(0.08) || sheetDetent == .fraction(0.4))
+            {
+                state.closeDetail()
             }
         }
         .onChange(of: searchText) {
@@ -572,7 +588,7 @@ struct MainSheetContent: View {
                         sectionDivider
                     }
 
-                    LazyVStack(spacing: 10) {
+                    LazyVStack(spacing: 8) {
                         ForEach(sortedDestinations) { dest in
                             DestinationCard(
                                 destination: dest,
@@ -601,7 +617,7 @@ struct MainSheetContent: View {
                     }
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 12)
             .padding(.bottom, 100)
         }
         .scrollDismissesKeyboard(.interactively)

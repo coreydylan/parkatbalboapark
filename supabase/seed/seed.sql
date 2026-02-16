@@ -1,32 +1,32 @@
 -- =============================================================
 -- Park at Balboa Park - Seed Data
--- Generated: 2026-02-12T01:53:11.396Z
+-- Generated: 2026-02-14T22:32:49.652Z
 -- =============================================================
 
 -- Parking Lots
 -- =============================================================
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('space-theater', 'Space Theater', 'Space Theater Lot', '1875 El Prado, San Diego, CA 92101', 32.7312, -117.146, 150, false, true, false, 'Behind Fleet Science Center, accessed from Park Blvd. Previously called North Pepper Grove lot. Walking access to Natural History Museum, Casa del Prado Theatre, Casa de Balboa.')
+VALUES ('space-theater', 'Space Theater', 'Space Theater Lot', '1875 El Prado, San Diego, CA 92101', 32.7312, -117.146, 154, false, true, false, 'Behind Fleet Science Center, accessed from Park Blvd. Previously called North Pepper Grove lot. Walking access to Natural History Museum, Casa del Prado Theatre, Casa de Balboa.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('casa-de-balboa', 'Casa de Balboa', 'Casa de Balboa Lot', '1649 El Prado, San Diego, CA 92101', 32.7308, -117.1475, 100, false, true, false, 'Behind Casa de Balboa building, accessed from Park Blvd. Walking access to Museum of Photographic Arts, Model Railroad Museum, History Center.')
+VALUES ('casa-de-balboa', 'Casa de Balboa', 'Casa de Balboa Lot', '1649 El Prado, San Diego, CA 92101', 32.7308, -117.1475, 82, false, true, false, 'Behind Casa de Balboa building, accessed from Park Blvd. Walking access to Museum of Photographic Arts, Model Railroad Museum, History Center.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('alcazar-parking-structure', 'Alcazar Parking Structure', 'Alcazar Parking Structure', '2170 Pan American Rd, San Diego, CA 92101', 32.73056, -117.15188, 400, true, true, true, 'Largest parking facility in Balboa Park. Multi-level structure near Alcazar Garden and The Prado. EV charging stations on level 2. Near House of Charm tram stop.')
+VALUES ('alcazar-parking-structure', 'Alcazar Garden', 'Alcazar Garden Lot', '2170 Pan American Rd, San Diego, CA 92101', 32.73056, -117.15188, 120, false, true, true, 'Surface parking lot near Alcazar Garden and The Prado. Near House of Charm tram stop.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('organ-pavilion', 'Organ Pavilion', 'Organ Pavilion Lot', '1549 El Prado, San Diego, CA 92101', 32.7284, -117.15118, 150, false, true, true, 'Located near the Spreckels Organ Pavilion. Tram stop on site. Convenient for Japanese Friendship Garden and international cottages.')
+VALUES ('organ-pavilion', 'Organ Pavilion', 'Organ Pavilion Lot', '2125 Pan American Rd E, San Diego, CA 92101', 32.7284, -117.15118, 352, false, true, true, 'Located near the Spreckels Organ Pavilion. Tram stop on site. Convenient for Japanese Friendship Garden and international cottages.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('palisades', 'Palisades', 'Palisades Lot', '2175 Pan American Rd, San Diego, CA 92101', 32.72817, -117.14945, 200, false, true, false, 'Formerly Pan American Plaza lot. Near Comic-Con Museum, Air & Space Museum, and Municipal Gymnasium. Becomes free for verified city residents March 2, 2026.')
+VALUES ('palisades', 'Palisades', 'Palisades Lot', '2175 Pan American Rd, San Diego, CA 92101', 32.7275, -117.1515, 150, false, true, false, 'Formerly Pan American Plaza lot. Near Comic-Con Museum, Air & Space Museum, and Municipal Gymnasium. Becomes free for verified city residents March 2, 2026.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('bea-evenson', 'Bea Evenson', 'Bea Evenson Lot', '1788 El Prado, San Diego, CA 92101', 32.7325, -117.1467, 100, false, true, false, 'On Village Place Rd, east of Natural History Museum. Walking access to Fleet Science Center, Spanish Village Art Center, Botanical Building. Becomes free for verified city residents March 2, 2026.')
+VALUES ('bea-evenson', 'Bea Evenson', 'Bea Evenson Lot', '1788 El Prado, San Diego, CA 92101', 32.7325, -117.1467, 102, false, true, false, 'On Village Place Rd, east of Natural History Museum. Walking access to Fleet Science Center, Spanish Village Art Center, Botanical Building. Becomes free for verified city residents March 2, 2026.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
@@ -34,7 +34,7 @@ VALUES ('south-carousel', 'South Carousel', 'South Carousel Lot', '1889 Zoo Pl, 
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('pepper-grove', 'Pepper Grove', 'Pepper Grove Lot', '1549 El Prado, San Diego, CA 92101', 32.73, -117.146, 120, false, true, false, 'Adjacent to Space Theater lot, behind Fleet Science Center. Near Pepper Grove Playground. Becomes free for verified city residents March 2, 2026.')
+VALUES ('pepper-grove', 'Pepper Grove', 'Pepper Grove Lot', '2005 Park Blvd, San Diego, CA 92101', 32.73, -117.146, 120, false, true, false, 'Adjacent to Space Theater lot, behind Fleet Science Center. Near Pepper Grove Playground. Becomes free for verified city residents March 2, 2026.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
@@ -42,15 +42,15 @@ VALUES ('federal-building', 'Federal Building', 'Federal Building Lot', '2490 Pa
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('marston-point', 'Marston Point', 'Marston Point Lot', '2551 Balboa Dr, San Diego, CA 92101', 32.7275, -117.1575, 80, false, true, false, 'Southwest mesa, off Balboa Dr near Bankers Hill. Becomes free for verified city residents March 2, 2026.')
+VALUES ('marston-point', 'Marston Point', 'Marston Point Lot', '2040 Balboa Dr, San Diego, CA 92101', 32.7275, -117.1575, 80, false, true, false, 'Southwest mesa, off Balboa Dr near Bankers Hill. Becomes free for verified city residents March 2, 2026.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('inspiration-point-upper', 'Inspiration Point (Upper)', 'Inspiration Point Upper Lot', '2040 Pan American Rd, San Diego, CA 92101', 32.72795, -117.15273, 200, false, true, true, 'Large lot at east end of park. Free tram stop available for shuttle to central attractions. Near Veterans Museum. Becomes free for verified city residents March 2, 2026.')
+VALUES ('inspiration-point-upper', 'Inspiration Point (Upper)', 'Inspiration Point Upper Lot', '2040 Pan American Rd, San Diego, CA 92101', 32.72795, -117.15273, 624, false, true, true, 'Large lot at east end of park. Free tram stop available for shuttle to central attractions. Near Veterans Museum. Becomes free for verified city residents March 2, 2026.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('inspiration-point-lower', 'Inspiration Point (Lower)', 'Inspiration Point Lower Lot', '2050 Pan American Rd, San Diego, CA 92101', 32.72567, -117.15361, 100, false, true, false, 'First 3 hours free for all visitors. Adjacent to upper lot tram stop. Becomes free for verified city residents March 2, 2026.')
+VALUES ('inspiration-point-lower', 'Inspiration Point (Lower)', 'Inspiration Point Lower Lot', '2050 Pan American Rd, San Diego, CA 92101', 32.7265, -117.15, 300, false, true, false, 'First 3 hours free for all visitors. Adjacent to upper lot tram stop. Becomes free for verified city residents March 2, 2026.')
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
@@ -66,7 +66,7 @@ VALUES ('centro-cultural', 'Centro Cultural de la Raza', 'Centro Cultural Lot', 
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO parking_lots (slug, name, display_name, address, lat, lng, capacity, has_ev_charging, has_ada_spaces, has_tram_stop, notes)
-VALUES ('presidents-way', 'Presidents Way', 'Presidents Way Lot', '2400 Presidents Way, San Diego, CA 92101', 32.73245, -117.14673, 30, false, true, false, 'Small parking area along Presidents Way near Park Blvd intersection. May partially overlap with metered street parking along the road. Free and outside the named paid lot system.')
+VALUES ('presidents-way', 'Presidents Way', 'Presidents Way Lot', '2400 Presidents Way, San Diego, CA 92101', 32.7285, -117.149, 30, false, true, false, 'Small parking area along Presidents Way near Park Blvd intersection. May partially overlap with metered street parking along the road. Free and outside the named paid lot system.')
 ON CONFLICT (slug) DO NOTHING;
 
 -- Lot Tier Assignments
@@ -725,3 +725,149 @@ ON CONFLICT (lot_id, method) DO NOTHING;
 INSERT INTO payment_methods (lot_id, method)
 VALUES ((SELECT id FROM parking_lots WHERE slug = 'inspiration-point-lower'), 'credit_card')
 ON CONFLICT (lot_id, method) DO NOTHING;
+
+-- Park Organizations
+-- =============================================================
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('museo-de-las-americas', 'Centro Cultural de la Raza', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('comic-con-museum', 'Comic-Con Museum', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('fleet-science-center', 'Fleet Science Center', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('house-of-pacific-relations', 'House of Pacific Relations International Cottages', 'cultural')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('ica-san-diego', 'Institute of Contemporary Art San Diego', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('japanese-friendship-garden', 'Japanese Friendship Garden', 'garden')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('marston-house', 'Marston House Museum', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('mingei-international', 'Mingei International Museum', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('museum-of-photographic-arts', 'Museum of Photographic Arts', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('museum-of-us', 'Museum of Us', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-air-space-museum', 'San Diego Air & Space Museum', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-art-institute', 'San Diego Art Institute', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-automotive-museum', 'San Diego Automotive Museum', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-history-center', 'San Diego History Center', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-mineral-gem', 'San Diego Mineral & Gem Society', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-model-railroad', 'San Diego Model Railroad Museum', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-museum-of-art', 'San Diego Museum of Art', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('san-diego-natural-history', 'San Diego Natural History Museum', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('timken-museum', 'Timken Museum of Art', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('veterans-museum', 'Veterans Museum at Balboa Park', 'museum')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('worldbeat-center', 'WorldBeat Center', 'cultural')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('the-old-globe', 'The Old Globe Theatre', 'performing-arts')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('sd-youth-symphony', 'San Diego Youth Symphony and Conservatory', 'performing-arts')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('spreckels-organ-society', 'Spreckels Organ Society', 'performing-arts')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('spanish-village-art-center', 'Spanish Village Art Center', 'cultural')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('forever-balboa-park', 'Forever Balboa Park', 'nonprofit')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('balboa-art-conservation', 'Balboa Art Conservation Center', 'nonprofit')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('committee-of-100', 'Committee of 100', 'nonprofit')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('sd-zoo-wildlife-alliance', 'San Diego Zoo Wildlife Alliance', 'zoo')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('sd-lawn-bowling', 'San Diego Lawn Bowling Club', 'club')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('sd-archers', 'San Diego Archers', 'club')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('redwood-bridge-club', 'Redwood Bridge Club', 'club')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('balboa-park-chess-club', 'Balboa Park Chess Club', 'club')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('house-of-scotland', 'House of Scotland Pipe Band', 'club')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('balboa-park-horseshoe', 'Balboa Park Horseshoe Club', 'club')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO park_organizations (slug, name, category)
+VALUES ('city-parks-recreation', 'City of San Diego Parks & Recreation', 'government')
+ON CONFLICT (slug) DO NOTHING;

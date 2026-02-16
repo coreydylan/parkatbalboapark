@@ -25,6 +25,7 @@
 		263C6B76610A6AB290267679 /* california-native-plant-garden.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D11E4D45F16E7773B284B0C9 /* california-native-plant-garden.jpg */; };
 		27E6E05B28105CB63B91A30F /* morley-field-baseball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1F7C184812AA1D410B22DA2E /* morley-field-baseball.jpg */; };
 		280D80C4CC38B6F3D3448871 /* ParkingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3E3BA0F87E89DE853C7192 /* ParkingOption.swift */; };
+		A1B2C3D4E5F60718293A4B5C /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E7F8091A2B3C4D5E6F7081 /* Organization.swift */; };
 		294B163BF5CB8ACFCDF78EA8 /* redwood-circle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD1D9EA446B6D68809FC6B16 /* redwood-circle.jpg */; };
 		299C6775D4B0AC97897CED8F /* centro-cultural-de-la-raza.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2EA0AD0864858577D09672E2 /* centro-cultural-de-la-raza.jpg */; };
 		2A93F1625F223EFFFD7A1E11 /* StreetSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C485428A3A0C265174F0F239 /* StreetSegment.swift */; };
@@ -148,6 +149,7 @@
 		FB6C1B54CD67AAA069BB08CA /* puppet-theater.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06C5D5BC3B2C5ED6EC7CB08B /* puppet-theater.jpg */; };
 		FC85259E696747341ABB6C5A /* TierTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80DDA370825C18ABE166F16 /* TierTransition.swift */; };
 		FD3DCAA0AFFE0E88FF263ABD /* SectionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385D1BB64909FCE0397932F7 /* SectionAnimation.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* SafariView.swift */; };
 		FE50FD604EEE994222627782 /* lawn-bowling-green.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 227F81487FB7DA68FC5BE4DF /* lawn-bowling-green.jpg */; };
 /* End PBXBuildFile section */
 
@@ -185,6 +187,7 @@
 		34B0B0D4D29BE007750FAE92 /* balboa-park-visitor-center.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "balboa-park-visitor-center.jpg"; sourceTree = "<group>"; };
 		375FD8919307C0532C73CBA5 /* VisitDurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitDurationPicker.swift; sourceTree = "<group>"; };
 		385D1BB64909FCE0397932F7 /* SectionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionAnimation.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		3907E02F62ACD4535D01FDEB /* casa-del-prado.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "casa-del-prado.jpg"; sourceTree = "<group>"; };
 		3931F31C19ADE25173AA5404 /* balboa-park-club.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "balboa-park-club.jpg"; sourceTree = "<group>"; };
 		39B8E1D78162ACECC5FCF7A2 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
@@ -229,6 +232,7 @@
 		8EC792A6A762B9729BA9ACB1 /* plaza-de-panama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "plaza-de-panama.jpg"; sourceTree = "<group>"; };
 		902DFBE81FADC4A9CCC1D278 /* morley-field-dog-park.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "morley-field-dog-park.jpg"; sourceTree = "<group>"; };
 		91DCAB82362BE4AEDBCC5C5F /* MeterCostResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterCostResult.swift; sourceTree = "<group>"; };
+		D6E7F8091A2B3C4D5E6F7081 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		9292EC8FD7EA13C0460F5E05 /* institute-of-contemporary-art.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "institute-of-contemporary-art.jpg"; sourceTree = "<group>"; };
 		9456E250B59A2BF9BC6D1591 /* golden-hill-recreation-center.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "golden-hill-recreation-center.jpg"; sourceTree = "<group>"; };
 		950F27A8BAAB5613E3749808 /* ethnobotany-peace-garden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ethnobotany-peace-garden.jpg"; sourceTree = "<group>"; };
@@ -403,6 +407,7 @@
 				D2B95DAE17DCB05F78423463 /* LotTier.swift */,
 				EC3C7E0303446D115BF1662C /* LotTierAssignment.swift */,
 				91DCAB82362BE4AEDBCC5C5F /* MeterCostResult.swift */,
+				D6E7F8091A2B3C4D5E6F7081 /* Organization.swift */,
 				D409D8D496778DBB4F219895 /* ParkingLot.swift */,
 				1D3E3BA0F87E89DE853C7192 /* ParkingOption.swift */,
 				54EC1991F1C49CC6E75A63DC /* ParkingRecommendation.swift */,
@@ -445,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				0D2DEFBC25F9568E4ED550C2 /* Color+App.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* SafariView.swift */,
 				385D1BB64909FCE0397932F7 /* SectionAnimation.swift */,
 			);
 			path = Extensions;
@@ -783,6 +789,7 @@
 				E279F3B60C61E00AF9409D93 /* MapFilterBar.swift in Sources */,
 				A91B78587550CA6256E0E22B /* MapState.swift in Sources */,
 				9EF085D6C6B9FDB28E70ACD1 /* MeterCostResult.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5C /* Organization.swift in Sources */,
 				CECA2C4DF0087B9EFCFDE3FE /* OnboardingView.swift in Sources */,
 				2C6D8353BFCDA76D8B4C218E /* ParkAtBalboaParkApp.swift in Sources */,
 				7833F886A146EBA0461FBCFC /* ParkMapView.swift in Sources */,
@@ -800,6 +807,7 @@
 				8376D13CB5245CADA7F7D277 /* RecommendationResponse.swift in Sources */,
 				73D6EAAAA7B8DE628A99F408 /* RecommendationSheet.swift in Sources */,
 				FD3DCAA0AFFE0E88FF263ABD /* SectionAnimation.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* SafariView.swift in Sources */,
 				48C1A8E437B45C349A1760DC /* StreetMeterCard.swift in Sources */,
 				F27B2718BDD9717FA4A90ED4 /* StreetMeterMarkerView.swift in Sources */,
 				2A93F1625F223EFFFD7A1E11 /* StreetSegment.swift in Sources */,
