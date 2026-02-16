@@ -7,7 +7,7 @@ struct TierChangeTimeline: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label("Tier Changes", systemImage: "calendar.badge.clock")
+            Label("Level Changes", systemImage: "calendar.badge.clock")
                 .font(.subheadline.weight(.semibold))
 
             VStack(alignment: .leading, spacing: 0) {
@@ -80,7 +80,7 @@ struct TierChangeTimeline: View {
     }
 
     private var timelineAccessibilityLabel: String {
-        var parts = ["Currently \(currentTier.name) tier"]
+        var parts = ["Currently \(currentTier.name)"]
         for transition in transitions {
             let date = formattedDate(transition.dateString)
             let status = transition.isFuture ? "Expected" : "Past"

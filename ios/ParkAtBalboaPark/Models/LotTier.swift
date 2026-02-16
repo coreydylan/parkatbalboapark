@@ -11,9 +11,9 @@ enum LotTier: Int, Codable, CaseIterable, Identifiable, Hashable, Sendable {
     var name: String {
         switch self {
         case .free: "Free"
-        case .premium: "Premium"
-        case .standard: "Standard"
-        case .economy: "Economy"
+        case .premium: "Level 1"
+        case .standard: "Level 2"
+        case .economy: "Level 3"
         }
     }
 

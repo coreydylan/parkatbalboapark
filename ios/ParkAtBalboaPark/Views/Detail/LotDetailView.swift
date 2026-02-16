@@ -182,7 +182,7 @@ struct LotDetailView: View {
     }
 
     private var statsAccessibilityLabel: String {
-        var parts = ["\(recommendation.tier.name) tier"]
+        var parts = [recommendation.tier.name]
         if let walkTime = recommendation.walkingTimeDisplay {
             parts.append("\(walkTime) walk")
         }

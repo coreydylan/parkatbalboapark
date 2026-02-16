@@ -68,7 +68,7 @@ enum PricingExplanationEngine {
 
         // Staff/volunteer free at non-premium tiers
         if isFree && (userType == .staff || userType == .volunteer) && tier != .premium {
-            return "\(timePrefix), the \(lotName) is free for Balboa Park \(userType.label.lowercased()) at \(tier.name) tier lots."
+            return "\(timePrefix), the \(lotName) is free for Balboa Park \(userType.label.lowercased()) at \(tier.name) lots."
         }
 
         // ADA free

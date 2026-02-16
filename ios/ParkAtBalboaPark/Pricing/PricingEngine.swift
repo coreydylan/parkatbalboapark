@@ -234,9 +234,9 @@ enum PricingEngine {
     /// 1. Free-tier lots are always free.
     /// 2. Outside enforcement hours, parking is free.
     /// 3. Pass holders park free.
-    /// 4. Staff and volunteers park free in Free, Standard, and Economy lots.
+    /// 4. Staff and volunteers park free at Level 2 and Level 3 lots.
     /// 5. Lot-specific special rules (e.g. first N hours free).
-    /// 6. Standard pricing rule lookup with nonresident fallback.
+    /// 6. Pricing rule lookup with nonresident fallback.
     static func computeLotCost(
         lot: ParkingLot,
         tier: LotTier,
@@ -269,7 +269,7 @@ enum PricingEngine {
 
         // Staff and volunteers park free in tier 0, 2, 3
         if (userType == .staff || userType == .volunteer) && tier != .premium {
-            tips.append("Staff and volunteers park free in Free, Standard, and Economy lots")
+            tips.append("Staff and volunteers park free at Level 2 and Level 3 lots")
             return CostResult(costCents: 0, costDisplay: "FREE", isFree: true, tips: tips)
         }
 
