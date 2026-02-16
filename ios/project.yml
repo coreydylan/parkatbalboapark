@@ -33,3 +33,5 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.parkatbalboapark.app
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        DEVELOPMENT_TEAM: 225TS3W879
+        CODE_SIGN_STYLE: Automatic

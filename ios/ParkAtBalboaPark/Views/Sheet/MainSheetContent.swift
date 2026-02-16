@@ -9,7 +9,6 @@ struct MainSheetContent: View {
     @Namespace private var searchNS
     @State private var isSearching = false
     @State private var showParkingResults = false
-    @State private var profileSetupPrompt = false
     @State private var showTripPlanner = false
     @State private var searchText = ""
     @State private var showTimePicker = false
@@ -21,8 +20,8 @@ struct MainSheetContent: View {
         sheetDetent == .fraction(0.08)
     }
 
-    private var hasProfile: Bool {
-        state.profile.effectiveUserType != nil
+    private var hasConfiguredProfile: Bool {
+        state.profile.onboardingComplete || state.profile.residencyCardDismissed
     }
 
     /// After a destination is selected but before "Park Now" / "Plan a Trip"
@@ -90,9 +89,6 @@ struct MainSheetContent: View {
                 showTripPlanner = false
                 commitToParking()
             }
-        }
-        .onChange(of: showProfile) {
-            if !showProfile { profileSetupPrompt = false }
         }
         .onChange(of: state.parking.selectedDestination) {
             if state.parking.selectedDestination == nil {
@@ -181,7 +177,7 @@ struct MainSheetContent: View {
                         .foregroundStyle(.primary)
                         .font(.subheadline.weight(.medium))
                         .lineLimit(1)
-                } else if isCollapsed && !hasProfile {
+                } else if isCollapsed && !hasConfiguredProfile {
                     Text("Start Here")
                         .foregroundStyle(.secondary)
                         .font(.callout.weight(.semibold))
@@ -274,7 +270,8 @@ struct MainSheetContent: View {
 
     @ViewBuilder
     private var profileChip: some View {
-        if hasProfile, let userType = state.profile.effectiveUserType {
+        if hasConfiguredProfile {
+            let userType = state.profile.effectiveUserType
             Menu {
                 // Role switcher
                 if state.profile.userRoles.count > 1 {
@@ -317,7 +314,6 @@ struct MainSheetContent: View {
             }
         } else {
             Button {
-                profileSetupPrompt = true
                 showProfile = true
             } label: {
                 Image(systemName: "person.circle")
@@ -363,8 +359,8 @@ struct MainSheetContent: View {
 
     @ViewBuilder
     private var inlineProfileMenu: some View {
-        if let userType = state.profile.effectiveUserType {
-            Menu {
+        let userType = state.profile.effectiveUserType
+        Menu {
                 if state.profile.userRoles.count > 1 {
                     ForEach(
                         Array(state.profile.userRoles).sorted(by: { $0.rawValue < $1.rawValue })
@@ -397,7 +393,6 @@ struct MainSheetContent: View {
                     .frame(width: 22, height: 22)
                     .background(.quaternary, in: Circle())
             }
-        }
     }
 
     // MARK: - Pill Tap Logic
@@ -413,12 +408,7 @@ struct MainSheetContent: View {
             return
         }
 
-        if !hasProfile {
-            profileSetupPrompt = true
-            showProfile = true
-        } else {
-            activateSearch()
-        }
+        activateSearch()
     }
 
     // MARK: - Destination Card

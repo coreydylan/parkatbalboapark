@@ -10,24 +10,20 @@ class AppState {
     let locationService = LocationService()
     let morph = CardMorphState()
 
-    var showOnboarding: Bool = false
     var expandedPreviewSlug: String? = nil
     var detailRecommendation: ParkingRecommendation? = nil
 
     init() {
-        showOnboarding = !profile.onboardingComplete
+        profile.appOpenCount += 1
+        Task { await loadData() }
     }
 
     private var lastApiUserType: UserType?
     private var lastHasPass: Bool = false
 
-    func completeOnboarding() {
-        profile.completeOnboarding()
-        showOnboarding = false
-        Task { await loadData() }
-    }
-
     func loadData() async {
+        profile.recordVisit()
+        profile.resetDayPermitCountIfNeeded()
         await parking.loadData()
         await fetchRecommendations()
     }

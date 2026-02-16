@@ -31,15 +31,27 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             List {
-                introSection
                 profileSummarySection
+
+                // Primary identity section — shown prominently based on user type
+                if state.profile.hasADAPlaccard {
+                    accessibilitySection
+                }
+                if state.profile.affiliation != .none {
+                    affiliationSection
+                }
+
                 residencySection
-                parkingPassSection
-                affiliationSection
-                accessibilitySection
+
+                // Parking pass: show for SD residents or anyone who has one
+                if state.profile.isSDCityResident || state.profile.hasPass {
+                    parkingPassSection
+                }
+
                 activeRoleSection
                 enforcementSection
                 tramSection
+                moreOptionsSection
                 aboutSection
             }
             .navigationTitle("Settings")
@@ -56,38 +68,18 @@ struct ProfileView: View {
                 SafariView(url: url)
                     .ignoresSafeArea()
             }
-            .alert("Reset Onboarding", isPresented: $showResetAlert) {
+            .alert("Reset All Settings", isPresented: $showResetAlert) {
                 Button("Reset", role: .destructive) {
                     resetProfile()
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This will clear all your settings and show the onboarding flow again.")
+                Text("This will clear all your settings. You'll see the setup prompt again next time you open the app.")
             }
         }
     }
 
-    // MARK: - Intro
-
-    @ViewBuilder
-    private var introSection: some View {
-        Section {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Balboa Park has a complicated parking system with different rates depending on who you are \u{2014} where you live, where you work, and whether you have a permit or pass.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-
-                Text("Tell us about yourself below. Select everything that applies and we\u{2019}ll automatically find the cheapest parking option for wherever you\u{2019}re headed.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.vertical, 4)
-        } header: {
-            Text("How This Works")
-        }
-    }
-
-    // MARK: - Section 1: Profile Summary
+    // MARK: - Profile Summary
 
     @ViewBuilder
     private var profileSummarySection: some View {
@@ -214,7 +206,7 @@ struct ProfileView: View {
 
     private var residencyFooterText: String {
         if state.profile.isSDCityResident && !state.profile.isVerifiedResident {
-            return "Important: the parking kiosks at the lots cannot verify residency. If you just show up and pay at a kiosk, you\u{2019}ll pay full non-resident rates even though you live here. To get the resident discount, you must register online ($5 one-time) and pre-purchase your parking through the city\u{2019}s permit portal before you arrive. You\u{2019}ll need your license plate and a driver\u{2019}s license, vehicle registration, or utility bill. Approval takes 1\u{2013}2 business days."
+            return "Important: the parking kiosks at the lots cannot verify residency. If you just show up and pay at a kiosk, you\u{2019}ll pay full non-resident rates even though you live here. To get the resident discount: Step 1 \u{2014} create an account at the city\u{2019}s permit portal ($5 one-time fee). Step 2 \u{2014} purchase a permit or pass. During your first purchase you\u{2019}ll enter your license plate and upload proof of residency (driver\u{2019}s license, vehicle registration, or utility bill). Verification takes 1\u{2013}2 business days after that first purchase."
         } else if state.profile.isSDCityResident && state.profile.isVerifiedResident {
             return "You\u{2019}re registered and can pre-purchase parking at resident rates through the permit portal. Remember: the kiosks at the lots cannot verify residency, so always buy your permit online before you arrive. Starting March 2, 2026, seven lots become completely free for verified residents."
         } else {
@@ -240,16 +232,43 @@ struct ProfileView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+
+                // Permit expiration
+                DatePicker(
+                    "Expires",
+                    selection: permitExpirationBinding,
+                    displayedComponents: .date
+                )
+
+                permitStatusRow
             }
 
             if !state.profile.hasPass {
                 passPricingGrid
 
                 Button {
-                    safariURL = URL(string: "https://sandiego.thepermitportal.com/")
+                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
                 } label: {
-                    Label("Buy a pass at the city\u{2019}s permit portal", systemImage: "arrow.up.right.square")
+                    Label("Buy a pass or day permit", systemImage: "arrow.up.right.square")
                         .foregroundStyle(Color.accentColor)
+                }
+
+                if state.profile.isVerifiedResident {
+                    HStack {
+                        Label("Day permits this month", systemImage: "ticket")
+                            .font(.subheadline)
+                        Spacer()
+                        Text("\(state.profile.dayPermitCount)")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Button {
+                        state.profile.recordDayPermitPurchase()
+                    } label: {
+                        Label("Record a day permit purchase", systemImage: "plus.circle")
+                            .font(.subheadline)
+                    }
                 }
             }
         } header: {
@@ -301,13 +320,55 @@ struct ProfileView: View {
         )
     }
 
+    private var permitExpirationBinding: Binding<Date> {
+        Binding(
+            get: { state.profile.permitExpirationDate ?? Calendar.current.date(byAdding: .month, value: 1, to: Date())! },
+            set: { state.profile.permitExpirationDate = $0 }
+        )
+    }
+
+    @ViewBuilder
+    private var permitStatusRow: some View {
+        switch state.profile.permitState {
+        case .expired:
+            HStack {
+                Label("Expired", systemImage: "exclamationmark.triangle.fill")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.red)
+                Spacer()
+                Button("Renew") {
+                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                }
+                .font(.subheadline)
+            }
+        case .expiringSoon:
+            HStack {
+                let daysLeft = Calendar.current.dateComponents([.day], from: Date(), to: state.profile.permitExpirationDate ?? Date()).day ?? 0
+                Label("Expires in \(daysLeft) day\(daysLeft == 1 ? "" : "s")", systemImage: "clock.badge.exclamationmark")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.orange)
+                Spacer()
+                Button("Renew") {
+                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                }
+                .font(.subheadline)
+            }
+        case .active:
+            Label("Active", systemImage: "checkmark.circle.fill")
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(.green)
+        default:
+            EmptyView()
+        }
+    }
+
     private var parkingPassFooterText: String {
         if state.profile.hasPass {
             return "Your pass covers all paid lots and metered park roads (not 6th Ave/Park Blvd meters or Zoo lots). Passes are virtual \u{2014} tied to your license plate, no physical tag. This app just needs to know you have one so we can show you accurate pricing."
         } else if state.profile.isSDCityResident {
-            return "The permit portal also sells single-day permits at resident rates (e.g. $4 half-day or $8/day at Level 1 lots, $5/day at Level 2 & 3). These must be purchased online before your visit \u{2014} the kiosks at the lots only charge non-resident rates. If you visit often, a monthly pass ($30) is cheaper than buying day permits. Registration is required first ($5 one-time)."
+            return "The permit portal also sells single-day permits at resident rates (e.g. $4 half-day or $8/day at Level 1 lots, $5/day at Level 2 & 3). These must be purchased online before your visit \u{2014} the kiosks at the lots only charge non-resident rates. If you visit often, a monthly pass ($30) is cheaper than buying day permits. You\u{2019}ll need a portal account first ($5 one-time fee to register)."
         } else {
-            return "Passes cover all paid lots and metered roads inside the park. They\u{2019}re virtual (tied to your license plate) and purchased through the city\u{2019}s permit portal. You must register first ($5 one-time). Non-residents pay at the kiosks in the lots for single visits, or buy a pass for regular visits."
+            return "Passes cover all paid lots and metered roads inside the park. They\u{2019}re virtual (tied to your license plate) and purchased through the city\u{2019}s permit portal. You\u{2019}ll need a portal account first ($5 one-time fee to register). You enter your plate number and upload residency docs during your first purchase. Non-residents pay at the kiosks for single visits, or buy a pass for regular visits."
         }
     }
 
@@ -514,7 +575,49 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Section 9: About
+    // MARK: - More Options (discovery for hidden sections)
+
+    @ViewBuilder
+    private var moreOptionsSection: some View {
+        // Only show if there are discoverable sections currently hidden
+        if state.profile.affiliation == .none || !state.profile.hasADAPlaccard || (!state.profile.isSDCityResident && !state.profile.hasPass) {
+            Section {
+                if state.profile.affiliation == .none {
+                    @Bindable var profile = state.profile
+                    Button {
+                        withAnimation {
+                            profile.affiliation = .staff
+                        }
+                    } label: {
+                        Label("I work or volunteer at a park organization", systemImage: "building.2")
+                            .font(.subheadline)
+                    }
+                }
+
+                if !state.profile.hasADAPlaccard {
+                    @Bindable var profile = state.profile
+                    Toggle(isOn: $profile.hasADAPlaccard) {
+                        Label("I have a disability placard or plate", systemImage: "accessibility")
+                            .font(.subheadline)
+                    }
+                    .tint(Color.accentColor)
+                }
+
+                if !state.profile.isSDCityResident && !state.profile.hasPass {
+                    Button {
+                        safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                    } label: {
+                        Label("Buy a parking pass", systemImage: "creditcard")
+                            .font(.subheadline)
+                    }
+                }
+            } header: {
+                Text("More Options")
+            }
+        }
+    }
+
+    // MARK: - About
 
     @ViewBuilder
     private var aboutSection: some View {
@@ -528,7 +631,7 @@ struct ProfileView: View {
             Button(role: .destructive) {
                 showResetAlert = true
             } label: {
-                Label("Reset onboarding", systemImage: "arrow.counterclockwise")
+                Label("Reset all settings", systemImage: "arrow.counterclockwise")
                     .font(.subheadline)
             }
         } header: {
@@ -550,7 +653,15 @@ struct ProfileView: View {
         state.profile.hasADAPlaccard = false
         state.profile.activeCapacity = nil
         state.profile.onboardingComplete = false
-        state.showOnboarding = true
+        state.profile.residencyCardDismissed = false
+        state.profile.residencyDeferred = false
+        state.profile.permitExpirationDate = nil
+        state.profile.permitReminderSnoozedUntil = nil
+        state.profile.dayPermitCount = 0
+        state.profile.dayPermitCountResetDate = nil
+        state.profile.visitCount = 0
+        state.profile.lastVisitDate = nil
+        state.profile.appOpenCount = 0
         dismiss()
     }
 }

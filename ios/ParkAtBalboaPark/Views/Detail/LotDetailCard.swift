@@ -10,6 +10,7 @@ struct LotDetailCard: View {
     @State private var snapshotImage: UIImage?
     @State private var showDirectionsSheet = false
     @State private var showAllRates = false
+    @State private var safariURL: URL?
 
     private var lot: ParkingLot? {
         state.parking.lotLookup[recommendation.lotSlug]
@@ -69,6 +70,10 @@ struct LotDetailCard: View {
                     .background(.white.opacity(0.2), in: Circle())
             }
             .padding(12)
+        }
+        .sheet(item: $safariURL) { url in
+            SafariView(url: url)
+                .ignoresSafeArea()
         }
         .confirmationDialog("Get Directions", isPresented: $showDirectionsSheet) {
             Button("Apple Maps") {
@@ -190,6 +195,16 @@ struct LotDetailCard: View {
 
                     // Payment info
                     paymentInfo
+
+                    // Buy permit link for verified residents at paid lots
+                    if !recommendation.isFree && state.profile.isVerifiedResident {
+                        Button {
+                            safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                        } label: {
+                            Label("Buy a day permit (resident rate)", systemImage: "arrow.up.right.square")
+                                .font(.caption.weight(.medium))
+                        }
+                    }
 
                     // Directions button
                     Button {
@@ -455,7 +470,7 @@ struct LotDetailCard: View {
     private var pricingExplanation: String? {
         let rule = PricingEngine.findPricingRule(
             tier: recommendation.tier,
-            userType: state.profile.effectiveUserType ?? .nonresident,
+            userType: state.profile.effectiveUserType,
             rules: state.parking.cachedPricingRules,
             date: state.parking.effectiveStartTime
         )
@@ -465,7 +480,7 @@ struct LotDetailCard: View {
         let text = PricingExplanationEngine.explain(
             lotName: recommendation.lotDisplayName,
             tier: recommendation.tier,
-            userType: state.profile.effectiveUserType ?? .nonresident,
+            userType: state.profile.effectiveUserType,
             isVerifiedResident: state.profile.isVerifiedResident,
             costCents: recommendation.costCents,
             costDisplay: recommendation.costDisplay,

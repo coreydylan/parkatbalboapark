@@ -264,7 +264,7 @@ struct FullscreenLotOverlay: View {
             PricingExplanationView(
                 recommendation: recommendation,
                 lot: lot,
-                userType: state.profile.effectiveUserType ?? .nonresident,
+                userType: state.profile.effectiveUserType,
                 isVerifiedResident: state.profile.isVerifiedResident,
                 hasPass: state.profile.hasPass,
                 startTime: state.parking.effectiveStartTime,

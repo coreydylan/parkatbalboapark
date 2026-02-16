@@ -9,8 +9,6 @@ struct RecommendationSheet: View {
         VStack(spacing: 0) {
             if let error = state.parking.fetchError {
                 errorState(error)
-            } else if state.profile.effectiveUserType == nil {
-                emptyState
             } else if state.parking.isLoading {
                 loadingState
             } else if state.parking.recommendations.isEmpty {
@@ -93,20 +91,6 @@ struct RecommendationSheet: View {
     }
 
     // MARK: - States
-
-    private var emptyState: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "car.fill")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-            Text("Set up your profile to see\nparking recommendations")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 40)
-    }
 
     private var loadingState: some View {
         VStack(spacing: 16) {

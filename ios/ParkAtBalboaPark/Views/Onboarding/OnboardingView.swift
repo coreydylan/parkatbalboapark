@@ -322,7 +322,7 @@ struct OnboardingView: View {
                             Label("Register to save up to 50%", systemImage: "tag.fill")
                                 .font(.subheadline.bold())
 
-                            Text("Registration is $5 one-time at the city's permit portal. You'll need your license plate number and a driver's license, vehicle registration, or utility bill. Verification takes up to 2 business days.")
+                            Text("Step 1: Create an account at the city\u{2019}s permit portal ($5 one-time fee). Step 2: The first time you purchase a permit or pass, you\u{2019}ll enter your license plate number and upload proof of residency (driver\u{2019}s license, vehicle registration, or utility bill). Verification takes up to 2 business days after that first purchase.")
                                 .font(.caption)
 
                             Button {
@@ -426,7 +426,7 @@ struct OnboardingView: View {
                                 .foregroundStyle(.secondary)
 
                             Button {
-                                safariURL = URL(string: "https://sandiego.thepermitportal.com/")
+                                safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
                             } label: {
                                 Label("Buy a pass", systemImage: "arrow.up.right.square")
                                     .font(.subheadline.weight(.medium))
@@ -900,38 +900,8 @@ struct OnboardingView: View {
         state.profile.selectedOrganization = selectedOrg
         state.profile.isOrgRegistered = isOrgRegistered
         state.profile.hasADAPlaccard = hasADA
-        state.completeOnboarding()
+        state.profile.completeOnboarding()
     }
 }
 
-// MARK: - Toggle Chip
-
-struct ToggleChip: View {
-    let label: String
-    var icon: String? = nil
-    let isActive: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 6) {
-                if let icon {
-                    Image(systemName: icon)
-                        .font(.caption)
-                }
-                Text(label)
-                    .font(.subheadline.weight(.medium))
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .background(
-                Capsule()
-                    .fill(isActive ? Color.accentColor : Color(.systemGray6))
-            )
-            .foregroundStyle(isActive ? .white : .primary)
-        }
-        .sensoryFeedback(.selection, trigger: isActive)
-        .accessibilityAddTraits(.isToggle)
-        .accessibilityValue(isActive ? "Selected" : "Not selected")
-    }
-}
+// ToggleChip moved to Views/Components/ToggleChip.swift

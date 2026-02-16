@@ -106,6 +106,108 @@ class UserProfile {
         didSet { UserDefaults.standard.set(onboardingComplete, forKey: "onboardingComplete") }
     }
 
+    // MARK: - Soft Onboarding
+
+    var residencyCardDismissed: Bool = false {
+        didSet { UserDefaults.standard.set(residencyCardDismissed, forKey: "residencyCardDismissed") }
+    }
+
+    var residencyDeferred: Bool = false {
+        didSet { UserDefaults.standard.set(residencyDeferred, forKey: "residencyDeferred") }
+    }
+
+    var appOpenCount: Int = 0 {
+        didSet { UserDefaults.standard.set(appOpenCount, forKey: "appOpenCount") }
+    }
+
+    // MARK: - Permit Lifecycle
+
+    var permitExpirationDate: Date? = nil {
+        didSet {
+            if let date = permitExpirationDate {
+                UserDefaults.standard.set(date.timeIntervalSince1970, forKey: "permitExpirationDate")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "permitExpirationDate")
+            }
+        }
+    }
+
+    var permitReminderSnoozedUntil: Date? = nil {
+        didSet {
+            if let date = permitReminderSnoozedUntil {
+                UserDefaults.standard.set(date.timeIntervalSince1970, forKey: "permitReminderSnoozedUntil")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "permitReminderSnoozedUntil")
+            }
+        }
+    }
+
+    var dayPermitCount: Int = 0 {
+        didSet { UserDefaults.standard.set(dayPermitCount, forKey: "dayPermitCount") }
+    }
+
+    var dayPermitCountResetDate: Date? = nil {
+        didSet {
+            if let date = dayPermitCountResetDate {
+                UserDefaults.standard.set(date.timeIntervalSince1970, forKey: "dayPermitCountResetDate")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "dayPermitCountResetDate")
+            }
+        }
+    }
+
+    // MARK: - Visit Tracking
+
+    var visitCount: Int = 0 {
+        didSet { UserDefaults.standard.set(visitCount, forKey: "visitCount") }
+    }
+
+    var lastVisitDate: Date? = nil {
+        didSet {
+            if let date = lastVisitDate {
+                UserDefaults.standard.set(date.timeIntervalSince1970, forKey: "lastVisitDate")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "lastVisitDate")
+            }
+        }
+    }
+
+    // MARK: - Permit State (Computed)
+
+    enum PermitState {
+        case noAccount
+        case registeredNoPermit
+        case active
+        case expiringSoon
+        case expired
+    }
+
+    var permitState: PermitState {
+        if hasPass {
+            guard let expiration = permitExpirationDate else { return .active }
+            if expiration < Date() { return .expired }
+            let daysLeft = Calendar.current.dateComponents([.day], from: Date(), to: expiration).day ?? 0
+            if daysLeft <= 7 { return .expiringSoon }
+            return .active
+        }
+        if isVerifiedResident { return .registeredNoPermit }
+        if isSDCityResident { return .noAccount }
+        return .registeredNoPermit
+    }
+
+    var isReminderSnoozed: Bool {
+        guard let snoozedUntil = permitReminderSnoozedUntil else { return false }
+        return Date() < snoozedUntil
+    }
+
+    var shouldShowDayPermitROI: Bool {
+        dayPermitCount >= 3 && !hasPass
+    }
+
+    var shouldSuggestPassToVisitor: Bool {
+        !isSDCityResident && visitCount >= 4 && !hasPass
+    }
+
     // MARK: - Derived Roles
 
     var userRoles: Set<UserType> {
@@ -132,7 +234,7 @@ class UserProfile {
         }
     }
 
-    var effectiveUserType: UserType? {
+    var effectiveUserType: UserType {
         if let activeCapacity { return activeCapacity }
         // Priority: ada > staff/volunteer > resident/nonresident
         let roles = userRoles
@@ -140,14 +242,13 @@ class UserProfile {
         if roles.contains(.staff) { return .staff }
         if roles.contains(.volunteer) { return .volunteer }
         if roles.contains(.resident) { return .resident }
-        if roles.contains(.nonresident) { return .nonresident }
-        return nil
+        return .nonresident
     }
 
     /// User type sent to the API. Unverified residents are mapped to nonresident
     /// so they see full (non-discounted) pricing from the backend.
-    var apiUserType: UserType? {
-        guard let effective = effectiveUserType else { return nil }
+    var apiUserType: UserType {
+        let effective = effectiveUserType
         if effective == .resident && !isVerifiedResident {
             return .nonresident
         }
@@ -186,9 +287,36 @@ class UserProfile {
             activeCapacity = capacity
         }
 
+        // Soft onboarding state
+        residencyCardDismissed = UserDefaults.standard.bool(forKey: "residencyCardDismissed")
+        residencyDeferred = UserDefaults.standard.bool(forKey: "residencyDeferred")
+        appOpenCount = UserDefaults.standard.integer(forKey: "appOpenCount")
+
+        // Permit lifecycle
+        visitCount = UserDefaults.standard.integer(forKey: "visitCount")
+        dayPermitCount = UserDefaults.standard.integer(forKey: "dayPermitCount")
+
+        let permitExpTS = UserDefaults.standard.double(forKey: "permitExpirationDate")
+        if permitExpTS > 0 { permitExpirationDate = Date(timeIntervalSince1970: permitExpTS) }
+
+        let snoozedTS = UserDefaults.standard.double(forKey: "permitReminderSnoozedUntil")
+        if snoozedTS > 0 { permitReminderSnoozedUntil = Date(timeIntervalSince1970: snoozedTS) }
+
+        let resetTS = UserDefaults.standard.double(forKey: "dayPermitCountResetDate")
+        if resetTS > 0 { dayPermitCountResetDate = Date(timeIntervalSince1970: resetTS) }
+
+        let lastVisitTS = UserDefaults.standard.double(forKey: "lastVisitDate")
+        if lastVisitTS > 0 { lastVisitDate = Date(timeIntervalSince1970: lastVisitTS) }
+
         // Migrate from legacy userRoles-based storage
         if onboardingComplete && UserDefaults.standard.data(forKey: "userRoles") != nil {
             migrateFromLegacyRoles()
+        }
+
+        // Migrate from old mandatory onboarding: users who completed it
+        // should never see the new residency card
+        if onboardingComplete && !residencyCardDismissed {
+            residencyCardDismissed = true
         }
     }
 
@@ -221,5 +349,43 @@ class UserProfile {
 
     func setActiveCapacity(_ type: UserType?) {
         activeCapacity = type
+    }
+
+    // MARK: - Visit Tracking Actions
+
+    func recordVisit() {
+        let today = Calendar.current.startOfDay(for: Date())
+        if let last = lastVisitDate, Calendar.current.isDate(last, inSameDayAs: today) {
+            return
+        }
+        visitCount += 1
+        lastVisitDate = today
+    }
+
+    func recordDayPermitPurchase() {
+        resetDayPermitCountIfNeeded()
+        dayPermitCount += 1
+    }
+
+    func resetDayPermitCountIfNeeded() {
+        guard let resetDate = dayPermitCountResetDate else {
+            // First time: set reset to start of next month
+            if let startOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())),
+               let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: startOfMonth) {
+                dayPermitCountResetDate = nextMonth
+            }
+            return
+        }
+        if Date() >= resetDate {
+            dayPermitCount = 0
+            if let startOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())),
+               let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: startOfMonth) {
+                dayPermitCountResetDate = nextMonth
+            }
+        }
+    }
+
+    func snoozePermitReminder(days: Int = 3) {
+        permitReminderSnoozedUntil = Calendar.current.date(byAdding: .day, value: days, to: Date())
     }
 }
