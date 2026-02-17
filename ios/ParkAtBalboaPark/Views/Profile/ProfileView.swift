@@ -4,7 +4,7 @@ struct ProfileView: View {
     @Environment(AppState.self) private var state
     @Environment(\.dismiss) private var dismiss
     @State private var showResetAlert = false
-    @State private var safariURL: URL?
+    @State private var portalFlow: PortalFlow?
 
     private var march2Date: Date {
         DateComponents(calendar: .current, year: 2026, month: 3, day: 2).date!
@@ -64,9 +64,8 @@ struct ProfileView: View {
                     }
                 }
             }
-            .sheet(item: $safariURL) { url in
-                SafariView(url: url)
-                    .ignoresSafeArea()
+            .fullScreenCover(item: $portalFlow) { flow in
+                PortalGuideView(flow: flow)
             }
             .alert("Reset All Settings", isPresented: $showResetAlert) {
                 Button("Reset", role: .destructive) {
@@ -191,7 +190,7 @@ struct ProfileView: View {
 
             if state.profile.isSDCityResident && !state.profile.isVerifiedResident {
                 Button {
-                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Register/Create")
+                    portalFlow = .registration
                 } label: {
                     Label("Register at the city\u{2019}s permit portal", systemImage: "arrow.up.right.square")
                         .foregroundStyle(Color.accentColor)
@@ -247,7 +246,7 @@ struct ProfileView: View {
                 passPricingGrid
 
                 Button {
-                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                    portalFlow = .purchase
                 } label: {
                     Label("Buy a pass or day permit", systemImage: "arrow.up.right.square")
                         .foregroundStyle(Color.accentColor)
@@ -337,7 +336,7 @@ struct ProfileView: View {
                     .foregroundStyle(.red)
                 Spacer()
                 Button("Renew") {
-                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                    portalFlow = .purchase
                 }
                 .font(.subheadline)
             }
@@ -349,7 +348,7 @@ struct ProfileView: View {
                     .foregroundStyle(.orange)
                 Spacer()
                 Button("Renew") {
-                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                    portalFlow = .purchase
                 }
                 .font(.subheadline)
             }
@@ -605,7 +604,7 @@ struct ProfileView: View {
 
                 if !state.profile.isSDCityResident && !state.profile.hasPass {
                     Button {
-                        safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                        portalFlow = .purchase
                     } label: {
                         Label("Buy a parking pass", systemImage: "creditcard")
                             .font(.subheadline)

@@ -4,6 +4,11 @@ import UIKit
 
 struct RecommendationSheet: View {
     @Environment(AppState.self) private var state
+    var onCustomize: (() -> Void)?
+
+    private var showProfileSetupBanner: Bool {
+        !state.profile.residencyCardDismissed && !state.profile.onboardingComplete
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -149,6 +154,10 @@ struct RecommendationSheet: View {
                         VStack(spacing: 0) {
                             filterBar
 
+                            if showProfileSetupBanner {
+                                profileSetupBanner
+                            }
+
                             VStack(spacing: 10) {
                                 ForEach(Array(options.enumerated()), id: \.element.id) {
                                     index, option in
@@ -206,6 +215,38 @@ struct RecommendationSheet: View {
             }
         }
         return "No parking options match\nyour current filters"
+    }
+
+    // MARK: - Profile Setup Banner
+
+    private var profileSetupBanner: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "person.crop.circle.badge.questionmark")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+            Text("Showing visitor rates.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            Button("Customize") {
+                onCustomize?()
+            }
+            .font(.caption.weight(.semibold))
+
+            Text("\u{00b7}")
+                .foregroundStyle(.quaternary)
+
+            Button("Skip") {
+                withAnimation(.smooth(duration: 0.2)) {
+                    state.profile.residencyCardDismissed = true
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 
     @ViewBuilder

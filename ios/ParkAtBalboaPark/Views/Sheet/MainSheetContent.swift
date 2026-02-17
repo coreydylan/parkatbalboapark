@@ -62,7 +62,7 @@ struct MainSheetContent: View {
                         destinationList
                             .transition(.opacity.combined(with: .offset(y: 8)))
                     } else {
-                        RecommendationSheet()
+                        RecommendationSheet(onCustomize: { showProfile = true })
                             .transition(.opacity.combined(with: .offset(y: 8)))
                     }
                 }

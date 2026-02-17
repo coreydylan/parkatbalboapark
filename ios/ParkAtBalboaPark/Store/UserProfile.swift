@@ -120,6 +120,12 @@ class UserProfile {
         didSet { UserDefaults.standard.set(appOpenCount, forKey: "appOpenCount") }
     }
 
+    // MARK: - Portal Account
+
+    var hasPortalAccount: Bool = false {
+        didSet { UserDefaults.standard.set(hasPortalAccount, forKey: "hasPortalAccount") }
+    }
+
     // MARK: - Permit Lifecycle
 
     var permitExpirationDate: Date? = nil {
@@ -190,7 +196,7 @@ class UserProfile {
             if daysLeft <= 7 { return .expiringSoon }
             return .active
         }
-        if isVerifiedResident { return .registeredNoPermit }
+        if hasPortalAccount || isVerifiedResident { return .registeredNoPermit }
         if isSDCityResident { return .noAccount }
         return .registeredNoPermit
     }
@@ -286,6 +292,9 @@ class UserProfile {
            let capacity = UserType(rawValue: capacityRaw) {
             activeCapacity = capacity
         }
+
+        // Portal account
+        hasPortalAccount = UserDefaults.standard.bool(forKey: "hasPortalAccount")
 
         // Soft onboarding state
         residencyCardDismissed = UserDefaults.standard.bool(forKey: "residencyCardDismissed")

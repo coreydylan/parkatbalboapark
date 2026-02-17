@@ -82,6 +82,7 @@
 		7F57245C360F21F18DF5FD18 /* el-prado-walkway.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF77305F39B39C8230DCC582 /* el-prado-walkway.jpg */; };
 		8376D13CB5245CADA7F7D277 /* RecommendationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C7CF1FCD043EDF0B43E832 /* RecommendationResponse.swift */; };
 		83B9AAE501D50FA6CED87233 /* veterans-museum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F99ACB1A4D90DBEA20A476 /* veterans-museum.jpg */; };
+		882E56D899176CD29CBFDCBE /* PortalGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E571AAD8DD55F1EBAC3F00 /* PortalGuideView.swift */; };
 		88D1B1279A3CDD0BBF1A0E5C /* morley-field-disc-golf.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D698A0AF190CE64CF8D0B0F /* morley-field-disc-golf.jpg */; };
 		8ACCFA182F1C4845960B5997 /* TierChangeTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7D4C6D6C7E5729458AE1 /* TierChangeTimeline.swift */; };
 		8BA71C5BAC3D4FC115974BFD /* plaza-de-panama.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8EC792A6A762B9729BA9ACB1 /* plaza-de-panama.jpg */; };
@@ -108,6 +109,7 @@
 		A88A642C84479DA9D7ABE1E7 /* comic-con-museum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 569804831989A1D2D0B54A15 /* comic-con-museum.jpg */; };
 		A91B78587550CA6256E0E22B /* MapState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1041FF4678A83F23AF93C6 /* MapState.swift */; };
 		A91E97C4D339B59851404DFE /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B8E1D78162ACECC5FCF7A2 /* UserProfile.swift */; };
+		AB405D4B8C96F9A7A4650B84 /* PortalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148E9BC6057B3560D33D6D5 /* PortalWebView.swift */; };
 		ADA50634F5EE493708DBE3A8 /* LotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A39B461CCE8C9B649A3762D /* LotDetailView.swift */; };
 		B08511BFE9C64C9344A33C60 /* tea-pavilion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7291397590B13B227FBC6D40 /* tea-pavilion.jpg */; };
 		B17DA432AC3475DEFD1C8285 /* ResidencyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661977669D6B4F5CA69FBCDD /* ResidencyCardView.swift */; };
@@ -123,8 +125,10 @@
 		C3EAFDE5E33D1A6E8DBEC68F /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28B4D696F5AF4D38EA46619 /* Destination.swift */; };
 		C63E775766C985F99A6D683A /* LotDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE55D4A26AE3BE16FA1C38A /* LotDetailCard.swift */; };
 		C7B03285D74A6330CC6CC1C4 /* zoro-garden.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06CC764C9E892C63FC5C5EDF /* zoro-garden.jpg */; };
+		C8EF4D056311D3C4EA73B952 /* PortalSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CBD74A44222D1DD11D8F99 /* PortalSteps.swift */; };
 		CCB67078E148DCBD124CE6EA /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81CBB9005F10E2D703710F /* InfoView.swift */; };
 		CECA2C4DF0087B9EFCFDE3FE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99524B9A4285D570C555B1 /* OnboardingView.swift */; };
+		CF92C621E87F0BA1CFF993E5 /* CoachBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB442D94C7378FC4F2082D1 /* CoachBannerView.swift */; };
 		D2B6439B87420AE412AD7F86 /* san-diego-museum-of-art.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3078B0392562430D9D98E1C8 /* san-diego-museum-of-art.jpg */; };
 		D2F2759647F8579FD2821434 /* palm-canyon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 23968B9E11051E7234751119 /* palm-canyon.jpg */; };
 		D4333BE3E2888F090DA992C3 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D784B07A3C299FF51CC08 /* Waypoint.swift */; };
@@ -252,6 +256,7 @@
 		A0FB59AF1D0D003866B26BF1 /* california-tower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "california-tower.jpg"; sourceTree = "<group>"; };
 		A323483A2750B52C20ED7E31 /* FullscreenLotOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenLotOverlay.swift; sourceTree = "<group>"; };
 		A3F4F77F0D5D42C787A0332E /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		A9CBD74A44222D1DD11D8F99 /* PortalSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalSteps.swift; sourceTree = "<group>"; };
 		B4C7CC8674AEABE286C1E931 /* StreetViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetViewService.swift; sourceTree = "<group>"; };
 		B50457AB5F132C52402B1796 /* PricingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingEngine.swift; sourceTree = "<group>"; };
 		B7088FCE735D77EB09F3194A /* san-diego-model-railroad-museum.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "san-diego-model-railroad-museum.jpg"; sourceTree = "<group>"; };
@@ -259,10 +264,12 @@
 		BAF70F8239AC2B6FEE1CDEA1 /* PricingRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingRule.swift; sourceTree = "<group>"; };
 		BC2DEC4E696749D445E33469 /* inez-grant-parker-memorial-rose-garden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "inez-grant-parker-memorial-rose-garden.jpg"; sourceTree = "<group>"; };
 		BD1D9EA446B6D68809FC6B16 /* redwood-circle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "redwood-circle.jpg"; sourceTree = "<group>"; };
+		BDB442D94C7378FC4F2082D1 /* CoachBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachBannerView.swift; sourceTree = "<group>"; };
 		BE71AED40F08415FC88BC45E /* SupabaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClient.swift; sourceTree = "<group>"; };
 		BEB293C0023BC73F1B4C178D /* RecommendationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCard.swift; sourceTree = "<group>"; };
 		BED59FF0DA2A270CFF3DABED /* EnforcementPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnforcementPeriod.swift; sourceTree = "<group>"; };
 		C0F432A5E0A7E3CA6415785A /* kate-sessions-cactus-garden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kate-sessions-cactus-garden.jpg"; sourceTree = "<group>"; };
+		C148E9BC6057B3560D33D6D5 /* PortalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalWebView.swift; sourceTree = "<group>"; };
 		C2E3189C588DE2557171DA5F /* AmenitiesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenitiesGrid.swift; sourceTree = "<group>"; };
 		C485428A3A0C265174F0F239 /* StreetSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetSegment.swift; sourceTree = "<group>"; };
 		C65C652C14DE3B4A8AB79D2D /* ParkAtBalboaPark.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ParkAtBalboaPark.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +288,7 @@
 		D371FCD78C8E70FA57F89343 /* DestinationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCard.swift; sourceTree = "<group>"; };
 		D409D8D496778DBB4F219895 /* ParkingLot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLot.swift; sourceTree = "<group>"; };
 		D51987BA7533DF147B8CC44F /* casa-del-rey-moro-garden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "casa-del-rey-moro-garden.jpg"; sourceTree = "<group>"; };
+		D5E571AAD8DD55F1EBAC3F00 /* PortalGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalGuideView.swift; sourceTree = "<group>"; };
 		D8931641195E83D30D461ACF /* ParkAtBalboaParkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkAtBalboaParkApp.swift; sourceTree = "<group>"; };
 		D9424469084447C5D4AF34C1 /* grape-street-dog-park.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "grape-street-dog-park.jpg"; sourceTree = "<group>"; };
 		DA63E4BF495FC07B75DA47FD /* balboa-park-golf-course.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "balboa-park-golf-course.jpg"; sourceTree = "<group>"; };
@@ -485,6 +493,7 @@
 				C82466D08E912E913CC3B786 /* Info */,
 				B21EDEB061EBE6F1EE4C1474 /* Map */,
 				B689A743D811A28FEA99AE0C /* Onboarding */,
+				8DC0251326568ED8FE4B4D13 /* PermitPortal */,
 				2C05B3FB42450E2CC2315530 /* Profile */,
 				F3897D289503AB7FFF4F5A04 /* Recommendations */,
 				DDCC5BF5F297AC44D9985A74 /* Search */,
@@ -516,6 +525,16 @@
 				D8931641195E83D30D461ACF /* ParkAtBalboaParkApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		8DC0251326568ED8FE4B4D13 /* PermitPortal */ = {
+			isa = PBXGroup;
+			children = (
+				BDB442D94C7378FC4F2082D1 /* CoachBannerView.swift */,
+				D5E571AAD8DD55F1EBAC3F00 /* PortalGuideView.swift */,
+				C148E9BC6057B3560D33D6D5 /* PortalWebView.swift */,
+			);
+			path = PermitPortal;
 			sourceTree = "<group>";
 		};
 		8EA5B58B948982239E314D96 /* ParkAtBalboaPark */ = {
@@ -582,6 +601,7 @@
 				B90F2036D230CBB840D13D33 /* ContextualPromptEngine.swift */,
 				362A89447889826FB557B983 /* DirectionsHelper.swift */,
 				4E5D015E7D6EC0A07A64553E /* LocationService.swift */,
+				A9CBD74A44222D1DD11D8F99 /* PortalSteps.swift */,
 				0934C539BE0795C2192251BD /* PricingExplanationEngine.swift */,
 				B4C7CC8674AEABE286C1E931 /* StreetViewService.swift */,
 				BE71AED40F08415FC88BC45E /* SupabaseClient.swift */,
@@ -783,6 +803,7 @@
 				95FF8AC7421E9B2524E14781 /* AppState.swift in Sources */,
 				8BD09E900F6B1B97C6A1CBD3 /* CardFramePreferenceKey.swift in Sources */,
 				EF3BD1C7DF8346752C5DD2DD /* CardMorphState.swift in Sources */,
+				CF92C621E87F0BA1CFF993E5 /* CoachBannerView.swift in Sources */,
 				52D6F4D594C6F3E0CE8862A2 /* Color+App.swift in Sources */,
 				DA834A978ADF35DCA860CDA4 /* CompactTimePicker.swift in Sources */,
 				A84867E940A48BA8AFAA03C8 /* ContentView.swift in Sources */,
@@ -819,6 +840,9 @@
 				280D80C4CC38B6F3D3448871 /* ParkingOption.swift in Sources */,
 				6239C0362BBCB1ADF817E89D /* ParkingRecommendation.swift in Sources */,
 				46076B2A2D1DA9F66A0DC162 /* ParkingStore.swift in Sources */,
+				882E56D899176CD29CBFDCBE /* PortalGuideView.swift in Sources */,
+				C8EF4D056311D3C4EA73B952 /* PortalSteps.swift in Sources */,
+				AB405D4B8C96F9A7A4650B84 /* PortalWebView.swift in Sources */,
 				EF910EA1D77E704C8EAA74A6 /* PricingEngine.swift in Sources */,
 				1D1D5CE4BD79462D39A2FDFE /* PricingExplanationEngine.swift in Sources */,
 				2F6B6106681BEB3C0B121284 /* PricingExplanationView.swift in Sources */,

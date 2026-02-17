@@ -28,6 +28,11 @@ targets:
           - "**/*.xcworkspace"
     resources:
       - path: ParkAtBalboaPark/Resources
+    info:
+      path: ParkAtBalboaPark/Info.plist
+      properties:
+        LSApplicationQueriesSchemes:
+          - googlechrome
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.parkatbalboapark.app

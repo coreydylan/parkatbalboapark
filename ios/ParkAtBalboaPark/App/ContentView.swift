@@ -7,6 +7,7 @@ struct ContentView: View {
     @State private var recommendationTask: Task<Void, Never>?
     @State private var showResidencyCard = false
     @State private var activePrompt: ContextualPromptEngine.Prompt?
+    @State private var portalFlow: PortalFlow?
 
     private var recommendationSignature: Int {
         var hasher = Hasher()
@@ -30,9 +31,12 @@ struct ContentView: View {
                     ContextualPromptView(
                         prompt: prompt,
                         onAction: {
-                            if let urlString = prompt.actionURL,
-                               let url = URL(string: urlString) {
-                                UIApplication.shared.open(url)
+                            if let urlString = prompt.actionURL {
+                                if urlString.contains("Register/Create") {
+                                    portalFlow = .registration
+                                } else if urlString.contains("thepermitportal.com") {
+                                    portalFlow = .purchase
+                                }
                             }
                             withAnimation(.smooth(duration: 0.2)) {
                                 activePrompt = nil
@@ -68,6 +72,9 @@ struct ContentView: View {
                 .presentationBackground(.clear)
                 .presentationDragIndicator(.hidden)
                 .interactiveDismissDisabled()
+            }
+            .fullScreenCover(item: $portalFlow) { flow in
+                PortalGuideView(flow: flow)
             }
             .onChange(of: state.parking.selectedDestination) {
                 // Pan map to destination immediately

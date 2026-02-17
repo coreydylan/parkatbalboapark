@@ -11,7 +11,7 @@ struct ResidencyCardView: View {
     @State private var verifiedChoice: VerifiedChoice?
     @State private var hasPass = false
     @State private var passType: ParkingPassType = .monthly
-    @State private var safariURL: URL?
+    @State private var portalFlow: PortalFlow?
 
     private enum CardPhase: Equatable {
         case question           // "Do you live in City of San Diego?"
@@ -51,9 +51,8 @@ struct ResidencyCardView: View {
         .shadow(color: .black.opacity(0.15), radius: 20, y: 10)
         .transition(.move(edge: .bottom).combined(with: .opacity))
         .animation(.spring(response: 0.5, dampingFraction: 0.88), value: phase)
-        .sheet(item: $safariURL) { url in
-            SafariView(url: url)
-                .ignoresSafeArea()
+        .fullScreenCover(item: $portalFlow) { flow in
+            PortalGuideView(flow: flow)
         }
     }
 
@@ -236,7 +235,7 @@ struct ResidencyCardView: View {
 
             VStack(spacing: 10) {
                 Button {
-                    safariURL = URL(string: "https://sandiego.thepermitportal.com/Register/Create")
+                    portalFlow = .registration
                 } label: {
                     Label("Register at the permit portal", systemImage: "arrow.up.right.square")
                         .font(.subheadline.weight(.medium))

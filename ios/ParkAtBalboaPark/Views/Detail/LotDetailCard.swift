@@ -10,7 +10,7 @@ struct LotDetailCard: View {
     @State private var snapshotImage: UIImage?
     @State private var showDirectionsSheet = false
     @State private var showAllRates = false
-    @State private var safariURL: URL?
+    @State private var portalFlow: PortalFlow?
 
     private var lot: ParkingLot? {
         state.parking.lotLookup[recommendation.lotSlug]
@@ -71,9 +71,8 @@ struct LotDetailCard: View {
             }
             .padding(12)
         }
-        .sheet(item: $safariURL) { url in
-            SafariView(url: url)
-                .ignoresSafeArea()
+        .fullScreenCover(item: $portalFlow) { flow in
+            PortalGuideView(flow: flow)
         }
         .confirmationDialog("Get Directions", isPresented: $showDirectionsSheet) {
             Button("Apple Maps") {
@@ -199,7 +198,7 @@ struct LotDetailCard: View {
                     // Buy permit link for verified residents at paid lots
                     if !recommendation.isFree && state.profile.isVerifiedResident {
                         Button {
-                            safariURL = URL(string: "https://sandiego.thepermitportal.com/Home/Availability")
+                            portalFlow = .purchase
                         } label: {
                             Label("Buy a day permit (resident rate)", systemImage: "arrow.up.right.square")
                                 .font(.caption.weight(.medium))

@@ -71,8 +71,23 @@ struct ContextualPromptEngine {
             )
         }
 
-        // Priority 4: Deferred residency prompt (remind after 4+ app opens)
-        if profile.residencyDeferred && profile.appOpenCount >= 4 && !profile.isReminderSnoozed {
+        // Priority 4: Registered but hasn't purchased a pass yet
+        if profile.hasPortalAccount && !profile.isVerifiedResident && profile.isSDCityResident && !profile.isReminderSnoozed {
+            return Prompt(
+                id: "portal_registered_no_pass",
+                icon: "ticket.fill",
+                iconColor: "accentColor",
+                title: "Ready to buy a pass?",
+                message: "You\u{2019}ve registered at the permit portal. Purchase your first pass to verify your residency and unlock discounted rates.",
+                actionLabel: "Buy a Pass",
+                actionURL: "https://sandiego.thepermitportal.com/Home/Availability",
+                dismissable: true,
+                snoozable: true
+            )
+        }
+
+        // Priority 5: Deferred residency prompt (remind after 4+ app opens)
+        if profile.residencyDeferred && !profile.hasPortalAccount && profile.appOpenCount >= 4 && !profile.isReminderSnoozed {
             return Prompt(
                 id: "residency_deferred",
                 icon: "person.crop.circle.badge.questionmark",
@@ -86,7 +101,7 @@ struct ContextualPromptEngine {
             )
         }
 
-        // Priority 5: Frequent non-resident visitor
+        // Priority 6: Frequent non-resident visitor
         if profile.shouldSuggestPassToVisitor && !profile.isReminderSnoozed {
             return Prompt(
                 id: "frequent_visitor",
@@ -101,7 +116,7 @@ struct ContextualPromptEngine {
             )
         }
 
-        // Priority 6: March 2 awareness (14 days before, for verified residents)
+        // Priority 7: March 2 awareness (14 days before, for verified residents)
         let march2 = DateComponents(calendar: .current, year: 2026, month: 3, day: 2).date!
         let daysUntilMarch2 = Calendar.current.dateComponents([.day], from: Date(), to: march2).day ?? 999
         if daysUntilMarch2 > 0 && daysUntilMarch2 <= 14 && profile.isVerifiedResident && !profile.isReminderSnoozed {
