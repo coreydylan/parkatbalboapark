@@ -252,23 +252,6 @@ struct ProfileView: View {
                         .foregroundStyle(Color.accentColor)
                 }
 
-                if state.profile.isVerifiedResident {
-                    HStack {
-                        Label("Day permits this month", systemImage: "ticket")
-                            .font(.subheadline)
-                        Spacer()
-                        Text("\(state.profile.dayPermitCount)")
-                            .font(.subheadline.weight(.medium))
-                            .foregroundStyle(.secondary)
-                    }
-
-                    Button {
-                        state.profile.recordDayPermitPurchase()
-                    } label: {
-                        Label("Record a day permit purchase", systemImage: "plus.circle")
-                            .font(.subheadline)
-                    }
-                }
             }
         } header: {
             Text("Parking Pass")
@@ -656,8 +639,6 @@ struct ProfileView: View {
         state.profile.residencyDeferred = false
         state.profile.permitExpirationDate = nil
         state.profile.permitReminderSnoozedUntil = nil
-        state.profile.dayPermitCount = 0
-        state.profile.dayPermitCountResetDate = nil
         state.profile.visitCount = 0
         state.profile.lastVisitDate = nil
         state.profile.appOpenCount = 0

@@ -23,7 +23,6 @@ class AppState {
 
     func loadData() async {
         profile.recordVisit()
-        profile.resetDayPermitCountIfNeeded()
         await parking.loadData()
         await fetchRecommendations()
     }

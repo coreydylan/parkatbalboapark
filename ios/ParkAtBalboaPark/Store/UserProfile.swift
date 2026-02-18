@@ -148,20 +148,6 @@ class UserProfile {
         }
     }
 
-    var dayPermitCount: Int = 0 {
-        didSet { UserDefaults.standard.set(dayPermitCount, forKey: "dayPermitCount") }
-    }
-
-    var dayPermitCountResetDate: Date? = nil {
-        didSet {
-            if let date = dayPermitCountResetDate {
-                UserDefaults.standard.set(date.timeIntervalSince1970, forKey: "dayPermitCountResetDate")
-            } else {
-                UserDefaults.standard.removeObject(forKey: "dayPermitCountResetDate")
-            }
-        }
-    }
-
     // MARK: - Visit Tracking
 
     var visitCount: Int = 0 {
@@ -206,10 +192,6 @@ class UserProfile {
         return Date() < snoozedUntil
     }
 
-    var shouldShowDayPermitROI: Bool {
-        dayPermitCount >= 3 && !hasPass
-    }
-
     var shouldSuggestPassToVisitor: Bool {
         !isSDCityResident && visitCount >= 4 && !hasPass
     }
@@ -251,11 +233,16 @@ class UserProfile {
         return .nonresident
     }
 
-    /// User type sent to the API. Unverified residents are mapped to nonresident
-    /// so they see full (non-discounted) pricing from the backend.
+    /// User type sent to the API. Unverified residents and unregistered
+    /// staff/volunteers are mapped to their fallback type so they see
+    /// accurate pricing from the backend.
     var apiUserType: UserType {
         let effective = effectiveUserType
         if effective == .resident && !isVerifiedResident {
+            return .nonresident
+        }
+        if (effective == .staff || effective == .volunteer) && !isOrgRegistered {
+            if isSDCityResident && isVerifiedResident { return .resident }
             return .nonresident
         }
         return effective
@@ -303,16 +290,12 @@ class UserProfile {
 
         // Permit lifecycle
         visitCount = UserDefaults.standard.integer(forKey: "visitCount")
-        dayPermitCount = UserDefaults.standard.integer(forKey: "dayPermitCount")
 
         let permitExpTS = UserDefaults.standard.double(forKey: "permitExpirationDate")
         if permitExpTS > 0 { permitExpirationDate = Date(timeIntervalSince1970: permitExpTS) }
 
         let snoozedTS = UserDefaults.standard.double(forKey: "permitReminderSnoozedUntil")
         if snoozedTS > 0 { permitReminderSnoozedUntil = Date(timeIntervalSince1970: snoozedTS) }
-
-        let resetTS = UserDefaults.standard.double(forKey: "dayPermitCountResetDate")
-        if resetTS > 0 { dayPermitCountResetDate = Date(timeIntervalSince1970: resetTS) }
 
         let lastVisitTS = UserDefaults.standard.double(forKey: "lastVisitDate")
         if lastVisitTS > 0 { lastVisitDate = Date(timeIntervalSince1970: lastVisitTS) }
@@ -369,29 +352,6 @@ class UserProfile {
         }
         visitCount += 1
         lastVisitDate = today
-    }
-
-    func recordDayPermitPurchase() {
-        resetDayPermitCountIfNeeded()
-        dayPermitCount += 1
-    }
-
-    func resetDayPermitCountIfNeeded() {
-        guard let resetDate = dayPermitCountResetDate else {
-            // First time: set reset to start of next month
-            if let startOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())),
-               let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: startOfMonth) {
-                dayPermitCountResetDate = nextMonth
-            }
-            return
-        }
-        if Date() >= resetDate {
-            dayPermitCount = 0
-            if let startOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())),
-               let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: startOfMonth) {
-                dayPermitCountResetDate = nextMonth
-            }
-        }
     }
 
     func snoozePermitReminder(days: Int = 3) {

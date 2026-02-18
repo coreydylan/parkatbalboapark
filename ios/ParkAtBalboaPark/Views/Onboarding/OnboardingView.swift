@@ -25,6 +25,10 @@ struct OnboardingView: View {
     @State private var hasADA: Bool = false
     @State private var safariURL: URL?
 
+    private var march2Date: Date {
+        DateComponents(calendar: .current, year: 2026, month: 3, day: 2).date!
+    }
+
     // MARK: - Organizations
 
     private var availableOrganizations: [String] {
@@ -789,7 +793,7 @@ struct OnboardingView: View {
 
                 // MARK: March 2026 Callout
 
-                if !hasADA && isSDCityResident && isVerifiedResident {
+                if !hasADA && isSDCityResident && isVerifiedResident && Date.now < march2Date {
                     VStack(alignment: .leading, spacing: 6) {
                         Label("Coming March 2, 2026", systemImage: "calendar.badge.clock")
                             .font(.subheadline.bold())
@@ -811,7 +815,9 @@ struct OnboardingView: View {
                         .font(.caption.bold())
                         .foregroundStyle(.secondary)
 
-                    Text("Parking is enforced daily 8 AM \u{2013} 8 PM. Free on major holidays.")
+                    Text(Date.now >= march2Date
+                        ? "Parking is enforced daily 8 AM \u{2013} 6 PM. Free on major holidays."
+                        : "Parking is enforced daily 8 AM \u{2013} 8 PM. Free on major holidays.")
                         .font(.caption)
                         .foregroundStyle(.tertiary)
                 }

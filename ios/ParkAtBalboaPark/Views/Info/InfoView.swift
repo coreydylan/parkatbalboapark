@@ -4,6 +4,10 @@ struct InfoView: View {
     @Environment(AppState.self) private var state
     @Environment(\.dismiss) private var dismiss
 
+    private var march2Date: Date {
+        DateComponents(calendar: .current, year: 2026, month: 3, day: 2).date!
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -28,8 +32,13 @@ struct InfoView: View {
                             : "Free parking right now"
                     )
 
-                    Label("8:00 AM \u{2013} 8:00 PM daily", systemImage: "clock")
-                        .font(.subheadline)
+                    Label(
+                        Date.now >= march2Date
+                            ? "8:00 AM \u{2013} 6:00 PM daily"
+                            : "8:00 AM \u{2013} 8:00 PM daily",
+                        systemImage: "clock"
+                    )
+                    .font(.subheadline)
 
                     Label("Free on holidays", systemImage: "calendar")
                         .font(.subheadline)

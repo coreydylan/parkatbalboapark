@@ -54,23 +54,6 @@ struct ContextualPromptEngine {
             )
         }
 
-        // Priority 3: Day permit ROI suggestion
-        if profile.shouldShowDayPermitROI {
-            let totalCents = profile.dayPermitCount * (profile.isSDCityResident ? 500 : 1000)
-            let passCents = profile.isSDCityResident ? 3000 : 4000
-            return Prompt(
-                id: "day_permit_roi",
-                icon: "lightbulb.fill",
-                iconColor: "orange",
-                title: "A pass might save you money",
-                message: "You\u{2019}ve bought \(profile.dayPermitCount) day permits this month ($\(totalCents / 100)). A monthly pass is $\(passCents / 100).",
-                actionLabel: "View Pass Options",
-                actionURL: "https://sandiego.thepermitportal.com/Home/Availability",
-                dismissable: true,
-                snoozable: false
-            )
-        }
-
         // Priority 4: Registered but hasn't purchased a pass yet
         if profile.hasPortalAccount && !profile.isVerifiedResident && profile.isSDCityResident && !profile.isReminderSnoozed {
             return Prompt(
